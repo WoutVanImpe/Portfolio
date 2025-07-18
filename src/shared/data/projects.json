@@ -1,0 +1,32 @@
+[
+	{
+		"id": 1,
+		"title": "Instagram posts",
+		"img": "#",
+		"tags": ["graphic-design"]
+	},
+	{
+		"id": 2,
+		"title": "Trifold flyer",
+		"img": "#",
+		"tags": ["graphic-design"]
+	},
+	{
+		"id": 3,
+		"title": "Parallax website",
+		"img": "#",
+		"tags": ["web"]
+	},
+	{
+		"id": 4,
+		"title": "Bataille",
+		"img": "#",
+		"tags": ["web"]
+	},
+	{
+		"id": 5,
+		"title": "Pokemon card game",
+		"img": "#",
+		"tags": ["web"]
+	}
+]

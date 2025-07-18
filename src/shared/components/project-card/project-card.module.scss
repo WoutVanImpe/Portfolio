@@ -1,32 +1,81 @@
 .project-card {
 	width: 200px;
-	aspect-ratio: 1/1.2;
-
+	height: min-content;
+	padding: 5px;
+	border-radius: 10px;
+	border: 4px solid transparent;
+	background-color: white;
 	display: flex;
 	flex-direction: column;
-
-    border-radius: 20px;
-    background-color: chartreuse;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 
 	&__img {
-		flex: 3;
+		width: 100%;
+		height: 170px;
+		border-radius: 10px;
+		overflow: hidden;
+		background: gray;
 
 		img {
 			width: 100%;
-            height: 100%;
+			height: 100%;
 			object-fit: cover;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+			display: block;
 		}
 	}
 
 	&__textbox {
-		flex: 1;
+		display: flex;
+		flex-direction: column;
+		padding: 10px;
+		padding-left: 0px;
+		padding-right: 0px;
+		gap: 20px;
 
-        padding: 5px;
-
-		> * {
-			margin: 0px;
+		h3 {
+			font-size: 20px;
+			font-weight: 600;
+			margin: 0;
+			color: black;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
+	}
+
+	&__bottom {
+		display: flex;
+		gap: 10px;
+		flex-wrap: wrap;
+	}
+
+	&__tag {
+		font-weight: bold;
+		padding: 0.3em 0.7em;
+		border-radius: 15px;
+		font-size: 12px;
+		letter-spacing: -0.6px;
+
+		&--motion {
+			background: rgba(16, 185, 129, 0.2);
+			color: #047857;
+		}
+
+		&--graphic-design {
+			background: rgba(251, 191, 36, 0.25);
+			color: #92400e;
+		}
+
+		&--web {
+			background: rgba(96, 165, 250, 0.25);
+			color: #1e3a8a;
+		}
+	}
+
+	&:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 1);
+		transition-duration: 500ms;
+		transition-timing-function: ease-out;
 	}
 }
