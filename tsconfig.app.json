@@ -27,7 +27,8 @@
 			"~home/*": ["./src/home/*"],
 			"~contact/*": ["./src/contact/*"],
 			"~projects/*": ["./src/projects/*"],
-			"~shared/*": ["./src/shared/*"]
+			"~shared/*": ["./src/shared/*"],
+			"~assets/*": ["./src/assets/*"]
 		}
 	},
 	"include": ["src"]
