@@ -6,15 +6,20 @@ import { FloatingCard } from "./components/FloatingCard";
 
 export const Home = () => {
 	const { data } = useGetProjects();
+	const projectList: ProjectType[] = [];
 	const dimensions = useWindowDimensions();
+
+	if (data) {
+		while (projectList.length <= dimensions.width /253) data.forEach((project) => projectList.push(project));
+	}
 
 	return (
 		<div className={styles["p-home"]}>
 			<div className={styles["p-home__header"]}>
 				<div className={styles["p-home__header__constrainBox"]}></div>
 
-				{data?.map((project: ProjectType, index: number) => (
-					<FloatingCard key={project.title + index} project={project} startX={dimensions.width + index * 300} containerWidth={dimensions.width} containerHeight={dimensions.height} />
+				{projectList.map((project: ProjectType, index: number) => (
+					<FloatingCard key={project.title + index} project={project} index={index} containerWidth={dimensions.width} containerHeight={dimensions.height} />
 				))}
 			</div>
 			<div className={styles["p-home__header"]}>

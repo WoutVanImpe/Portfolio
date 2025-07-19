@@ -6,23 +6,29 @@ import testImg from "../../assets/testimg.jpg";
 
 type FloatingCardProps = {
 	project: ProjectType;
-	startX: number; 
+	index: number;
 	containerWidth: number;
-    containerHeight: number;
+	containerHeight: number;
 };
 
-export const FloatingCard = ({ project, startX, containerWidth, containerHeight }: FloatingCardProps) => {
+export const FloatingCard = ({ project, index, containerWidth, containerHeight }: FloatingCardProps) => {
+	const startX = containerWidth + index * 185;
 	const [x, setX] = useState(startX);
+	const [top, setTop] = useState(Math.random() * (containerHeight - 300));
+
+	const distance = startX + 300;
+	const speed = 60;
+	const duration = distance / speed;
 
 	return (
 		<motion.div
 			style={{
 				x,
+				top,
 				scale: 0.7,
 				filter: "blur(2px)",
 				cursor: "pointer",
 				position: "absolute",
-				top: Math.random() * (containerHeight - 300),
 			}}
 			whileHover={{
 				scale: 1.3,
@@ -32,7 +38,7 @@ export const FloatingCard = ({ project, startX, containerWidth, containerHeight 
 			animate={{ x: -300 }}
 			transition={{
 				x: {
-					duration: 15 + Math.random() * 40,
+					duration,
 					ease: "linear",
 					repeat: Infinity,
 					repeatType: "loop",
@@ -42,7 +48,8 @@ export const FloatingCard = ({ project, startX, containerWidth, containerHeight 
 			}}
 			onUpdate={(latest) => {
 				if (parseFloat(latest.x as string) <= -300) {
-					setX(containerWidth + 300);
+					setX(containerWidth + 500);
+					setTop(Math.random() * (containerHeight - 300));
 				}
 			}}
 		>
