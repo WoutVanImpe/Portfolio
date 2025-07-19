@@ -3,17 +3,21 @@
 		width: 100%;
 		height: calc(100vh - 20px);
 		position: relative;
-		background-color: aqua;
+		background-color: orangered;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
 		align-items: flex-start;
 		gap: 20px;
 
-		&__constrainBox {
+		&__welcome {
 			position: absolute;
 			width: 100%;
 			height: 100%;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 	}
 }

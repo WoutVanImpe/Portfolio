@@ -29,11 +29,13 @@ export const FloatingCardToLeft = ({ project, index, containerWidth, containerHe
 				filter: "blur(2px)",
 				cursor: "pointer",
 				position: "absolute",
+				zIndex: 1,
 			}}
 			whileHover={{
 				scale: 1.3,
 				filter: "blur(0px)",
 				zIndex: 3,
+				backdropFilter: "blur(2px)",
 			}}
 			animate={{ x: -300 }}
 			transition={{
@@ -48,7 +50,7 @@ export const FloatingCardToLeft = ({ project, index, containerWidth, containerHe
 			}}
 			onUpdate={(latest) => {
 				if (parseFloat(latest.x as string) <= -300) {
-					setX(containerWidth + 500);
+					setX(containerWidth + 300);
 					setTop(Math.random() * (containerHeight - 300));
 				}
 			}}
@@ -77,11 +79,13 @@ export const FloatingCardToRight = ({ project, index, containerWidth, containerH
 				filter: "blur(2px)",
 				cursor: "pointer",
 				position: "absolute",
+				zIndex: 1,
 			}}
 			whileHover={{
 				scale: 1.3,
 				filter: "blur(0px)",
 				zIndex: 3,
+				backdropFilter: "blur(2px)",
 			}}
 			animate={{ x: containerWidth + 300 }}
 			transition={{
@@ -96,7 +100,7 @@ export const FloatingCardToRight = ({ project, index, containerWidth, containerH
 			}}
 			onUpdate={(latest) => {
 				if (parseFloat(latest.x as string) >= containerWidth + 300) {
-					setX(0 - 500);
+					setX(0 - 300);
 					setTop(Math.random() * (containerHeight - 300));
 				}
 			}}

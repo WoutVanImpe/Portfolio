@@ -16,8 +16,6 @@ export const Home = () => {
 	return (
 		<div className={styles["p-home"]}>
 			<div className={styles["p-home__header"]}>
-				<div className={styles["p-home__header__constrainBox"]}></div>
-
 				{projectList.map((project: ProjectType, index: number) => {
 					if (index % 2) {
 						return <FloatingCardToLeft key={project.title + index} project={project} index={index} containerWidth={dimensions.width} containerHeight={dimensions.height} />;
@@ -25,9 +23,11 @@ export const Home = () => {
 						return <FloatingCardToRight key={project.title + index} project={project} index={index} containerWidth={dimensions.width} containerHeight={dimensions.height} />;
 					}
 				})}
-			</div>
-			<div className={styles["p-home__header"]}>
-				<div className={styles["p-home__header__constrainBox"]}></div>
+				<div className={styles["p-home__header__welcome"]}>
+					<div className={styles["p-home__header__welcome__textblock"]}>
+						<h1>Welkom</h1>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
