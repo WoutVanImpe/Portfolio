@@ -1,5 +1,5 @@
 import type ProjectType from "./project.types";
-import file from "../data/projects.json";
+import file from "../../data/projects.json";
 
 class ProjectService {
 	async getProjects(): Promise<ProjectType[]> {
