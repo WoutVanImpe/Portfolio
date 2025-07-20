@@ -23,11 +23,11 @@ export const Home = () => {
 		mass: 1,
 	});
 
-	const gradColor1 = useTransform(smoothScrollY, [0.5, 0.8], ["#4c24e1", "#4c24e1"]);
-	const gradColor2 = useTransform(smoothScrollY, [0.5, 0.8], ["#0065f4", "#f200a0"]);
-	const gradColor3 = useTransform(smoothScrollY, [0.5, 0.8], ["#007cd3", "#ff495f"]);
-	const gradColor4 = useTransform(smoothScrollY, [0.5, 0.8], ["#0088a0", "#ffad3f"]);
-	const gradColor5 = useTransform(smoothScrollY, [0.5, 0.8], ["#008f7a", "#f9f871"]);
+	const gradColor1 = useTransform(smoothScrollY, [0.5, 0.9], ["#4c24e1", "#4c24e1"]);
+	const gradColor2 = useTransform(smoothScrollY, [0.5, 0.9], ["#0065f4", "#f200a0"]);
+	const gradColor3 = useTransform(smoothScrollY, [0.5, 0.9], ["#007cd3", "#ff495f"]);
+	const gradColor4 = useTransform(smoothScrollY, [0.5, 0.9], ["#0088a0", "#ffad3f"]);
+	const gradColor5 = useTransform(smoothScrollY, [0.5, 0.9], ["#008f7a", "#f9f871"]);
 
 	const gradient = useTransform(smoothScrollY, (value) => `linear-gradient(to right top, ${gradColor1.get()}, ${gradColor2.get()}, ${gradColor3.get()}, ${gradColor4.get()}, ${gradColor5.get()})`);
 
