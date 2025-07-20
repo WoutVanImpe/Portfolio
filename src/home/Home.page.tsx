@@ -3,10 +3,10 @@ import { useGetProjects } from "~shared/hooks/projects-data/useGetProjects.hooks
 import type ProjectType from "~shared/hooks/projects-data/project.types";
 import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 import { FloatingCardToLeft, FloatingCardToRight } from "./components/FloatingCard";
-import { useRef } from "react";
+import { forwardRef, useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 
-export const Home = () => {
+export const Home = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { data } = useGetProjects();
 	const projectList: ProjectType[] = [];
 	const dimensions = useWindowDimensions();
@@ -32,7 +32,7 @@ export const Home = () => {
 	const gradient = useTransform(smoothScrollY, (value) => `linear-gradient(to right top, ${gradColor1.get()}, ${gradColor2.get()}, ${gradColor3.get()}, ${gradColor4.get()}, ${gradColor5.get()})`);
 
 	return (
-		<div className={styles["p-home"]}>
+		<div className={styles["p-home"]} ref={ref}>
 			<motion.div ref={scrollRef} className={styles["p-home__header"]} style={{ backgroundImage: gradient }}>
 				{projectList.map((project: ProjectType, index: number) => {
 					if (index % 2) {
@@ -56,8 +56,6 @@ export const Home = () => {
 					</svg>
 				</div>
 			</motion.div>
-
-			<div style={{ height: "1000px" }}></div>
 		</div>
 	);
-};
+});
