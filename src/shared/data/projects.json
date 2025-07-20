@@ -28,5 +28,11 @@
 		"title": "Pokemon card game",
 		"img": "#",
 		"tags": ["web"]
+	},
+	{
+		"id": 6,
+		"title": "Layouter Kikkertje",
+		"img": "#",
+		"tags": ["graphic-design"]
 	}
 ]
