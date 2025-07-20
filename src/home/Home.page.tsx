@@ -10,7 +10,7 @@ export const Home = () => {
 	const dimensions = useWindowDimensions();
 
 	if (data) {
-		while (projectList.length <= dimensions.width / 253) data.forEach((project) => projectList.push(project));
+		while (projectList.length <= (dimensions.width / 253) * 2) data.forEach((project) => projectList.push(project));
 	}
 
 	return (
@@ -25,7 +25,8 @@ export const Home = () => {
 				})}
 				<div className={styles["p-home__header__welcome"]}>
 					<div className={styles["p-home__header__welcome__textblock"]}>
-						<h1>Welkom</h1>
+						<h1>Hallo</h1>
+						<h2>Ik ben Wout Van Impe</h2>
 					</div>
 				</div>
 			</div>
