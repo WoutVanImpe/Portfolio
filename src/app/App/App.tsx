@@ -1,11 +1,16 @@
-import { Outlet } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import styles from "./app.module.scss";
+import { Home } from "~home/Home.page";
+
+const queryClient = new QueryClient();
 
 export const App = () => {
 	return (
-		<div className={styles["app"]}>
-			<Outlet />
-		</div>
+		<QueryClientProvider client={queryClient}>
+			<div className={styles["app"]}>
+				<Home />
+			</div>
+		</QueryClientProvider>
 	);
 };
 
