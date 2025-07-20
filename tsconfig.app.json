@@ -27,6 +27,7 @@
 			"~home/*": ["./src/home/*"],
 			"~contact/*": ["./src/contact/*"],
 			"~projects/*": ["./src/projects/*"],
+			"~about/*": ["./src/about/*"],
 			"~shared/*": ["./src/shared/*"],
 			"~assets/*": ["./src/assets/*"]
 		}
