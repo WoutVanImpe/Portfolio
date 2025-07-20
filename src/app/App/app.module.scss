@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap");
 
 body {
 	margin: 0px;
@@ -13,10 +13,12 @@ h1,
 h2,
 h3,
 h4,
-h5 {
-	font-family: "Fredoka", sans-serif;
+h5,
+p,
+span {
+	font-family: "Outfit", sans-serif;
 	font-optical-sizing: auto;
-	font-weight: 600;
+	font-weight: 400;
 	font-style: normal;
-	font-variation-settings: "wdth" 100;
+	cursor: default;
 }
