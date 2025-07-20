@@ -1,9 +1,10 @@
 .p-home {
+	position: relative;
+
 	&__header {
 		width: 100%;
-		height: calc(100vh - 20px);
+		height: 100vh;
 		position: relative;
-		background-color: orangered;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
@@ -21,9 +22,19 @@
 
 			&__textblock {
 				display: flex;
+				flex-direction: column;
 				z-index: 2;
-				width: min-content;
+				width: fit-content;
 				height: min-content;
+
+				padding: 20px;
+
+				text-align: center;
+
+				> * {
+					margin: 0px;
+					color: white;
+				}
 			}
 		}
 	}
