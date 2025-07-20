@@ -14,7 +14,7 @@ type FloatingCardProps = {
 export const FloatingCardToLeft = ({ project, index, containerWidth, containerHeight }: FloatingCardProps) => {
 	const startX = containerWidth + index * 185;
 	const [x, setX] = useState(startX);
-	const [top, setTop] = useState(Math.random() * (containerHeight - 300));
+	const [top, setTop] = useState(Math.random() * (containerHeight - 340));
 
 	const distance = startX + 300;
 	const speed = 60;
@@ -51,7 +51,7 @@ export const FloatingCardToLeft = ({ project, index, containerWidth, containerHe
 			onUpdate={(latest) => {
 				if (parseFloat(latest.x as string) <= -300) {
 					setX(containerWidth + 300);
-					setTop(Math.random() * (containerHeight - 300));
+					setTop(Math.random() * (containerHeight - 340));
 				}
 			}}
 		>
@@ -64,7 +64,7 @@ export const FloatingCardToRight = ({ project, index, containerWidth, containerH
 	const startX = -300 - index * 185;
 	const endX = containerWidth + 300;
 	const [x, setX] = useState(startX);
-	const [top, setTop] = useState(Math.random() * (containerHeight - 300));
+	const [top, setTop] = useState(Math.random() * (containerHeight - 340));
 
 	const distance = endX - startX;
 	const speed = 60;
@@ -101,7 +101,7 @@ export const FloatingCardToRight = ({ project, index, containerWidth, containerH
 			onUpdate={(latest) => {
 				if (parseFloat(latest.x as string) >= containerWidth + 300) {
 					setX(0 - 300);
-					setTop(Math.random() * (containerHeight - 300));
+					setTop(Math.random() * (containerHeight - 340));
 				}
 			}}
 		>
