@@ -5,6 +5,14 @@ body {
 	overflow-x: hidden;
 }
 
+.app {
+	position: relative;
+
+	> * {
+		padding: 20px;
+		padding-bottom: 0px;
+	}
+}
 
 h1,
 h2,
@@ -12,7 +20,8 @@ h3,
 h4,
 h5,
 p,
-span {
+span,
+button {
 	font-family: "Outfit", sans-serif;
 	font-optical-sizing: auto;
 	font-weight: 400;
