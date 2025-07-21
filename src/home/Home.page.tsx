@@ -1,19 +1,16 @@
 import styles from "./home.module.scss";
-import { useGetProjects } from "~shared/hooks/projects-data/useGetProjects.hooks";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
-import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 import { FloatingCardToLeft, FloatingCardToRight } from "./components/FloatingCard";
 import { forwardRef, useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 
-export const Home = forwardRef<HTMLDivElement, {}>((props, ref) => {
-	const { data } = useGetProjects();
-	const projectList: ProjectType[] = [];
+interface ProjectListProps {
+	projects: ProjectType[];
+}
+
+export const Home = forwardRef<HTMLDivElement, ProjectListProps>(({ projects }, ref) => {
 	const dimensions = useWindowDimensions();
-
-	if (data) {
-		while (projectList.length <= (dimensions.width / 253) * 2) data.forEach((project) => projectList.push(project));
-	}
 
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const { scrollYProgress } = useScroll({ target: scrollRef, offset: ["start end", "end start"] });
@@ -34,7 +31,7 @@ export const Home = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	return (
 		<div className={styles["p-home"]} ref={ref}>
 			<motion.div ref={scrollRef} className={styles["p-home__header"]} style={{ backgroundImage: gradient }}>
-				{projectList.map((project: ProjectType, index: number) => {
+				{projects.map((project: ProjectType, index: number) => {
 					if (index % 2) {
 						return <FloatingCardToLeft key={project.title + index} project={project} index={index} containerWidth={dimensions.width} containerHeight={dimensions.height} />;
 					} else {
