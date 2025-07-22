@@ -13,11 +13,13 @@ import type ProjectType from "~shared/hooks/projects-data/project.types";
 
 export const Page = () => {
 	const { data } = useGetProjects();
-	const projectList: ProjectType[] = [];
+	const StyleProjectList: ProjectType[] = [];
+	const realProjectList: ProjectType[] = []; 
 	const dimensions = useWindowDimensions();
 
 	if (data) {
-		while (projectList.length <= (dimensions.width / 253) * 2) data.forEach((project) => projectList.push(project));
+		while (StyleProjectList.length <= (dimensions.width / 253) * 2) data.forEach((project) => StyleProjectList.push(project));
+		data.forEach((project) => realProjectList.push(project))
 	}
 
 	const homeRef = useRef<HTMLDivElement | null>(null);
@@ -42,10 +44,10 @@ export const Page = () => {
 	return (
 		<motion.div className={styles["page"]}>
 			<NavBar home={homeRef} about={aboutRef} works={worksRef} contact={contactRef} whiteNavColor={whiteNavColor} navIndex={navIndex} />
-			<Home projects={projectList} ref={homeRef} />
+			<Home projects={StyleProjectList} ref={homeRef} />
 			<About ref={aboutRef} />
 			<div style={{ height: "500px" }}></div>
-			<Projects projects={projectList} ref={worksRef} />
+			<Projects projects={realProjectList} ref={worksRef} />
 			<div style={{ height: "500px" }}></div>
 			<Contact ref={contactRef} />
 			<div style={{ height: "500px" }}></div>
