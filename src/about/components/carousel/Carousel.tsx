@@ -1,0 +1,123 @@
+import { useState } from "react";
+import styles from "./carousel.module.scss";
+import { motion } from "framer-motion";
+import { ProjectCard } from "~shared/components/project-card/ProjectCard";
+import testimg from "../../../assets/testimg.jpg";
+import arrowLeft from "./imgs/arrowLeft.svg";
+import arrowRight from "./imgs/arrowRight.svg";
+import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
+
+export const Carousel = () => {
+	const { width: screenWidth } = useWindowDimensions();
+
+	const cardWidth = 250;
+	const overlap = 70;
+	const spacing = cardWidth - overlap;
+
+	const totalCards = 11;
+
+	const centerIndex = Math.floor(totalCards / 2);
+
+	const positions = Array.from({ length: totalCards }, (_, i) => {
+		const offset = i - centerIndex;
+		return offset * spacing;
+	});
+
+	const [cardOrder, setCardOrder] = useState<number[]>(Array.from({ length: totalCards }, (_, i) => i));
+
+	const handleNext = () => {
+		setCardOrder((prev) => {
+			const [first, ...rest] = prev;
+			return [...rest, first];
+		});
+	};
+
+	const handlePrev = () => {
+		setCardOrder((prev) => {
+			const last = prev[prev.length - 1];
+			return [last, ...prev.slice(0, -1)];
+		});
+	};
+	return (
+		<div
+			style={{
+				position: "relative",
+				width: "100%",
+				height: "400px",
+				overflow: "hidden",
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "end",
+			}}
+		>
+			{cardOrder.map((posIndex, i) => {
+				const offset = posIndex - centerIndex;
+				const x = positions[posIndex];
+
+				// Define animation styles based on offset
+				const styleVariants: Record<
+					string,
+					{
+						scale: number;
+						opacity: number;
+						filter: string;
+						zIndex: number;
+						rotateZ: string;
+					}
+				> = {
+					"0": { scale: 1.1, opacity: 1, filter: "none", zIndex: 10, rotateZ: "-2deg" },
+					"1": { scale: 0.9, opacity: 1, filter: "none", zIndex: 9, rotateZ: "15deg" },
+					"-1": { scale: 0.9, opacity: 1, filter: "none", zIndex: 9, rotateZ: "-15deg" },
+					"2": { scale: 0.8, opacity: 0.8, filter: "blur(1px)", zIndex: 8, rotateZ: "-5deg" },
+					"-2": { scale: 0.8, opacity: 0.8, filter: "blur(1px)", zIndex: 8, rotateZ: "5deg" },
+					"3": { scale: 0.7, opacity: 0.7, filter: "blur(2px)", zIndex: 7, rotateZ: "2deg" },
+					"-3": { scale: 0.7, opacity: 0.7, filter: "blur(2px)", zIndex: 7, rotateZ: "-2deg" },
+				};
+
+				const animationStyle = styleVariants[offset] || { scale: 0.6, opacity: 0, filter: "blur(4px)", zIndex: 1 };
+
+				return (
+					<motion.div
+						className={styles["carouselCard"]}
+						key={`Card ${i + 1}`}
+						animate={{
+							x,
+							scale: animationStyle.scale,
+							opacity: animationStyle.opacity,
+							filter: animationStyle.filter,
+							rotateZ: animationStyle.rotateZ,
+						}}
+						transition={{ duration: 0.5, ease: "easeInOut" }}
+						style={{
+							position: "absolute",
+							top: 50,
+							left: screenWidth / 2,
+							marginLeft: `-${cardWidth / 2}px`,
+							zIndex: animationStyle.zIndex,
+						}}
+					>
+						<ProjectCard id={i} title={`Card ${i + 1}`} img={testimg} tags={["web"]} />
+					</motion.div>
+				);
+			})}
+
+			<button
+				onClick={handlePrev}
+				style={{
+					marginRight: "20px",
+				}}
+			>
+				<img src={arrowRight} alt="terug" />
+			</button>
+
+			<button
+				onClick={handleNext}
+				style={{
+					marginLeft: "20px",
+				}}
+			>
+				<img src={arrowLeft} alt="volgende" />
+			</button>
+		</div>
+	);
+};
