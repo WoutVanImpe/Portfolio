@@ -1,9 +1,9 @@
-import { forwardRef, useRef } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import styles from "./projects.module.scss";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
 import classNames from "classnames";
 import { GridCard } from "./components/GridCard";
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import { motion, motionValue, useMotionTemplate, useScroll, useSpring, useTransform } from "motion/react";
 
 interface ProjectListProps {
 	projects: ProjectType[];
@@ -26,6 +26,24 @@ export const Projects = forwardRef<HTMLDivElement, ProjectListProps>(({ projects
 
 	const gradient = useTransform(smoothScrollY, (value) => `linear-gradient(to right top, ${gradColor1.get()}, ${gradColor2.get()}, ${gradColor3.get()}, ${gradColor4.get()}, ${gradColor5.get()})`);
 
+	const fullGridIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+	const [gridIndex, setGridIndex] = useState(fullGridIndex);
+	const [extendedBlock, setExtendedBlock] = useState<[] | number[]>([]);
+	const [gridSizeValue, setGridSizeValue] = useState<1 | 4>(4);
+	const gridSizeMotion = motionValue<1 | 4>(4);
+	const gridTemplate = useMotionTemplate`repeat(${gridSizeMotion}, 1fr)`;
+
+	const handleClick = (index: number) => {
+		setGridIndex((prev) => (prev.length !== 1 ? [index] : fullGridIndex));
+		setGridSizeValue(gridSizeValue === 4 ? 1 : 4);
+		setExtendedBlock(extendedBlock.length === 0 ? [index] : []);
+	};
+
+	useEffect(() => {
+		gridSizeMotion.set(gridSizeValue);
+		console.log(gridSizeMotion);
+	}, [gridSizeValue]);
+
 	return (
 		<motion.div ref={ref} className={styles["projects-wrapper"]} style={{ backgroundImage: gradient }}>
 			<div ref={scrollRef} className={styles["custom-shape-divider-top-1753196371"]}>
@@ -37,38 +55,13 @@ export const Projects = forwardRef<HTMLDivElement, ProjectListProps>(({ projects
 				</svg>
 			</div>
 			<div className={styles["p-projects"]}>
-				<div className={styles["p-projects__grid"]}>
-					<div className={classNames(styles["p-projects__grid__div1"])}>
-						<GridCard {...projects.find((p) => p.id === 3)!} />
-					</div>
-					<div className={classNames(styles["p-projects__grid__div2"])}>
-						<GridCard {...projects.find((p) => p.id === 7)!} />
-					</div>
-					<div className={classNames(styles["p-projects__grid__div3"])}>
-						<GridCard {...projects.find((p) => p.id === 1)!} />
-					</div>
-					<div className={classNames(styles["p-projects__grid__div4"])}>
-						<GridCard {...projects.find((p) => p.id === 9)!} />
-					</div>
-					<div className={classNames(styles["p-projects__grid__div5"])}>
-						<GridCard {...projects.find((p) => p.id === 5)!} />
-					</div>
-					<div className={classNames(styles["p-projects__grid__div6"])}>
-						<GridCard {...projects.find((p) => p.id === 2)!} />
-					</div>
-					<div className={classNames(styles["p-projects__grid__div7"])}>
-						<GridCard {...projects.find((p) => p.id === 6)!} />
-					</div>
-					<div className={classNames(styles["p-projects__grid__div8"])}>
-						<GridCard {...projects.find((p) => p.id === 4)!} />
-					</div>
-					<div className={classNames(styles["p-projects__grid__div9"])}>
-						<GridCard {...projects.find((p) => p.id === 8)!} />
-					</div>
-					<div className={classNames(styles["p-projects__grid__div10"])}>
-						<GridCard {...projects.find((p) => p.id === 10)!} />
-					</div>
-				</div>
+				<motion.div className={styles["p-projects__grid"]} style={{ gridTemplateColumns: gridTemplate, gridTemplateRows: gridTemplate }}>
+					{projects.slice(0, 10).map((project, index) => (
+						<motion.div key={project.title + index} id={`project${index}`} className={classNames(styles[`p-projects__grid__div${index + 1}`], { [styles.shown]: gridIndex.includes(index) }, { [styles.extended]: extendedBlock.includes(index) })} onClick={() => handleClick(index)}>
+							<GridCard {...project} />
+						</motion.div>
+					))}
+				</motion.div>
 			</div>
 			<div className={styles["custom-shape-divider-bottom-1753196696"]}>
 				<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">

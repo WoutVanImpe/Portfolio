@@ -40,5 +40,33 @@
 		"img": "#",
 		"tags": ["graphic-design"],
 		"description": "magazine for JNM"
+	},
+	{
+		"id": 7,
+		"title": "Parallax website",
+		"img": "#",
+		"tags": ["web"],
+		"description": "parallax school task"
+	},
+	{
+		"id": 8,
+		"title": "Bataille",
+		"img": "#",
+		"tags": ["web"],
+		"description": "game for fun"
+	},
+	{
+		"id": 9,
+		"title": "Pokemon card game",
+		"img": "#",
+		"tags": ["web"],
+		"description": "game for fun"
+	},
+	{
+		"id": 10,
+		"title": "Layouter Kikkertje",
+		"img": "#",
+		"tags": ["graphic-design"],
+		"description": "magazine for JNM"
 	}
 ]

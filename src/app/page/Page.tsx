@@ -10,16 +10,15 @@ import { useGetProjects } from "~shared/hooks/projects-data/useGetProjects.hooks
 import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
 
-
 export const Page = () => {
 	const { data } = useGetProjects();
-	const StyleProjectList: ProjectType[] = [];
-	const realProjectList: ProjectType[] = []; 
+	const styleProjectList: ProjectType[] = [];
+	const realProjectList: ProjectType[] = [];
 	const dimensions = useWindowDimensions();
 
 	if (data) {
-		while (StyleProjectList.length <= (dimensions.width / 253) * 2) data.forEach((project) => StyleProjectList.push(project));
-		data.forEach((project) => realProjectList.push(project))
+		while (styleProjectList.length <= (dimensions.width / 253) * 2) data.forEach((project) => styleProjectList.push(project));
+		data.forEach((project) => realProjectList.push(project));
 	}
 
 	const homeRef = useRef<HTMLDivElement | null>(null);
@@ -44,10 +43,10 @@ export const Page = () => {
 	return (
 		<motion.div className={styles["page"]}>
 			<NavBar home={homeRef} about={aboutRef} works={worksRef} contact={contactRef} whiteNavColor={whiteNavColor} navIndex={navIndex} />
-			<Home projects={StyleProjectList} ref={homeRef} />
+			<Home projects={styleProjectList} ref={homeRef} />
 			<About ref={aboutRef} />
 			<div style={{ height: "500px" }}></div>
-			<Projects projects={realProjectList} ref={worksRef} />
+			<Projects projects={styleProjectList} ref={worksRef} />
 			<div style={{ height: "500px" }}></div>
 			<Contact ref={contactRef} />
 			<div style={{ height: "500px" }}></div>

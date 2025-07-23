@@ -51,6 +51,10 @@
 		width: 90%;
 		height: 90vh;
 
+		> * {
+			display: none;
+		}
+
 		&__div1 {
 			grid-row: span 2 / span 2;
 		}
@@ -102,5 +106,18 @@
 			grid-column-start: 4;
 			grid-row-start: 4;
 		}
+	}
+}
+
+.shown {
+	&#{&} {
+		display: block;
+	}
+}
+
+.extended {
+	&#{&} {
+		grid-row-start: 1;
+		grid-column-start: 1;
 	}
 }
