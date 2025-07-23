@@ -19,7 +19,7 @@ export const Carousel = ({ projects }: CarouselProps) => {
 	const overlap = 50;
 	const spacing = cardWidth - overlap;
 
-	const totalCards = 9;
+	const totalCards = projects.length;
 
 	const centerIndex = Math.floor(totalCards / 2);
 
@@ -48,7 +48,7 @@ export const Carousel = ({ projects }: CarouselProps) => {
 			style={{
 				position: "relative",
 				width: "100%",
-				height: "400px",
+				height: "50vh",
 				overflow: "hidden",
 				display: "flex",
 				justifyContent: "center",
