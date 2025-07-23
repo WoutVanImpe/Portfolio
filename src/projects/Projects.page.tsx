@@ -36,7 +36,7 @@ export const Projects = forwardRef<HTMLDivElement, ProjectListProps>(({ projects
 				</svg>
 			</div>
 			<div className={styles["p-projects"]}>
-				<Carousel />
+				<Carousel projects={projects} />
 			</div>
 			<div className={styles["custom-shape-divider-bottom-1753196696"]}>
 				<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">

@@ -6,15 +6,20 @@ import testimg from "../../../assets/testimg.jpg";
 import arrowLeft from "./imgs/arrowLeft.svg";
 import arrowRight from "./imgs/arrowRight.svg";
 import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
+import type ProjectType from "~shared/hooks/projects-data/project.types";
 
-export const Carousel = () => {
+interface CarouselProps {
+	projects: ProjectType[];
+}
+
+export const Carousel = ({ projects }: CarouselProps) => {
 	const { width: screenWidth } = useWindowDimensions();
 
 	const cardWidth = 200;
 	const overlap = 50;
 	const spacing = cardWidth - overlap;
 
-	const totalCards = 11;
+	const totalCards = 9;
 
 	const centerIndex = Math.floor(totalCards / 2);
 
@@ -98,7 +103,7 @@ export const Carousel = () => {
 							backdropFilter: "blur(5px)",
 						}}
 					>
-						<ProjectCard id={i} title={`Card ${i + 1}`} img={testimg} tags={["web"]} />
+						<ProjectCard id={projects[i].id} title={projects[i].title} img={testimg} tags={projects[i].tags} />
 					</motion.div>
 				);
 			})}

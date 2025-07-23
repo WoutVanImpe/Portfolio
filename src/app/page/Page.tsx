@@ -46,7 +46,7 @@ export const Page = () => {
 			<Home projects={styleProjectList} ref={homeRef} />
 			<About ref={aboutRef} />
 			<div style={{ height: "500px" }}></div>
-			<Projects projects={styleProjectList} ref={worksRef} />
+			{data && data.length > 0 && <Projects projects={realProjectList} ref={worksRef} />}
 			<div style={{ height: "500px" }}></div>
 			<Contact ref={contactRef} />
 			<div style={{ height: "500px" }}></div>
