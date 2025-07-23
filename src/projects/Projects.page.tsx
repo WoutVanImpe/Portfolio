@@ -1,9 +1,8 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useRef } from "react";
 import styles from "./projects.module.scss";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
-import classNames from "classnames";
-import { GridCard } from "./components/GridCard";
-import { motion, motionValue, useMotionTemplate, useScroll, useSpring, useTransform } from "motion/react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import { Carousel } from "./components/carousel/Carousel";
 
 interface ProjectListProps {
 	projects: ProjectType[];
@@ -26,12 +25,6 @@ export const Projects = forwardRef<HTMLDivElement, ProjectListProps>(({ projects
 
 	const gradient = useTransform(smoothScrollY, (value) => `linear-gradient(to right top, ${gradColor1.get()}, ${gradColor2.get()}, ${gradColor3.get()}, ${gradColor4.get()}, ${gradColor5.get()})`);
 
-	const [extendedBlock, setExtendedBlock] = useState<number[]>([]);
-
-	const handleClick = (index: number) => {
-		setExtendedBlock((prev) => (prev.includes(index) ? prev.filter((i) => i !== index) : [index]));
-	};
-
 	return (
 		<motion.div ref={ref} className={styles["projects-wrapper"]} style={{ backgroundImage: gradient }}>
 			<div ref={scrollRef} className={styles["custom-shape-divider-top-1753196371"]}>
@@ -43,24 +36,7 @@ export const Projects = forwardRef<HTMLDivElement, ProjectListProps>(({ projects
 				</svg>
 			</div>
 			<div className={styles["p-projects"]}>
-				<motion.div layout className={styles["p-projects__grid"]}>
-					{projects.slice(0, 10).map((project, index) => (
-						<motion.div
-							layout
-							animate={{
-								scale: extendedBlock.includes(index) ? 1.05 : 1,
-								borderRadius: extendedBlock.includes(index) ? "20px" : "8px",
-							}}
-							transition={{ layout: { duration: 0.5 }, scale: { duration: 0.3 } }}
-							key={project.title + index}
-							id={`project${index}`}
-							className={classNames(styles[`p-projects__grid__div${index + 1}`], { [styles.extended]: extendedBlock.includes(index) })}
-							onClick={() => handleClick(index)}
-						>
-							<GridCard {...project} />
-						</motion.div>
-					))}
-				</motion.div>
+				<Carousel />
 			</div>
 			<div className={styles["custom-shape-divider-bottom-1753196696"]}>
 				<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">

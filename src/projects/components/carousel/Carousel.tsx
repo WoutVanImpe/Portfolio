@@ -102,6 +102,7 @@ export const Carousel = () => {
 			})}
 
 			<button
+				className={styles["carouselButton"]}
 				onClick={handlePrev}
 				style={{
 					marginRight: "20px",
@@ -111,6 +112,7 @@ export const Carousel = () => {
 			</button>
 
 			<button
+				className={styles["carouselButton"]}
 				onClick={handleNext}
 				style={{
 					marginLeft: "20px",
