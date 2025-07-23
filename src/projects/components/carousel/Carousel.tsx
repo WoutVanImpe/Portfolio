@@ -10,8 +10,8 @@ import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 export const Carousel = () => {
 	const { width: screenWidth } = useWindowDimensions();
 
-	const cardWidth = 250;
-	const overlap = 70;
+	const cardWidth = 200;
+	const overlap = 50;
 	const spacing = cardWidth - overlap;
 
 	const totalCards = 11;
@@ -54,7 +54,6 @@ export const Carousel = () => {
 				const offset = posIndex - centerIndex;
 				const x = positions[posIndex];
 
-				// Define animation styles based on offset
 				const styleVariants: Record<
 					string,
 					{
@@ -65,13 +64,15 @@ export const Carousel = () => {
 						rotateZ: string;
 					}
 				> = {
-					"0": { scale: 1.1, opacity: 1, filter: "none", zIndex: 10, rotateZ: "-2deg" },
-					"1": { scale: 0.9, opacity: 1, filter: "none", zIndex: 9, rotateZ: "15deg" },
-					"-1": { scale: 0.9, opacity: 1, filter: "none", zIndex: 9, rotateZ: "-15deg" },
-					"2": { scale: 0.8, opacity: 0.8, filter: "blur(1px)", zIndex: 8, rotateZ: "-5deg" },
-					"-2": { scale: 0.8, opacity: 0.8, filter: "blur(1px)", zIndex: 8, rotateZ: "5deg" },
-					"3": { scale: 0.7, opacity: 0.7, filter: "blur(2px)", zIndex: 7, rotateZ: "2deg" },
-					"-3": { scale: 0.7, opacity: 0.7, filter: "blur(2px)", zIndex: 7, rotateZ: "-2deg" },
+					"0": { scale: 1.1, opacity: 1, filter: "none", zIndex: 9, rotateZ: "-2deg" },
+					"1": { scale: 0.9, opacity: 1, filter: "none", zIndex: 8, rotateZ: "15deg" },
+					"-1": { scale: 0.9, opacity: 1, filter: "none", zIndex: 8, rotateZ: "-15deg" },
+					"2": { scale: 0.8, opacity: 0.8, filter: "blur(1px)", zIndex: 7, rotateZ: "-5deg" },
+					"-2": { scale: 0.8, opacity: 0.8, filter: "blur(1px)", zIndex: 7, rotateZ: "5deg" },
+					"3": { scale: 0.7, opacity: 0.7, filter: "blur(2px)", zIndex: 6, rotateZ: "2deg" },
+					"-3": { scale: 0.7, opacity: 0.7, filter: "blur(2px)", zIndex: 6, rotateZ: "-2deg" },
+					"4": { scale: 0.6, opacity: 0, filter: "blur(3px)", zIndex: 7, rotateZ: "-10deg" },
+					"-4": { scale: 0.6, opacity: 0, filter: "blur(3px)", zIndex: 7, rotateZ: "10deg" },
 				};
 
 				const animationStyle = styleVariants[offset] || { scale: 0.6, opacity: 0, filter: "blur(4px)", zIndex: 1 };
@@ -94,6 +95,7 @@ export const Carousel = () => {
 							left: screenWidth / 2,
 							marginLeft: `-${cardWidth / 2}px`,
 							zIndex: animationStyle.zIndex,
+							backdropFilter: "blur(5px)",
 						}}
 					>
 						<ProjectCard id={i} title={`Card ${i + 1}`} img={testimg} tags={["web"]} />

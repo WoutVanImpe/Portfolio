@@ -1,5 +1,5 @@
 .projects-wrapper {
-	padding: 150px 20px;
+	padding: 150px 0px;
 	background-image: linear-gradient(to right top, rgb(76, 36, 225), rgb(242, 0, 160), rgb(255, 73, 95), rgb(255, 173, 63), rgb(249, 248, 113));
 	position: relative;
 
@@ -36,80 +36,8 @@
 .p-projects {
 	display: flex;
 	flex-direction: column;
-	max-width: 1200px;
 	margin: 0px auto;
 
-	&__grid {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		grid-template-rows: repeat(4, 1fr);
-		gap: 8px;
-
-		justify-content: center;
-
-		position: relative;
-
-		align-self: center;
-		width: 90%;
-		height: 90vh;
-
-		&__div1 {
-			grid-row: span 2 / span 2;
-		}
-
-		&__div2 {
-			grid-row: span 2 / span 2;
-			grid-column-start: 2;
-			grid-row-start: 2;
-		}
-
-		&__div3 {
-			grid-column: span 2 / span 2;
-			grid-column-start: 3;
-			grid-row-start: 1;
-		}
-
-		&__div4 {
-			grid-column-start: 2;
-			grid-row-start: 1;
-		}
-
-		&__div5 {
-			grid-column-start: 3;
-			grid-row-start: 2;
-		}
-
-		&__div6 {
-			grid-row: span 2 / span 2;
-			grid-column-start: 4;
-			grid-row-start: 2;
-		}
-
-		&__div7 {
-			grid-row-start: 3;
-		}
-
-		&__div8 {
-			grid-row: span 2 / span 2;
-			grid-column-start: 3;
-			grid-row-start: 3;
-		}
-
-		&__div9 {
-			grid-column: span 2 / span 2;
-			grid-row-start: 4;
-		}
-
-		&__div10 {
-			grid-column-start: 4;
-			grid-row-start: 4;
-		}
-	}
+	
 }
 
-.extended {
-	&#{&} {
-		grid-column: span 2 / span 2;
-		grid-row: span 2 / span 2;
-	}
-}
