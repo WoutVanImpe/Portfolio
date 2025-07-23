@@ -26,23 +26,11 @@ export const Projects = forwardRef<HTMLDivElement, ProjectListProps>(({ projects
 
 	const gradient = useTransform(smoothScrollY, (value) => `linear-gradient(to right top, ${gradColor1.get()}, ${gradColor2.get()}, ${gradColor3.get()}, ${gradColor4.get()}, ${gradColor5.get()})`);
 
-	const fullGridIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-	const [gridIndex, setGridIndex] = useState(fullGridIndex);
 	const [extendedBlock, setExtendedBlock] = useState<number[]>([]);
-	const [gridSizeValue, setGridSizeValue] = useState<1 | 4>(4);
-	const gridSizeMotion = motionValue<1 | 4>(4);
-	const gridTemplate = useMotionTemplate`repeat(${gridSizeMotion}, 1fr)`;
 
 	const handleClick = (index: number) => {
-		setGridSizeValue(gridSizeValue === 4 ? 1 : 4);
 		setExtendedBlock((prev) => (prev.includes(index) ? prev.filter((i) => i !== index) : [index]));
-		setGridIndex((prev) => (prev.length !== 1 ? [index] : fullGridIndex));
 	};
-
-	useEffect(() => {
-		gridSizeMotion.set(gridSizeValue);
-		console.log(gridSizeMotion);
-	}, [gridSizeValue]);
 
 	return (
 		<motion.div ref={ref} className={styles["projects-wrapper"]} style={{ backgroundImage: gradient }}>
@@ -55,12 +43,18 @@ export const Projects = forwardRef<HTMLDivElement, ProjectListProps>(({ projects
 				</svg>
 			</div>
 			<div className={styles["p-projects"]}>
-				<motion.div className={styles["p-projects__grid"]} style={{ gridTemplateColumns: gridTemplate, gridTemplateRows: gridTemplate }}>
+				<motion.div layout className={styles["p-projects__grid"]}>
 					{projects.slice(0, 10).map((project, index) => (
 						<motion.div
+							layout
+							animate={{
+								scale: extendedBlock.includes(index) ? 1.05 : 1,
+								borderRadius: extendedBlock.includes(index) ? "20px" : "8px",
+							}}
+							transition={{ layout: { duration: 0.5 }, scale: { duration: 0.3 } }}
 							key={project.title + index}
 							id={`project${index}`}
-							className={classNames(styles[`p-projects__grid__div${index + 1}`], { [styles.shown]: gridIndex.includes(index) }, { [styles.extended]: extendedBlock.includes(index) })}
+							className={classNames(styles[`p-projects__grid__div${index + 1}`], { [styles.extended]: extendedBlock.includes(index) })}
 							onClick={() => handleClick(index)}
 						>
 							<GridCard {...project} />

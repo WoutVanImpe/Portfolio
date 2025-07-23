@@ -45,15 +45,13 @@
 		grid-template-rows: repeat(4, 1fr);
 		gap: 8px;
 
+		justify-content: center;
+
 		position: relative;
 
 		align-self: center;
 		width: 90%;
 		height: 90vh;
-
-		> * {
-			display: none;
-		}
 
 		&__div1 {
 			grid-row: span 2 / span 2;
@@ -109,15 +107,9 @@
 	}
 }
 
-.shown {
-	&#{&} {
-		display: block;
-	}
-}
-
 .extended {
 	&#{&} {
-		grid-row-start: 1;
-		grid-column-start: 1;
+		grid-column: span 2 / span 2;
+		grid-row: span 2 / span 2;
 	}
 }
