@@ -28,15 +28,15 @@ export const Projects = forwardRef<HTMLDivElement, ProjectListProps>(({ projects
 
 	const fullGridIndex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 	const [gridIndex, setGridIndex] = useState(fullGridIndex);
-	const [extendedBlock, setExtendedBlock] = useState<[] | number[]>([]);
+	const [extendedBlock, setExtendedBlock] = useState<number[]>([]);
 	const [gridSizeValue, setGridSizeValue] = useState<1 | 4>(4);
 	const gridSizeMotion = motionValue<1 | 4>(4);
 	const gridTemplate = useMotionTemplate`repeat(${gridSizeMotion}, 1fr)`;
 
 	const handleClick = (index: number) => {
-		setGridIndex((prev) => (prev.length !== 1 ? [index] : fullGridIndex));
 		setGridSizeValue(gridSizeValue === 4 ? 1 : 4);
-		setExtendedBlock(extendedBlock.length === 0 ? [index] : []);
+		setExtendedBlock((prev) => (prev.includes(index) ? prev.filter((i) => i !== index) : [index]));
+		setGridIndex((prev) => (prev.length !== 1 ? [index] : fullGridIndex));
 	};
 
 	useEffect(() => {
@@ -57,7 +57,12 @@ export const Projects = forwardRef<HTMLDivElement, ProjectListProps>(({ projects
 			<div className={styles["p-projects"]}>
 				<motion.div className={styles["p-projects__grid"]} style={{ gridTemplateColumns: gridTemplate, gridTemplateRows: gridTemplate }}>
 					{projects.slice(0, 10).map((project, index) => (
-						<motion.div key={project.title + index} id={`project${index}`} className={classNames(styles[`p-projects__grid__div${index + 1}`], { [styles.shown]: gridIndex.includes(index) }, { [styles.extended]: extendedBlock.includes(index) })} onClick={() => handleClick(index)}>
+						<motion.div
+							key={project.title + index}
+							id={`project${index}`}
+							className={classNames(styles[`p-projects__grid__div${index + 1}`], { [styles.shown]: gridIndex.includes(index) }, { [styles.extended]: extendedBlock.includes(index) })}
+							onClick={() => handleClick(index)}
+						>
 							<GridCard {...project} />
 						</motion.div>
 					))}
