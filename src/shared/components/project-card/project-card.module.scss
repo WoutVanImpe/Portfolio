@@ -1,6 +1,6 @@
 .project-card {
 	width: 200px;
-	height: min-content;
+	overflow: visible;
 	padding: 5px;
 	display: flex;
 	flex-direction: column;
@@ -11,6 +11,30 @@
 	backdrop-filter: blur(7.6px);
 	-webkit-backdrop-filter: blur(7.6px);
 	border: 1px solid rgba(255, 255, 255, 0.4);
+
+	transition: height 0.4s ease;
+
+
+	&__bigcard {
+		display: flex;
+		flex-direction: row;
+
+		&__norm {
+			display: flex;
+			flex-direction: column;
+			flex: 1;
+		}
+
+		&__extra {
+			padding: 10px;
+			flex: 1;
+
+			p {
+				margin: 0;
+				font-size: 11px;
+			}
+		}
+	}
 
 	&__img {
 		width: 100%;
