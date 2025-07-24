@@ -53,17 +53,21 @@ export const Carousel = ({ projects }: CarouselProps) => {
 	}, [card0Clicked]);
 
 	const handleNext = () => {
-		setCardOrder((prev) => {
-			const [first, ...rest] = prev;
-			return [...rest, first];
-		});
+		if (!card0Clicked) {
+			setCardOrder((prev) => {
+				const [first, ...rest] = prev;
+				return [...rest, first];
+			});
+		}
 	};
 
 	const handlePrev = () => {
-		setCardOrder((prev) => {
-			const last = prev[prev.length - 1];
-			return [last, ...prev.slice(0, -1)];
-		});
+		if (!card0Clicked) {
+			setCardOrder((prev) => {
+				const last = prev[prev.length - 1];
+				return [last, ...prev.slice(0, -1)];
+			});
+		}
 	};
 
 	const handleClick = (e: React.MouseEvent<HTMLDivElement>, offset: number) => {
@@ -93,7 +97,6 @@ export const Carousel = ({ projects }: CarouselProps) => {
 				display: "flex",
 				justifyContent: "center",
 				alignItems: "center",
-				backgroundColor: "green",
 			}}
 		>
 			{cardOrder.map((posIndex, i) => {
@@ -135,6 +138,7 @@ export const Carousel = ({ projects }: CarouselProps) => {
 							marginLeft: `-${cardWidth / 2}px`,
 							zIndex: animationStyle.zIndex,
 							backdropFilter: "blur(5px)",
+							cursor: "pointer",
 						}}
 						onClick={(e) => handleClick(e, offset)}
 					>
@@ -147,7 +151,11 @@ export const Carousel = ({ projects }: CarouselProps) => {
 				className={styles["carouselButton"]}
 				onClick={handlePrev}
 				style={{
-					marginRight: "20px",
+					position: "absolute",
+					top: "calc(50% + 180px)",
+					right: "calc(50% + 30px)",
+					transform: "translateY(-50%)",
+					zIndex: 7,
 				}}
 			>
 				<img src={arrowRight} alt="terug" />
@@ -157,7 +165,11 @@ export const Carousel = ({ projects }: CarouselProps) => {
 				className={styles["carouselButton"]}
 				onClick={handleNext}
 				style={{
-					marginLeft: "20px",
+					position: "absolute",
+					top: "calc(50% + 180px)",
+					left: "calc(50% + 30px)",
+					transform: "translateY(-50%)",
+					zIndex: 7,
 				}}
 			>
 				<img src={arrowLeft} alt="volgende" />
