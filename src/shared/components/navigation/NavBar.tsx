@@ -14,7 +14,7 @@ export const NavBar = ({ home, about, works, contact, whiteNavColor, navIndex }:
 
 	useEffect(() => {
 		whiteNavColor ? scrolling.set(1) : scrolling.set(0);
-		navIndex ? index.set(2) : index.set(10);
+		navIndex ? index.set(2) : index.set(99);
 	}, [whiteNavColor, navIndex]);
 
 	const backgroundColorState = useTransform(scrolling, [0, 1], [0, 255]);
