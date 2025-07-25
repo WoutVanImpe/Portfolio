@@ -27,7 +27,7 @@ export const HomePage = () => {
 	const contactRef = useRef<HTMLDivElement | null>(null);
 
 	const [whiteNavColor, setWhiteNavColor] = useState(true);
-	const [navIndex, setNavIndex] = useState(true);
+	const [navIndex, setNavIndex] = useState<2 | 30>(2);
 
 	const isHomeInView = useInView(homeRef, { amount: 0.1 });
 	const isHomeInViewForIndex = useInView(homeRef, { amount: 0.3 });
@@ -37,7 +37,7 @@ export const HomePage = () => {
 	}, [isHomeInView]);
 
 	useEffect(() => {
-		setNavIndex(isHomeInViewForIndex);
+		setNavIndex(isHomeInViewForIndex ? 2 : 30);
 	}, [isHomeInViewForIndex]);
 
 	return (

@@ -29,6 +29,15 @@
 		background: rgba(255, 255, 255, 0.3);
 	}
 
+	button.navbar {
+		&__link {
+			&--active::after {
+				transform: scaleX(1);
+				transform-origin: left;
+			}
+		}
+	}
+
 	&__links {
 		display: flex;
 		gap: 32px;
