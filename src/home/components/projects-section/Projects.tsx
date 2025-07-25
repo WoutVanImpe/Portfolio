@@ -36,6 +36,13 @@ export const Projects = forwardRef<HTMLDivElement, ProjectListProps>(({ projects
 				</svg>
 			</div>
 			<div className={styles["p-projects"]}>
+				<div className={styles["p-projects__text"]}>
+					<h1>Works</h1>
+					<p>
+						Mijn werk beweegt zich tussen front-end development en visuele vormgeving. Ik maak interactieve websites, promomateriaal zoals Instagram visuals, flyers en magazines, en experimenteer met video: van motion design tot dronebeelden en live
+						visuals.
+					</p>
+				</div>
 				<Carousel projects={projects} />
 			</div>
 			<div className={styles["custom-shape-divider-bottom-1753196696"]}>

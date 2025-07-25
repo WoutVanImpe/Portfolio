@@ -1,5 +1,5 @@
 .projects-wrapper {
-	padding: 150px 0px;
+	padding: 100px 0px;
 	background-image: linear-gradient(to right top, rgb(76, 36, 225), rgb(242, 0, 160), rgb(255, 73, 95), rgb(255, 173, 63), rgb(249, 248, 113));
 	position: relative;
 
@@ -38,6 +38,24 @@
 	flex-direction: column;
 	margin: 0px auto;
 
-	
-}
+	&__text {
+		color: #ffffff;
+		font-weight: 400;
+		text-align: center;
 
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		h1 {
+			font-weight: 600;
+			margin-top: 0;
+		}
+
+		p {
+			width: 55vw;
+			margin-bottom: 0;
+		}
+	}
+}
