@@ -2,7 +2,7 @@ import { forwardRef, useRef } from "react";
 import styles from "./projects.module.scss";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
-import { Carousel } from "./components/carousel/Carousel";
+import { Carousel } from "../carousel/Carousel";
 
 interface ProjectListProps {
 	projects: ProjectType[];

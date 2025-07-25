@@ -1,58 +1,54 @@
 import styles from "./home.module.scss";
+import { motion, useInView } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { NavBar } from "~home/components/navigation/NavBar";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
-import { FloatingCardToLeft, FloatingCardToRight } from "./components/FloatingCard";
-import { forwardRef, useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import { useGetProjects } from "~shared/hooks/projects-data/useGetProjects.hooks";
 import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
+import { Header } from "./components/header-section/Header";
+import { About } from "./components/about-section/About";
+import { Projects } from "./components/projects-section/Projects";
+import { Contact } from "./components/contact-section/Contact";
 
-interface ProjectListProps {
-	projects: ProjectType[];
-}
-
-export const Home = forwardRef<HTMLDivElement, ProjectListProps>(({ projects }, ref) => {
+export const HomePage = () => {
+	const { data } = useGetProjects();
+	const styleProjectList: ProjectType[] = [];
+	const realProjectList: ProjectType[] = [];
 	const dimensions = useWindowDimensions();
 
-	const scrollRef = useRef<HTMLDivElement>(null);
-	const { scrollYProgress } = useScroll({ target: scrollRef, offset: ["start end", "end start"] });
-	const smoothScrollY = useSpring(scrollYProgress, {
-		stiffness: 50,
-		damping: 20,
-		mass: 1,
-	});
+	if (data) {
+		while (styleProjectList.length <= (dimensions.width / 253) * 2) data.forEach((project) => styleProjectList.push(project));
+		data.forEach((project) => realProjectList.push(project));
+	}
 
-	const gradColor1 = useTransform(smoothScrollY, [0.5, 0.9], ["#4c24e1", "#4c24e1"]);
-	const gradColor2 = useTransform(smoothScrollY, [0.5, 0.9], ["#0065f4", "#f200a0"]);
-	const gradColor3 = useTransform(smoothScrollY, [0.5, 0.9], ["#007cd3", "#ff495f"]);
-	const gradColor4 = useTransform(smoothScrollY, [0.5, 0.9], ["#0088a0", "#ffad3f"]);
-	const gradColor5 = useTransform(smoothScrollY, [0.5, 0.9], ["#008f7a", "#f9f871"]);
+	const homeRef = useRef<HTMLDivElement | null>(null);
+	const aboutRef = useRef<HTMLDivElement | null>(null);
+	const worksRef = useRef<HTMLDivElement | null>(null);
+	const contactRef = useRef<HTMLDivElement | null>(null);
 
-	const gradient = useTransform(smoothScrollY, (value) => `linear-gradient(to right top, ${gradColor1.get()}, ${gradColor2.get()}, ${gradColor3.get()}, ${gradColor4.get()}, ${gradColor5.get()})`);
+	const [whiteNavColor, setWhiteNavColor] = useState(true);
+	const [navIndex, setNavIndex] = useState(true);
+
+	const isHomeInView = useInView(homeRef, { amount: 0.1 });
+	const isHomeInViewForIndex = useInView(homeRef, { amount: 0.3 });
+
+	useEffect(() => {
+		setWhiteNavColor(isHomeInView);
+	}, [isHomeInView]);
+
+	useEffect(() => {
+		setNavIndex(isHomeInViewForIndex);
+	}, [isHomeInViewForIndex]);
 
 	return (
-		<div className={styles["p-home"]} ref={ref}>
-			<motion.div ref={scrollRef} className={styles["p-home__header"]} style={{ backgroundImage: gradient }}>
-				{projects.map((project: ProjectType, index: number) => {
-					if (index % 2) {
-						return <FloatingCardToLeft key={project.title + index} project={project} index={index} containerWidth={dimensions.width} containerHeight={dimensions.height} />;
-					} else {
-						return <FloatingCardToRight key={project.title + index} project={project} index={index} containerWidth={dimensions.width} containerHeight={dimensions.height} />;
-					}
-				})}
-				<div className={styles["p-home__header__welcome"]}>
-					<div className={styles["p-home__header__welcome__textblock"]}>
-						<h1>Hallo</h1>
-						<h2>Ik ben Wout Van Impe</h2>
-					</div>
-				</div>
-				<div className={styles["custom-shape-divider-bottom-1753013852"]}>
-					<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-						<path
-							d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-							className={styles["shape-fill"]}
-						></path>
-					</svg>
-				</div>
-			</motion.div>
-		</div>
+		<motion.div className={styles["page"]}>
+			<NavBar home={homeRef} about={aboutRef} works={worksRef} contact={contactRef} whiteNavColor={whiteNavColor} navIndex={navIndex} />
+			<Header projects={styleProjectList} ref={homeRef} />
+			<About ref={aboutRef} />
+			<div style={{ height: "500px" }}></div>
+			{data && data.length > 0 && <Projects projects={realProjectList} ref={worksRef} />}
+			<Contact ref={contactRef} />
+			<div style={{ height: "500px" }}></div>
+		</motion.div>
 	);
-});
+};

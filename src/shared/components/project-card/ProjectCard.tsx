@@ -2,12 +2,15 @@ import styles from "./project-card.module.scss";
 import classNames from "classnames";
 import { motion, AnimatePresence } from "framer-motion";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
+import { MiniCarousel } from "../mini-carousel/MiniCarousel";
+import { NavLink } from "react-router";
+import { PROJECT_ROUTE } from "~shared/routes/routes";
 
 interface ProjectCardProps extends ProjectType {
-	clicked: string;
+	clicked?: string;
 }
 
-export const ProjectCard = ({ title, img, tags, description, clicked }: ProjectCardProps) => {
+export const ProjectCard = ({ id, title, img, tags, description, clicked, extraImg }: ProjectCardProps) => {
 	const isExpanded = clicked === "0true";
 
 	const cardVariants = {
@@ -30,12 +33,16 @@ export const ProjectCard = ({ title, img, tags, description, clicked }: ProjectC
 	};
 
 	return (
-		<motion.div className={styles["project-card"]} layout variants={cardVariants} animate={isExpanded ? "expanded" : "collapsed"} transition={{ duration: 0.4, ease: "easeInOut" }}>
+		<motion.div key={id} className={styles["project-card"]} layout variants={cardVariants} animate={isExpanded ? "expanded" : "collapsed"} transition={{ duration: 0.4, ease: "easeInOut" }}>
 			<div className={styles["project-card__bigcard"]}>
 				<div className={styles["project-card__bigcard__norm"]}>
-					<div className={styles["project-card__img"]}>
-						<img src={img} alt={title} />
-					</div>
+					{isExpanded ? (
+						<MiniCarousel images={extraImg ?? []} title={title} />
+					) : (
+						<div className={styles["project-card__img"]}>
+							<img src={img} alt={title} draggable={false} />
+						</div>
+					)}
 					<div className={styles["project-card__textbox"]}>
 						<h3>{title}</h3>
 						<div className={styles["project-card__bottom"]}>
@@ -53,7 +60,7 @@ export const ProjectCard = ({ title, img, tags, description, clicked }: ProjectC
 						<motion.div
 							key="extra"
 							layout
-							initial={{ opacity: 0, height: 0 }}
+							initial={{ opacity: 0 }}
 							animate={{
 								opacity: 1,
 								transition: {
@@ -70,6 +77,7 @@ export const ProjectCard = ({ title, img, tags, description, clicked }: ProjectC
 							className={styles["project-card__bigcard__extra"]}
 						>
 							<p>{description}</p>
+							<NavLink to={`${PROJECT_ROUTE.template}${id}`} className={styles["project-card__bigcard__extra__navbutton"]} >Zie meer</NavLink>
 						</motion.div>
 					)}
 				</AnimatePresence>
