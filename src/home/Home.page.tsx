@@ -45,7 +45,6 @@ export const HomePage = () => {
 			<NavBar home={homeRef} about={aboutRef} works={worksRef} contact={contactRef} whiteNavColor={whiteNavColor} navIndex={navIndex} />
 			<Header projects={styleProjectList} ref={homeRef} />
 			<About ref={aboutRef} />
-			<div style={{ height: "500px" }}></div>
 			{data && data.length > 0 && <Projects projects={realProjectList} ref={worksRef} />}
 			<Contact ref={contactRef} />
 			<div style={{ height: "500px" }}></div>
