@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { ProjectCard } from "~shared/components/project-card/ProjectCard";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
-import testImg from "../../assets/testimg.jpg";
+import testImg from "../../../assets/testimg.jpg";
 
 type FloatingCardProps = {
 	project: ProjectType;
@@ -55,7 +55,7 @@ export const FloatingCardToLeft = ({ project, index, containerWidth, containerHe
 				}
 			}}
 		>
-			<ProjectCard title={project.title} image={testImg} tags={project.tags} />
+			<ProjectCard id={project.id} title={project.title} img={testImg} tags={project.tags} />
 		</motion.div>
 	);
 };
@@ -105,7 +105,7 @@ export const FloatingCardToRight = ({ project, index, containerWidth, containerH
 				}
 			}}
 		>
-			<ProjectCard title={project.title} image={testImg} tags={project.tags} />
+			<ProjectCard id={project.id} title={project.title} img={testImg} tags={project.tags} />
 		</motion.div>
 	);
 };

@@ -3,36 +3,70 @@
 		"id": 1,
 		"title": "Instagram posts",
 		"img": "#",
-		"tags": ["graphic-design", "social-media"]
+		"tags": ["graphic-design", "social-media"],
+		"description": "instagram for JNM"
 	},
 	{
 		"id": 2,
 		"title": "Trifold flyer",
 		"img": "#",
-		"tags": ["graphic-design"]
+		"tags": ["graphic-design"],
+		"description": "instagrflyeram for JNM"
 	},
 	{
 		"id": 3,
 		"title": "Parallax website",
 		"img": "#",
-		"tags": ["web"]
+		"tags": ["web"],
+		"description": "parallax school task"
 	},
 	{
 		"id": 4,
 		"title": "Bataille",
 		"img": "#",
-		"tags": ["web"]
+		"tags": ["web"],
+		"description": "game for fun"
 	},
 	{
 		"id": 5,
 		"title": "Pokemon card game",
 		"img": "#",
-		"tags": ["web"]
+		"tags": ["web"],
+		"description": "game for fun"
 	},
 	{
 		"id": 6,
 		"title": "Layouter Kikkertje",
 		"img": "#",
-		"tags": ["graphic-design"]
+		"tags": ["graphic-design"],
+		"description": "magazine for JNM"
+	},
+	{
+		"id": 7,
+		"title": "Parallax website",
+		"img": "#",
+		"tags": ["web"],
+		"description": "parallax school task"
+	},
+	{
+		"id": 8,
+		"title": "Bataille",
+		"img": "#",
+		"tags": ["web"],
+		"description": "game for fun"
+	},
+	{
+		"id": 9,
+		"title": "Pokemon card game",
+		"img": "#",
+		"tags": ["web"],
+		"description": "game for fun"
+	},
+	{
+		"id": 10,
+		"title": "Layouter Kikkertje",
+		"img": "#",
+		"tags": ["graphic-design"],
+		"description": "magazine for JNM"
 	}
 ]
