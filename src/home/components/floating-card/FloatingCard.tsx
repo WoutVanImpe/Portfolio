@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { ProjectCard } from "~shared/components/project-card/ProjectCard";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
-import testImg from "../../assets/testimg.jpg";
+import testImg from "../../../assets/testimg.jpg";
 
 type FloatingCardProps = {
 	project: ProjectType;
