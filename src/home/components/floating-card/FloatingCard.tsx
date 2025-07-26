@@ -27,7 +27,6 @@ export const FloatingCardToLeft = ({ project, index, containerWidth, containerHe
 				top,
 				scale: 0.7,
 				filter: "blur(2px)",
-				cursor: "pointer",
 				position: "absolute",
 				zIndex: 1,
 			}}
@@ -77,7 +76,6 @@ export const FloatingCardToRight = ({ project, index, containerWidth, containerH
 				top,
 				scale: 0.7,
 				filter: "blur(2px)",
-				cursor: "pointer",
 				position: "absolute",
 				zIndex: 1,
 			}}
