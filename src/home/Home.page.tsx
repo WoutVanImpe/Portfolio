@@ -3,22 +3,22 @@ import { motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { NavBar } from "~home/components/navigation/NavBar";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
-import { useGetProjects } from "~shared/hooks/projects-data/useGetProjects.hooks";
 import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 import { Header } from "./components/header-section/Header";
 import { About } from "./components/about-section/About";
 import { Projects } from "./components/projects-section/Projects";
 import { Contact } from "./components/contact-section/Contact";
+import { useProjects } from "~context/ProjectContext";
 
 export const HomePage = () => {
-	const { data } = useGetProjects();
+	const { projects } = useProjects();
 	const styleProjectList: ProjectType[] = [];
 	const realProjectList: ProjectType[] = [];
 	const dimensions = useWindowDimensions();
 
-	if (data) {
-		while (styleProjectList.length <= (dimensions.width / 253) * 2) data.forEach((project) => styleProjectList.push(project));
-		data.forEach((project) => realProjectList.push(project));
+	if (projects) {
+		while (styleProjectList.length <= (dimensions.width / 253) * 2) projects.forEach((project) => styleProjectList.push(project));
+		projects.forEach((project) => realProjectList.push(project));
 	}
 
 	const homeRef = useRef<HTMLDivElement | null>(null);
@@ -45,7 +45,7 @@ export const HomePage = () => {
 			<NavBar home={homeRef} about={aboutRef} works={worksRef} contact={contactRef} whiteNavColor={whiteNavColor} navIndex={navIndex} />
 			<Header projects={styleProjectList} ref={homeRef} />
 			<About ref={aboutRef} />
-			{data && data.length > 0 && <Projects projects={realProjectList} ref={worksRef} />}
+			{projects && projects.length > 0 && <Projects projects={realProjectList} ref={worksRef} />}
 			<Contact ref={contactRef} />
 			<div style={{ height: "500px" }}></div>
 		</motion.div>
