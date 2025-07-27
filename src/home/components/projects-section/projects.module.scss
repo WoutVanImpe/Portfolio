@@ -48,13 +48,16 @@
 		justify-content: center;
 		align-items: center;
 
+		max-width: 1200px;
+		margin: 0 auto;
+
 		h1 {
 			margin-top: 0;
 		}
 
 		p {
-			width: 55vw;
-			margin-bottom: 0;
+			max-width: 700px;
+			margin: 0;
 		}
 	}
 }
