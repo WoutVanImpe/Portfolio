@@ -26,6 +26,7 @@
 			"~app/*": ["./src/app/*"],
 			"~context/*": ["./src/context/*"],
 			"~home/*": ["./src/home/*"],
+			"~project/*": ["./src/project/*"],
 			"~shared/*": ["./src/shared/*"],
 			"~assets/*": ["./src/assets/*"]
 		}
