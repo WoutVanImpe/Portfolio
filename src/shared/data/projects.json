@@ -4,69 +4,89 @@
 		"title": "Instagram posts",
 		"img": "#",
 		"tags": ["graphic-design", "social-media"],
-		"description": "instagram for JNM"
+		"sections": {
+			"intro": "instagram for JNM"
+		}
 	},
 	{
 		"id": 2,
 		"title": "Trifold flyer",
 		"img": "#",
 		"tags": ["graphic-design"],
-		"description": "instagrflyeram for JNM"
+		"sections": {
+			"intro": "instagrflyeram for JNM"
+		}
 	},
 	{
 		"id": 3,
 		"title": "Parallax website",
 		"img": "#",
 		"tags": ["web"],
-		"description": "Een studentenproject waarin klassieke sprookjes worden herverteld als interactieve digitale verhalen met parallax-effecten en animatie. Ontwikkeld als onderdeel van de opleiding Multimedia en Creatieve Technologie aan de Erasmushogeschool Brussel."
+		"sections": {
+			"intro": "Een studentenproject waarin klassieke sprookjes worden herverteld als interactieve digitale verhalen met parallax-effecten en animatie. Ontwikkeld als onderdeel van de opleiding Multimedia en Creatieve Technologie aan de Erasmushogeschool Brussel."
+		}
 	},
 	{
 		"id": 4,
 		"title": "Bataille",
 		"img": "#",
 		"tags": ["web"],
-		"description": "game for fun"
+		"sections": {
+			"intro": "game for fun"
+		}
 	},
 	{
 		"id": 5,
 		"title": "Pokemon card game",
 		"img": "#",
 		"tags": ["web"],
-		"description": "game for fun"
+		"sections": {
+			"intro": "game for fun"
+		}
 	},
 	{
 		"id": 6,
 		"title": "Layouter Kikkertje",
 		"img": "#",
 		"tags": ["graphic-design"],
-		"description": "magazine for JNM"
+		"sections": {
+			"intro": "magazine for JNM"
+		}
 	},
 	{
 		"id": 7,
 		"title": "Parallax website",
 		"img": "#",
 		"tags": ["web"],
-		"description": "parallax school task"
+		"sections": {
+			"intro": "parallax school task"
+		}
 	},
 	{
 		"id": 8,
 		"title": "Bataille",
 		"img": "#",
 		"tags": ["web"],
-		"description": "game for fun"
+		"sections": {
+			"intro": "game for fun"
+		}
 	},
 	{
 		"id": 9,
 		"title": "Pokemon card game",
 		"img": "#",
 		"tags": ["web"],
-		"description": "game for fun"
+		"sections": {
+			"intro": "game for fun"
+		}
 	},
 	{
 		"id": 10,
 		"title": "Layouter Kikkertje",
 		"img": "#",
 		"tags": ["graphic-design"],
-		"description": "magazine for JNM"
+		"sections": {
+			"intro": "magazine for JNM"
+		}
 	}
 ]
