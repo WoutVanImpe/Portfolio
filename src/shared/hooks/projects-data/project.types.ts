@@ -3,9 +3,9 @@ export default interface ProjectType {
 	title: string;
 	img: string;
 	tags: string[];
-	sections?: {
+	description?: {
 		intro: string;
-		
+		sections: string[]
 	};
 	extraImg?: string[];
 }

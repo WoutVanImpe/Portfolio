@@ -10,7 +10,7 @@ interface ProjectCardProps extends ProjectType {
 	clicked?: string;
 }
 
-export const ProjectCard = ({ id, title, img, tags, sections, clicked, extraImg }: ProjectCardProps) => {
+export const ProjectCard = ({ id, title, img, tags, description, clicked, extraImg }: ProjectCardProps) => {
 	const isExpanded = clicked === "0true";
 
 	const cardVariants = {
@@ -37,7 +37,7 @@ export const ProjectCard = ({ id, title, img, tags, sections, clicked, extraImg 
 			<div className={styles["project-card__bigcard"]}>
 				<div className={styles["project-card__bigcard__norm"]}>
 					{isExpanded ? (
-						<MiniCarousel images={extraImg ?? []} title={title} />
+						<MiniCarousel images={extraImg} title={title} />
 					) : (
 						<div className={styles["project-card__img"]}>
 							<img src={img} alt={title} draggable={false} />
@@ -76,7 +76,7 @@ export const ProjectCard = ({ id, title, img, tags, sections, clicked, extraImg 
 							}}
 							className={styles["project-card__bigcard__extra"]}
 						>
-							<p>{sections?.intro}</p>
+							<p>{description?.intro}</p>
 							<NavLink to={`${PROJECT_ROUTE.template}${id}`} className={styles["project-card__bigcard__extra__navbutton"]} >Zie meer</NavLink>
 						</motion.div>
 					)}
