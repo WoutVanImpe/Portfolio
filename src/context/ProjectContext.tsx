@@ -4,15 +4,20 @@ import { useGetProjects } from "~shared/hooks/projects-data/useGetProjects.hooks
 
 type ProjectContextType = {
 	projects: ProjectType[] | undefined;
+	lamp: boolean;
+	setLamp: (mode: boolean) => void;
 };
 
 const ProjectContext = createContext<ProjectContextType>({
 	projects: undefined,
+	lamp: false,
+	setLamp: () => {},
 });
 
 export const ProjectProvider = ({ children }: { children: React.ReactNode }) => {
 	const { data } = useGetProjects();
 	const [projects, setProjects] = useState<ProjectType[] | undefined>(undefined);
+	const [lamp, setLamp] = useState<boolean>(false);
 
 	useEffect(() => {
 		setProjects(data);
@@ -21,8 +26,10 @@ export const ProjectProvider = ({ children }: { children: React.ReactNode }) => 
 	const value = useMemo(
 		() => ({
 			projects: projects ?? undefined,
+			lamp,
+			setLamp,
 		}),
-		[projects]
+		[projects, lamp]
 	);
 
 	return <ProjectContext.Provider value={value}>{children}</ProjectContext.Provider>;
