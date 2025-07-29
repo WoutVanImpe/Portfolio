@@ -4,69 +4,96 @@
 		"title": "Instagram posts",
 		"img": "#",
 		"tags": ["graphic-design", "social-media"],
-		"description": "instagram for JNM"
+		"description": {
+			"intro": "instagram for JNM"
+		}
 	},
 	{
 		"id": 2,
 		"title": "Trifold flyer",
 		"img": "#",
 		"tags": ["graphic-design"],
-		"description": "instagrflyeram for JNM"
+		"description": {
+			"intro": "instagrflyeram for JNM"
+		}
 	},
 	{
 		"id": 3,
-		"title": "Parallax website",
-		"img": "#",
-		"tags": ["web"],
-		"description": "Een studentenproject waarin klassieke sprookjes worden herverteld als interactieve digitale verhalen met parallax-effecten en animatie. Ontwikkeld als onderdeel van de opleiding Multimedia en Creatieve Technologie aan de Erasmushogeschool Brussel."
+		"title": "Er was eens...",
+		"img": "./images/frontend-main.png",
+		"tags": ["web", "motion"],
+		"description": {
+			"intro": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel.",
+			"sections": [
+				"## De portaalwebsite\n\nEen centrale React-applicatie waar bezoekers sprookjes kunnen ontdekken. Je kan zoeken op naam, filteren op genre, of een willekeurig verhaal opvragen via een shuffle-functie. De portaal bevat ook een **\"Over ons\"** en een **\"Making Of\"**-pagina, die uitleg geven over het projectproces.",
+				"\n\n## De parallax storytelling\n\nEen visueel meeslepende website die één sprookje vertelt via gelaagde scènes en scroll-interactie. Elk element (zoals lucht, bergen, bomen...) beweegt met een eigen snelheid voor een dynamisch diepte-effect. Alle visuals zijn ontworpen in een middeleeuwse *woodcut*-stijl die de mysterieuze sfeer versterkt.",
+				"## Gebruikte technologieën\n\n**Portaalwebsite**\n- React + TypeScript\n- React Router (HashRouter)\n- React Query\n- Context API\n- SCSS Modules\n- Vite\n\n**Parallax Storytelling**\n- React + TypeScript\n- Framer Motion (useScroll, useTransform)\n- SCSS Modules",
+				"## Functionaliteiten\n\n- Zoek- en filterfunctie op naam en genre\n- Shuffle voor willekeurige sprookjes\n- Dynamische layout per route (klassiek of parallax)\n- Informatieve secties (\"Over ons\", \"Making Of\")\n- Herbruikbare modulaire componenten"
+			]
+		},
+		"extraImg": ["./images/frontend-extra1.jpg", "./images/frontend-extra2.jpg", "./images/frontend-extra3.jpg"]
 	},
 	{
 		"id": 4,
 		"title": "Bataille",
 		"img": "#",
 		"tags": ["web"],
-		"description": "game for fun"
+		"description": {
+			"intro": "game for fun"
+		}
 	},
 	{
 		"id": 5,
 		"title": "Pokemon card game",
 		"img": "#",
 		"tags": ["web"],
-		"description": "game for fun"
+		"description": {
+			"intro": "game for fun"
+		}
 	},
 	{
 		"id": 6,
 		"title": "Layouter Kikkertje",
 		"img": "#",
 		"tags": ["graphic-design"],
-		"description": "magazine for JNM"
+		"description": {
+			"intro": "magazine for JNM"
+		}
 	},
 	{
 		"id": 7,
 		"title": "Parallax website",
 		"img": "#",
 		"tags": ["web"],
-		"description": "parallax school task"
+		"description": {
+			"intro": "parallax school task"
+		}
 	},
 	{
 		"id": 8,
 		"title": "Bataille",
 		"img": "#",
 		"tags": ["web"],
-		"description": "game for fun"
+		"description": {
+			"intro": "game for fun"
+		}
 	},
 	{
 		"id": 9,
 		"title": "Pokemon card game",
 		"img": "#",
 		"tags": ["web"],
-		"description": "game for fun"
+		"description": {
+			"intro": "game for fun"
+		}
 	},
 	{
 		"id": 10,
 		"title": "Layouter Kikkertje",
 		"img": "#",
 		"tags": ["graphic-design"],
-		"description": "magazine for JNM"
+		"description": {
+			"intro": "magazine for JNM"
+		}
 	}
 ]

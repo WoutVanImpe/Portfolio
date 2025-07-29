@@ -37,7 +37,7 @@ export const ProjectCard = ({ id, title, img, tags, description, clicked, extraI
 			<div className={styles["project-card__bigcard"]}>
 				<div className={styles["project-card__bigcard__norm"]}>
 					{isExpanded ? (
-						<MiniCarousel images={extraImg ?? []} title={title} />
+						<MiniCarousel images={extraImg} title={title} />
 					) : (
 						<div className={styles["project-card__img"]}>
 							<img src={img} alt={title} draggable={false} />
@@ -76,7 +76,7 @@ export const ProjectCard = ({ id, title, img, tags, description, clicked, extraI
 							}}
 							className={styles["project-card__bigcard__extra"]}
 						>
-							<p>{description}</p>
+							<p>{description?.intro}</p>
 							<NavLink to={`${PROJECT_ROUTE.template}${id}`} className={styles["project-card__bigcard__extra__navbutton"]} >Zie meer</NavLink>
 						</motion.div>
 					)}
