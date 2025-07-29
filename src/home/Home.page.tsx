@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useEffect, useState } from "react";
 import light from "./assets/light.svg";
 import { useProjects } from "~context/ProjectContext";
+import { Clock } from "~shared/components/clock/Clock";
 
 export const HomePage = () => {
 	const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -34,7 +35,8 @@ export const HomePage = () => {
 				handleMouse(e);
 			}}
 		>
-			<Lamp />
+			<Clock />
+			{/* <Lamp /> */}
 			<motion.img
 				style={{
 					opacity: opacity,
@@ -42,7 +44,7 @@ export const HomePage = () => {
 					x: mousePos.x,
 					y: mousePos.y,
 					translateX: "-50%",
-					translateY: "-50%",
+					translateY: "-30%",
 					pointerEvents: "none",
 					scale: scale,
 					zIndex: 10,
