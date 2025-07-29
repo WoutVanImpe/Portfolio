@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 830.43">
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1350.29 1350.29">
   <defs>
     <style>
       .cls-1 {
         fill: url(#radial-gradient);
       }
     </style>
-    <radialGradient id="radial-gradient" cx="640" cy="415.21" fx="640" fy="415.21" r="26.13" gradientUnits="userSpaceOnUse">
+    <radialGradient id="radial-gradient" cx="675.14" cy="675.14" fx="675.14" fy="675.14" r="675.14" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#ff0" stop-opacity=".1"/>
-      <stop offset=".57" stop-color="#4c4c00" stop-opacity=".73"/>
-      <stop offset="1" stop-color="#000"/>
+      <stop offset=".02" stop-color="#4c4c00" stop-opacity=".73"/>
+      <stop offset=".04" stop-color="#000"/>
     </radialGradient>
   </defs>
   <g id="Layer_1-2" data-name="Layer 1">
-    <g>
-      <path d="M0,0v830.43h1280V0H0ZM640,441.35c-14.43,0-26.13-11.7-26.13-26.14s11.7-26.13,26.13-26.13,26.13,11.7,26.13,26.13-11.7,26.14-26.13,26.14Z"/>
-      <circle class="cls-1" cx="640" cy="415.21" r="26.13"/>
-    </g>
+    <circle class="cls-1" cx="675.14" cy="675.14" r="675.14"/>
   </g>
 </svg>
