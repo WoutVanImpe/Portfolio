@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import light from "./assets/light.svg";
 import { useProjects } from "~context/ProjectContext";
 import { Clock } from "~shared/components/clock/Clock";
+import { Globe } from "~shared/components/globe/Glode";
 
 export const HomePage = () => {
 	const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -35,7 +36,8 @@ export const HomePage = () => {
 				handleMouse(e);
 			}}
 		>
-			<Clock />
+			<Globe />
+			{/* <Clock /> */}
 			{/* <Lamp /> */}
 			<motion.img
 				style={{
