@@ -22,7 +22,7 @@ export const Clock = () => {
 	});
 
 	const minutePos = useTransform(smoothMinutes, [0, 60], [0, 360]);
-	const hourPos = useTransform(smoothHours, [0, 1440], [0, 360]);
+	const hourPos = useTransform(smoothHours, [0, 1440], [0, 720]);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
