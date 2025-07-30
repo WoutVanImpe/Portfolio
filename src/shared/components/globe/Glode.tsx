@@ -13,7 +13,7 @@ export const Globe = () => {
 				alt="globe"
 				whileHover={{
 					rotate: 360,
-					filter: "blur(4px)",
+					filter: "blur(3px)",
 					transition: {
 						rotate: {
 							duration: 0.2,
