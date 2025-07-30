@@ -6,11 +6,12 @@ import light from "./assets/light.svg";
 import { useProjects } from "~context/ProjectContext";
 import { Clock } from "~shared/components/clock/Clock";
 import { Globe } from "~shared/components/globe/Glode";
+import { Window } from "~shared/components/window/Window";
 
 export const HomePage = () => {
 	const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 	const lampOpacity = useMotionValue(0);
-	const { lamp } = useProjects();
+	const { lamp, backgroundColor } = useProjects();
 
 	const smoothLamp = useSpring(lampOpacity, {
 		stiffness: 120,
@@ -32,28 +33,33 @@ export const HomePage = () => {
 	return (
 		<motion.div
 			className={styles["playfield"]}
+			animate={{ backgroundColor: backgroundColor }}
+			transition={{ duration: 0.5, ease: "easeIn" }}
 			onMouseMove={(e) => {
 				handleMouse(e);
 			}}
 		>
-			<Globe />
-			{/* <Clock /> */}
+			{/* <Window /> */}
+			{/* <Globe /> */}
+			<Clock />
 			{/* <Lamp /> */}
-			<motion.img
-				style={{
-					opacity: opacity,
-					position: "absolute",
-					x: mousePos.x,
-					y: mousePos.y,
-					translateX: "-50%",
-					translateY: "-30%",
-					pointerEvents: "none",
-					scale: scale,
-					zIndex: 10,
-				}}
-				src={light}
-				alt="light"
-			/>
+			<div className={styles["light-container"]}>
+				<motion.img
+					style={{
+						opacity: opacity,
+						position: "absolute",
+						x: mousePos.x,
+						y: mousePos.y,
+						translateX: "-50%",
+						translateY: "-50%",
+						pointerEvents: "none",
+						scale: scale,
+						zIndex: 10,
+					}}
+					src={light}
+					alt="light"
+				/>
+			</div>
 		</motion.div>
 	);
 };

@@ -1,0 +1,37 @@
+.window-container {
+	width: 400px;
+	aspect-ratio: 1/1;
+	position: relative;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&__window {
+		width: 90%;
+		height: 90%;
+
+		object-fit: contain;
+		z-index: 2;
+	}
+
+	&__cloth {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		z-index: 4;
+
+		transform-origin: center right;
+
+        cursor: pointer;
+	}
+
+	&__rail {
+		position: absolute;
+		top: 2px;
+		left: 0;
+
+		z-index: 3;
+	}
+}
