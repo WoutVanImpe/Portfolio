@@ -14,7 +14,7 @@ export const HomePage = () => {
 	const { lamp, backgroundColor } = useProjects();
 
 	const smoothLamp = useSpring(lampOpacity, {
-		stiffness: 120,
+		stiffness: 20,
 		damping: 20,
 		mass: 1,
 	});
@@ -34,14 +34,14 @@ export const HomePage = () => {
 		<motion.div
 			className={styles["playfield"]}
 			animate={{ backgroundColor: backgroundColor }}
-			transition={{ duration: 0.5, ease: "easeIn" }}
+			transition={{ duration: 1, ease: "easeIn"}}
 			onMouseMove={(e) => {
 				handleMouse(e);
 			}}
 		>
-			{/* <Window /> */}
+			<Window />
 			{/* <Globe /> */}
-			<Clock />
+			{/* <Clock /> */}
 			{/* <Lamp /> */}
 			<div className={styles["light-container"]}>
 				<motion.img
