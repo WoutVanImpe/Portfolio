@@ -23,4 +23,33 @@
 
 		cursor: zoom-in;
 	}
+
+	&__lang {
+		position: absolute;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 15px;
+
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto auto;
+
+		pointer-events: none;
+
+		p {
+			margin: 0;
+
+			padding: 10px 15px;
+			background-color: rgba(128, 128, 128, 0.496);
+			border-radius: 10px;
+
+			pointer-events: visibleStroke;
+			cursor: pointer;
+		}
+	}
 }

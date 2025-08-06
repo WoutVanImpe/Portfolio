@@ -39,8 +39,8 @@ export const HomePage = () => {
 				handleMouse(e);
 			}}
 		>
-			<Window />
-			{/* <Globe /> */}
+			{/* <Window /> */}
+			<Globe />
 			{/* <Clock /> */}
 			{/* <Lamp /> */}
 			<div className={styles["light-container"]}>
