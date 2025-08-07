@@ -9,19 +9,21 @@ import { useEffect } from "react";
 
 export const Window = () => {
 	const { darkmode, setDarkmode } = useTheme();
-	const { curtain } = useObjects();
+	const { curtain, lamp, setLamp } = useObjects();
 	const curtainState = useMotionValue(0);
 
 	useEffect(() => {
 		if (curtain) {
 			curtainState.set(curtain.get());
-			console.log(curtainState);
 		}
 	}, [curtain?.get()]);
 
 	const handleClick = () => {
 		curtain?.set(curtain.get() === 1 ? 0 : 1);
 		setDarkmode(!darkmode);
+		if (lamp === true) {
+			setLamp(false);
+		}
 	};
 
 	const smoothCurtain = useSpring(curtainState, {

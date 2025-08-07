@@ -1,14 +1,23 @@
 import styles from "./lamp.module.scss";
 import lampImg from "../assets/lamp.svg";
 import triggerImg from "../assets/lamp-trigger.svg";
+import lampOnImg from "../assets/lamp-on.svg";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useObjects } from "~context/ObjectContext";
 import { useTheme } from "~context/ThemeContext";
+import { useEffect } from "react";
 
 export const Lamp = () => {
 	const { lamp, setLamp, curtain } = useObjects();
 	const { darkmode, setDarkmode } = useTheme();
 	const y = useMotionValue(0);
+	const lightOpacity = useMotionValue(1);
+
+	useEffect(() => {
+		if (!lamp) {
+			lightOpacity.set(1);
+		}
+	}, [lamp]);
 
 	const smoothY = useSpring(y, {
 		stiffness: 120,
@@ -16,6 +25,13 @@ export const Lamp = () => {
 		mass: 1,
 	});
 
+	const smoothLight = useSpring(lightOpacity, {
+		stiffness: 80,
+		damping: 20,
+		mass: 1,
+	});
+
+	const lampOpacity = useTransform(smoothLight, [0, 1], [0, 1]);
 	const lampY = useTransform(smoothY, [0, 1], [0, 25]);
 
 	const handleClick = () => {
@@ -26,6 +42,7 @@ export const Lamp = () => {
 			setDarkmode(!darkmode);
 		}
 
+		lightOpacity.set(lightOpacity.get() === 1 ? 0 : 1);
 		setLamp(!lamp);
 		setTimeout(() => {
 			y.set(0);
@@ -38,6 +55,7 @@ export const Lamp = () => {
 			<motion.div className={styles["lamp-container__trigger"]} style={{ y: lampY }} whileHover={{ translateY: "1px", scale: 1.1 }} onClick={handleClick}>
 				<img src={triggerImg} alt="trigger" />
 			</motion.div>
+			<motion.img className={styles["lamp-container__lampcap"]} style={{ opacity: lampOpacity }} src={lampOnImg} alt="lampkap" />
 		</div>
 	);
 };
