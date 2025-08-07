@@ -4,21 +4,31 @@ import curtainImg from "../assets/curtain.svg";
 import railImg from "../assets/curtain-rail.svg";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useTheme } from "~context/ThemeContext";
+import { useObjects } from "~context/ObjectContext";
+import { useEffect } from "react";
 
 export const Window = () => {
 	const { darkmode, setDarkmode } = useTheme();
+	const { curtain } = useObjects();
 	const curtainState = useMotionValue(0);
+
+	useEffect(() => {
+		if (curtain) {
+			curtainState.set(curtain.get());
+			console.log(curtainState);
+		}
+	}, [curtain?.get()]);
+
+	const handleClick = () => {
+		curtain?.set(curtain.get() === 1 ? 0 : 1);
+		setDarkmode(!darkmode);
+	};
 
 	const smoothCurtain = useSpring(curtainState, {
 		stiffness: 60,
 		damping: 20,
 		mass: 1,
 	});
-
-	const handleClick = () => {
-		curtainState.set(curtainState.get() === 1 ? 0 : 1);
-		setDarkmode(!darkmode);
-	};
 
 	const curtainScale = useTransform(smoothCurtain, [0, 1], [0.2, 1]);
 

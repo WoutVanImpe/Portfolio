@@ -3,9 +3,11 @@ import lampImg from "../assets/lamp.svg";
 import triggerImg from "../assets/lamp-trigger.svg";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useObjects } from "~context/ObjectContext";
+import { useTheme } from "~context/ThemeContext";
 
 export const Lamp = () => {
-	const { lamp, setLamp } = useObjects();
+	const { lamp, setLamp, curtain } = useObjects();
+	const { darkmode, setDarkmode } = useTheme();
 	const y = useMotionValue(0);
 
 	const smoothY = useSpring(y, {
@@ -18,6 +20,12 @@ export const Lamp = () => {
 
 	const handleClick = () => {
 		y.set(1);
+
+		if (curtain?.get() === 0) {
+			curtain.set(1);
+			setDarkmode(!darkmode);
+		}
+
 		setLamp(!lamp);
 		setTimeout(() => {
 			y.set(0);

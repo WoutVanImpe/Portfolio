@@ -6,7 +6,7 @@ import light from "./assets/light.svg";
 import { Clock } from "~shared/components/clock/Clock";
 import { Globe } from "~shared/components/globe/Glode";
 import { Window } from "~shared/components/window/Window";
-import { useObjects} from "~context/ObjectContext";
+import { useObjects } from "~context/ObjectContext";
 import { useTheme } from "~context/ThemeContext";
 
 export const HomePage = () => {
@@ -41,7 +41,7 @@ export const HomePage = () => {
 				handleMouse(e);
 			}}
 		>
-			{/* <Window /> */}
+			<Window />
 			{/* <Globe /> */}
 			{/* <Clock /> */}
 			<Lamp />
