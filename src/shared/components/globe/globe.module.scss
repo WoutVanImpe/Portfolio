@@ -10,6 +10,17 @@
 		z-index: 1;
 	}
 
+	> p {
+		margin: 0;
+
+		position: absolute;
+		bottom: 6px;
+		right: 74px;
+
+		color: white;
+		text-transform: uppercase;
+	}
+
 	&__globe {
 		position: absolute;
 		top: 20px;
@@ -40,8 +51,9 @@
 		margin: auto auto;
 
 		pointer-events: none;
+		z-index: 3;
 
-		p {
+		button {
 			margin: 0;
 
 			padding: 10px 15px;

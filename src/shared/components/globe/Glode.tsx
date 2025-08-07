@@ -1,38 +1,24 @@
 import styles from "./globe.module.scss";
 import globeImg from "../assets/globe.svg";
 import baseImg from "../assets/globe-base.svg";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { LanguageButton } from "./LanguageButton";
 
 export const Globe = () => {
-	const [styleNumber, setStyleNumber] = useState<0 | 1>(0);
-	const opacityVal = useMotionValue<number>(0);
-	const indexVal = useMotionValue<number>(1);
-
-	const smoothDisplay = useSpring(opacityVal, {
-		stiffness: 50,
-		damping: 20,
-		mass: 1,
-	});
-
-	const smoothIndex = useSpring(indexVal, {
-		stiffness: 25,
-		damping: 20,
-		mass: 1,
-	});
-
-	const langDisplay = useTransform(smoothDisplay, [0, 1], [0, 1]);
-	const langIndex = useTransform(smoothIndex, [1, 3], [1, 3]);
+	const { i18n } = useTranslation();
+	const [showLangs, setShowLangs] = useState(false);
 
 	const handleClick = () => {
-		setStyleNumber(styleNumber === 0 ? 1 : 0);
-		opacityVal.set(opacityVal.get() === 0 ? 1 : 0);
-		indexVal.set(indexVal.get() === 1 ? 3 : 1);
+		setShowLangs((prev) => !prev);
 	};
 
 	return (
 		<div className={styles["globe-container"]}>
 			<img className={styles["globe-container__base"]} src={baseImg} alt="globe base" />
+			<p>{i18n.language}</p>
+
 			<motion.img
 				className={styles["globe-container__globe"]}
 				src={globeImg}
@@ -50,10 +36,14 @@ export const Globe = () => {
 				}}
 				onClick={handleClick}
 			/>
-			<motion.div style={{ opacity: langDisplay, zIndex: langIndex }} className={styles["globe-container__lang"]}>
-				<p>Nederlands</p>
-				<p>English</p>
-			</motion.div>
+
+			<AnimatePresence>
+				{showLangs && (
+					<motion.div className={styles["globe-container__lang"]} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.3 }}>
+						{Array.isArray(i18n.options.supportedLngs) && i18n.options.supportedLngs.filter((lng) => lng !== "cimode").map((language) => <LanguageButton key={language} language={language} onClick={handleClick} />)}
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };
