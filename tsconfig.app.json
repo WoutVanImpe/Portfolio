@@ -25,6 +25,7 @@
 		"paths": {
 			"~app/*": ["./src/app/*"],
 			"~context/*": ["./src/context/*"],
+			"~i18n/*": ["./src/shared/i18n/*"],
 			"~home/*": ["./src/home/*"],
 			"~project/*": ["./src/project/*"],
 			"~shared/*": ["./src/shared/*"],
