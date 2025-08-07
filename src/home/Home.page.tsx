@@ -6,13 +6,13 @@ import light from "./assets/light.svg";
 import { Clock } from "~shared/components/clock/Clock";
 import { Globe } from "~shared/components/globe/Glode";
 import { Window } from "~shared/components/window/Window";
-import { useLamp } from "~context/LampContext";
+import { useObjects} from "~context/ObjectContext";
 import { useTheme } from "~context/ThemeContext";
 
 export const HomePage = () => {
 	const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 	const lampOpacity = useMotionValue(0);
-	const { lamp } = useLamp();
+	const { lamp } = useObjects();
 	const { backgroundColor } = useTheme();
 
 	const smoothLamp = useSpring(lampOpacity, {

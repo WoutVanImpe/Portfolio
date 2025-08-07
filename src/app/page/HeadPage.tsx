@@ -1,15 +1,15 @@
 import { Outlet } from "react-router";
 import { DataProvider } from "~context/DataContext";
-import { LampProvider } from "~context/LampContext";
+import { ObjectProvider } from "~context/ObjectContext";
 import { ThemeProvider } from "~context/ThemeContext";
 
 export const HeadPage = () => {
 	return (
 		<DataProvider>
 			<ThemeProvider>
-				<LampProvider>
+				<ObjectProvider>
 					<Outlet />
-				</LampProvider>
+				</ObjectProvider>
 			</ThemeProvider>
 		</DataProvider>
 	);
