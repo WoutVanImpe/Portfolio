@@ -3,10 +3,10 @@ import windowImg from "../assets/window.svg";
 import curtainImg from "../assets/curtain.svg";
 import railImg from "../assets/curtain-rail.svg";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import { useProjects } from "~context/ProjectContext";
+import { useTheme } from "~context/ThemeContext";
 
 export const Window = () => {
-	const { darkmode, setDarkmode } = useProjects();
+	const { darkmode, setDarkmode } = useTheme();
 	const curtainState = useMotionValue(0);
 
 	const smoothCurtain = useSpring(curtainState, {

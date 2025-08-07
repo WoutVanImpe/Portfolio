@@ -2,10 +2,10 @@ import styles from "./lamp.module.scss";
 import lampImg from "../assets/lamp.svg";
 import triggerImg from "../assets/lamp-trigger.svg";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import { useProjects } from "~context/ProjectContext";
+import { useLamp } from "~context/LampContext";
 
 export const Lamp = () => {
-	const { lamp, setLamp } = useProjects();
+	const { lamp, setLamp } = useLamp();
 	const y = useMotionValue(0);
 
 	const smoothY = useSpring(y, {

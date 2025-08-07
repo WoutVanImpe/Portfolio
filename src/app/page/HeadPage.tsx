@@ -1,10 +1,16 @@
 import { Outlet } from "react-router";
-import { ProjectProvider } from "../../context/ProjectContext";
+import { DataProvider } from "~context/DataContext";
+import { LampProvider } from "~context/LampContext";
+import { ThemeProvider } from "~context/ThemeContext";
 
 export const HeadPage = () => {
 	return (
-		<ProjectProvider>
-			<Outlet />
-		</ProjectProvider>
+		<DataProvider>
+			<ThemeProvider>
+				<LampProvider>
+					<Outlet />
+				</LampProvider>
+			</ThemeProvider>
+		</DataProvider>
 	);
 };

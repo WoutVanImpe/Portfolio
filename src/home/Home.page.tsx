@@ -3,15 +3,17 @@ import styles from "./home.module.scss";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useEffect, useState } from "react";
 import light from "./assets/light.svg";
-import { useProjects } from "~context/ProjectContext";
 import { Clock } from "~shared/components/clock/Clock";
 import { Globe } from "~shared/components/globe/Glode";
 import { Window } from "~shared/components/window/Window";
+import { useLamp } from "~context/LampContext";
+import { useTheme } from "~context/ThemeContext";
 
 export const HomePage = () => {
 	const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 	const lampOpacity = useMotionValue(0);
-	const { lamp, backgroundColor } = useProjects();
+	const { lamp } = useLamp();
+	const { backgroundColor } = useTheme();
 
 	const smoothLamp = useSpring(lampOpacity, {
 		stiffness: 20,
@@ -34,15 +36,15 @@ export const HomePage = () => {
 		<motion.div
 			className={styles["playfield"]}
 			animate={{ backgroundColor: backgroundColor }}
-			transition={{ duration: 1, ease: "easeIn"}}
+			transition={{ duration: 1, ease: "easeIn" }}
 			onMouseMove={(e) => {
 				handleMouse(e);
 			}}
 		>
 			{/* <Window /> */}
-			<Globe />
+			{/* <Globe /> */}
 			{/* <Clock /> */}
-			{/* <Lamp /> */}
+			<Lamp />
 			<div className={styles["light-container"]}>
 				<motion.img
 					style={{
