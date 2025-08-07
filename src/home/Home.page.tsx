@@ -41,10 +41,10 @@ export const HomePage = () => {
 				handleMouse(e);
 			}}
 		>
-			<Window />
-			{/* <Globe /> */}
+			{/* <Window /> */}
+			<Globe />
 			{/* <Clock /> */}
-			<Lamp />
+			{/* <Lamp /> */}
 			<div className={styles["light-container"]}>
 				<motion.img
 					style={{
