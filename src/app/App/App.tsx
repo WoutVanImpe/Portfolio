@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createHashRouter, RouterProvider } from "react-router";
 import { HeadPage } from "~app/page/HeadPage";
 import { HOME_ROUTE, NO_ROUTE, PROJECT_ROUTE } from "~shared/routes/routes";
+import "../../shared/i18n/config";
 
 const queryClient = new QueryClient();
 
