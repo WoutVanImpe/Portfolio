@@ -1,6 +1,6 @@
 .postcard-container {
-	width: 800px;
-	aspect-ratio: 2/1;
+	width: 600px;
+	height: 400px;
 	position: relative;
 
 	pointer-events: none;
@@ -15,7 +15,7 @@
 		height: 100px;
 		position: absolute;
 		top: 15px;
-		right: 110px;
+		right: 10px;
 
 		display: flex;
 		flex-direction: row;
@@ -28,7 +28,7 @@
 	&__title {
 		position: absolute;
 		top: 191px;
-		left: 455px;
+		left: 355px;
 
 		max-width: 220px;
 		margin: 0;
@@ -40,7 +40,7 @@
 	&__description {
 		position: absolute;
 		top: 188px;
-		left: 110px;
+		left: 10px;
 
 		width: 310px;
 		height: 200px;
@@ -56,7 +56,7 @@
     &__image {
         position: absolute;
 		top: 18px;
-		left: 110px;
+		left: 10px;
 
         border-radius: 10px;
         object-fit: cover;
