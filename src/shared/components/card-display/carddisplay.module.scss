@@ -22,6 +22,8 @@
 	&__card {
 		z-index: 2;
 
+		pointer-events: all;
+
         width: fit-content;
 
         position: absolute;
