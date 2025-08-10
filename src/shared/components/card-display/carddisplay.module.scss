@@ -5,6 +5,8 @@
 
 	pointer-events: none;
 
+	
+
 	&__back {
 		z-index: 1;
 	}
@@ -21,8 +23,6 @@
 
 	&__card {
 		z-index: 2;
-
-		pointer-events: all;
 
         width: fit-content;
 
