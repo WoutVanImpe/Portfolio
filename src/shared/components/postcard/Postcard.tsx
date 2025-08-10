@@ -54,6 +54,9 @@ export const Postcard = () => {
 						delectus qui porro neque est nihil galisum 33 pariatur ipsum!
 					</p>
 					<img className={styles["postcard-container__front__image"]} src="./images/frontend-main.png" alt="main" />
+					<motion.button whileHover={{ scale: 1.1 }} style={{ rotate: -5 }} className={styles["postcard-container__front__button"]}>
+						Zie meer
+					</motion.button>
 				</motion.div>
 			) : (
 				<motion.div className={styles["postcard-container__back"]}>

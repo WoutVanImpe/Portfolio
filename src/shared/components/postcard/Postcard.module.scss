@@ -71,6 +71,37 @@
 			height: 160px;
 			margin: 0;
 		}
+
+		&__button {
+			position: absolute;
+			bottom: 25px;
+			right: 13px;
+
+			background: none;
+
+			padding: 5px 10px;
+			border: 3px solid #d23;
+			border-radius: 5px;
+
+			font-size: 20px;
+			color: #d23;
+			font-weight: 700;
+			text-transform: uppercase;
+			font-family: "Courier", sans-serif;
+
+			mask-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png");
+			-webkit-mask-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png");
+			mask-size: 944px 604px;
+			-webkit-mask-size: 944px 604px;
+			mix-blend-mode: multiply;
+
+			cursor: pointer;
+
+			&:hover {
+				border: 3px dashed #0A9928;
+				color: #0A9928;
+			}
+		}
 	}
 
 	&__back {
