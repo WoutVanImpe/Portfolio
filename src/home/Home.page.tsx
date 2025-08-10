@@ -8,6 +8,8 @@ import { Globe } from "~shared/components/globe/Glode";
 import { Window } from "~shared/components/window/Window";
 import { useObjects } from "~context/ObjectContext";
 import { useTheme } from "~context/ThemeContext";
+import { Postcard } from "~shared/components/postcard/Postcard";
+import { CardDisplay } from "~shared/components/card-display/CardDisplay";
 
 export const HomePage = () => {
 	const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -41,8 +43,10 @@ export const HomePage = () => {
 				handleMouse(e);
 			}}
 		>
+			<CardDisplay/>
+			{/* <Postcard /> */}
 			{/* <Window /> */}
-			<Globe />
+			{/* <Globe /> */}
 			{/* <Clock /> */}
 			{/* <Lamp /> */}
 			<div className={styles["light-container"]}>
