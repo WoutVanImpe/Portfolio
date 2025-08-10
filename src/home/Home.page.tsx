@@ -7,7 +7,6 @@ import { Clock } from "~shared/components/clock/Clock";
 import { Globe } from "~shared/components/globe/Glode";
 import { Window } from "~shared/components/window/Window";
 import { useObjects } from "~context/ObjectContext";
-import { useTheme } from "~context/ThemeContext";
 import { Postcard } from "~shared/components/postcard/Postcard";
 import { CardDisplay } from "~shared/components/card-display/CardDisplay";
 
@@ -15,7 +14,6 @@ export const HomePage = () => {
 	const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 	const lampOpacity = useMotionValue(0);
 	const { lamp } = useObjects();
-	const { backgroundColor } = useTheme();
 
 	const smoothLamp = useSpring(lampOpacity, {
 		stiffness: 20,
@@ -37,15 +35,13 @@ export const HomePage = () => {
 	return (
 		<motion.div
 			className={styles["playfield"]}
-			animate={{ backgroundColor: backgroundColor }}
-			transition={{ duration: 1, ease: "easeIn" }}
 			onMouseMove={(e) => {
 				handleMouse(e);
 			}}
 		>
-			<CardDisplay/>
+			{/* <CardDisplay/> */}
 			{/* <Postcard /> */}
-			{/* <Window /> */}
+			<Window />
 			{/* <Globe /> */}
 			{/* <Clock /> */}
 			{/* <Lamp /> */}
