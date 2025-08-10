@@ -19,7 +19,7 @@ export const Postcard = () => {
 			}),
 			controls.start({
 				rotateY: 90,
-				transition: { duration: 0.5, delay: 0.3, ease: "easeInOut" },
+				transition: { duration: 0.5, delay: 0.3, ease: "easeIn" },
 			}),
 		]);
 
@@ -28,7 +28,7 @@ export const Postcard = () => {
 		await Promise.all([
 			controls.start({
 				rotateY: 0,
-				transition: { duration: 0.5, ease: "easeInOut" },
+				transition: { duration: 0.5, ease: "easeOut" },
 			}),
 			controls.start({
 				y: 0,
