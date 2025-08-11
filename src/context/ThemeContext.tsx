@@ -3,29 +3,23 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 type ThemeContextType = {
 	darkmode: boolean;
 	setDarkmode: (mode: boolean) => void;
-	backgroundColor: "#f8f1e9" | "#2E2A26";
-	setBackgroundColor: (mode: "#f8f1e9" | "#2E2A26") => void;
-	patternColor: "#C2A083 " | "#A38C7A";
-	setPatternColor: (mode: "#C2A083 " | "#A38C7A") => void;
+	backgroundColor: "#aa88e7ff" | "#342353ff";
+	setBackgroundColor: (mode: "#aa88e7ff" | "#342353ff") => void;
 };
 
 const ThemeContext = createContext<ThemeContextType>({
 	darkmode: false,
 	setDarkmode: () => {},
-	backgroundColor: "#f8f1e9",
+	backgroundColor: "#aa88e7ff",
 	setBackgroundColor: () => {},
-	patternColor: "#C2A083 ",
-	setPatternColor: () => {},
 });
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 	const [darkmode, setDarkmode] = useState<boolean>(false);
-	const [backgroundColor, setBackgroundColor] = useState<"#f8f1e9" | "#2E2A26">("#f8f1e9");
-	const [patternColor, setPatternColor] = useState<"#C2A083 " | "#A38C7A">("#C2A083 ");
+	const [backgroundColor, setBackgroundColor] = useState<"#aa88e7ff" | "#342353ff">("#aa88e7ff");
 
 	useEffect(() => {
-		setBackgroundColor(darkmode ? "#2E2A26" : "#f8f1e9");
-		setPatternColor(darkmode ? "#A38C7A" : "#C2A083 ");
+		setBackgroundColor(darkmode ? "#342353ff" : "#aa88e7ff");
 	}, [darkmode]);
 
 	const value = useMemo(
@@ -34,10 +28,8 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 			setDarkmode,
 			backgroundColor,
 			setBackgroundColor,
-			patternColor,
-			setPatternColor,
 		}),
-		[darkmode, backgroundColor, patternColor]
+		[darkmode, backgroundColor]
 	);
 
 	return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
