@@ -2,7 +2,7 @@ import styles from "./contactSection.module.scss";
 
 export const ContactSection = () => {
 	return (
-		<div>
+		<div className={styles["s-contact"]}>
 			<div></div>
 		</div>
 	);
