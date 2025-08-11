@@ -2,6 +2,7 @@
 	width: 200px;
 	aspect-ratio: 1/1;
 	position: relative;
+	display: flex;
 
 	&__base {
 		width: 100%;
@@ -14,11 +15,12 @@
 		margin: 0;
 
 		position: absolute;
-		bottom: 6px;
-		right: 74px;
+		bottom: 2px;
+		right: 73px;
 
 		color: white;
 		text-transform: uppercase;
+		z-index: 2;
 	}
 
 	&__globe {
