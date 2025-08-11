@@ -33,35 +33,37 @@ export const HomePage = () => {
 	const scale = useTransform(smoothLamp, [0, 1], [20, 8]);
 
 	return (
-		<motion.div
-			className={styles["playfield"]}
-			onMouseMove={(e) => {
-				handleMouse(e);
-			}}
-		>
-			{/* <CardDisplay/> */}
-			{/* <Postcard /> */}
-			<Window />
-			{/* <Globe /> */}
-			{/* <Clock /> */}
-			{/* <Lamp /> */}
-			<div className={styles["light-container"]}>
-				<motion.img
-					style={{
-						opacity: opacity,
-						position: "absolute",
-						x: mousePos.x,
-						y: mousePos.y,
-						translateX: "-50%",
-						translateY: "-50%",
-						pointerEvents: "none",
-						scale: scale,
-						zIndex: 10,
-					}}
-					src={light}
-					alt="light"
-				/>
-			</div>
-		</motion.div>
+		<div className={styles["p-home"]}>
+			<motion.div
+				className={styles["playfield"]}
+				onMouseMove={(e) => {
+					handleMouse(e);
+				}}
+			>
+				{/* <CardDisplay/> */}
+				{/* <Postcard /> */}
+				{/* <Window /> */}
+				{/* <Globe /> */}
+				{/* <Clock /> */}
+				{/* <Lamp /> */}
+				<div className={styles["light-container"]}>
+					<motion.img
+						style={{
+							opacity: opacity,
+							position: "absolute",
+							x: mousePos.x,
+							y: mousePos.y,
+							translateX: "-50%",
+							translateY: "-50%",
+							pointerEvents: "none",
+							scale: scale,
+							zIndex: 10,
+						}}
+						src={light}
+						alt="light"
+					/>
+				</div>
+			</motion.div>
+		</div>
 	);
 };
