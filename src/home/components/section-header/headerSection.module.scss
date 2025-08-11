@@ -15,22 +15,52 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: start;
+		gap: 30px;
 
 		&__frame {
 			background-color: #f2f2fa;
 			border: 10px solid #e3dfe6;
-            outline: 8px solid #aa7a6f;
+			outline: 8px solid #aa7a6f;
 
-            padding: 10px 45px 10px 10px;
+			padding: 10px 45px 10px 10px;
 
 			> * {
 				margin: 0;
 				z-index: 2;
 			}
 		}
+
+		&__shelf-container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+			&__objects {
+				display: flex;
+				flex-direction: row-reverse;
+				justify-content: space-around;
+				align-items: flex-end;
+
+				> * {
+					transform-origin: bottom left;
+				}
+			}
+
+			&__shelf {
+				border-top: 15px solid #c57e62;
+				background-color: #ded4db;
+				border-radius: 5px;
+
+				width: 500px;
+				height: 20px;
+
+				transform-origin: top left;
+			}
+		}
 	}
 
-	&__objects-container {
+	&__window-container {
 		flex: 2;
 		height: 100%;
 
