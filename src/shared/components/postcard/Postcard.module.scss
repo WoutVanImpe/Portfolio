@@ -1,10 +1,13 @@
 .postcard-container {
 	width: 600px;
-	height: 400px;
+	height: 395px;
 	position: relative;
+
 
 	pointer-events: all;
 	cursor: pointer;
+	box-shadow: 5px 5px rgba(0, 0, 0, 0.253);
+	border-radius: 10px;
 
 	&__front {
 		position: relative;
@@ -98,8 +101,8 @@
 			cursor: pointer;
 
 			&:hover {
-				border: 3px dashed #0A9928;
-				color: #0A9928;
+				border: 3px dashed #0a9928;
+				color: #0a9928;
 			}
 		}
 	}
