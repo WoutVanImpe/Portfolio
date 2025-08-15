@@ -1,0 +1,51 @@
+.navigation-container {
+	width: 600px;
+	position: relative;
+
+	&__globe-container {
+		position: absolute;
+		bottom: 378px;
+		left: 80px;
+
+		scale: 1.8;
+		transform-origin: left bottom;
+	}
+
+	&__options-container {
+		position: absolute;
+
+        left: 47px;
+        bottom: 70px;
+
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		flex-wrap: nowrap;
+		align-items: flex-end;
+        gap: 50px;
+
+		&__option {
+            position: relative;
+
+			img {
+                width: 87.5px;
+			}
+
+            p{
+                position: absolute;
+                right: -23px;
+                top: 50px;
+
+
+                width: 150px;
+
+                text-align: center;
+                rotate: -90deg;
+
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 25px;
+            }
+		}
+	}
+}
