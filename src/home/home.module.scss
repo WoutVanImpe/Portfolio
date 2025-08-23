@@ -4,6 +4,16 @@
 
 	max-width: 1200px;
 	margin: 0 auto;
+
+	position: relative;
+
+	&__nav {
+		position: fixed;
+		top: 0;
+		left: 40px;
+
+		transform-origin: top left;
+	}
 }
 
 .light-container {

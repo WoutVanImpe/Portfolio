@@ -5,13 +5,13 @@ import book2Img from "../../../shared/components/assets/nav-option2.svg";
 import book3Img from "../../../shared/components/assets/nav-option3.svg";
 import book4Img from "../../../shared/components/assets/nav-option4.svg";
 import { Globe } from "~shared/components/globe/Glode";
-import { motion, useMotionValue } from "motion/react";
+import { motion, MotionValue } from "motion/react";
 
-export const Navigation = () => {
-	const navState = useMotionValue<number>(0);
+type RefType = React.RefObject<HTMLDivElement | null>;
 
+export const Navigation = ({ home, about, works, contact, y }: { home: RefType; about: RefType; works: RefType; contact: RefType; y: MotionValue<number> }) => {
 	const handleStateClick = () => {
-		navState.set(navState.get() === 1 ? 0 : 1);
+		y.set(y.get() === 0 ? 1 : 0);
 	};
 
 	return (
@@ -21,24 +21,52 @@ export const Navigation = () => {
 				<Globe />
 			</div>
 			<div className={styles["navigation-container__options-container"]}>
-				<motion.div className={styles["navigation-container__options-container__option"]} whileHover={{ scale: 1.1 }}>
+				<motion.div
+					className={styles["navigation-container__options-container__option"]}
+					whileHover={{ scale: 1.1 }}
+					onClick={() => {
+						home.current?.scrollIntoView({ behavior: "smooth" });
+						y.set(0);
+					}}
+				>
 					<p>Home</p>
 					<img src={book1Img} alt="home option" />
 				</motion.div>
-				<motion.div className={styles["navigation-container__options-container__option"]} whileHover={{ scale: 1.1 }}>
+				<motion.div
+					className={styles["navigation-container__options-container__option"]}
+					whileHover={{ scale: 1.1 }}
+					onClick={() => {
+						about.current?.scrollIntoView({ behavior: "smooth" });
+						y.set(0);
+					}}
+				>
 					<p>About</p>
 					<img src={book2Img} alt="about option" />
 				</motion.div>
-				<motion.div className={styles["navigation-container__options-container__option"]} whileHover={{ scale: 1.1 }}>
+				<motion.div
+					className={styles["navigation-container__options-container__option"]}
+					whileHover={{ scale: 1.1 }}
+					onClick={() => {
+						works.current?.scrollIntoView({ behavior: "smooth" });
+						y.set(0);
+					}}
+				>
 					<p>Works</p>
 					<img src={book3Img} alt="works option" />
 				</motion.div>
-				<motion.div className={styles["navigation-container__options-container__option"]} whileHover={{ scale: 1.1 }}>
+				<motion.div
+					className={styles["navigation-container__options-container__option"]}
+					whileHover={{ scale: 1.1 }}
+					onClick={() => {
+						contact.current?.scrollIntoView({ behavior: "smooth" });
+						y.set(0);
+					}}
+				>
 					<p>Contact</p>
 					<img src={book4Img} alt="contact option" />
 				</motion.div>
 			</div>
-			<motion.div className={styles["navigation-container__click-target"]} onClick={handleStateClick}></motion.div>
+			<motion.div className={styles["navigation-container__click-target"]} style={{ cursor: "pointer" }} onClick={handleStateClick}></motion.div>
 		</div>
 	);
 };
