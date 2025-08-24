@@ -6,6 +6,8 @@ import book3Img from "../../../shared/components/assets/nav-option3.svg";
 import book4Img from "../../../shared/components/assets/nav-option4.svg";
 import { Globe } from "~shared/components/globe/Glode";
 import { motion, MotionValue } from "motion/react";
+import { useEffect, useState } from "react";
+import classNames from "classnames";
 
 type RefType = React.RefObject<HTMLDivElement | null>;
 
@@ -13,6 +15,31 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 	const handleStateClick = () => {
 		y.set(y.get() === 0 ? 1 : 0);
 	};
+
+	const [activeSection, setActiveSection] = useState("home");
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const sectionOffsets = [
+				{ name: "home", top: home.current?.getBoundingClientRect().top || 0 },
+				{ name: "about", top: about.current?.getBoundingClientRect().top || 0 },
+				{ name: "works", top: works.current?.getBoundingClientRect().top || 0 },
+				{ name: "contact", top: contact.current?.getBoundingClientRect().top || 0 },
+			];
+
+			const threshold = 100;
+			const visibleSection = sectionOffsets.find((section) => section.top >= 0 && section.top < threshold);
+
+			if (visibleSection) {
+				setActiveSection(visibleSection.name);
+			}
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		handleScroll();
+
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [home, about, works, contact]);
 
 	return (
 		<div className={styles["navigation-container"]}>
@@ -30,7 +57,7 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 					}}
 				>
 					<h5>Home</h5>
-					<p>home</p>
+					<p className={classNames(activeSection === "home" ? styles["actif-nav"] : "")}>home</p>
 					<img src={book1Img} alt="home option" />
 				</motion.div>
 				<motion.div
@@ -42,7 +69,7 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 					}}
 				>
 					<h5>About</h5>
-					<p>about</p>
+					<p className={classNames(activeSection === "about" ? styles["actif-nav"] : "")}>about</p>
 					<img src={book2Img} alt="about option" />
 				</motion.div>
 				<motion.div
@@ -54,7 +81,7 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 					}}
 				>
 					<h5>Works</h5>
-					<p>works</p>
+					<p className={classNames(activeSection === "works" ? styles["actif-nav"] : "")}>works</p>
 					<img src={book3Img} alt="works option" />
 				</motion.div>
 				<motion.div
@@ -65,8 +92,8 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<h5>Contact</h5>
-					<p>contact</p>
+					<h5 className={classNames(activeSection === "contact" ? styles["actif-nav"] : "")}>Contact</h5>
+					<p className={classNames(activeSection === "contact" ? styles["actif-nav"] : "")}>contact</p>
 					<img src={book4Img} alt="contact option" />
 				</motion.div>
 			</div>

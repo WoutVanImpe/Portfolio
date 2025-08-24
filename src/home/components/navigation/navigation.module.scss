@@ -40,9 +40,9 @@
 		&__option {
 			position: relative;
 			cursor: pointer;
-            > * {
-                cursor: pointer;
-            }
+			> * {
+				cursor: pointer;
+			}
 
 			img {
 				width: 87.5px;
@@ -73,7 +73,37 @@
 				text-align: center;
 
 				font-size: 17px;
-				
+				transition: transform 0.3s ease-in-out;
+			}
+
+			p::after {
+				content: "";
+
+				position: absolute;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				bottom: -5px;
+
+				width: 80%;
+				height: 4px;
+
+				border-radius: 10px;
+
+				background: rgb(0, 0, 0);
+
+				transform: scaleX(0);
+				transform-origin: right;
+				transition: transform 0.3s ease-in-out;
+			}
+
+			p.actif-nav::after {
+				transform: scaleX(1);
+				transform-origin: left;
+			}
+
+			p.actif-nav{
+				font-weight: 600;
 			}
 		}
 	}
