@@ -8,27 +8,16 @@ import { AboutSection } from "./components/section-about/AboutSection";
 import { WorksSection } from "./components/section-works/WorksSection";
 import { ContactSection } from "./components/section-contact/ContactSection";
 import { Navigation } from "./components/navigation/Navigation";
+import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 
 export const HomePage = () => {
+	/* Lamp effect */
 	const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 	const lampOpacity = useMotionValue<number>(0);
 	const { lamp } = useObjects();
 
 	const smoothLamp = useSpring(lampOpacity, {
 		stiffness: 20,
-		damping: 20,
-		mass: 1,
-	});
-
-	const headerRef = useRef<HTMLDivElement | null>(null);
-	const aboutRef = useRef<HTMLDivElement | null>(null);
-	const worksRef = useRef<HTMLDivElement | null>(null);
-	const contactRef = useRef<HTMLDivElement | null>(null);
-
-	const navY = useMotionValue<number>(0);
-
-	const smoothNav = useSpring(navY, {
-		stiffness: 80,
 		damping: 20,
 		mass: 1,
 	});
@@ -44,7 +33,28 @@ export const HomePage = () => {
 	const opacity = useTransform(smoothLamp, [0, 1], [0, 1]);
 	const scale = useTransform(smoothLamp, [0, 1], [20, 8]);
 
-	const y = useTransform(smoothNav, [0, 1], [-550, -20]);
+	/* Navigation */
+	const { width } = useWindowDimensions();
+	const navPos = useMotionValue<number>(0);
+
+	useEffect(() => {
+		navPos.set(width > 1200 ? (width - 1200) / 2 : 0);
+	});
+
+	const headerRef = useRef<HTMLDivElement | null>(null);
+	const aboutRef = useRef<HTMLDivElement | null>(null);
+	const worksRef = useRef<HTMLDivElement | null>(null);
+	const contactRef = useRef<HTMLDivElement | null>(null);
+
+	const navY = useMotionValue<number>(0);
+
+	const smoothNav = useSpring(navY, {
+		stiffness: 80,
+		damping: 20,
+		mass: 1,
+	});
+
+	const y = useTransform(smoothNav, [0, 1], [-500, -20]);
 
 	return (
 		<motion.div className={styles["p-home"]} onMouseMove={(e) => handleMouse(e)}>
@@ -52,7 +62,7 @@ export const HomePage = () => {
 			<AboutSection ref={aboutRef} />
 			<WorksSection ref={worksRef} />
 			<ContactSection ref={contactRef} />
-			<motion.div className={styles["p-home__nav"]} style={{ scale: 0.8, y: y }} whileHover={{ translateY: "10px" }}>
+			<motion.div className={styles["p-home__nav"]} style={{ scale: 0.8, y: y, right: navPos }} whileHover={{ translateY: "10px" }}>
 				<Navigation home={headerRef} about={aboutRef} works={worksRef} contact={contactRef} y={navY} />
 			</motion.div>
 			<div className={styles["light-container"]}>

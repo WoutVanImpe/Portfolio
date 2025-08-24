@@ -29,7 +29,8 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<p>Home</p>
+					<h5>Home</h5>
+					<p>home</p>
 					<img src={book1Img} alt="home option" />
 				</motion.div>
 				<motion.div
@@ -40,7 +41,8 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<p>About</p>
+					<h5>About</h5>
+					<p>about</p>
 					<img src={book2Img} alt="about option" />
 				</motion.div>
 				<motion.div
@@ -51,7 +53,8 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<p>Works</p>
+					<h5>Works</h5>
+					<p>works</p>
 					<img src={book3Img} alt="works option" />
 				</motion.div>
 				<motion.div
@@ -62,7 +65,8 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<p>Contact</p>
+					<h5>Contact</h5>
+					<p>contact</p>
 					<img src={book4Img} alt="contact option" />
 				</motion.div>
 			</div>
