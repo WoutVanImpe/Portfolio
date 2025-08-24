@@ -1,0 +1,16 @@
+.window-lamp-container {
+	width: 400px;
+	aspect-ratio: 1/1;
+	position: relative;
+
+	&__lamp {
+		position: absolute;
+		bottom: 62px;
+		left: 35px;
+
+		scale: 0.6;
+		transform-origin: left bottom;
+
+		z-index: 4;
+	}
+}

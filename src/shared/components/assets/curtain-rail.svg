@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357.07 5.33">
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 359.7 8.83">
   <defs>
     <style>
       .cls-1 {
@@ -8,6 +8,9 @@
     </style>
   </defs>
   <g id="Layer_1-2" data-name="Layer 1">
-    <path class="cls-1" d="M2.8,5.33C1.26,5.33,0,4.25,0,2.91,0,1.57,1.25.49,2.8.49l351.46-.49h0c1.55,0,2.8,1.08,2.8,2.42,0,1.34-1.25,2.43-2.8,2.43L2.81,5.33h0Z"/>
+    <g>
+      <image width="357" height="10" transform="translate(3.24 -.38)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWUAAAAKCAYAAABsUE+AAAAACXBIWXMAAAsSAAALEgHS3X78AAABbElEQVRoge3YS09TQRgG4Aep8bbRpcalC/kNLPxZ/kS3ujCpxIUhxiASQcFrCriYQU4IrbQ9nNPW90lO0pP5LrPp1+msiYiILu3iNXawjefNxQFO8QU3cbe+TyPx/fdY9vgueqxK/M8p82IxPG583sKofv6OZxjiAL8GeFkDRrg9puAsX7J5dN3vYs8fLddbJcd9byBiiRxjHW9xA5s4VH5ch3hX4/bxm3JSHioD5LQmRUTEfD4ow3iAe84PvOvKUP6qHP5GOFIHMudDeaRM9FuNoped9Mad/q4au4r5/6p5f8x6RKy2w/o8qu+flXkLT3EH7+vz1wDf8Al72GisTfr7Pc1wmzWn7/5t5ez03P86cvruP0tOm7V2J9SKOHOi3D5sKSfks5PzBl7gVY3bbyatKZfMR8pEf9jRZrnaneubjvosW51F2kvq/J91Fmkv89Y5aWkPl3kwYe2Jctf88Rr7R0RERERERES07Q82w5G7Z6xckAAAAABJRU5ErkJggg=="/>
+      <path class="cls-1" d="M2.8,5.33C1.26,5.33,0,4.25,0,2.91,0,1.57,1.25.49,2.8.49l351.46-.49h0c1.55,0,2.8,1.08,2.8,2.42,0,1.34-1.25,2.43-2.8,2.43L2.81,5.33h0Z"/>
+    </g>
   </g>
 </svg>

@@ -1,0 +1,24 @@
+.s-contact {
+	width: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	h1 {
+		align-self: center;
+		justify-self: flex-start;
+		width: fit-content;
+
+		text-transform: uppercase;
+
+		background-color: #f2f2fa;
+		border: 10px solid #e3dfe6;
+		outline: 8px solid #aa7a6f;
+		box-shadow: 10px 10px rgba(0, 0, 0, 0.322);
+
+		padding: 10px 45px 10px 45px;
+		margin-bottom: 50px;
+	}
+
+}

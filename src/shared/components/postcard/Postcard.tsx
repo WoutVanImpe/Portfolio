@@ -5,13 +5,18 @@ import webImg from "../assets/web-stamp.svg";
 import socialImg from "../assets/social-stamp.svg";
 import designImg from "../assets/design-stamp.svg";
 import { useState } from "react";
-import { motion, useAnimation, useMotionValue, useSpring, useTransform } from "motion/react";
+import { motion, MotionValue, useAnimation } from "motion/react";
 
-export const Postcard = () => {
+type PostcardProps = {
+	handleFrame?: MotionValue<number>;
+};
+
+export const Postcard = ({ handleFrame }: PostcardProps) => {
 	const [viewState, setViewState] = useState<boolean>(false);
 	const controls = useAnimation();
 
 	const handleClick = async () => {
+		handleFrame?.set(handleFrame.get() === 1 ? 0 : 1);
 		await Promise.all([
 			controls.start({
 				y: -130,
