@@ -1,9 +1,15 @@
 [
 	{
 		"id": 1,
-		"title": "Er was eens...",
 		"cover": "./images/frontend-main.png",
 		"tags": ["web", "graphic design"],
-		"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
+		"en": {
+			"title": "Once upon a time...",
+			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+		},
+		"nl": {
+			"title": "Er was eens...",
+			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
+		}
 	}
 ]

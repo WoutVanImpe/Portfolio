@@ -4,10 +4,10 @@ import motionImg from "../assets/motion-stamp.svg";
 import webImg from "../assets/web-stamp.svg";
 import socialImg from "../assets/social-stamp.svg";
 import designImg from "../assets/design-stamp.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, MotionValue, useAnimation } from "motion/react";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 type PostcardProps = {
 	handleFrame?: MotionValue<number>;
@@ -15,6 +15,13 @@ type PostcardProps = {
 };
 
 export const Postcard = ({ handleFrame, ProjectInfo }: PostcardProps) => {
+	const { i18n } = useTranslation();
+	const [selectedLanguage, setSelectedLanguage] = useState<string>("en");
+
+	useEffect(() => {
+		setSelectedLanguage(i18n.language);
+	}, [i18n.language]);
+
 	const [viewState, setViewState] = useState<boolean>(false);
 	const controls = useAnimation();
 
@@ -52,6 +59,17 @@ export const Postcard = ({ handleFrame, ProjectInfo }: PostcardProps) => {
 		"graphic design": designImg,
 	};
 
+	const text: Record<
+		string,
+		{
+			title: string;
+			teaser: string;
+		}
+	> = {
+		en: ProjectInfo.en,
+		nl: ProjectInfo.nl,
+	};
+
 	return (
 		<motion.div className={styles["postcard-container"]} onClick={handleClick} animate={controls}>
 			{viewState ? (
@@ -63,8 +81,8 @@ export const Postcard = ({ handleFrame, ProjectInfo }: PostcardProps) => {
 							return <img key={tag} src={imgSrc} alt={`${tag} stamp`} />;
 						})}
 					</div>
-					<h2 className={styles["postcard-container__front__title"]}>{ProjectInfo.title}</h2>
-					<p className={styles["postcard-container__front__description"]}>{ProjectInfo.teaser}</p>
+					<h2 className={styles["postcard-container__front__title"]}>{text[selectedLanguage].title}</h2>
+					<p className={styles["postcard-container__front__description"]}>{text[selectedLanguage].teaser}</p>
 					<img className={styles["postcard-container__front__image"]} src={ProjectInfo.cover} alt="main" />
 					<motion.button whileHover={{ scale: 1.1 }} style={{ rotate: -5 }} className={styles["postcard-container__front__button"]}>
 						<Trans>works.seeMore</Trans>
