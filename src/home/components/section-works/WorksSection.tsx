@@ -14,7 +14,7 @@ export const WorksSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 
 	useEffect(() => {
 		projects === undefined ? setProjectsList([]) : setProjectsList(projects);
-	}, projects);
+	}, [projects]);
 
 	const { width } = useWindowDimensions();
 	const cardScale = useMotionValue<number>(width > 1200 ? (1200 * 0.48) / 650 : (width * 0.48) / 650);
@@ -31,9 +31,9 @@ export const WorksSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 				<Trans>works.title</Trans>
 			</motion.h1>
 			<motion.div className={styles["s-works__works-container"]}>
-				{projectsList.map((project) => (
+				{projectsList.map((project, index) => (
 					<motion.div key={project.id} className={styles["s-works__works-container__card-container"]} style={{ scale: cardScale }}>
-						<CardDisplay projectInfo={project} />
+						<CardDisplay projectInfo={project} index={index} />
 					</motion.div>
 				))}
 			</motion.div>

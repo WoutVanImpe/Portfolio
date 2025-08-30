@@ -107,4 +107,20 @@
 			}
 		}
 	}
+
+	> p {
+		position: absolute;
+		bottom: -20px;
+		right: 20px;
+
+		width: 200px;
+		rotate: -2deg;
+
+		font-size: 30px;
+		line-height: 20px;
+
+		font-family: "Shadows Into Light", cursive;
+		font-weight: 500;
+		font-style: normal;
+	}
 }

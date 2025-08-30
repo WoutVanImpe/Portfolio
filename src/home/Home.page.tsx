@@ -9,8 +9,34 @@ import { WorksSection } from "./components/section-works/WorksSection";
 import { ContactSection } from "./components/section-contact/ContactSection";
 import { Navigation } from "./components/navigation/Navigation";
 import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
+import { useTips } from "~context/TipsContext";
 
 export const HomePage = () => {
+	/* Tips opacity */
+	const { setTips } = useTips();
+
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "w") {
+				setTips(true);
+			}
+		};
+
+		const handleKeyUp = (e: KeyboardEvent) => {
+			if (e.key === "w") {
+				setTips(false);
+			}
+		};
+
+		window.addEventListener("keydown", handleKeyDown);
+		window.addEventListener("keyup", handleKeyUp);
+
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown);
+			window.removeEventListener("keyup", handleKeyUp);
+		};
+	}, []);
+
 	/* Lamp effect */
 	const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 	const lampOpacity = useMotionValue<number>(0);

@@ -18,6 +18,8 @@
 		gap: 30px;
 
 		&__frame {
+			position: relative;
+
 			background-color: #f2f2fa;
 			border: 10px solid #e3dfe6;
 			outline: 8px solid #aa7a6f;
@@ -28,6 +30,21 @@
 			> * {
 				margin: 0;
 				z-index: 2;
+			}
+
+			> p {
+				position: absolute;
+				bottom: -65px;
+				left: 20px;
+
+				rotate: -1deg;
+
+				font-size: 25px;
+				line-height: 30px;
+
+				font-family: "Shadows Into Light", cursive;
+				font-weight: 500;
+				font-style: normal;
 			}
 		}
 	}

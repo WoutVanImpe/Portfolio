@@ -13,6 +13,8 @@ import contact_nl from "./translations/homepage/contact/contact_nl.json";
 import contact_en from "./translations/homepage/contact/contact_en.json";
 import nav_nl from "./translations/homepage/nav/nav_nl.json";
 import nav_en from "./translations/homepage/nav/nav_en.json";
+import tips_nl from "./translations/homepage/tips/tips_nl.json";
+import tips_en from "./translations/homepage/tips/tips_en.json";
 
 i18n
 	.use(LanguageDetector)
@@ -26,6 +28,7 @@ i18n
 					works: works_nl,
 					contact: contact_nl,
 					nav: nav_nl,
+					tips: tips_nl,
 				},
 			},
 			en: {
@@ -35,6 +38,7 @@ i18n
 					works: works_en,
 					contact: contact_en,
 					nav: nav_en,
+					tips: tips_en,
 				},
 			},
 		},

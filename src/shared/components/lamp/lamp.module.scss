@@ -49,4 +49,20 @@
 
 		z-index: 3;
 	}
+
+	p {
+		position: absolute;
+		bottom: 15px;
+		right: -75px;
+		rotate: -5deg;
+
+		width: 90px;
+
+		font-size: 30px;
+		line-height: 30px;
+
+		font-family: "Shadows Into Light", cursive;
+		font-weight: 500;
+		font-style: normal;
+	}
 }

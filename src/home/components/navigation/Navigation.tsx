@@ -5,14 +5,32 @@ import book2Img from "../../../shared/components/assets/nav-option2.svg";
 import book3Img from "../../../shared/components/assets/nav-option3.svg";
 import book4Img from "../../../shared/components/assets/nav-option4.svg";
 import { Globe } from "~shared/components/globe/Glode";
-import { motion, MotionValue } from "motion/react";
+import { motion, MotionValue, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { Trans } from "react-i18next";
+import { useTheme } from "~context/ThemeContext";
+import { useTips } from "~context/TipsContext";
 
 type RefType = React.RefObject<HTMLDivElement | null>;
 
 export const Navigation = ({ home, about, works, contact, y }: { home: RefType; about: RefType; works: RefType; contact: RefType; y: MotionValue<number> }) => {
+	const { textColor } = useTheme();
+	const { tips } = useTips();
+	const tipOpac = useMotionValue(0);
+
+	useEffect(() => {
+		tips ? tipOpac.set(1) : tipOpac.set(0);
+	}, [tips]);
+
+	const smoothTip = useSpring(tipOpac, {
+		stiffness: 80,
+		damping: 20,
+		mass: 1,
+	});
+
+	const tipOpacity = useTransform(smoothTip, [0, 1], [0, 1]);
+
 	const handleStateClick = () => {
 		y.set(y.get() === 0 ? 1 : 0);
 	};
@@ -57,8 +75,12 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<h5><Trans>nav.home</Trans></h5>
-					<p className={classNames(activeSection === "home" ? styles["actif-nav"] : "")}><Trans>nav.home</Trans></p>
+					<h5>
+						<Trans>nav.home</Trans>
+					</h5>
+					<p className={classNames(activeSection === "home" ? styles["actif-nav"] : "")}>
+						<Trans>nav.home</Trans>
+					</p>
 					<img src={book1Img} alt="home option" />
 				</motion.div>
 				<motion.div
@@ -69,8 +91,12 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<h5><Trans>nav.about</Trans></h5>
-					<p className={classNames(activeSection === "about" ? styles["actif-nav"] : "")}><Trans>nav.about</Trans></p>
+					<h5>
+						<Trans>nav.about</Trans>
+					</h5>
+					<p className={classNames(activeSection === "about" ? styles["actif-nav"] : "")}>
+						<Trans>nav.about</Trans>
+					</p>
 					<img src={book2Img} alt="about option" />
 				</motion.div>
 				<motion.div
@@ -81,8 +107,12 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<h5><Trans>nav.works</Trans></h5>
-					<p className={classNames(activeSection === "works" ? styles["actif-nav"] : "")}><Trans>nav.works</Trans></p>
+					<h5>
+						<Trans>nav.works</Trans>
+					</h5>
+					<p className={classNames(activeSection === "works" ? styles["actif-nav"] : "")}>
+						<Trans>nav.works</Trans>
+					</p>
 					<img src={book3Img} alt="works option" />
 				</motion.div>
 				<motion.div
@@ -93,12 +123,19 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<h5 className={classNames(activeSection === "contact" ? styles["actif-nav"] : "")}><Trans>nav.contact</Trans></h5>
-					<p className={classNames(activeSection === "contact" ? styles["actif-nav"] : "")}><Trans>nav.contact</Trans></p>
+					<h5 className={classNames(activeSection === "contact" ? styles["actif-nav"] : "")}>
+						<Trans>nav.contact</Trans>
+					</h5>
+					<p className={classNames(activeSection === "contact" ? styles["actif-nav"] : "")}>
+						<Trans>nav.contact</Trans>
+					</p>
 					<img src={book4Img} alt="contact option" />
 				</motion.div>
 			</div>
 			<motion.div className={styles["navigation-container__click-target"]} style={{ cursor: "pointer" }} onClick={handleStateClick}></motion.div>
+			<motion.p animate={{ color: textColor }} style={{ opacity: tipOpacity }} transition={{ duration: 1, ease: "easeIn" }}>
+				<Trans>tips.nav</Trans>
+			</motion.p>
 		</div>
 	);
 };
