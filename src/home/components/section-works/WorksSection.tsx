@@ -4,6 +4,7 @@ import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 import { motion, useMotionValue } from "motion/react";
 import { forwardRef, useEffect } from "react";
 import { useTheme } from "~context/ThemeContext";
+import { Trans } from "react-i18next";
 
 export const WorksSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { width } = useWindowDimensions();
@@ -18,7 +19,7 @@ export const WorksSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	return (
 		<div className={styles["s-works"]} ref={ref}>
 			<motion.h1 animate={{ color: textColor, backgroundColor: textBgColor, borderColor: textBorderColor }} transition={{ duration: 1, ease: "easeIn" }}>
-				Works
+				<Trans>works.title</Trans>
 			</motion.h1>
 			<motion.div className={styles["s-works__works-container"]}>
 				<motion.div className={styles["s-works__works-container__card-container"]} style={{ scale: cardScale }}>

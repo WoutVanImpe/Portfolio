@@ -8,6 +8,7 @@ import { Globe } from "~shared/components/globe/Glode";
 import { motion, MotionValue } from "motion/react";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
+import { Trans } from "react-i18next";
 
 type RefType = React.RefObject<HTMLDivElement | null>;
 
@@ -56,8 +57,8 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<h5>Home</h5>
-					<p className={classNames(activeSection === "home" ? styles["actif-nav"] : "")}>home</p>
+					<h5><Trans>nav.home</Trans></h5>
+					<p className={classNames(activeSection === "home" ? styles["actif-nav"] : "")}><Trans>nav.home</Trans></p>
 					<img src={book1Img} alt="home option" />
 				</motion.div>
 				<motion.div
@@ -68,8 +69,8 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<h5>About</h5>
-					<p className={classNames(activeSection === "about" ? styles["actif-nav"] : "")}>about</p>
+					<h5><Trans>nav.about</Trans></h5>
+					<p className={classNames(activeSection === "about" ? styles["actif-nav"] : "")}><Trans>nav.about</Trans></p>
 					<img src={book2Img} alt="about option" />
 				</motion.div>
 				<motion.div
@@ -80,8 +81,8 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<h5>Works</h5>
-					<p className={classNames(activeSection === "works" ? styles["actif-nav"] : "")}>works</p>
+					<h5><Trans>nav.works</Trans></h5>
+					<p className={classNames(activeSection === "works" ? styles["actif-nav"] : "")}><Trans>nav.works</Trans></p>
 					<img src={book3Img} alt="works option" />
 				</motion.div>
 				<motion.div
@@ -92,8 +93,8 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 						y.set(0);
 					}}
 				>
-					<h5 className={classNames(activeSection === "contact" ? styles["actif-nav"] : "")}>Contact</h5>
-					<p className={classNames(activeSection === "contact" ? styles["actif-nav"] : "")}>contact</p>
+					<h5 className={classNames(activeSection === "contact" ? styles["actif-nav"] : "")}><Trans>nav.contact</Trans></h5>
+					<p className={classNames(activeSection === "contact" ? styles["actif-nav"] : "")}><Trans>nav.contact</Trans></p>
 					<img src={book4Img} alt="contact option" />
 				</motion.div>
 			</div>

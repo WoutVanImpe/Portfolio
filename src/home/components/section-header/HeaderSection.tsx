@@ -4,6 +4,7 @@ import { motion, useMotionValue } from "motion/react";
 import { forwardRef, useEffect } from "react";
 import { WindowLamp } from "~shared/components/window-lamp/WindowLamp";
 import { useTheme } from "~context/ThemeContext";
+import { Trans } from "react-i18next";
 
 
 export const HeaderSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
@@ -20,8 +21,8 @@ export const HeaderSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 		<div className={styles["s-header"]} ref={ref}>
 			<div className={styles["s-header__greet-container"]}>
 				<motion.div className={styles["s-header__greet-container__frame"]} animate={{ color: textColor, backgroundColor: textBgColor, borderColor: textBorderColor }} transition={{ duration: 1, ease: "easeIn" }}>
-					<h1>Hallo, ik ben Wout!</h1>
-					<h3>Student Multimedia en Creatieve Technologie</h3>
+					<h1><Trans>header.title</Trans></h1>
+					<h3><Trans>header.subtitle</Trans></h3>
 				</motion.div>
 			</div>
 			<div className={styles["s-header__window-container"]}>
