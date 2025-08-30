@@ -6,12 +6,15 @@ import socialImg from "../assets/social-stamp.svg";
 import designImg from "../assets/design-stamp.svg";
 import { useState } from "react";
 import { motion, MotionValue, useAnimation } from "motion/react";
+import type ProjectType from "~shared/hooks/projects-data/project.types";
+import { Trans } from "react-i18next";
 
 type PostcardProps = {
 	handleFrame?: MotionValue<number>;
+	ProjectInfo: ProjectType;
 };
 
-export const Postcard = ({ handleFrame }: PostcardProps) => {
+export const Postcard = ({ handleFrame, ProjectInfo }: PostcardProps) => {
 	const [viewState, setViewState] = useState<boolean>(false);
 	const controls = useAnimation();
 
@@ -42,30 +45,34 @@ export const Postcard = ({ handleFrame }: PostcardProps) => {
 		]);
 	};
 
+	const tagImages: Record<string, string> = {
+		motion: motionImg,
+		web: webImg,
+		"social media": socialImg,
+		"graphic design": designImg,
+	};
+
 	return (
 		<motion.div className={styles["postcard-container"]} onClick={handleClick} animate={controls}>
 			{viewState ? (
 				<motion.div className={styles["postcard-container__front"]}>
 					<img className={styles["postcard-container__front__card"]} src={cardImg} alt="postcard" />
 					<div className={styles["postcard-container__front__stamp-container"]}>
-						<img src={motionImg} alt="stamp" />
-						<img src={webImg} alt="stamp" />
+						{ProjectInfo.tags.map((tag) => {
+							const imgSrc = tagImages[tag];
+							return <img key={tag} src={imgSrc} alt={`${tag} stamp`} />;
+						})}
 					</div>
-					<h2 className={styles["postcard-container__front__title"]}>Project portfolio website</h2>
-					<p className={styles["postcard-container__front__description"]}>
-						Lorem ipsum dolor sit amet. Sit beatae alias in doloribus quis nam labore libero qui culpa pariatur. Est tenetur voluptatibus non pariatur esse sit debitis eveniet hic magnam alias. Sit odio voluptatem ut repudiandae dolorem a ducimus
-						obcaecati est incidunt molestiae. Est asperiores obcaecati et illum quas est reprehenderit esse et totam omnis a numquam eaque qui sequi nulla! Quo architecto alias sit libero quas qui molestiae veniam aut iste omnis et quia consequatur.
-						Et corporis veritatis vel incidunt corporis et debitis quia non iste quia qui quidem exercitationem. Aut beatae dignissimos aut minima sapiente ad quaerat corporis! Ut enim natus rem rerum voluptatum quo odit accusamus eos aliquam
-						delectus qui porro neque est nihil galisum 33 pariatur ipsum!
-					</p>
-					<img className={styles["postcard-container__front__image"]} src="./images/frontend-main.png" alt="main" />
+					<h2 className={styles["postcard-container__front__title"]}>{ProjectInfo.title}</h2>
+					<p className={styles["postcard-container__front__description"]}>{ProjectInfo.teaser}</p>
+					<img className={styles["postcard-container__front__image"]} src={ProjectInfo.cover} alt="main" />
 					<motion.button whileHover={{ scale: 1.1 }} style={{ rotate: -5 }} className={styles["postcard-container__front__button"]}>
-						Zie meer
+						<Trans>works.seeMore</Trans>
 					</motion.button>
 				</motion.div>
 			) : (
 				<motion.div className={styles["postcard-container__back"]}>
-					<img className={styles["postcard-container__back__image"]} src="./images/frontend-main.png" alt="main" />
+					<img className={styles["postcard-container__back__image"]} src={ProjectInfo.cover} alt="main" />
 				</motion.div>
 			)}
 		</motion.div>

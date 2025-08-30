@@ -3,8 +3,13 @@ import frontFrameImg from "../assets/cardholder-front.svg";
 import backFrameImg from "../assets/cardholder-back.svg";
 import { Postcard } from "../postcard/Postcard";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import type ProjectType from "~shared/hooks/projects-data/project.types";
 
-export const CardDisplay = () => {
+type CardDisplayProps = {
+	projectInfo: ProjectType;
+}
+
+export const CardDisplay = ({projectInfo}: CardDisplayProps) => {
 	const frameState = useMotionValue<number>(1);
 
 	const smoothFrame = useSpring(frameState, {
@@ -27,7 +32,7 @@ export const CardDisplay = () => {
 					y: -20,
 				}}
 			>
-				<Postcard handleFrame={frameState} />
+				<Postcard handleFrame={frameState} ProjectInfo={projectInfo} />
 			</motion.div>
 			<motion.img className={styles["postcard-display-container__front"]} src={frontFrameImg} style={{ opacity: frameOpacity, scale: frameScale }} alt="front of frame" />
 		</div>
