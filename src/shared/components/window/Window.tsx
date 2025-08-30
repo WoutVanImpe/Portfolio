@@ -2,7 +2,7 @@ import styles from "./window.module.scss";
 import windowImg from "../assets/window.svg";
 import curtainImg from "../assets/curtain.svg";
 import railImg from "../assets/curtain-rail.svg";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { easeInOut, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useTheme } from "~context/ThemeContext";
 import { useObjects } from "~context/ObjectContext";
 import { useEffect } from "react";
@@ -38,7 +38,7 @@ export const Window = () => {
 		<div className={styles["window-container"]}>
 			<div className={styles["window-container__background"]}></div>
 			<img className={styles["window-container__window"]} src={windowImg} alt="window" />
-			<motion.img style={{ scaleX: curtainScale }} onClick={handleClick} className={styles["window-container__cloth"]} src={curtainImg} alt="curtain" />
+			<motion.img style={{ scaleX: curtainScale }} onClick={handleClick} whileHover={{ scaleY: 0.98 }} transition={{ scaleY: { duration: 0.3, ease: easeInOut } }} className={styles["window-container__cloth"]} src={curtainImg} alt="curtain" />
 			<img className={styles["window-container__rail"]} src={railImg} alt="curtain rail" />
 		</div>
 	);
