@@ -3,6 +3,7 @@ import styles from "./aboutSection.module.scss";
 import { motion } from "motion/react";
 import { forwardRef } from "react";
 import { Trans } from "react-i18next";
+import { Phone } from "~shared/components/phone/Phone";
 
 export const AboutSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { textColor, textBgColor, textBorderColor } = useTheme();
@@ -12,6 +13,7 @@ export const AboutSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 			<motion.h1 animate={{ color: textColor, backgroundColor: textBgColor, borderColor: textBorderColor }} transition={{ duration: 1, ease: "easeIn" }}>
 				<Trans>about.title</Trans>
 			</motion.h1>
+			<Phone/>
 		</div>
 	);
 });
