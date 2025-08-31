@@ -54,7 +54,72 @@
 }
 
 .screen {
-	width: 269px;
+	width: 270px;
 	height: 509px;
 	border-radius: 8px;
+
+	svg:hover {
+		cursor: pointer;
+	}
+
+	> * {
+		border-radius: 8px;
+		width: calc(270px - 40px);
+		height: calc(509px - 40px);
+		padding: 20px;
+	}
+
+	&__home {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(4, max(70px));
+		row-gap: 10px;
+		place-items: center;
+
+		> * {
+			width: 70px;
+			aspect-ratio: 1/1;
+		}
+	}
+
+	&__draw {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+
+		canvas {
+			width: 230px;
+			height: 350px;
+			border-radius: 10px;
+			border: rgba(0, 0, 0, 0.384) solid 5px;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		svg {
+			width: 50px;
+		}
+
+		&__controls {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			gap: 10px;
+
+			&__color {
+				width: 45px;
+				height: 45px;
+				border-radius: 10px;
+				border: rgba(0, 0, 0, 0.384) solid 1px;
+			}
+
+			input {
+				width: 100px;
+			}
+		}
+	}
 }
