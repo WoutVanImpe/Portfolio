@@ -122,4 +122,37 @@
 			}
 		}
 	}
+
+	&__todo {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		h1 {
+			background: none;
+			border: none;
+			box-shadow: none;
+			outline: none;
+			text-transform: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		&__list {
+			height: 350px;
+            overflow-y: scroll;
+			display: flex;
+			flex-direction: column;
+		}
+
+		&__controls {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+			svg {
+				width: 50px;
+			}
+		}
+	}
 }
