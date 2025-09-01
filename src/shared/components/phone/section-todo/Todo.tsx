@@ -2,6 +2,7 @@ import { useState, type Dispatch, type SetStateAction } from "react";
 import styles from "./todoSection.module.scss";
 import { useTheme } from "~context/ThemeContext";
 import { motion } from "motion/react";
+import { Trans } from "react-i18next";
 
 interface Todo {
 	id: number;
@@ -42,7 +43,7 @@ export const Todo = ({ todo, setDoneTodos, removeTodo }: TodoProps) => {
 					</motion.svg>
 				</motion.div>
 				<motion.h5 animate={{ color: textColor }} transition={{ color: { duration: 0.2, ease: "easeIn" } }}>
-					{todo.name}
+					<Trans>{todo.name}</Trans>
 				</motion.h5>
 			</motion.div>
 			<motion.svg animate={{ fill: textColor }} transition={{ fill: { duration: 0.2, ease: "easeIn" } }} onClick={handleDelete} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">

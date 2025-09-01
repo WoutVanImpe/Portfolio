@@ -1,0 +1,12 @@
+{
+	"todo": {
+		"done": "todo's done",
+		"inputTitle": "Title:",
+		"inputColor": "Color:",
+		"curtain": "The curtain",
+		"lamp": "The lamp",
+		"drawer": "The drawer",
+		"globe": "The globe",
+		"card": "The postcard"
+	}
+}

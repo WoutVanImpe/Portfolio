@@ -1,0 +1,12 @@
+{
+	"todo": {
+		"done": "todo's gedaan",
+		"inputTitle": "Titel:",
+		"inputColor": "Kleur:",
+		"curtain": "Het gordijn",
+		"lamp": "De lamp",
+		"drawer": "De lade",
+		"globe": "De wereldbol",
+		"card": "De postkaart"
+	}
+}
