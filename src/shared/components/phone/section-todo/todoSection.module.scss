@@ -1,4 +1,4 @@
-.todo {
+.todoSection {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -18,15 +18,71 @@
 		overflow-y: scroll;
 		display: flex;
 		flex-direction: column;
+		gap: 10px;
 	}
 
 	&__controls {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+		text-align: center;
+
+		p {
+			width: 100px;
+		}
 
 		svg {
 			width: 50px;
+		}
+	}
+}
+
+.todo {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	border-radius: 10px;
+	padding: 5px 2px;
+
+	border: rgba(0, 0, 0, 0.384) solid 2px;
+	border-left: red 5px solid;
+
+	svg {
+		width: 40px;
+	}
+
+	&__front {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 5px;
+
+		margin-left: 5px;
+
+		&__input {
+			width: 15px;
+			height: 15px;
+
+			border-radius: 3px;
+			border: rgba(0, 0, 0, 0.384) solid 1px;
+
+			position: relative;
+
+			svg {
+				position: absolute;
+				top: -6px;
+				left: -6px;
+
+				width: 28px;
+				rotate: 45deg;
+			}
+		}
+
+		h5 {
+			margin: 0;
+			font-size: 18px;
 		}
 	}
 }
