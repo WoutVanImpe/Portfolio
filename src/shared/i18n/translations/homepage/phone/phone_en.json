@@ -8,5 +8,14 @@
 		"drawer": "The drawer",
 		"globe": "The globe",
 		"card": "The postcard"
+	},
+	"weather": {
+		"search": "search",
+		"brussels": "Brussels",
+		"temperature": "temperature",
+		"precipitation": "precipitation",
+		"windSpeed": "wind speed",
+		"loading": "loading",
+		"kph": "kph"
 	}
 }

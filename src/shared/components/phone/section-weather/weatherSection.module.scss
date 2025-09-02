@@ -1,2 +1,75 @@
 .weather {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	&__search {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		gap: 10px;
+
+		input[type="text"] {
+			height: 20px;
+			width: 80%;
+
+			border-radius: 10px;
+			border: rgba(0, 0, 0, 0.384) solid 2px;
+		}
+
+		button {
+			border-radius: 10px;
+			border: rgba(0, 0, 0, 0.384) solid 2px;
+
+			font-weight: 600;
+
+			padding: 2.5px 10px;
+		}
+	}
+
+	&__data {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: center;
+
+		img {
+			width: 70%;
+		}
+
+		> * {
+			margin: 0;
+		}
+
+		h2 {
+			margin-top: 10px;
+		}
+
+		> p {
+			margin-bottom: 40px;
+		}
+
+		&__container {
+			display: flex;
+			flex-direction: column;
+			justify-content: start;
+			align-items: center;
+			gap: 10px;
+
+			> * {
+				margin: 0;
+			}
+
+            :first-child {
+                font-size: 20px;
+                font-weight: 500;
+            }
+		}
+	}
+
+	svg {
+		width: 50px;
+	}
 }

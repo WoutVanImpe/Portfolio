@@ -8,5 +8,14 @@
 		"drawer": "De lade",
 		"globe": "De wereldbol",
 		"card": "De postkaart"
+	},
+	"weather": {
+		"search": "zoek",
+		"brussels": "Brussel",
+		"temperature": "temperature",
+		"precipitation": "neerslag",
+		"windSpeed": "windsnelheid",
+		"loading": "laden",
+		"kph": "km/u"
 	}
 }
