@@ -13,7 +13,6 @@ export const AboutSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 			<motion.h1 animate={{ color: textColor, backgroundColor: textBgColor, borderColor: textBorderColor }} transition={{ duration: 1, ease: "easeIn" }}>
 				<Trans>about.title</Trans>
 			</motion.h1>
-			<Phone/>
 		</div>
 	);
 });
