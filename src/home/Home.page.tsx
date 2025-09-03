@@ -85,8 +85,8 @@ export const HomePage = () => {
 	return (
 		<motion.div className={styles["p-home"]} onMouseMove={(e) => handleMouse(e)}>
 			<HeaderSection ref={headerRef} />
-			<AboutSection ref={aboutRef} />
 			<WorksSection ref={worksRef} />
+			<AboutSection ref={aboutRef} />
 			<ContactSection ref={contactRef} />
 			<motion.div className={styles["p-home__nav"]} style={{ scale: 0.8, y: y, right: navPos }} whileHover={{ translateY: "10px" }}>
 				<Navigation home={headerRef} about={aboutRef} works={worksRef} contact={contactRef} y={navY} />

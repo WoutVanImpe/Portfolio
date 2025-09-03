@@ -83,22 +83,7 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 					</p>
 					<img src={book1Img} alt="home option" />
 				</motion.div>
-				<motion.div
-					className={styles["navigation-container__options-container__option"]}
-					whileHover={{ scale: 1.1 }}
-					onClick={() => {
-						about.current?.scrollIntoView({ behavior: "smooth" });
-						y.set(0);
-					}}
-				>
-					<h5>
-						<Trans>nav.about</Trans>
-					</h5>
-					<p className={classNames(activeSection === "about" ? styles["actif-nav"] : "")}>
-						<Trans>nav.about</Trans>
-					</p>
-					<img src={book2Img} alt="about option" />
-				</motion.div>
+
 				<motion.div
 					className={styles["navigation-container__options-container__option"]}
 					whileHover={{ scale: 1.1 }}
@@ -113,7 +98,23 @@ export const Navigation = ({ home, about, works, contact, y }: { home: RefType; 
 					<p className={classNames(activeSection === "works" ? styles["actif-nav"] : "")}>
 						<Trans>nav.works</Trans>
 					</p>
-					<img src={book3Img} alt="works option" />
+					<img src={book2Img} alt="works option" />
+				</motion.div>
+				<motion.div
+					className={styles["navigation-container__options-container__option"]}
+					whileHover={{ scale: 1.1 }}
+					onClick={() => {
+						about.current?.scrollIntoView({ behavior: "smooth" });
+						y.set(0);
+					}}
+				>
+					<h5>
+						<Trans>nav.about</Trans>
+					</h5>
+					<p className={classNames(activeSection === "about" ? styles["actif-nav"] : "")}>
+						<Trans>nav.about</Trans>
+					</p>
+					<img src={book3Img} alt="about option" />
 				</motion.div>
 				<motion.div
 					className={styles["navigation-container__options-container__option"]}
