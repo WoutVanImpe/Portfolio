@@ -3,14 +3,14 @@ import styles from "./weatherSection.module.scss";
 import { motion } from "motion/react";
 import { useTheme } from "~context/ThemeContext";
 import { UseGetWeather } from "~shared/hooks/weather API/useGetWeather.hooks";
-import { Trans, useTranslation, } from "react-i18next";
-import { t } from 'i18next';
+import { Trans, useTranslation } from "react-i18next";
+import { t } from "i18next";
 
 export const WeatherSection = ({ setAppState }: { setAppState: Dispatch<SetStateAction<"home" | "draw" | "todo" | "weather" | "map">> }) => {
 	const [location, setLocation] = useState<string>("brussel");
 	const { i18n } = useTranslation();
 
-	const { data, refetch, isLoading } = UseGetWeather(location, i18n.language);
+	const { data, isLoading } = UseGetWeather(location, i18n.language);
 
 	const { textColor, textBgColor, darkmode } = useTheme();
 
@@ -18,10 +18,6 @@ export const WeatherSection = ({ setAppState }: { setAppState: Dispatch<SetState
 
 	const handleTyping = () => {
 		setLocation(textInputRef.current!.value);
-	};
-
-	const handleSearch = () => {
-		refetch();
 	};
 
 	return (
@@ -35,9 +31,6 @@ export const WeatherSection = ({ setAppState }: { setAppState: Dispatch<SetState
 					animate={{ color: textColor, backgroundColor: textBgColor, borderColor: darkmode ? "rgba(250, 250, 250, 0.384)" : "rgba(0, 0, 0, 0.384)" }}
 					transition={{ duration: 1, ease: "easeIn" }}
 				/>
-				<motion.button onClick={handleSearch} animate={{ color: textColor, backgroundColor: textBgColor, borderColor: darkmode ? "rgba(250, 250, 250, 0.384)" : "rgba(0, 0, 0, 0.384)" }} transition={{ duration: 1, ease: "easeIn" }}>
-					<Trans>phone.weather.search</Trans>
-				</motion.button>
 			</div>
 			<div className={styles["weather__data"]}>
 				<img src={data?.current.condition.icon} alt="" />

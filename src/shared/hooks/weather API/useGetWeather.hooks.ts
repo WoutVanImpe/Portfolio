@@ -4,7 +4,7 @@ import { weatherService } from "./weather.service";
 
 export const UseGetWeather = (location: string, lang: string) => {
 	return useQuery<WeatherResponseType, Error>({
-		queryKey: ["project", location, lang],
+		queryKey: ["weather", location, lang],
 		queryFn: () => weatherService.getWeather(location, lang),
 	});
 };

@@ -1,7 +1,7 @@
-import { apiKey } from "./ApiKey";
+import { WEATHER_APIKEY } from "./ApiKey";
 import type WeatherResponseType from "./weather.types";
 
-const API_KEY = apiKey;
+const API_KEY = WEATHER_APIKEY;
 
 class WeatherService {
 	async getWeather(location: string, lang: string): Promise<WeatherResponseType> {
