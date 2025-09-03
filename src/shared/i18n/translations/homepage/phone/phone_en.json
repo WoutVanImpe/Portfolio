@@ -10,12 +10,17 @@
 		"card": "The postcard"
 	},
 	"weather": {
-		"search": "search",
 		"brussels": "Brussels",
 		"temperature": "temperature",
 		"precipitation": "precipitation",
 		"windSpeed": "wind speed",
 		"loading": "loading",
 		"kph": "kph"
+	},
+	"map": {
+		"search": "search",
+		"notFound": "location not found",
+		"loading": "loading",
+		"brussels": "Brussels"
 	}
 }

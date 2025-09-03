@@ -10,12 +10,17 @@
 		"card": "De postkaart"
 	},
 	"weather": {
-		"search": "zoek",
 		"brussels": "Brussel",
 		"temperature": "temperature",
 		"precipitation": "neerslag",
 		"windSpeed": "windsnelheid",
 		"loading": "laden",
 		"kph": "km/u"
+	},
+	"map": {
+		"search": "zoek",
+		"notFound": "locatie niet gevonden",
+		"loading": "laden",
+		"brussels": "Brussel"
 	}
 }
