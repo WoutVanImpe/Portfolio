@@ -1,5 +1,5 @@
-import { Lamp } from "../lamp/Lamp";
-import { Window } from "../window/Window";
+import { Lamp } from "./lamp/Lamp";
+import { Window } from "./window/Window";
 import styles from "./windowLamp.module.scss";
 
 export const WindowLamp = () => {

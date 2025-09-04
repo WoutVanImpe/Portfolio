@@ -1,7 +1,7 @@
 import styles from "./lamp.module.scss";
-import lampImg from "../assets/lamp.svg";
-import triggerImg from "../assets/lamp-trigger.svg";
-import lampOnImg from "../assets/lamp-on.svg";
+import lampImg from "../../assets/lamp.svg";
+import triggerImg from "../../assets/lamp-trigger.svg";
+import lampOnImg from "../../assets/lamp-on.svg";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useObjects } from "~context/ObjectContext";
 import { useTheme } from "~context/ThemeContext";

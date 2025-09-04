@@ -1,7 +1,7 @@
 import styles from "./window.module.scss";
-import windowImg from "../assets/window.svg";
-import curtainImg from "../assets/curtain.svg";
-import railImg from "../assets/curtain-rail.svg";
+import windowImg from "../../assets/window.svg";
+import curtainImg from "../../assets/curtain.svg";
+import railImg from "../../assets/curtain-rail.svg";
 import { easeInOut, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useTheme } from "~context/ThemeContext";
 import { useObjects } from "~context/ObjectContext";
