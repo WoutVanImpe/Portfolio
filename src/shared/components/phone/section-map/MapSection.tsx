@@ -28,6 +28,7 @@ export const MapSection = ({ setAppState }: { setAppState: Dispatch<SetStateActi
 		<div className={styles["map"]}>
 			<div className={styles["map__search"]}>
 				<motion.input
+					name="location"
 					type="text"
 					placeholder={t("phone.weather.brussels")}
 					ref={textInputRef}

@@ -24,6 +24,7 @@ export const WeatherSection = ({ setAppState }: { setAppState: Dispatch<SetState
 		<div className={styles["weather"]}>
 			<div className={styles["weather__search"]}>
 				<motion.input
+					name="location"
 					type="text"
 					placeholder={t("phone.weather.brussels")}
 					ref={textInputRef}

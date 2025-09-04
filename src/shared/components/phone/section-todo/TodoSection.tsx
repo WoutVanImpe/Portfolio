@@ -89,12 +89,12 @@ export const TodoSection = ({ setAppState }: { setAppState: Dispatch<SetStateAct
 					<motion.p animate={{ color: textColor }} transition={{ color: { duration: 1, ease: "easeIn" } }}>
 						<Trans>phone.todo.inputTitle</Trans>
 					</motion.p>
-					<input type="text" ref={textInputRef} maxLength={20} style={{ marginBottom: 20 }} />
+					<input name="title" type="text" ref={textInputRef} maxLength={20} style={{ marginBottom: 20 }} />
 					<motion.p animate={{ color: textColor }} transition={{ color: { duration: 1, ease: "easeIn" } }}>
 						<Trans>phone.todo.inputColor</Trans>
 					</motion.p>
 					<motion.div className={styles["todoSection__form__color"]} style={{ backgroundColor: colorInput }} />
-					<input type="range" min={0} max={360} defaultValue={0} onChange={(e: ChangeEvent<HTMLInputElement>) => todoColor.set(Number(e.target.value))} />
+					<input name="color" type="range" min={0} max={360} defaultValue={0} onChange={(e: ChangeEvent<HTMLInputElement>) => todoColor.set(Number(e.target.value))} />
 				</div>
 				<div className={styles["todoSection__controls"]}>
 					<motion.svg onClick={handleCancel} animate={{ fill: textColor }} transition={{ fill: { duration: 1, ease: "easeIn" } }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
