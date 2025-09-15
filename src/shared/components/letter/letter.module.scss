@@ -20,6 +20,8 @@
 		display: flex;
 		flex-direction: column;
 
+		overflow: hidden;
+
 		p {
 			margin-bottom: 0px;
 
@@ -92,8 +94,9 @@
 			}
 
 			&__flap {
-				bottom: 189px;
+				bottom: 188.5px;
 				z-index: 2;
+				transform-origin: bottom;
 			}
 		}
 	}
