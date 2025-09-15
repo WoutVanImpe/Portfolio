@@ -3,6 +3,7 @@ import styles from "./contactSection.module.scss";
 import { useTheme } from "~context/ThemeContext";
 import { forwardRef } from "react";
 import { Trans } from "react-i18next";
+import { Letter } from "~shared/components/letter/Letter";
 
 export const ContactSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { textColor, textBgColor, textBorderColor } = useTheme();
@@ -12,6 +13,7 @@ export const ContactSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 			<motion.h1 animate={{ color: textColor, backgroundColor: textBgColor, borderColor: textBorderColor }} transition={{ duration: 1, ease: "easeIn" }}>
 				<Trans>contact.title</Trans>
 			</motion.h1>
+			<Letter/>
 		</div>
 	);
 });

@@ -1,0 +1,100 @@
+.letter {
+	position: relative;
+	width: 400px;
+
+	&__paper {
+		padding: 10px;
+		border-radius: 10px;
+		background-color: #e2e2df;
+		width: 370px;
+		height: auto;
+
+		z-index: 3;
+
+		position: absolute;
+		bottom: 150px;
+		right: 0;
+		left: 0;
+		margin: 0 auto;
+
+		display: flex;
+		flex-direction: column;
+
+		p {
+			margin-bottom: 0px;
+
+			display: flex;
+			align-items: start;
+		}
+
+		input {
+			background: none;
+			border: none;
+			border-bottom: 2px dotted black;
+			margin-left: 5px;
+		}
+
+		&__message-wrapper {
+			transform-origin: bottom;
+
+			&__message {
+				margin-left: 0px;
+				margin-bottom: 30px;
+
+				width: 98%;
+				transform-origin: bottom;
+
+				resize: none;
+
+				background: none;
+				border: none;
+				border-bottom: 2px dotted black;
+			}
+		}
+
+		button {
+			font-family: "Tangerine", cursive;
+			font-weight: 400;
+			font-style: normal;
+			font-size: 45px;
+
+			align-self: center;
+			width: min-content;
+
+			border: none;
+			background: none;
+
+			&:hover {
+				font-weight: 700;
+			}
+		}
+	}
+
+	&__envelope-container {
+		&__envelope {
+			width: 400px;
+			aspect-ratio: 2/1;
+
+			position: relative;
+
+			> * {
+				position: absolute;
+			}
+
+			&__front {
+				bottom: 0;
+				z-index: 4;
+			}
+
+			&__back {
+				bottom: 0;
+				z-index: 1;
+			}
+
+			&__flap {
+				bottom: 189px;
+				z-index: 2;
+			}
+		}
+	}
+}
