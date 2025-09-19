@@ -3,10 +3,10 @@ import frontImg from "../assets/letter-front.svg";
 import backImg from "../assets/letter-back.svg";
 import flapImg from "../assets/letter-flap.svg";
 import { useRef } from "react";
-import { AnimatePresence, motion, useAnimation } from "motion/react";
+import { motion, MotionValue, useAnimation } from "motion/react";
 import { Trans } from "react-i18next";
 
-export const Letter = () => {
+export const Letter = ({ letterReady }: { letterReady: MotionValue<number> }) => {
 	const nameInput = useRef<HTMLInputElement | null>(null);
 	const emailInput = useRef<HTMLInputElement | null>(null);
 	const messageInput = useRef<HTMLTextAreaElement | null>(null);
@@ -43,6 +43,8 @@ export const Letter = () => {
 				transition: { duration: 0.8, ease: "easeInOut" },
 			}),
 		]);
+
+		letterReady.set(1);
 
 		await envelopeControls.start({
 			rotateX: 180,

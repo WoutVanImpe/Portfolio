@@ -5,6 +5,8 @@
 	flex-direction: column;
 	justify-content: center;
 
+	overflow: hidden;
+
 	h1 {
 		align-self: center;
 		justify-self: flex-start;
@@ -21,4 +23,29 @@
 		margin-bottom: 50px;
 	}
 
+	&__form {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+		height: 500px;
+
+		> * {
+			width: 50%;
+		}
+
+		&__letter {
+			display: flex;
+			align-items: end;
+
+			margin-top: 150px;
+
+			rotate: -2deg;
+		}
+
+		&__mailbox {
+			scale: 0.7;
+		}
+	}
 }

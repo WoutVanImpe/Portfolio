@@ -1,6 +1,7 @@
 .letter {
 	position: relative;
 	width: 400px;
+	isolation: isolate;
 
 	&__paper {
 		padding: 10px;
@@ -9,7 +10,7 @@
 		width: 370px;
 		height: auto;
 
-		z-index: 3;
+		z-index: 4;
 
 		position: absolute;
 		bottom: 150px;
@@ -24,16 +25,18 @@
 
 		p {
 			margin-bottom: 0px;
-
-			display: flex;
-			align-items: start;
 		}
 
-		input {
-			background: none;
+		input[type="text"] {
 			border: none;
-			border-bottom: 2px dotted black;
-			margin-left: 5px;
+			background-color: #58585817;
+			border-radius: 3px;
+			margin-left: 6px;
+
+			&:focus {
+				background-color: #58585817;
+				outline: none;
+			}
 		}
 
 		&__message-wrapper {
@@ -42,15 +45,23 @@
 			&__message {
 				margin-left: 0px;
 				margin-bottom: 30px;
+				margin-top: 8px;
 
 				width: 98%;
 				transform-origin: bottom;
 
 				resize: none;
 
-				background: none;
 				border: none;
-				border-bottom: 2px dotted black;
+				background-color: #58585817;
+				border-radius: 3px;
+
+				cursor: text;
+
+				&:focus {
+					background-color: #58585817;
+					outline: none;
+				}
 			}
 		}
 
@@ -85,17 +96,17 @@
 
 			&__front {
 				bottom: 0;
-				z-index: 4;
+				z-index: 5;
 			}
 
 			&__back {
 				bottom: 0;
-				z-index: 1;
+				z-index: 2;
 			}
 
 			&__flap {
 				bottom: 188.5px;
-				z-index: 2;
+				z-index: 3;
 				transform-origin: bottom;
 			}
 		}
