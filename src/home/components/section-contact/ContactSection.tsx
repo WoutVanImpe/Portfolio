@@ -4,15 +4,20 @@ import { useTheme } from "~context/ThemeContext";
 import { forwardRef } from "react";
 import { Trans } from "react-i18next";
 import { Letter } from "~shared/components/letter/Letter";
-import { Mailbox } from "~shared/components/mailbox/Mailbox";
+import boxFrontImg from "../../assets/mailbox-front.svg";
+import boxBackImg from "../../assets/mailbox-back.svg";
+import boxDoorImg from "../../assets/mailbox-door.svg";
 
 export const ContactSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { textColor, textBgColor, textBorderColor } = useTheme();
 
 	const letterControls = useAnimation();
+	const doorControls = useAnimation();
 
 	const letterReady = useMotionValue<number>(0);
 	const doorOpen = useMotionValue<number>(0);
+
+	useMotionValueEvent(letterReady, "change", () => handleDoor());
 
 	useMotionValueEvent(doorOpen, "change", () => {
 		if (doorOpen.get() === 1) {
@@ -32,6 +37,14 @@ export const ContactSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 		letterReady.set(0);
 	};
 
+	const handleDoor = async () => {
+		await doorControls.start({
+			rotateY: 150 * letterReady.get(),
+			transition: { duration: 0.8, ease: "easeInOut" },
+		});
+		doorOpen.set(1);
+	};
+
 	return (
 		<div className={styles["s-contact"]} ref={ref}>
 			<motion.h1 animate={{ color: textColor, backgroundColor: textBgColor, borderColor: textBorderColor }} transition={{ duration: 1, ease: "easeIn" }}>
@@ -41,8 +54,12 @@ export const ContactSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 				<motion.div animate={letterControls} className={styles["s-contact__form__letter"]}>
 					<Letter letterReady={letterReady} />
 				</motion.div>
-				<div className={styles["s-contact__form__mailbox"]}>
-					<Mailbox letterReady={letterReady} doorOpen={doorOpen} />
+				<div className={styles["s-contact__form__mailbox-container"]}>
+					<div className={styles["s-contact__form__mailbox-container__mailbox"]}>
+						<motion.img className={styles["s-contact__form__mailbox-container__mailbox__front"]} src={boxFrontImg} alt="mailbox" />
+						<motion.img className={styles["s-contact__form__mailbox-container__mailbox__back"]} src={boxBackImg} alt="mailbox" />
+						<motion.img animate={doorControls} className={styles["s-contact__form__mailbox-container__mailbox__door"]} src={boxDoorImg} alt="mailbox" />
+					</div>
 				</div>
 			</div>
 		</div>

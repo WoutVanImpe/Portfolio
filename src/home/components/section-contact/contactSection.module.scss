@@ -28,6 +28,7 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		position: relative;
 
 		height: 500px;
 
@@ -38,14 +39,50 @@
 		&__letter {
 			display: flex;
 			align-items: end;
+			z-index: 4;
 
 			margin-top: 150px;
 
 			rotate: -2deg;
 		}
 
-		&__mailbox {
+		&__mailbox-container {
 			scale: 0.7;
+			z-index: 4;
+
+			&__mailbox {
+				width: 700px;
+				height: 500px;
+
+				position: relative;
+
+				> * {
+					position: absolute;
+				}
+
+				&__front {
+					width: 558px;
+					z-index: 6;
+					top: 114px;
+					left: 114px;
+				}
+
+				&__back {
+					scale: 0.9;
+					top: 0;
+					left: 0;
+
+					z-index: -5;
+				}
+
+				&__door {
+					width: 170px;
+					top: 120px;
+					left: 30px;
+					z-index: 6;
+					transform-origin: right;
+				}
+			}
 		}
 	}
 }
