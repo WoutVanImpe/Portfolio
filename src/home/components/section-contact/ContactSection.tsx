@@ -51,16 +51,20 @@ export const ContactSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 				<Trans>contact.title</Trans>
 			</motion.h1>
 			<div className={styles["s-contact__form"]}>
-				<motion.div animate={letterControls} className={styles["s-contact__form__letter"]}>
+				<motion.div animate={letterControls} className={styles["s-contact__form__letter"]} style={{ zIndex: 2 }}>
 					<Letter letterReady={letterReady} />
 				</motion.div>
-				<div className={styles["s-contact__form__mailbox-container"]}>
+				<motion.div className={styles["s-contact__form__mailbox-container"]} style={{ zIndex: 3 }}>
 					<div className={styles["s-contact__form__mailbox-container__mailbox"]}>
 						<motion.img className={styles["s-contact__form__mailbox-container__mailbox__front"]} src={boxFrontImg} alt="mailbox" />
-						<motion.img className={styles["s-contact__form__mailbox-container__mailbox__back"]} src={boxBackImg} alt="mailbox" />
 						<motion.img animate={doorControls} className={styles["s-contact__form__mailbox-container__mailbox__door"]} src={boxDoorImg} alt="mailbox" />
 					</div>
-				</div>
+				</motion.div>
+				<motion.div className={styles["s-contact__form__mailbox-container"]} style={{ zIndex: 1 }}>
+					<div className={styles["s-contact__form__mailbox-container__mailbox"]}>
+						<motion.img className={styles["s-contact__form__mailbox-container__mailbox__back"]} src={boxBackImg} alt="mailbox" />
+					</div>
+				</motion.div>
 			</div>
 		</div>
 	);
