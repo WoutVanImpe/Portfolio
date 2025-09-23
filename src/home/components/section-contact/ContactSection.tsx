@@ -28,7 +28,7 @@ export const ContactSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const insertLetter = async () => {
 		await letterControls.start({
 			rotate: 0,
-			x: 700,
+			x: 720,
 			y: -50,
 			scale: 0.8,
 			transition: { rotate: { duration: 0.2, ease: "easeInOut" }, y: { duration: 0.8, ease: "easeInOut" }, scale: { duration: 0.5, ease: "easeInOut" }, x: { duration: 0.8, ease: "easeInOut" } },
