@@ -5,6 +5,7 @@
 	flex-direction: column;
 	justify-content: center;
 
+
 	h1 {
 		align-self: center;
 		justify-self: flex-start;
@@ -21,4 +22,77 @@
 		margin-bottom: 50px;
 	}
 
+	&__form {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		position: relative;
+
+		height: 500px;
+
+		> * {
+			width: 50%;
+		}
+
+		&__letter {
+			display: flex;
+			align-items: end;
+			z-index: 4;
+
+			margin-top: 150px;
+
+			rotate: -1deg;
+		}
+
+		&__mailbox-container {
+			pointer-events: none;
+			position: absolute;
+			
+			z-index: 4;
+			width: 100%;
+			height: 100%;
+
+			overflow: hidden;
+
+			&__mailbox {
+				scale: 0.7;
+
+				width: 700px;
+				height: 500px;
+
+				margin-left: auto;
+
+				position: relative;
+				transform-origin: right;
+
+				> * {
+					position: absolute;
+				}
+
+				&__front {
+					width: 558px;
+					z-index: 6;
+					top: 114px;
+					left: 114px;
+				}
+
+				&__back {
+					scale: 0.9;
+					top: 0;
+					left: 0;
+
+					z-index: -5;
+				}
+
+				&__door {
+					width: 170px;
+					top: 120px;
+					left: 30px;
+					z-index: 6;
+					transform-origin: right;
+				}
+			}
+		}
+	}
 }
