@@ -1,0 +1,43 @@
+.portrait-container {
+	width: 600px;
+	transform-origin: center left;
+
+	background-color: #f2f2fa;
+	border: 10px solid #e3dfe6;
+	outline: 8px solid #aa7a6f;
+	box-shadow: 10px 10px rgba(0, 0, 0, 0.322);
+	border-radius: 10px;
+
+	padding: 15px 20px 15px 20px;
+
+    position: relative;
+
+    &__portrait{
+        width: 100%;
+
+        z-index: 2;
+
+        position: relative;
+    }
+
+    &__eye-container{
+        position: absolute;
+        width: 70px;
+        height: 70px;
+
+        overflow: hidden;
+
+        z-index: 1;
+
+        &--left {
+            top: 144px;
+            left: 182px;
+        }
+
+        &--right{
+            scale: 0.9;
+            top: 139.7px;
+            left: 260px;
+        }
+    }
+}
