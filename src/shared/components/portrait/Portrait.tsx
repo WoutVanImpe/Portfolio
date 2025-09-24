@@ -8,8 +8,8 @@ import { useTheme } from "~context/ThemeContext";
 export const Portrait = ({ scale }: { scale: number }) => {
 	const { textColor, textBgColor, textBorderColor } = useTheme();
 
-	const mouseX = useMotionValue<number>(380);
-	const mouseY = useMotionValue<number>(250);
+	const mouseX = useMotionValue<number>(380 * scale);
+	const mouseY = useMotionValue<number>(250 * scale);
 
 	const handleMouse = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();

@@ -14,7 +14,7 @@ export const AboutSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 				<Trans>about.title</Trans>
 			</motion.h1>
 			<div className={styles["s-about__long-text"]}>
-				<div style={{ scale: 0.6, width: "40%", height: 0.6 * 692 + 100, marginTop: 50, transformOrigin: "left" }}>
+				<div style={{ scale: 0.6, width: "40%", height: 0.6 * 692, transformOrigin: "top left" }}>
 					<Portrait scale={0.6} />
 				</div>
 				<motion.p animate={{ color: textColor }} transition={{ duration: 1, ease: "easeIn" }}>
