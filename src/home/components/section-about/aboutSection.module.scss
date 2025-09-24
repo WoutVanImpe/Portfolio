@@ -21,7 +21,7 @@
 		box-shadow: 10px 10px rgba(0, 0, 0, 0.322);
 
 		padding: 10px 45px 10px 45px;
-		margin-bottom: 40px;
+		margin-bottom: 80px;
 	}
 
 	&__long-text {
@@ -37,9 +37,17 @@
 			width: 50%;
 		}
 
-		&__clock-container {
+		&__portret-container {
 			width: 300px;
 			transform-origin: center left;
+
+			background-color: #f2f2fa;
+			border: 10px solid #e3dfe6;
+			outline: 8px solid #aa7a6f;
+			box-shadow: 10px 10px rgba(0, 0, 0, 0.322);
+			border-radius: 10px;
+
+			padding: 15px 20px 15px 20px;
 		}
 	}
 }

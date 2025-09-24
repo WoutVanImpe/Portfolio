@@ -1,10 +1,9 @@
 import { useTheme } from "~context/ThemeContext";
 import styles from "./aboutSection.module.scss";
+import portretImg from "../../assets/portret.svg";
 import { motion } from "motion/react";
 import { forwardRef } from "react";
 import { Trans } from "react-i18next";
-import { Phone } from "~shared/components/phone/Phone";
-import { Clock } from "~shared/components/clock/Clock";
 
 export const AboutSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { textColor, textBgColor, textBorderColor } = useTheme();
@@ -15,8 +14,8 @@ export const AboutSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 				<Trans>about.title</Trans>
 			</motion.h1>
 			<div className={styles["s-about__long-text"]}>
-				<motion.div className={styles["s-about__long-text__clock-container"]} style={{ scale: 1.7 }}>
-					<Clock />
+				<motion.div className={styles["s-about__long-text__portret-container"]} animate={{ color: textColor, backgroundColor: textBgColor, borderColor: textBorderColor }} transition={{ duration: 1, ease: "easeIn" }}>
+					<motion.img src={portretImg} alt="portret" />
 				</motion.div>
 				<motion.p animate={{ color: textColor }} transition={{ duration: 1, ease: "easeIn" }}>
 					Hi! Ik ben Wout, een derdejaarsstudent Multimedia en Creatieve Technologie aan de Erasmushogeschool Brussel, met een sterke passie voor front-end development en motion design. Ik experimenteer graag met nieuwe technologieën en daag mezelf
