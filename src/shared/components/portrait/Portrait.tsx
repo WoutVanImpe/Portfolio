@@ -5,22 +5,23 @@ import eyeImg from "../assets/eye.svg";
 import classNames from "classnames";
 import { useTheme } from "~context/ThemeContext";
 
-export const Portrait = () => {
+export const Portrait = ({ scale }: { scale: number }) => {
 	const { textColor, textBgColor, textBorderColor } = useTheme();
 
-	const mouseX = useMotionValue<number>(280);
-	const mouseY = useMotionValue<number>(165);
+	const mouseX = useMotionValue<number>(380);
+	const mouseY = useMotionValue<number>(250);
 
 	const handleMouse = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-		mouseX.set(e.clientX);
-		mouseY.set(e.clientY);
+		const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
+		mouseX.set(e.clientX - rect.left);
+		mouseY.set(e.clientY - rect.top);
 	};
 
-	const leftEyeX = useTransform(mouseX, [0, 227, 600], [-10, 0, 10]);
-	const rightEyeX = useTransform(mouseX, [0, 305, 600], [-10, 0, 10]);
+	const leftEyeX = useTransform(mouseX, [0, 312 * scale, 600 * scale], [-15, 0, 10]);
+	const rightEyeX = useTransform(mouseX, [0, 457 * scale, 600 * scale], [-10, 0, 10]);
 
-	const leftEyeY = useTransform(mouseY, [0, 169, 680], [-5, 0, 5]);
-	const rightEyeY = useTransform(mouseY, [0, 160, 680], [-5, 0, 5]);
+	const leftEyeY = useTransform(mouseY, [0, 244 * scale, 692 * scale], [-5, 0, 5]);
+	const rightEyeY = useTransform(mouseY, [0, 263 * scale, 692 * scale], [-5, 0, 5]);
 
 	return (
 		<motion.div className={styles["portrait-container"]} onMouseMove={(e) => handleMouse(e)} animate={{ color: textColor, backgroundColor: textBgColor, borderColor: textBorderColor }} transition={{ duration: 1, ease: "easeIn" }}>
