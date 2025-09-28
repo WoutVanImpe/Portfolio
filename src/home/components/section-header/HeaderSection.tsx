@@ -8,34 +8,47 @@ import { Trans } from "react-i18next";
 
 export const HeaderSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { width } = useWindowDimensions();
-	const windowScale = useMotionValue<number>(width > 1200 ? (1200 * 0.3) / 500 : (width * 0.3) / 500);
-
 	const { textColor, textBgColor, textBorderColor } = useTheme();
 
+	const getWindowScale = (width: number) => {
+		if (width >= 1000) {
+			return 1;
+		}
+		if (width >= 860) {
+			return (width / 1000) * 0.9;
+		}
+		if (width >= 570) {
+			return 1;
+		}
+		return (width / 570) * 0.9;
+	};
+
+	const windowScale = useMotionValue(getWindowScale(width));
+
 	useEffect(() => {
-		windowScale.set(width > 1200 ? (1200 * 0.3) / 400 : (width * 0.3) / 400);
+		windowScale.set(getWindowScale(width));
 	}, [width]);
 
 	return (
-		<div className={styles["s-header"]} ref={ref}>
+		<motion.div className={styles["s-header"]} ref={ref}>
 			<div className={styles["s-header__greet-container"]}>
-				<motion.div className={styles["s-header__greet-container__frame"]} animate={{ color: textColor, backgroundColor: textBgColor, borderColor: textBorderColor }} transition={{ duration: 1, ease: "easeIn" }}>
-					<h1>
-						<Trans>header.title</Trans>
-					</h1>
-					<h3>
-						<Trans>header.subtitle</Trans>
-					</h3>
+				<motion.div className={styles["s-header__greet-container__text-container"]}>
+					<motion.div className={styles["s-header__greet-container__text-container__frame"]} animate={{ color: textColor, backgroundColor: textBgColor, borderColor: textBorderColor }} transition={{ duration: 1, ease: "easeIn" }}>
+						<h1>
+							<Trans>header.title</Trans>
+						</h1>
+						<h3>
+							<Trans>header.subtitle</Trans>
+						</h3>
+					</motion.div>
 					<motion.p animate={{ color: textColor }} transition={{ duration: 1, ease: "easeIn" }}>
 						<Trans>tips.title</Trans>
 					</motion.p>
 				</motion.div>
 			</div>
-			<div className={styles["s-header__window-container"]}>
-				<motion.div className={styles["s-header__window-container__window"]} style={{ scale: windowScale }}>
-					<WindowLamp />
-				</motion.div>
-			</div>
-		</div>
+			<motion.div className={styles["s-header__window-container"]} style={{ scale: windowScale }}>
+				<WindowLamp />
+			</motion.div>
+		</motion.div>
 	);
 });
