@@ -5,7 +5,6 @@
 	flex-direction: column;
 	justify-content: center;
 
-
 	h1 {
 		align-self: center;
 		justify-self: flex-start;
@@ -39,6 +38,7 @@
 			display: flex;
 			align-items: end;
 			z-index: 4;
+			transform-origin: center;
 
 			margin-top: 150px;
 
@@ -48,7 +48,7 @@
 		&__mailbox-container {
 			pointer-events: none;
 			position: absolute;
-			
+
 			z-index: 4;
 			width: 100%;
 			height: 100%;
@@ -92,6 +92,20 @@
 					z-index: 6;
 					transform-origin: right;
 				}
+			}
+		}
+
+		@media (max-width: 900px) {
+			justify-content: center;
+
+			> * {
+				width: 100%;
+			}
+
+			&__letter {
+				rotate: 0deg;
+				justify-content: center;
+				margin-top: 0px;
 			}
 		}
 	}
