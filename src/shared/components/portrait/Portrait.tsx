@@ -23,8 +23,8 @@ export const Portrait = ({ scale }: { scale: number }) => {
 	const leftEyeX = useTransform(smoothX, [0, 312 * scale, 600 * scale], [-15, 0, 10]);
 	const rightEyeX = useTransform(smoothX, [0, 457 * scale, 600 * scale], [-10, 0, 10]);
 
-	const leftEyeY = useTransform(smoothY, [0, 244 * scale, 692 * scale], [-5, 0, 5]);
-	const rightEyeY = useTransform(smoothY, [0, 263 * scale, 692 * scale], [-5, 0, 5]);
+	const leftEyeY = useTransform(smoothY, [0, 244 * scale, 692 * scale], [-5, 0, 8]);
+	const rightEyeY = useTransform(smoothY, [0, 263 * scale, 692 * scale], [-5, 0, 8]);
 
 	return (
 		<motion.div
