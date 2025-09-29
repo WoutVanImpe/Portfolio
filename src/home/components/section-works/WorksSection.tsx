@@ -17,12 +17,36 @@ export const WorksSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	}, [projects]);
 
 	const { width } = useWindowDimensions();
-	const cardScale = useMotionValue<number>(width > 1200 ? (1200 * 0.48) / 650 : (width * 0.48) / 650);
-
 	const { textColor, textBgColor, textBorderColor } = useTheme();
 
+	let newScale: number;
+
+	if (width > 1200) {
+		newScale = (1200 * 0.48) / 650;
+	} else if (width >= 900) {
+		newScale = (width * 0.48) / 650;
+	} else if (width >= 650) {
+		newScale = 0.9;
+	} else {
+		newScale = (width / 650) * 0.9;
+	}
+
+	const cardScale = useMotionValue<number>(newScale);
+
 	useEffect(() => {
-		cardScale.set(width > 1200 ? (1200 * 0.48) / 650 : (width * 0.48) / 650);
+		let updatedScale: number;
+
+		if (width > 1200) {
+			updatedScale = (1200 * 0.48) / 650;
+		} else if (width >= 900) {
+			updatedScale = (width * 0.48) / 650;
+		} else if (width >= 650) {
+			updatedScale = 0.9;
+		} else {
+			updatedScale = (width / 650) * 0.9;
+		}
+
+		cardScale.set(updatedScale);
 	}, [width]);
 
 	return (

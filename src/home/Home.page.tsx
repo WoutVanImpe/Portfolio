@@ -65,7 +65,7 @@ export const HomePage = () => {
 
 	useEffect(() => {
 		navPos.set(width > 1200 ? (width - 1200) / 2 : 0);
-	});
+	}, [width]);
 
 	const headerRef = useRef<HTMLDivElement | null>(null);
 	const aboutRef = useRef<HTMLDivElement | null>(null);
@@ -88,7 +88,7 @@ export const HomePage = () => {
 			<WorksSection ref={worksRef} />
 			<AboutSection ref={aboutRef} />
 			<ContactSection ref={contactRef} />
-			<motion.div className={styles["p-home__nav"]} style={{ scale: 0.8, y: y, right: navPos }} whileHover={{ translateY: "10px" }}>
+			<motion.div className={styles["p-home__nav"]} style={{ scale: 0.8, y: y, right: width > 860 ? navPos : "0" }} whileHover={{ translateY: "10px" }}>
 				<Navigation home={headerRef} about={aboutRef} works={worksRef} contact={contactRef} y={navY} />
 			</motion.div>
 			<div className={styles["light-container"]}>
