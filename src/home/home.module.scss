@@ -14,6 +14,25 @@
 		top: 0;
 
 		transform-origin: top right;
+
+		@media (max-width: 860px) {
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+
+			transform-origin: top center;
+
+			> * {
+				left: 0;
+				right: 0;
+
+				margin: 0 auto;
+			}
+		}
+
+		@media (max-width: 600px) {
+			display: none;
+		}
 	}
 }
 
@@ -21,6 +40,8 @@
 	position: fixed;
 	top: 0;
 	left: 0;
+
+	justify-content: center;
 
 	overflow: hidden;
 
