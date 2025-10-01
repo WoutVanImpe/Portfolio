@@ -8,6 +8,7 @@ import boxFrontImg from "../../assets/mailbox-front.svg";
 import boxBackImg from "../../assets/mailbox-back.svg";
 import boxDoorImg from "../../assets/mailbox-door.svg";
 import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
+import { FadeInSlideUp } from "~shared/components/fadeIn/FadeIn";
 
 export const ContactSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { textColor, textBgColor, textBorderColor } = useTheme();
@@ -83,9 +84,11 @@ export const ContactSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 				<Trans>contact.title</Trans>
 			</motion.h1>
 			<motion.div className={styles["s-contact__form"]} style={{ scale: formScale, transformOrigin: "bottom" }}>
-				<motion.div animate={letterControls} className={styles["s-contact__form__letter"]} style={{ zIndex: 4, scale: letterScale, y: -50 }}>
-					<Letter letterReady={letterReady} />
-				</motion.div>
+				<FadeInSlideUp delay={0.1}>
+					<motion.div animate={letterControls} className={styles["s-contact__form__letter"]} style={{ zIndex: 4, scale: letterScale, y: -50 }}>
+						<Letter letterReady={letterReady} />
+					</motion.div>
+				</FadeInSlideUp>
 				<motion.div className={styles["s-contact__form__mailbox-container"]} style={{ zIndex: 3, display: width >= 900 ? "block" : "none" }}>
 					<div className={styles["s-contact__form__mailbox-container__mailbox"]}>
 						<motion.img className={styles["s-contact__form__mailbox-container__mailbox__front"]} src={boxFrontImg} alt="mailbox" />

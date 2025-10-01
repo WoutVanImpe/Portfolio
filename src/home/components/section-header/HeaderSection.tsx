@@ -5,6 +5,7 @@ import { forwardRef, useEffect } from "react";
 import { WindowLamp } from "~shared/components/window-lamp/WindowLamp";
 import { useTheme } from "~context/ThemeContext";
 import { Trans } from "react-i18next";
+import { FadeInZoom } from "~shared/components/fadeIn/FadeIn";
 
 export const HeaderSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { width } = useWindowDimensions();
@@ -46,9 +47,11 @@ export const HeaderSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 					</motion.p>
 				</motion.div>
 			</div>
-			<motion.div className={styles["s-header__window-container"]} style={{ scale: windowScale }}>
-				<WindowLamp />
-			</motion.div>
+			<FadeInZoom delay={0.3}>
+				<motion.div className={styles["s-header__window-container"]} style={{ scale: windowScale }}>
+					<WindowLamp />
+				</motion.div>
+			</FadeInZoom>
 		</motion.div>
 	);
 });

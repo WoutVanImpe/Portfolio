@@ -7,6 +7,7 @@ import { useTheme } from "~context/ThemeContext";
 import { Trans } from "react-i18next";
 import { useData } from "~context/DataContext";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
+import { FadeInSlideUp } from "~shared/components/fadeIn/FadeIn";
 
 export const WorksSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { projects } = useData();
@@ -56,9 +57,11 @@ export const WorksSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 			</motion.h1>
 			<motion.div className={styles["s-works__works-container"]}>
 				{projectsList.map((project, index) => (
-					<motion.div key={project.id} className={styles["s-works__works-container__card-container"]} style={{ scale: cardScale }}>
-						<CardDisplay projectInfo={project} index={index} />
-					</motion.div>
+					<FadeInSlideUp delay={0.1 * index} key={project.id}>
+						<motion.div key={project.id} className={styles["s-works__works-container__card-container"]} style={{ scale: cardScale }}>
+							<CardDisplay projectInfo={project} index={index} />
+						</motion.div>
+					</FadeInSlideUp>
 				))}
 			</motion.div>
 		</div>

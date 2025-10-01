@@ -5,6 +5,7 @@ import { forwardRef, useEffect } from "react";
 import { Trans } from "react-i18next";
 import { Portrait } from "~shared/components/portrait/Portrait";
 import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
+import { FadeInSlideUp } from "~shared/components/fadeIn/FadeIn";
 
 export const AboutSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { textColor, textBgColor, textBorderColor } = useTheme();
@@ -33,7 +34,9 @@ export const AboutSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 						display: "inline-block",
 					}}
 				>
-					<Portrait scale={portraitScale.get()} />
+					<FadeInSlideUp delay={0.1}>
+						<Portrait scale={portraitScale.get()} />
+					</FadeInSlideUp>
 				</motion.div>
 
 				<motion.p
