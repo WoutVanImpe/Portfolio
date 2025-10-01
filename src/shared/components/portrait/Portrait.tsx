@@ -4,6 +4,9 @@ import portraitImg from "../assets/portrait.svg";
 import eyeImg from "../assets/eye.svg";
 import classNames from "classnames";
 import { useTheme } from "~context/ThemeContext";
+import { Trans } from "react-i18next";
+import { useTips } from "~context/TipsContext";
+import { useEffect } from "react";
 
 export const Portrait = ({ scale }: { scale: number }) => {
 	const { textColor, textBgColor, textBorderColor } = useTheme();
@@ -26,6 +29,21 @@ export const Portrait = ({ scale }: { scale: number }) => {
 	const leftEyeY = useTransform(smoothY, [0, 244 * scale, 692 * scale], [-5, 0, 8]);
 	const rightEyeY = useTransform(smoothY, [0, 263 * scale, 692 * scale], [-5, 0, 8]);
 
+	const { tips } = useTips();
+	const tipOpac = useMotionValue(0);
+
+	useEffect(() => {
+		tips ? tipOpac.set(1) : tipOpac.set(0);
+	}, [tips]);
+
+	const smoothTip = useSpring(tipOpac, {
+		stiffness: 80,
+		damping: 20,
+		mass: 1,
+	});
+
+	const tipOpacity = useTransform(smoothTip, [0, 1], [0, 1]);
+
 	return (
 		<motion.div
 			className={styles["portrait-container"]}
@@ -44,6 +62,9 @@ export const Portrait = ({ scale }: { scale: number }) => {
 			<div className={classNames(styles["portrait-container__eye-container"], styles["portrait-container__eye-container--right"])}>
 				<motion.img style={{ x: rightEyeX, y: rightEyeY }} src={eyeImg} alt="eye" />
 			</div>
+			<motion.p className={styles["portrait-container__tip"]} animate={{ color: textColor }} style={{ opacity: tipOpacity, zIndex: 2 }} transition={{ duration: 1, ease: "easeIn" }}>
+				<Trans>tips.portrait</Trans>
+			</motion.p>
 		</motion.div>
 	);
 };
