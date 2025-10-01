@@ -41,7 +41,7 @@ export const CardDisplay = ({ projectInfo, index }: CardDisplayProps) => {
 		mass: 1,
 	});
 
-	const tipOpacity = useTransform(smoothTip, [0, 1], [0, 1]);
+	const tipOpacity = useTransform(smoothTip, [0, 1], [1, 1]);
 
 	return (
 		<div className={styles["postcard-display-container"]}>
