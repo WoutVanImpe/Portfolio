@@ -33,7 +33,7 @@ export const HeaderSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	return (
 		<motion.div className={styles["s-header"]} ref={ref}>
 			<div className={styles["s-header__greet-container"]}>
-				<motion.div className={styles["s-header__greet-container__text-container"]}>
+				<motion.div className={styles["s-header__greet-container__text-container"]} style={{marginBottom: 25}}>
 					<motion.div className={styles["s-header__greet-container__text-container__frame"]} animate={{ color: textColor, backgroundColor: textBgColor, borderColor: textBorderColor }} transition={{ duration: 1, ease: "easeIn" }}>
 						<h1>
 							<Trans>header.title</Trans>
@@ -42,7 +42,7 @@ export const HeaderSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 							<Trans>header.subtitle</Trans>
 						</h3>
 					</motion.div>
-					<motion.p animate={{ color: textColor }} transition={{ duration: 1, ease: "easeIn" }}>
+					<motion.p animate={{ color: textColor }} transition={{ duration: 1, ease: "easeIn" }} style={{ display: width > 768 ? "block" : "none", marginBottom:0 }}>
 						<Trans>tips.title</Trans>
 					</motion.p>
 				</motion.div>
