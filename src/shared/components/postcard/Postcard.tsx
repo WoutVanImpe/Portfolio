@@ -84,9 +84,9 @@ export const Postcard = ({ handleFrame, ProjectInfo }: PostcardProps) => {
 					<h2 className={styles["postcard-container__front__title"]}>{text[selectedLanguage].title}</h2>
 					<p className={styles["postcard-container__front__description"]}>{text[selectedLanguage].teaser}</p>
 					<img className={styles["postcard-container__front__image"]} src={ProjectInfo.cover} alt="main" />
-					<motion.button whileHover={{ scale: 1.1 }} style={{ rotate: -5 }} className={styles["postcard-container__front__button"]}>
+					{/* <motion.button whileHover={{ scale: 1.1 }} style={{ rotate: -5 }} className={styles["postcard-container__front__button"]}>
 						<Trans>works.seeMore</Trans>
-					</motion.button>
+					</motion.button> */}
 				</motion.div>
 			) : (
 				<motion.div className={styles["postcard-container__back"]}>
