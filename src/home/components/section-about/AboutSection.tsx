@@ -1,6 +1,6 @@
 import { useTheme } from "~context/ThemeContext";
 import styles from "./aboutSection.module.scss";
-import { motion, scale, useMotionValue } from "motion/react";
+import { motion, useMotionValue } from "motion/react";
 import { forwardRef, useEffect } from "react";
 import { Trans } from "react-i18next";
 import { Portrait } from "~shared/components/portrait/Portrait";
@@ -46,9 +46,7 @@ export const AboutSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
 					animate={{ color: textColor }}
 					transition={{ duration: 1, ease: "easeIn" }}
 				>
-					Hi! Ik ben Wout, een derdejaarsstudent Multimedia en Creatieve Technologie aan de Erasmushogeschool Brussel, met een sterke passie voor front-end development en motion design. Ik experimenteer graag met nieuwe technologieën en daag mezelf
-					uit om creatief en oplossingsgericht te werken. Naast mijn studie ben ik actief als socialmediamanager bij JNM (Jeugdbond voor Natuur en Milieu), waar ik onder andere meewerk aan promomateriaal zoals Instagramcontent, flyers en magazines.
-					Verder besteed ik in mijn vrije tijd graag aandacht aan het aanscherpen van mijn technische en visuele skills.
+					<Trans>about.about</Trans>
 				</motion.p>
 			</div>
 		</div>
