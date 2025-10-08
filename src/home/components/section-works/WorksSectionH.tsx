@@ -9,7 +9,7 @@ import { useData } from "~context/DataContext";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
 import { FadeInSlideUp } from "~shared/components/fadeIn/FadeIn";
 
-export const WorksSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
+export const WorksSectionH = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { projects } = useData();
 	const [projectsList, setProjectsList] = useState<[] | ProjectType[]>([]);
 

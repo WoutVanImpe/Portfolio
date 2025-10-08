@@ -10,7 +10,7 @@ import boxDoorImg from "../../assets/mailbox-door.svg";
 import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 import { FadeInSlideUp } from "~shared/components/fadeIn/FadeIn";
 
-export const ContactSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
+export const ContactSectionH = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { textColor, textBgColor, textBorderColor } = useTheme();
 	const { width } = useWindowDimensions();
 

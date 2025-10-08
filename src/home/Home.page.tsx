@@ -3,10 +3,10 @@ import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import light from "./assets/light.svg";
 import { useObjects } from "~context/ObjectContext";
-import { HeaderSection } from "./components/section-header/HeaderSection";
-import { AboutSection } from "./components/section-about/AboutSection";
-import { WorksSection } from "./components/section-works/WorksSection";
-import { ContactSection } from "./components/section-contact/ContactSection";
+import { HeaderSectionH } from "./components/section-header/HeaderSectionH";
+import { AboutSectionH } from "./components/section-about/AboutSectionH";
+import { WorksSectionH } from "./components/section-works/WorksSectionH";
+import { ContactSectionH } from "./components/section-contact/ContactSectionH";
 import { Navigation } from "./components/navigation/Navigation";
 import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 import { useTips } from "~context/TipsContext";
@@ -84,10 +84,10 @@ export const HomePage = () => {
 
 	return (
 		<motion.div className={styles["p-home"]} onMouseMove={(e) => handleMouse(e)}>
-			<HeaderSection ref={headerRef} />
-			<WorksSection ref={worksRef} />
-			<AboutSection ref={aboutRef} />
-			<ContactSection ref={contactRef} />
+			<HeaderSectionH ref={headerRef} />
+			<WorksSectionH ref={worksRef} />
+			<AboutSectionH ref={aboutRef} />
+			<ContactSectionH ref={contactRef} />
 			<motion.div className={styles["p-home__nav"]} style={{ scale: 0.8, y: y, right: width > 860 ? navPos : "0" }} whileHover={{ translateY: "10px" }}>
 				<Navigation home={headerRef} about={aboutRef} works={worksRef} contact={contactRef} y={navY} />
 			</motion.div>

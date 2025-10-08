@@ -7,7 +7,7 @@ import { Portrait } from "~shared/components/portrait/Portrait";
 import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 import { FadeInSlideUp } from "~shared/components/fadeIn/FadeIn";
 
-export const AboutSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
+export const AboutSectionH = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { textColor, textBgColor, textBorderColor } = useTheme();
 	const { width } = useWindowDimensions();
 

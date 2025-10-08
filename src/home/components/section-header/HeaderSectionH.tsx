@@ -7,7 +7,7 @@ import { useTheme } from "~context/ThemeContext";
 import { Trans } from "react-i18next";
 import { FadeInZoom } from "~shared/components/fadeIn/FadeIn";
 
-export const HeaderSection = forwardRef<HTMLDivElement, {}>((props, ref) => {
+export const HeaderSectionH = forwardRef<HTMLDivElement, {}>((props, ref) => {
 	const { width } = useWindowDimensions();
 	const { textColor, textBgColor, textBorderColor } = useTheme();
 
