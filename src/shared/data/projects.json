@@ -1,7 +1,20 @@
 [
 	{
 		"id": 1,
-		"cover": "./images/frontend-main.png",
+		"cover": "./images/parallax-main.png",
+		"tags": ["web", "motion"],
+		"en": {
+			"title": "The tale of Bluebeard",
+			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+		},
+		"nl": {
+			"title": "Het verhaal van Blauwbaard",
+			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
+		}
+	},
+	{
+		"id": 2,
+		"cover": "./images/portal-main.jpg",
 		"tags": ["web"],
 		"en": {
 			"title": "Once upon a time...",
@@ -13,8 +26,8 @@
 		}
 	},
 	{
-		"id": 2,
-		"cover": "./images/frontend-main.png",
+		"id": 3,
+		"cover": "./images/trifold-main.jpg",
 		"tags": ["graphic design"],
 		"en": {
 			"title": "Trifold promo flyer",
@@ -26,8 +39,8 @@
 		}
 	},
 	{
-		"id": 3,
-		"cover": "./images/frontend-main.png",
+		"id": 4,
+		"cover": "./images/insta-main.jpg",
 		"tags": ["social media"],
 		"en": {
 			"title": "Social media posts",
@@ -39,8 +52,8 @@
 		}
 	},
 	{
-		"id": 4,
-		"cover": "./images/frontend-main.png",
+		"id": 5,
+		"cover": "./images/drone-main.jpg",
 		"tags": ["motion"],
 		"en": {
 			"title": "Drone video",
@@ -48,6 +61,19 @@
 		},
 		"nl": {
 			"title": "Drone video",
+			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
+		}
+	},
+	{
+		"id": 6,
+		"cover": "./images/kikkertje-main.jpg",
+		"tags": ["graphic design"],
+		"en": {
+			"title": "The Kikkertje",
+			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+		},
+		"nl": {
+			"title": "Het Kikkertje",
 			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
 		}
 	}
