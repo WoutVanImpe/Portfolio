@@ -12,7 +12,6 @@ dist
 dist-ssr
 *.local
 .github
-*ApiKey.ts
 
 # Editor directories and files
 .vscode/*

@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { motion, MotionValue, useAnimation } from "motion/react";
 import { Trans } from "react-i18next";
 import emailjs from "@emailjs/browser";
+import { EMAIL_VARS } from "~home/components/section-contact/EmailVars";
 
 interface EmailContent {
 	name: string;
@@ -20,9 +21,9 @@ export const Letter = ({ letterReady }: { letterReady: MotionValue<number> }) =>
 	const messageInput = useRef<HTMLTextAreaElement | null>(null);
 
 	const emailVars = {
-		serviceId: "service_ayytesk",
-		templateId: "template_jcqws8w",
-		emailKey: "Nxvib6hyUFSl5mzua",
+		serviceId: EMAIL_VARS.SERVICE_ID,
+		templateId: EMAIL_VARS.TEMPLATE_ID,
+		emailKey: EMAIL_VARS.EMAIL_KEY,
 	};
 
 	const letterControls = useAnimation();
