@@ -1,5 +1,5 @@
 import { HomePage } from "~home/Home.page";
-import { Project } from "~project/Project.page";
+import { ProjectPage } from "~project/Project.page";
 import { PageTitle } from "~shared/hooks/page-title/PageTitle";
 
 export const NO_ROUTE = {
@@ -13,9 +13,9 @@ export const NO_ROUTE = {
 };
 
 export const PROJECT_ROUTE = {
-	template: "work/",
-	path: "work/:id",
-	element: <Project />,
+	template: "/work/",
+	path: "/work/:id",
+	element: <ProjectPage />,
 };
 
 export const HOME_ROUTE = {

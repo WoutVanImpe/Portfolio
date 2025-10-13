@@ -1,0 +1,60 @@
+.portrait-container {
+	width: 600px;
+	height: 692px;
+
+	background-color: #f2f2fa;
+	border: 10px solid #e3dfe6;
+	outline: 8px solid #aa7a6f;
+	box-shadow: 10px 10px rgba(0, 0, 0, 0.322);
+	border-radius: 10px;
+
+	padding: 15px 20px 15px 20px;
+
+	position: relative;
+
+	&__portrait {
+		width: 100%;
+
+		z-index: 2;
+
+		position: relative;
+	}
+
+	&__eye-container {
+		position: absolute;
+		width: 80px;
+		height: 60px;
+
+		z-index: 1;
+
+		&--left {
+			top: 214px;
+			left: 272px;
+		}
+
+		&--right {
+			scale: 0.9;
+			top: 209px;
+			left: 385px;
+		}
+	}
+
+	&__tip {
+		position: absolute;
+		top: 20px;
+		right: 15px;
+
+        margin: 0;
+
+		rotate: 5deg;
+        width: 200px;
+
+		font-size: 44px;
+		line-height: 40px;
+		text-align: end;
+
+		font-family: "Shadows Into Light", cursive;
+		font-weight: 500;
+		font-style: normal;
+	}
+}

@@ -1,99 +1,80 @@
 [
 	{
 		"id": 1,
-		"title": "Instagram posts",
-		"img": "#",
-		"tags": ["graphic-design", "social-media"],
-		"description": {
-			"intro": "instagram for JNM"
+		"cover": "./images/parallax-main.png",
+		"tags": ["web", "motion"],
+		"en": {
+			"title": "The tale of Bluebeard",
+			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+		},
+		"nl": {
+			"title": "Het verhaal van Blauwbaard",
+			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
 		}
 	},
 	{
 		"id": 2,
-		"title": "Trifold flyer",
-		"img": "#",
-		"tags": ["graphic-design"],
-		"description": {
-			"intro": "instagrflyeram for JNM"
+		"cover": "./images/portal-main.jpg",
+		"tags": ["web"],
+		"en": {
+			"title": "Once upon a time...",
+			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+		},
+		"nl": {
+			"title": "Er was eens...",
+			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
 		}
 	},
 	{
 		"id": 3,
-		"title": "Er was eens...",
-		"img": "./images/frontend-main.png",
-		"tags": ["web", "motion"],
-		"description": {
-			"intro": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel.",
-			"sections": [
-				"## De portaalwebsite\n\nEen centrale React-applicatie waar bezoekers sprookjes kunnen ontdekken. Je kan zoeken op naam, filteren op genre, of een willekeurig verhaal opvragen via een shuffle-functie. De portaal bevat ook een **\"Over ons\"** en een **\"Making Of\"**-pagina, die uitleg geven over het projectproces.",
-				"\n\n## De parallax storytelling\n\nEen visueel meeslepende website die één sprookje vertelt via gelaagde scènes en scroll-interactie. Elk element (zoals lucht, bergen, bomen...) beweegt met een eigen snelheid voor een dynamisch diepte-effect. Alle visuals zijn ontworpen in een middeleeuwse *woodcut*-stijl die de mysterieuze sfeer versterkt.",
-				"## Gebruikte technologieën\n\n**Portaalwebsite**\n- React + TypeScript\n- React Router (HashRouter)\n- React Query\n- Context API\n- SCSS Modules\n- Vite\n\n**Parallax Storytelling**\n- React + TypeScript\n- Framer Motion (useScroll, useTransform)\n- SCSS Modules",
-				"## Functionaliteiten\n\n- Zoek- en filterfunctie op naam en genre\n- Shuffle voor willekeurige sprookjes\n- Dynamische layout per route (klassiek of parallax)\n- Informatieve secties (\"Over ons\", \"Making Of\")\n- Herbruikbare modulaire componenten"
-			]
+		"cover": "./images/trifold-main.jpg",
+		"tags": ["graphic design"],
+		"en": {
+			"title": "Trifold promo flyer",
+			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
 		},
-		"extraImg": ["./images/frontend-extra1.jpg", "./images/frontend-extra2.jpg", "./images/frontend-extra3.jpg"]
+		"nl": {
+			"title": "Trifold promo flyer",
+			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
+		}
 	},
 	{
 		"id": 4,
-		"title": "Bataille",
-		"img": "#",
-		"tags": ["web"],
-		"description": {
-			"intro": "game for fun"
+		"cover": "./images/insta-main.jpg",
+		"tags": ["social media"],
+		"en": {
+			"title": "Social media posts",
+			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+		},
+		"nl": {
+			"title": "Sociale media posts",
+			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
 		}
 	},
 	{
 		"id": 5,
-		"title": "Pokemon card game",
-		"img": "#",
-		"tags": ["web"],
-		"description": {
-			"intro": "game for fun"
+		"cover": "./images/drone-main.jpg",
+		"tags": ["motion"],
+		"en": {
+			"title": "Drone video",
+			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+		},
+		"nl": {
+			"title": "Drone video",
+			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
 		}
 	},
 	{
 		"id": 6,
-		"title": "Layouter Kikkertje",
-		"img": "#",
-		"tags": ["graphic-design"],
-		"description": {
-			"intro": "magazine for JNM"
-		}
-	},
-	{
-		"id": 7,
-		"title": "Parallax website",
-		"img": "#",
-		"tags": ["web"],
-		"description": {
-			"intro": "parallax school task"
-		}
-	},
-	{
-		"id": 8,
-		"title": "Bataille",
-		"img": "#",
-		"tags": ["web"],
-		"description": {
-			"intro": "game for fun"
-		}
-	},
-	{
-		"id": 9,
-		"title": "Pokemon card game",
-		"img": "#",
-		"tags": ["web"],
-		"description": {
-			"intro": "game for fun"
-		}
-	},
-	{
-		"id": 10,
-		"title": "Layouter Kikkertje",
-		"img": "#",
-		"tags": ["graphic-design"],
-		"description": {
-			"intro": "magazine for JNM"
+		"cover": "./images/kikkertje-main.jpg",
+		"tags": ["graphic design"],
+		"en": {
+			"title": "The Kikkertje",
+			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+		},
+		"nl": {
+			"title": "Het Kikkertje",
+			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
 		}
 	}
 ]

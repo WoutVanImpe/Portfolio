@@ -1,0 +1,40 @@
+.draw {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+
+		canvas {
+			width: 230px;
+			height: 350px;
+			border-radius: 10px;
+			border: rgba(0, 0, 0, 0.384) solid 5px;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		svg {
+			width: 50px;
+		}
+
+		&__controls {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			gap: 10px;
+
+			&__color {
+				width: 45px;
+				height: 45px;
+				border-radius: 10px;
+				border: rgba(0, 0, 0, 0.384) solid 1px;
+			}
+
+			input {
+				width: 100px;
+			}
+		}
+	}

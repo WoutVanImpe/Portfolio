@@ -1,11 +1,13 @@
 export default interface ProjectType {
 	id: number;
-	title: string;
-	img: string;
-	tags: string[];
-	description?: {
-		intro: string;
-		sections: string[]
+	cover: string;
+	tags: ["motion" | "graphic desing" | "web" | "social media"];
+	en: {
+		title: string;
+		teaser: string;
 	};
-	extraImg?: string[];
+	nl: {
+		title: string;
+		teaser: string;
+	};
 }

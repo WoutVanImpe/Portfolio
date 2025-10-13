@@ -1,0 +1,26 @@
+{
+	"todo": {
+		"done": "todo's done",
+		"inputTitle": "Title:",
+		"inputColor": "Color:",
+		"curtain": "The curtain",
+		"lamp": "The lamp",
+		"drawer": "The drawer",
+		"globe": "The globe",
+		"card": "The postcard"
+	},
+	"weather": {
+		"brussels": "Brussels",
+		"temperature": "temperature",
+		"precipitation": "precipitation",
+		"windSpeed": "wind speed",
+		"loading": "loading",
+		"kph": "kph"
+	},
+	"map": {
+		"search": "search",
+		"notFound": "location not found",
+		"loading": "loading",
+		"brussels": "Brussels"
+	}
+}

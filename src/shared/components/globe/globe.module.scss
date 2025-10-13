@@ -1,0 +1,84 @@
+.globe-container {
+	width: 300px;
+	height: 200px;
+	position: relative;
+	display: flex;
+
+	&__base {
+		width: 200px;
+		height: 100%;
+		object-fit: contain;
+		z-index: 1;
+	}
+
+	&__indicator {
+		margin: 0;
+
+		position: absolute;
+		bottom: 2px;
+		left: 106px;
+
+		color: white;
+		text-transform: uppercase;
+		z-index: 2;
+	}
+
+	&__globe {
+		position: absolute;
+		top: 18px;
+		left: 26px;
+
+		width: 60%;
+		height: 60%;
+
+		object-fit: contain;
+		z-index: 2;
+
+		cursor: zoom-in;
+	}
+
+	&__lang {
+		width: 100px;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 15px;
+
+		pointer-events: none;
+		z-index: 3;
+
+		button {
+			margin: 0;
+
+			padding: 8px 15px;
+			background-color: rgb(250, 249, 237);
+			border: none;
+			border-radius: 20px;
+			box-shadow: 2px 2px rgba(0, 0, 0, 0.384);
+
+			font-weight: 500;
+
+			pointer-events: visibleStroke;
+			cursor: pointer;
+		}
+	}
+
+	&__tip {
+		position: absolute;
+		bottom: 140px;
+		right: 70px;
+
+		rotate: 10deg;
+		width: 80px;
+
+		font-size: 20px;
+		line-height: 20px;
+		text-align: end;
+
+		font-family: "Shadows Into Light", cursive;
+		font-weight: 500;
+		font-style: normal;
+	}
+}

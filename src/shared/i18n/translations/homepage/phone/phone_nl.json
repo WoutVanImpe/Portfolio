@@ -1,0 +1,26 @@
+{
+	"todo": {
+		"done": "todo's gedaan",
+		"inputTitle": "Titel:",
+		"inputColor": "Kleur:",
+		"curtain": "Het gordijn",
+		"lamp": "De lamp",
+		"drawer": "De lade",
+		"globe": "De wereldbol",
+		"card": "De postkaart"
+	},
+	"weather": {
+		"brussels": "Brussel",
+		"temperature": "temperature",
+		"precipitation": "neerslag",
+		"windSpeed": "windsnelheid",
+		"loading": "laden",
+		"kph": "km/u"
+	},
+	"map": {
+		"search": "zoek",
+		"notFound": "locatie niet gevonden",
+		"loading": "laden",
+		"brussels": "Brussel"
+	}
+}

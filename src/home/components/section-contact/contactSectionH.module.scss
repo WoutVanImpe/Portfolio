@@ -1,0 +1,112 @@
+.s-contact {
+	width: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	h1 {
+		align-self: center;
+		justify-self: flex-start;
+		width: fit-content;
+
+		text-transform: uppercase;
+
+		background-color: #f2f2fa;
+		border: 10px solid #e3dfe6;
+		outline: 8px solid #aa7a6f;
+		box-shadow: 10px 10px rgba(0, 0, 0, 0.322);
+
+		padding: 10px 45px 10px 45px;
+		margin-bottom: 50px;
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		position: relative;
+
+		height: 500px;
+
+		> * {
+			width: 50%;
+		}
+
+		&__letter {
+			display: flex;
+			align-items: end;
+			z-index: 4;
+			transform-origin: center;
+
+			margin-top: 150px;
+
+			rotate: -1deg;
+		}
+
+		&__mailbox-container {
+			pointer-events: none;
+			position: absolute;
+
+			z-index: 4;
+			width: 100%;
+			height: 100%;
+
+			overflow: hidden;
+
+			&__mailbox {
+				scale: 0.7;
+
+				width: 700px;
+				height: 500px;
+
+				margin-left: auto;
+
+				position: relative;
+				transform-origin: right;
+
+				> * {
+					position: absolute;
+				}
+
+				&__front {
+					width: 558px;
+					z-index: 6;
+					top: 114px;
+					left: 114px;
+				}
+
+				&__back {
+					scale: 0.9;
+					top: 0;
+					left: 0;
+
+					z-index: -5;
+				}
+
+				&__door {
+					width: 170px;
+					top: 120px;
+					left: 30px;
+					z-index: 6;
+					transform-origin: right;
+				}
+			}
+		}
+
+		@media (max-width: 900px) {
+			justify-content: center;
+
+			> * {
+				width: 100%;
+			}
+
+			&__letter {
+				rotate: 0deg;
+				justify-content: center;
+				margin-top: 0px;
+			}
+		}
+	}
+}

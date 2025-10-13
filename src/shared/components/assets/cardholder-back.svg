@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 486.96 275.65">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #4d4d4d;
+      }
+
+      .cls-2 {
+        fill: #666;
+      }
+
+      .cls-3 {
+        fill: gray;
+      }
+
+      .cls-4 {
+        fill: #bbc8d8;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <image width="488" height="9" transform="translate(-.3 180.24)" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAegAAAAJCAYAAAD5P7+fAAAACXBIWXMAAAsSAAALEgHS3X78AAABoUlEQVR4nO2azU7CQBSFvyILFFExMW5E446ND+DOZ/U9fAeX7NCwYmH8SVz4k+hiqtJKRygXO9OeLyGU9s69Z05oJzPThPlMgA1gG3goiLHiQ/mjzN82VWHPun1rGvLTFvlpS+x+XgJj4Bq4BR6h+CE7SL8nwNuShUIwKgQNEIaOdWhoA+8V1q9L/pi1K3+988esPcb8XeAJ6ANTcgP0ITAEToET4Bw4Bo7S61fGYmInhIFX+EmqFlAC/a9+I0+yyI8sdfJjF7ifPfH1ENsHztLjC9zy9oDFZ88WJlkZLS3h5+kY11B8feND0qJ4xa8S74u9ST9T3Mr1M/wM0JvADm4WvQccAL0lilvHNTlnmdrdku1ij6uytvoSZm31ZfW4Kms3tS+vwAswAu5ItxBnlwE7uCn2MP3dWzD5fxDaMob0+JEeP9LjR3r8WOjZWqHGX/XVtlzbEW4G/U1+n66F25fu497gLls0FKTTllh0QjxapdOWUHXObutoiV/x8+Kn+YtFL9IknmvLEuoNI0RT0T25HloF5+V3FvkhhBBCiHj5BIR4vomF02RKAAAAAElFTkSuQmCC"/>
+      <g>
+        <path class="cls-1" d="M481.91,183v-3.41c0-.88-.99-1.6-2.22-1.6H3.21c-1.23,0-2.22.72-2.22,1.6v3.41c0,.88.99,1.6,2.22,1.6h476.48c1.23,0,2.22-.72,2.22-1.6h0Z"/>
+        <path class="cls-1" d="M210.07,274.16h3.41c.88,0,1.6-.57,1.6-1.26V1.27c0-.7-.72-1.27-1.6-1.27h-3.41c-.88,0-1.6.57-1.6,1.27v271.63c0,.7.72,1.26,1.6,1.26h0Z"/>
+        <path class="cls-1" d="M269.47,274.16h3.41c.88,0,1.6-.57,1.6-1.26V1.27c0-.7-.72-1.27-1.6-1.27h-3.41c-.88,0-1.6.57-1.6,1.27v271.63c0,.7.72,1.26,1.6,1.26h0Z"/>
+        <path class="cls-3" d="M357.81,275.65v-4.75l-90.11-8.15c-.32.22-.5,1.07-.55,1.46-.05.5-.06,1.5,0,2,.04.35.25,1.1.55,1.29l90.11,8.15Z"/>
+        <path class="cls-3" d="M125.14,275.65v-4.75l90.11-8.15c.32.22.5,1.07.55,1.46.05.5.06,1.5,0,2-.04.35-.25,1.1-.55,1.29l-90.11,8.15Z"/>
+        <path class="cls-2" d="M276.14,11.89v-3.41c0-.88-.14-1.6-.32-1.6h-68.7c-.18,0-.32.72-.32,1.6v3.41c0,.88.14,1.6.32,1.6h68.7c.18,0,.32-.72.32-1.6h0Z"/>
+        <path class="cls-2" d="M276.14,27.22v-3.41c0-.88-.14-1.6-.32-1.6h-68.7c-.18,0-.32.72-.32,1.6v3.41c0,.88.14,1.6.32,1.6h68.7c.18,0,.32-.72.32-1.6h0Z"/>
+        <polygon class="cls-4" points="236.08 8.6 230.7 17.94 236.08 27.27 246.86 27.27 252.25 17.94 246.86 8.6 236.08 8.6 236.08 8.6"/>
+      </g>
+    </g>
+  </g>
+</svg>
