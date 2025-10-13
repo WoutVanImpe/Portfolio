@@ -13,8 +13,8 @@ export const NO_ROUTE = {
 };
 
 export const PROJECT_ROUTE = {
-	template: "work/",
-	path: "work/:id",
+	template: "/work/",
+	path: "/work/:id",
 	element: <ProjectPage />,
 };
 
