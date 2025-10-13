@@ -1,5 +1,5 @@
 export const EMAIL_VARS = {
-	EMAIL_KEY: "Nxvib6hyUFSl5mzua",
-	SERVICE_ID: "service_ayytesk",
-	TEMPLATE_ID: "template_jcqws8w",
+	EMAIL_KEY: process.env.EMAIL_KEY,
+	SERVICE_ID: process.env.SERVICE_ID,
+	TEMPLATE_ID: process.env.TEMPLATE_ID,
 };
