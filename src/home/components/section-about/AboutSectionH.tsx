@@ -1,5 +1,5 @@
 import { useTheme } from "~context/ThemeContext";
-import styles from "./aboutSection.module.scss";
+import styles from "./aboutSectionH.module.scss";
 import { motion, useMotionValue } from "motion/react";
 import { forwardRef, useEffect } from "react";
 import { Trans } from "react-i18next";

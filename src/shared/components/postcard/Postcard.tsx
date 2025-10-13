@@ -7,7 +7,7 @@ import designImg from "../assets/design-stamp.svg";
 import { useEffect, useState } from "react";
 import { motion, MotionValue, useAnimation } from "motion/react";
 import type ProjectType from "~shared/hooks/projects-data/project.types";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 type PostcardProps = {
 	handleFrame?: MotionValue<number>;

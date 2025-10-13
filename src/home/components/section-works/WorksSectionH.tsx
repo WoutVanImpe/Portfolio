@@ -1,5 +1,5 @@
 import { CardDisplay } from "~shared/components/card-display/CardDisplay";
-import styles from "./worksSection.module.scss";
+import styles from "./worksSectionH.module.scss";
 import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 import { motion, useMotionValue } from "motion/react";
 import { forwardRef, useEffect, useState } from "react";

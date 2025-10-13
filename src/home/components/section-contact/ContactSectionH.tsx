@@ -1,5 +1,5 @@
 import { motion, useAnimation, useMotionValue, useMotionValueEvent, useTransform } from "motion/react";
-import styles from "./contactSection.module.scss";
+import styles from "./contactSectionH.module.scss";
 import { useTheme } from "~context/ThemeContext";
 import { forwardRef, useEffect } from "react";
 import { Trans } from "react-i18next";
