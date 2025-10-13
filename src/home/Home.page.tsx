@@ -12,7 +12,6 @@ import useWindowDimensions from "~shared/hooks/screen-size/useWindowDimensions";
 import { useTips } from "~context/TipsContext";
 
 export const HomePage = () => {
-	console.log(import.meta.env.VITE_EMAIL_KEY);
 	/* Tips opacity */
 	const { setTips } = useTips();
 
