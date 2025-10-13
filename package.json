@@ -10,6 +10,7 @@
 		"deploy": "vite build && gh-pages -d dist"
 	},
 	"dependencies": {
+		"@emailjs/browser": "^4.4.1",
 		"@tanstack/react-query": "^5.74.11",
 		"classnames": "^2.5.1",
 		"i18next": "^25.3.2",

@@ -5,23 +5,58 @@ import flapImg from "../assets/letter-flap.svg";
 import { useRef } from "react";
 import { motion, MotionValue, useAnimation } from "motion/react";
 import { Trans } from "react-i18next";
+import emailjs from "@emailjs/browser";
+
+interface EmailContent {
+	name: string;
+	email: string;
+	message: string;
+	time: string;
+}
 
 export const Letter = ({ letterReady }: { letterReady: MotionValue<number> }) => {
 	const nameInput = useRef<HTMLInputElement | null>(null);
 	const emailInput = useRef<HTMLInputElement | null>(null);
 	const messageInput = useRef<HTMLTextAreaElement | null>(null);
 
+	const emailVars = {
+		serviceId: "service_ayytesk",
+		templateId: "template_jcqws8w",
+		emailKey: "Nxvib6hyUFSl5mzua",
+	};
+
 	const letterControls = useAnimation();
 	const envelopeControls = useAnimation();
 	const messageControls = useAnimation();
 
 	const handleSend = async () => {
-		const letter = {
-			name: nameInput.current?.value,
-			email: emailInput.current?.value,
-			message: messageInput.current?.value,
+		const current = new Date();
+		const date = `${current.getHours()}:${current.getMinutes()} - ${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
+
+		const name = nameInput.current?.value.trim() || "";
+		const email = emailInput.current?.value.trim() || "";
+		const message = messageInput.current?.value.trim() || "";
+
+		if (!name || !email || !message) {
+			alert("Please fill in all fields before sending.");
+			return;
+		}
+
+		const letter: EmailContent = {
+			name: nameInput.current!.value,
+			email: emailInput.current!.value,
+			message: messageInput.current!.value,
+			time: date,
 		};
+		sendEmail(letter);
 		await closeEnvelope();
+	};
+
+	const sendEmail = (letter: EmailContent) => {
+		emailjs
+			.send(emailVars.serviceId, emailVars.templateId, { ...letter }, emailVars.emailKey)
+			.then(() => alert("Message sent!"))
+			.catch((err) => console.error("Email send failed:", err));
 	};
 
 	const handleMsgTyping = () => {

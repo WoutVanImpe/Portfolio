@@ -35,6 +35,7 @@
 		}
 
 		&__letter {
+			position: relative;
 			display: flex;
 			align-items: end;
 			z-index: 4;
