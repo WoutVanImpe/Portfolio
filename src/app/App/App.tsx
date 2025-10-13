@@ -20,9 +20,11 @@ export const App = () => {
 		},
 	]);
 	return (
-		<QueryClientProvider client={queryClient}>
-			<RouterProvider router={router} />
-		</QueryClientProvider>
+		<div className={styles[""]}>
+			<QueryClientProvider client={queryClient}>
+				<RouterProvider router={router} />
+			</QueryClientProvider>
+		</div>
 	);
 };
 
