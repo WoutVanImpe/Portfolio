@@ -5,11 +5,11 @@
 		"tags": ["web", "motion"],
 		"en": {
 			"title": "The tale of Bluebeard",
-			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+			"teaser": "An interactive digital retelling of the fairy tale Bluebeard, brought to life through animation and parallax effects. Developed in React and Framer Motion as part of my front-end final project at Erasmus University College Brussels."
 		},
 		"nl": {
 			"title": "Het verhaal van Blauwbaard",
-			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
+			"teaser": "Een interactieve digitale vertelling van het sprookje Blauwbaard, tot leven gebracht met animatie en parallax-effecten. Ontwikkeld in React en Framer Motion als deel van mijn front-end eindwerk aan de Erasmushogeschool Brussel."
 		}
 	},
 	{
@@ -18,11 +18,11 @@
 		"tags": ["web"],
 		"en": {
 			"title": "Once upon a time...",
-			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+			"teaser": "A portal website that brings together all fairy tale projects in one clear and cohesive environment. Built with React, TanStack Query, Context, and dynamic routing. I followed a design system to ensure a consistent and user-friendly experience. This project forms the second part of my front-end final project at Erasmus University College Brussels."
 		},
 		"nl": {
 			"title": "Er was eens...",
-			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
+			"teaser": "Een portalwebsite die alle sprookjesprojecten bundelt in één overzichtelijke omgeving. Gebouwd met React, TanStack Query, context en dynamic routing. Bij het ontwerp hield ik me aan een vooraf bepaalde huisstijl, wat zorgde voor een consistente en gebruiksvriendelijke ervaring. Dit project vormt het tweede luik van mijn front-end eindwerk aan de Erasmushogeschool Brussel."
 		}
 	},
 	{
@@ -31,11 +31,11 @@
 		"tags": ["graphic design"],
 		"en": {
 			"title": "Trifold promo flyer",
-			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+			"teaser": "A trifold brochure designed for JNM (Youth for Nature and Environment), aimed at attracting new members. The design follows JNM’s visual identity, featuring natural greens, earthy browns, and organic shapes. The brochure is actively used as promotional material across Flanders and Brussels. Created in InDesign and Photoshop."
 		},
 		"nl": {
 			"title": "Trifold promo flyer",
-			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
+			"teaser": "Een drieluikfolder ontworpen voor JNM (Jeugdbond voor Natuur en Milieu), bedoeld om nieuwe leden aan te trekken. De folder volgt de herkenbare JNM-huisstijl, met natuurlijke groentinten, bruine accenten en organische vormen. Het ontwerp wordt effectief gebruikt als promotiemateriaal over heel Vlaanderen en Brussel. Gemaakt in InDesign en Photoshop."
 		}
 	},
 	{
@@ -44,11 +44,11 @@
 		"tags": ["social media"],
 		"en": {
 			"title": "Social media posts",
-			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+			"teaser": "A series of posts, stories, and reels created for the Instagram account of JNM (Youth for Nature and Environment), where I serve as social media manager. Designed in InDesign, Illustrator, and Photoshop, with videos edited in Premiere Pro and After Effects. Each piece of content applies JNM’s visual style for a consistent and engaging online presence."
 		},
 		"nl": {
 			"title": "Sociale media posts",
-			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
+			"teaser": "Een reeks posts, stories en reels ontworpen voor het Instagramaccount van JNM (Jeugdbond voor Natuur en Milieu), waar ik actief ben als social media manager. De content werd vormgegeven in InDesign, Illustrator en Photoshop, met video’s bewerkt in Premiere Pro en After Effects. In elke post trek ik de JNM-huisstijl consequent door voor een herkenbare en frisse uitstraling."
 		}
 	},
 	{
@@ -57,11 +57,11 @@
 		"tags": ["motion"],
 		"en": {
 			"title": "Drone video",
-			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+			"teaser": "A short drone film focused on movement and perspective. The video begins with establishing shots before spiraling in on a runner, capturing various angles from above, the side, front, and back. Filmed in the countryside around Brussels with the DJI Mini 2 SE. Edited and color-graded in Premiere Pro as part of my final project for the elective course Drones."
 		},
 		"nl": {
 			"title": "Drone video",
-			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
+			"teaser": "Een korte dronevideo waarin dynamiek en perspectief centraal staan. De video toont een opeenvolging van establishing shots, close-ups en spiraalbewegingen rond een hardloper, opgenomen op het platteland rond Brussel. Montage en kleurcorrectie gebeurden in Premiere Pro. Gemaakt als eindwerk voor het keuzevak Drones, met de DJI Mini 2 SE."
 		}
 	},
 	{
@@ -70,11 +70,11 @@
 		"tags": ["graphic design"],
 		"en": {
 			"title": "The Kikkertje",
-			"teaser": "An interactive digital narrative in which classic fairy tales are brought back to life with animation and parallax effects. Developed as a final project for the Front-end course at Erasmus University College Brussels."
+			"teaser": "Layout and design for Kikkertje, the youth magazine for ages 7–12 by JNM (Youth for Nature and Environment). I focused on playful, thematic page design aligned with JNM’s visual identity, turning written articles into engaging A5 spreads. Created three full issues using Illustrator, InDesign, and Photoshop."
 		},
 		"nl": {
 			"title": "Het Kikkertje",
-			"teaser": "Een interactieve digitale vertelling waarin klassieke sprookjes opnieuw tot leven komen met animatie en parallax-effecten. Ontwikkeld als eindwerk voor het vak Front-end aan de Erasmushogeschool Brussel."
+			"teaser": "Lay-out en vormgeving van Kikkertje, het jeugdmagazine voor 7- tot 12-jarigen van JNM (Jeugdbond voor Natuur en Milieu). Ik zorgde voor een speelse en thematische opmaak in lijn met de JNM-huisstijl, waarbij ik artikels vertaalde naar aantrekkelijke en kindvriendelijke layouts. Voor dit project maakte ik drie nummers in Illustrator, InDesign en Photoshop."
 		}
 	}
 ]
