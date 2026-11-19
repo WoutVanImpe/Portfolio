@@ -9,6 +9,13 @@
 
 		/* Bundler mode */
 		"moduleResolution": "bundler",
+		"paths": {
+			"@styles/*": ["./src/styles/*"],
+			"@shared/*": ["./src/shared/*"],
+			"@home/*": ["./src/pages/Home/*"],
+			"@home": ["./src/pages/Home"],
+			"@/*": ["./src/*"]
+		},
 		"allowImportingTsExtensions": true,
 		"verbatimModuleSyntax": true,
 		"moduleDetection": "force",
