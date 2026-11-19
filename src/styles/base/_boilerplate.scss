@@ -1,0 +1,59 @@
+@use "../abstract" as *;
+
+html,
+body,
+#root {
+	min-height: 100%;
+}
+
+body {
+	font-family: $font-family-base;
+	font-size: $font-size-base;
+	line-height: 1.5;
+	background-color: $color-canvas;
+	color: $color-ink;
+	-webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	line-height: 1.2;
+	font-weight: $font-weight-medium;
+}
+
+h1 {
+	font-size: $font-size-2xl;
+}
+
+h2 {
+	font-size: $font-size-xl;
+}
+
+h3 {
+	font-size: $font-size-lg;
+}
+
+a {
+	color: $color-accent;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+button {
+	cursor: pointer;
+	border: none;
+	background: none;
+}
+
+code,
+pre {
+	font-family: $font-family-mono;
+	font-size: $font-size-sm;
+}

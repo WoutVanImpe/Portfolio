@@ -1,0 +1,32 @@
+@use "@styles/abstract" as *;
+
+.home-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: $spacing-md;
+	min-height: 100%;
+	padding: $spacing-xl;
+	text-align: center;
+
+	&__eyebrow {
+		font-size: $font-size-sm;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: $color-accent;
+	}
+
+	&__title {
+		color: $color-ink;
+	}
+
+	&__intro {
+		max-width: 32rem;
+		color: $color-muted;
+
+		@include tablet {
+			font-size: $font-size-lg;
+		}
+	}
+}

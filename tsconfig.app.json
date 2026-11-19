@@ -9,6 +9,13 @@
 
 		/* Bundler mode */
 		"moduleResolution": "bundler",
+		"paths": {
+			"@styles/*": ["./src/styles/*"],
+			"@shared/*": ["./src/shared/*"],
+			"@home/*": ["./src/pages/Home/*"],
+			"@home": ["./src/pages/Home"],
+			"@/*": ["./src/*"]
+		},
 		"allowImportingTsExtensions": true,
 		"verbatimModuleSyntax": true,
 		"moduleDetection": "force",
@@ -21,16 +28,7 @@
 		"noUnusedParameters": true,
 		"erasableSyntaxOnly": true,
 		"noFallthroughCasesInSwitch": true,
-		"noUncheckedSideEffectImports": true,
-		"paths": {
-			"~app/*": ["./src/app/*"],
-			"~context/*": ["./src/context/*"],
-			"~i18n/*": ["./src/shared/i18n/*"],
-			"~home/*": ["./src/home/*"],
-			"~project/*": ["./src/project/*"],
-			"~shared/*": ["./src/shared/*"],
-			"~assets/*": ["./src/assets/*"]
-		}
+		"noUncheckedSideEffectImports": true
 	},
 	"include": ["src"]
 }

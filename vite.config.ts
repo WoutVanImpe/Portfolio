@@ -1,12 +1,17 @@
+import path from "node:path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vite.dev/config/
 export default defineConfig({
-	plugins: [react(), tsconfigPaths()],
-	base: "/Portfolio/",
-	optimizeDeps: {
-		exclude: ["js-big-decimal"],
+	plugins: [react()],
+	resolve: {
+		alias: {
+			"@styles": path.resolve(__dirname, "./src/styles"),
+			"@shared": path.resolve(__dirname, "./src/shared"),
+			"@home": path.resolve(__dirname, "./src/pages/Home"),
+			"@": path.resolve(__dirname, "./src"),
+		},
 	},
+	base: "/Portfolio/",
 });
