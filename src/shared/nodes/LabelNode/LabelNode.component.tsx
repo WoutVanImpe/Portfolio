@@ -1,10 +1,22 @@
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
+import type { CSSProperties } from "react";
 import { localize } from "@/i18n/localize";
 import { getProject } from "@shared/data/projects";
 import { Handler } from "@shared/Handler";
 import type { LabelNodeProps } from "./labelNode.props";
 import styles from "./labelNode.module.scss";
+
+const groupColors: Record<string, string> = {
+	theme: "var(--node-theme)",
+	language: "var(--node-language)",
+	filter: "var(--node-filter)",
+	effect: "var(--node-effect)",
+	web: "var(--node-web)",
+	motion: "var(--node-motion)",
+	design: "var(--node-design)",
+	social: "var(--node-social)",
+};
 
 export const LabelNode = ({ id, data }: LabelNodeProps) => {
 	const { t, i18n } = useTranslation();
@@ -30,9 +42,17 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 						: data.kind === "project"
 							? project?.category
 							: undefined;
+	const groupColor = nodeGroup ? groupColors[nodeGroup] : undefined;
+	const groupStyle: CSSProperties | undefined = groupColor
+		? {
+				backgroundColor: groupColor,
+				borderColor: groupColor,
+				color: "var(--text-on-accent)",
+			}
+		: undefined;
 
 	return (
-		<div className={clsx(styles["label-node"])} data-node-group={nodeGroup}>
+		<div className={clsx(styles["label-node"])} data-node-group={nodeGroup} style={groupStyle}>
 			{targets.map((handle, index) => (
 				<Handler
 					key={`target-${index}`}
