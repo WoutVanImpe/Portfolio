@@ -1,0 +1,52 @@
+const en = {
+	"node.display": "Display",
+	"node.displayFilter": "Display Filter",
+	"node.filter": "Filter",
+	"node.filterItem": "Filter Item",
+	"node.language": "Language",
+	"node.link": "Link",
+	"node.switch": "Switch",
+	"node.theme": "Theme",
+	"theme.light": "Light Theme",
+	"theme.dark": "Dark Theme",
+	"category.web": "Web",
+	"category.motion": "Motion",
+	"category.design": "Design",
+	"category.social": "Social",
+	"display.empty": "Connect a project to see its content.",
+	"display.loading": "Loading media…",
+	"display.error": "Media could not be loaded.",
+	"control.open": "Open live project",
+	"control.previous": "Previous media",
+	"control.next": "Next media",
+} as const;
+
+export type TranslationKey = keyof typeof en;
+
+const nl: Record<TranslationKey, string> = {
+	"node.display": "Weergave",
+	"node.displayFilter": "Weergavefilter",
+	"node.filter": "Filter",
+	"node.filterItem": "Filteritem",
+	"node.language": "Taal",
+	"node.link": "Link",
+	"node.switch": "Schakelaar",
+	"node.theme": "Thema",
+	"theme.light": "Licht thema",
+	"theme.dark": "Donker thema",
+	"category.web": "Web",
+	"category.motion": "Motion",
+	"category.design": "Ontwerp",
+	"category.social": "Sociaal",
+	"display.empty": "Verbind een project om de inhoud te zien.",
+	"display.loading": "Media laden…",
+	"display.error": "Media kon niet worden geladen.",
+	"control.open": "Open live project",
+	"control.previous": "Vorige media",
+	"control.next": "Volgende media",
+};
+
+export const resources = {
+	en: { translation: en },
+	nl: { translation: nl },
+};
