@@ -2,7 +2,54 @@
 
 .label-node {
 	@include node-surface;
-	padding: 8px;
+	position: relative;
+	overflow: hidden;
+	padding-left: 14px;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 6px;
+		bottom: 6px;
+		left: 4px;
+
+		width: 4px;
+		border-radius: $radius-sm;
+		background: var(--node-group-color, var(--border-node));
+		@include theme-transition;
+	}
+
+	&[data-node-group="theme"] {
+		--node-group-color: var(--node-theme);
+	}
+
+	&[data-node-group="language"] {
+		--node-group-color: var(--node-language);
+	}
+
+	&[data-node-group="filter"] {
+		--node-group-color: var(--node-filter);
+	}
+
+	&[data-node-group="effect"] {
+		--node-group-color: var(--node-effect);
+	}
+
+	&[data-node-group="web"] {
+		--node-group-color: var(--node-web);
+	}
+
+	&[data-node-group="motion"] {
+		--node-group-color: var(--node-motion);
+	}
+
+	&[data-node-group="design"] {
+		--node-group-color: var(--node-design);
+	}
+
+	&[data-node-group="social"] {
+		--node-group-color: var(--node-social);
+	}
 }
 
 .theme-swatch {

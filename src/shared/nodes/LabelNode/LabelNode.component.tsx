@@ -1,24 +1,38 @@
-import type { FC } from "react";
 import { useTranslation } from "react-i18next";
+import clsx from "clsx";
 import { localize } from "@/i18n/localize";
+import { getProject } from "@shared/data/projects";
 import { Handler } from "@shared/Handler";
 import type { LabelNodeProps } from "./labelNode.props";
 import styles from "./labelNode.module.scss";
 
-export const LabelNode: FC<LabelNodeProps> = ({ id, data }) => {
+export const LabelNode = ({ id, data }: LabelNodeProps) => {
 	const { t, i18n } = useTranslation();
 	const handles = data.handles ?? [];
 	const targets = handles.filter((handle) => handle.type === "target");
 	const sources = handles.filter((handle) => handle.type === "source");
 	const themeValue = data.kind === "theme" ? data.value : undefined;
+	const project = data.kind === "project" ? getProject(data.projectId) : undefined;
 	const label = data.labelKey
 		? t(data.labelKey)
 		: data.localizedLabel
 			? localize(data.localizedLabel, i18n.language)
 			: data.label;
+	const nodeGroup =
+		data.kind === "theme"
+			? "theme"
+			: data.kind === "language"
+				? "language"
+				: data.kind === "filter"
+					? "filter"
+					: data.kind === "modifier"
+						? "effect"
+						: data.kind === "project"
+							? project?.category
+							: undefined;
 
 	return (
-		<div className={styles["label-node"]}>
+		<div className={clsx(styles["label-node"])} data-node-group={nodeGroup}>
 			{targets.map((handle, index) => (
 				<Handler
 					key={`target-${index}`}

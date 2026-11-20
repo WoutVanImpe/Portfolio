@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState, type FC } from "react";
+import { useCallback, useMemo, useState, type FC, type MouseEvent as ReactMouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import {
 	Background,
@@ -11,7 +11,9 @@ import {
 } from "@xyflow/react";
 import { useTheme } from "@context/Theme";
 import { normalizeLanguage } from "@/i18n/localize";
+import { getProject } from "@shared/data/projects";
 import {
+	getActiveCategoryFilter,
 	getControlStates,
 	getDisplayStates,
 	getPrimaryDisplayState,
@@ -38,11 +40,27 @@ export const HomePage: FC<HomePageProps> = () => {
 	);
 	const [mediaIndexes, setMediaIndexes] = useState<Record<string, number>>({});
 
+	const activeCategory = useMemo(() => getActiveCategoryFilter(nodes, edges), [nodes, edges]);
 	const displayStates = useMemo(() => getDisplayStates(nodes, edges), [nodes, edges]);
 	const controlStates = useMemo(() => getControlStates(nodes, edges), [nodes, edges]);
 	const primaryDisplay = getPrimaryDisplayState(nodes, edges);
 	const primaryDisplayNode = nodes.find((node) => node.data.kind === "display" && node.data.variant === "media");
 	const primaryDisplayId = primaryDisplayNode?.data.kind === "display" ? primaryDisplayNode.data.displayId : undefined;
+
+	const hiddenNodeIds = useMemo(
+		() =>
+			new Set(
+				nodes
+					.filter(
+						(node) =>
+							node.data.kind === "project" &&
+							Boolean(activeCategory) &&
+							getProject(node.data.projectId)?.category !== activeCategory,
+					)
+					.map((node) => node.id),
+			),
+		[nodes, activeCategory],
+	);
 
 	const stepMedia = useCallback(
 		(displayId: string | undefined, delta: number) => {
@@ -62,6 +80,8 @@ export const HomePage: FC<HomePageProps> = () => {
 	const renderNodes = useMemo(
 		() =>
 			nodes.map((node) => {
+				if (hiddenNodeIds.has(node.id)) return { ...node, hidden: true };
+
 				if (node.data.kind === "display") {
 					const state = displayStates[node.data.displayId];
 
@@ -97,7 +117,15 @@ export const HomePage: FC<HomePageProps> = () => {
 
 				return node;
 			}),
-		[nodes, displayStates, controlStates, mediaIndexes, primaryDisplayId, primaryDisplay?.project, stepMedia],
+		[nodes, hiddenNodeIds, displayStates, controlStates, mediaIndexes, primaryDisplayId, primaryDisplay?.project, stepMedia],
+	);
+
+	const renderEdges = useMemo(
+		() =>
+			edges.map((edge) =>
+				hiddenNodeIds.has(edge.source) || hiddenNodeIds.has(edge.target) ? { ...edge, hidden: true } : edge,
+			),
+		[edges, hiddenNodeIds],
 	);
 
 	const onConnect = useCallback(
@@ -119,6 +147,15 @@ export const HomePage: FC<HomePageProps> = () => {
 		[nodes, edges],
 	);
 
+	const onEdgeDoubleClick = useCallback(
+		(_event: ReactMouseEvent, edge: PortfolioEdge) => {
+			if (edge.data?.kind === "theme" || edge.data?.kind === "language") return;
+
+			setEdges((current) => current.filter((item) => item.id !== edge.id));
+		},
+		[setEdges],
+	);
+
 	const onBeforeDelete = useCallback<OnBeforeDelete<PortfolioNode, PortfolioEdge>>(
 		async ({ nodes: deletedNodes, edges: deletedEdges }) => ({
 			nodes: deletedNodes,
@@ -131,10 +168,11 @@ export const HomePage: FC<HomePageProps> = () => {
 		<main className={styles["home-page"]}>
 			<ReactFlow
 				nodes={renderNodes}
-				edges={edges}
+				edges={renderEdges}
 				onNodesChange={onNodesChange}
 				onEdgesChange={onEdgesChange}
 				onConnect={onConnect}
+				onEdgeDoubleClick={onEdgeDoubleClick}
 				onBeforeDelete={onBeforeDelete}
 				isValidConnection={isValidConnectionCallback}
 				nodeTypes={nodeTypes}
