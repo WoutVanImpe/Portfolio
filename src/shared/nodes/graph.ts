@@ -1,10 +1,12 @@
-import { getProject, type Project } from "@shared/data/projects";
+import { getProject, type Project, type ProjectCategory } from "@shared/data/projects";
 import type { Connection } from "@xyflow/react";
-import type { DisplayStatus, PortfolioEdge, PortfolioNode } from "./node.types";
+import type { DisplayStatus, ModifierValue, PortfolioEdge, PortfolioNode } from "./node.types";
 
 export interface DisplayState {
 	project?: Project;
 	status: DisplayStatus;
+	modifiers?: ModifierValue[];
+	filter?: string;
 }
 
 export interface ControlState extends DisplayState {
@@ -15,7 +17,7 @@ const getNode = (nodes: PortfolioNode[], id: string | null | undefined): Portfol
 	nodes.find((node) => node.id === id);
 
 const isFlowEdge = (edge: PortfolioEdge): boolean =>
-	edge.data?.kind === undefined || edge.data.kind === "flow" || edge.data.kind === "modifier" || edge.data.kind === "filter";
+	edge.data?.kind === undefined || edge.data.kind === "flow" || edge.data.kind === "modifier";
 
 const findUpstreamProject = (
 	nodes: PortfolioNode[],
@@ -35,13 +37,37 @@ const findUpstreamProject = (
 			if (project) return project;
 		}
 
-		if (source.data.kind === "modifier" || source.data.kind === "filter") {
+		if (source.data.kind === "modifier") {
 			const project = findUpstreamProject(nodes, edges, source.id, visited);
 			if (project) return project;
 		}
 	}
 
 	return undefined;
+};
+
+const findUpstreamModifiers = (
+	nodes: PortfolioNode[],
+	edges: PortfolioEdge[],
+	nodeId: string,
+	visited: Set<string> = new Set(),
+): ModifierValue[] => {
+	if (visited.has(nodeId)) return [];
+	visited.add(nodeId);
+
+	const modifiers: ModifierValue[] = [];
+
+	for (const edge of edges.filter((item) => item.target === nodeId && isFlowEdge(item))) {
+		const source = getNode(nodes, edge.source);
+		if (!source) continue;
+
+		if (source.data.kind === "modifier" && source.data.value) {
+			modifiers.push(source.data.value);
+			modifiers.push(...findUpstreamModifiers(nodes, edges, source.id, visited));
+		}
+	}
+
+	return Array.from(new Set(modifiers));
 };
 
 const findUpstreamDisplay = (
@@ -59,7 +85,7 @@ const findUpstreamDisplay = (
 
 		if (source.data.kind === "display") return source;
 
-		if (source.data.kind === "modifier" || source.data.kind === "filter") {
+		if (source.data.kind === "modifier") {
 			const display = findUpstreamDisplay(nodes, edges, source.id, visited);
 			if (display) return display;
 		}
@@ -68,16 +94,41 @@ const findUpstreamDisplay = (
 	return undefined;
 };
 
+export const getActiveCategoryFilter = (nodes: PortfolioNode[], edges: PortfolioEdge[]): ProjectCategory | undefined => {
+	const hubIds = new Set(
+		nodes.filter((node) => node.data.kind === "filter" && !node.data.value).map((node) => node.id),
+	);
+	const activeEdge = edges.find((edge) => edge.data?.kind === "filter" && hubIds.has(edge.source));
+	const target = getNode(nodes, activeEdge?.target);
+
+	return target?.data.kind === "filter" && target.data.value ? target.data.value : undefined;
+};
+
+const effectStyles: Record<ModifierValue, string> = {
+	grayscale: "grayscale(1)",
+	blur: "blur(2px)",
+	contrast: "contrast(1.25)",
+};
+
+export const toCssFilter = (modifiers: ModifierValue[] = []): string | undefined => {
+	const filter = modifiers.map((modifier) => effectStyles[modifier]).filter(Boolean).join(" ");
+
+	return filter || undefined;
+};
+
 export const getDisplayStates = (nodes: PortfolioNode[], edges: PortfolioEdge[]): Record<string, DisplayState> => {
 	const states: Record<string, DisplayState> = {};
+	const activeCategory = getActiveCategoryFilter(nodes, edges);
 
 	for (const node of nodes) {
 		if (node.data.kind !== "display") continue;
 
-		const project = findUpstreamProject(nodes, edges, node.id);
+		const upstreamProject = findUpstreamProject(nodes, edges, node.id);
+		const project = activeCategory && upstreamProject?.category !== activeCategory ? undefined : upstreamProject;
+		const modifiers = findUpstreamModifiers(nodes, edges, node.id);
 		const status: DisplayStatus = !project ? "empty" : project.media.length === 0 ? "error" : "ready";
 
-		states[node.data.displayId] = { project, status };
+		states[node.data.displayId] = { project, status, modifiers, filter: toCssFilter(modifiers) };
 	}
 
 	return states;
@@ -144,12 +195,15 @@ export const isValidConnection = (
 		return !source.data.value && Boolean(target.data.value);
 	}
 
+	if (sourceKind === "filter" && targetKind === "filter") {
+		return !source.data.value && Boolean(target.data.value);
+	}
+
 	if (hasPath(target.id, source.id, edges)) return false;
 
 	if (sourceKind === "project") return targetKind === "display" || targetKind === "modifier";
 	if (sourceKind === "display") return targetKind === "control";
 	if (sourceKind === "modifier") return targetKind === "display" || targetKind === "modifier" || targetKind === "control";
-	if (sourceKind === "filter") return targetKind === "filter" || targetKind === "modifier" || targetKind === "display";
 
 	return false;
 };

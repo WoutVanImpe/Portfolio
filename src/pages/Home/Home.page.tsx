@@ -16,6 +16,7 @@ import {
 	getDisplayStates,
 	getPrimaryDisplayState,
 	handleConnect,
+	initialEdges,
 	initialNodes,
 	isValidConnection as isValidGraphConnection,
 	nodeTypes,
@@ -33,7 +34,7 @@ export const HomePage: FC<HomePageProps> = () => {
 	const language = normalizeLanguage(i18n.resolvedLanguage);
 	const [nodes, , onNodesChange] = useNodesState<PortfolioNode>(initialNodes);
 	const [edges, setEdges, onEdgesChange] = useEdgesState<PortfolioEdge>(
-		withActiveLanguageEdge(withActiveThemeEdge([], initialNodes, theme), initialNodes, language),
+		withActiveLanguageEdge(withActiveThemeEdge(initialEdges, initialNodes, theme), initialNodes, language),
 	);
 	const [mediaIndexes, setMediaIndexes] = useState<Record<string, number>>({});
 
@@ -70,6 +71,7 @@ export const HomePage: FC<HomePageProps> = () => {
 							...node.data,
 							project: state?.project,
 							status: state?.status,
+							filter: state?.filter,
 							mediaIndex: mediaIndexes[node.data.displayId] ?? 0,
 						},
 					};

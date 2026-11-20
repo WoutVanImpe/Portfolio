@@ -3,7 +3,7 @@ import type { HandlerPosition } from "@shared/Handler";
 import type { ThemeName } from "@context/Theme";
 import type { TranslationKey } from "@/i18n/resources";
 import type { LocalizedText } from "@/i18n/localize";
-import type { Project } from "@shared/data/projects";
+import type { Project, ProjectCategory } from "@shared/data/projects";
 
 export type NodeHandleType = "source" | "target";
 
@@ -41,6 +41,7 @@ export interface ProjectNodeData extends BaseNodeData {
 }
 
 export type DisplayStatus = "empty" | "loading" | "error" | "ready";
+export type ModifierValue = "grayscale" | "blur" | "contrast";
 
 export interface DisplayNodeData extends BaseNodeData {
 	kind: "display";
@@ -49,6 +50,7 @@ export interface DisplayNodeData extends BaseNodeData {
 	project?: Project;
 	mediaIndex?: number;
 	status?: DisplayStatus;
+	filter?: string;
 }
 
 export interface ControlNodeData extends BaseNodeData {
@@ -61,12 +63,12 @@ export interface ControlNodeData extends BaseNodeData {
 
 export interface ModifierNodeData extends BaseNodeData {
 	kind: "modifier";
-	value?: string;
+	value?: ModifierValue;
 }
 
 export interface FilterNodeData extends BaseNodeData {
 	kind: "filter";
-	value?: string;
+	value?: ProjectCategory;
 }
 
 export type PortfolioNodeData =

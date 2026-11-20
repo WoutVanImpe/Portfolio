@@ -25,6 +25,7 @@ export const DisplayNode: FC<DNP> = ({ data }) => {
 		[styles["display-node__media--loading"]]: mediaState === "loading",
 		[styles["display-node__media--error"]]: mediaState === "error",
 	});
+	const mediaStyle = { filter: display?.filter };
 
 	return (
 		<div className={clsx(styles["display-node"])}>
@@ -48,6 +49,7 @@ export const DisplayNode: FC<DNP> = ({ data }) => {
 						<img
 							src={media.src}
 							alt={media.alt ? localize(media.alt, i18n.language) : (label ?? "")}
+							style={mediaStyle}
 							onLoad={() => setMediaState("ready")}
 							onError={() => setMediaState("error")}
 						/>
@@ -56,6 +58,7 @@ export const DisplayNode: FC<DNP> = ({ data }) => {
 							src={media.src}
 							controls
 							aria-label={label ?? ""}
+							style={mediaStyle}
 							onLoadedData={() => setMediaState("ready")}
 							onError={() => setMediaState("error")}
 						/>

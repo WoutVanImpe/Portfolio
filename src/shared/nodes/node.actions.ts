@@ -1,9 +1,10 @@
 import type { Dispatch, SetStateAction } from "react";
 import { addEdge, type Connection } from "@xyflow/react";
 import type { ThemeName } from "@context/Theme";
+import type { ProjectCategory } from "@shared/data/projects";
 import type { PortfolioEdge, PortfolioNode } from "./node.types";
 
-type NodeKind = "theme" | "language";
+type NodeKind = "theme" | "language" | "filter";
 
 export const ACTIVE_EDGE_CLASS = "edge--active";
 
@@ -69,6 +70,28 @@ export const withActiveLanguageEdge = (
 	];
 };
 
+export const withActiveFilterEdge = (
+	currentEdges: PortfolioEdge[],
+	nodes: PortfolioNode[],
+	category: ProjectCategory,
+): PortfolioEdge[] => {
+	const source = nodes.find((node) => node.data.kind === "filter" && !node.data.value);
+	const target = nodes.find((node) => node.data.kind === "filter" && node.data.value === category);
+	const remaining = currentEdges.filter((edge) => edge.data?.kind !== "filter");
+
+	if (!source || !target) return remaining;
+
+	return [
+		...remaining,
+		{
+			id: `active-filter-${source.id}-${target.id}`,
+			source: source.id,
+			target: target.id,
+			data: { kind: "filter", active: true },
+		},
+	];
+};
+
 export const handleConnect = (options: ConnectHandlerOptions, connection: Connection): void => {
 	const { nodes, setEdges, applyTheme, applyLanguage } = options;
 	const themeValue = findEndpointValue(connection, nodes, "theme");
@@ -84,6 +107,12 @@ export const handleConnect = (options: ConnectHandlerOptions, connection: Connec
 	if (languageValue && applyLanguage) {
 		applyLanguage(languageValue);
 		setEdges((current) => withActiveLanguageEdge(current, nodes, languageValue));
+		return;
+	}
+
+	const filterValue = findEndpointValue(connection, nodes, "filter");
+	if (filterValue) {
+		setEdges((current) => withActiveFilterEdge(current, nodes, filterValue as ProjectCategory));
 		return;
 	}
 
