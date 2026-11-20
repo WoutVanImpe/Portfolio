@@ -7,6 +7,7 @@ export const LabelNode: FC<LabelNodeProps> = ({ id, data }) => {
 	const handles = data.handles ?? [];
 	const targets = handles.filter((handle) => handle.type === "target");
 	const sources = handles.filter((handle) => handle.type === "source");
+	const themeValue = data.kind === "theme" ? data.value : undefined;
 
 	return (
 		<div className={styles["label-node"]}>
@@ -21,7 +22,11 @@ export const LabelNode: FC<LabelNodeProps> = ({ id, data }) => {
 				/>
 			))}
 
-			<span>{data.label}</span>
+			{themeValue ? (
+				<span className={styles["theme-swatch"]} data-theme-preview={themeValue} role="img" aria-label={data.label} />
+			) : (
+				<span>{data.label}</span>
+			)}
 
 			{sources.map((handle, index) => (
 				<Handler

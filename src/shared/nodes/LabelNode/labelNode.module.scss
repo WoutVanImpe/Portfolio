@@ -2,4 +2,24 @@
 
 .label-node {
 	@include node-surface;
+	padding: 8px;
+}
+
+.theme-swatch {
+	width: $spacing-lg;
+	height: $spacing-lg;
+
+	flex-shrink: 0;
+	border: 1px solid var(--border-node);
+	border-radius: $radius-sm;
+	background-color: var(--bg-canvas);
+	@include theme-transition;
+
+	&[data-theme-preview="light"] {
+		@include theme-tokens(light);
+	}
+
+	&[data-theme-preview="dark"] {
+		@include theme-tokens(dark);
+	}
 }
