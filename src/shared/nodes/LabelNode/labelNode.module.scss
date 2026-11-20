@@ -2,21 +2,11 @@
 
 .label-node {
 	@include node-surface;
-	position: relative;
-	overflow: hidden;
-	padding-left: 14px;
 
-	&::before {
-		content: "";
-		position: absolute;
-		top: 6px;
-		bottom: 6px;
-		left: 4px;
-
-		width: 4px;
-		border-radius: $radius-sm;
-		background: var(--node-group-color, var(--border-node));
-		@include theme-transition;
+	&[data-node-group] {
+		background: var(--node-group-color, var(--bg-node));
+		border-color: var(--node-group-color, var(--border-node));
+		color: var(--text-on-accent);
 	}
 
 	&[data-node-group="theme"] {

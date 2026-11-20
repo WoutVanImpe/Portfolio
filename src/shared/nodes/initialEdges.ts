@@ -1,7 +1,7 @@
 import type { PortfolioEdge } from "./node.types";
 
 const firstProjectId = "project-14";
-const projectSourceHandle = `${firstProjectId}-0`;
+const projectSourceHandle = `${firstProjectId}-0-source`;
 
 export const initialEdges: PortfolioEdge[] = [
 	{
