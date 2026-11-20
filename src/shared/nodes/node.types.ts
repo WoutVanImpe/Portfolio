@@ -1,6 +1,7 @@
 import type { Edge, Node, NodeProps } from "@xyflow/react";
 import type { HandlerPosition } from "@shared/Handler";
 import type { ThemeName } from "@context/Theme";
+import type { TranslationKey } from "@/i18n/resources";
 
 export type NodeHandleType = "source" | "target";
 
@@ -12,7 +13,8 @@ export interface NodeHandleConfig {
 }
 
 interface BaseNodeData extends Record<string, unknown> {
-	label: string;
+	label?: string;
+	labelKey?: TranslationKey;
 	handles?: NodeHandleConfig[];
 }
 

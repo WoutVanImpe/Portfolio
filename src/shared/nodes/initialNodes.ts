@@ -1,19 +1,22 @@
 import type { ThemeName } from "@context/Theme";
+import type { TranslationKey } from "@/i18n/resources";
 import type { NodeHandleConfig, PortfolioNode, PortfolioNodeData } from "./node.types";
 
 interface NodeDefinition {
 	type: string;
-	label: string;
+	label?: string;
+	labelKey?: TranslationKey;
 	kind?: "theme" | "language";
 	value?: string;
 	handles?: NodeHandleConfig[];
+	position?: { x: number; y: number };
 }
 
 const nodeDefinitions: NodeDefinition[] = [
-	{ type: "display", label: "Display" },
+	{ type: "display", labelKey: "node.display" },
 	{
 		type: "displayFilter",
-		label: "Display Filter",
+		labelKey: "node.displayFilter",
 		handles: [
 			{ type: "target", position: "left" },
 			{ type: "source", position: "right" },
@@ -21,12 +24,12 @@ const nodeDefinitions: NodeDefinition[] = [
 	},
 	{
 		type: "filter",
-		label: "Filter",
+		labelKey: "node.filter",
 		handles: [{ type: "source", position: "right", offsetLeft: 90, offsetTop: 90 }],
 	},
 	{
 		type: "filterItem",
-		label: "Filter Item",
+		labelKey: "node.filterItem",
 		handles: [
 			{ type: "target", position: "left" },
 			{ type: "source", position: "right" },
@@ -34,43 +37,51 @@ const nodeDefinitions: NodeDefinition[] = [
 	},
 	{
 		type: "language",
-		label: "Language",
+		labelKey: "node.language",
 		kind: "language",
 		handles: [{ type: "source", position: "right" }],
 	},
 	{
 		type: "languageItem",
-		label: "Dutch",
+		label: "Nederlands",
 		kind: "language",
 		value: "nl",
 		handles: [{ type: "target", position: "left" }],
 	},
-	{ type: "link", label: "Link" },
-	{ type: "switch", label: "Switch" },
+	{ type: "link", labelKey: "node.link" },
+	{ type: "switch", labelKey: "node.switch" },
 	{
 		type: "theme",
-		label: "Theme",
+		labelKey: "node.theme",
 		kind: "theme",
 		handles: [{ type: "source", position: "right" }],
 	},
 	{
 		type: "themeItem",
-		label: "Light Theme",
+		labelKey: "theme.light",
 		kind: "theme",
 		value: "light",
 		handles: [{ type: "target", position: "left" }],
 	},
 	{
 		type: "themeItem",
-		label: "Dark Theme",
+		labelKey: "theme.dark",
 		kind: "theme",
 		value: "dark",
 		handles: [{ type: "target", position: "left" }],
 	},
+	{
+		type: "languageItem",
+		label: "English",
+		kind: "language",
+		value: "en",
+		handles: [{ type: "target", position: "left" }],
+		position: { x: 220, y: 300 },
+	},
 ];
 
-const toNodeData = ({ label, kind, value, handles }: NodeDefinition): PortfolioNodeData => {
-	const common = { label, handles };
+const toNodeData = ({ label, labelKey, kind, value, handles }: NodeDefinition): PortfolioNodeData => {
+	const common = { label, labelKey, handles };
 
 	if (kind === "theme") return { ...common, kind, value: value as ThemeName | undefined };
 	if (kind === "language") return { ...common, kind, value };
@@ -81,7 +92,7 @@ const toNodeData = ({ label, kind, value, handles }: NodeDefinition): PortfolioN
 export const initialNodes: PortfolioNode[] = nodeDefinitions.map((definition, index) => ({
 	id: `${definition.type}-${index + 1}`,
 	type: definition.type,
-	position: {
+	position: definition.position ?? {
 		x: (index % 2) * 220,
 		y: Math.floor(index / 2) * 120,
 	},
