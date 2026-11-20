@@ -15,8 +15,35 @@
 	box-shadow: var(--shadow-node);
 	@include theme-transition;
 
-	& img {
+	& img,
+	& video {
+		max-height: 160px;
 		border-radius: $radius-sm;
 		border: 1px solid var(--border-subtle);
+	}
+
+	&__message,
+	&__text {
+		width: 100%;
+		color: var(--text-secondary);
+		font-size: $font-size-sm;
+		text-align: center;
+	}
+
+	&__text {
+		display: flex;
+		flex-direction: column;
+		gap: $spacing-2xs;
+		color: var(--text-primary);
+
+		& span {
+			color: var(--text-accent);
+			font-size: $font-size-sm;
+			text-transform: uppercase;
+		}
+
+		& p {
+			color: var(--text-secondary);
+		}
 	}
 }

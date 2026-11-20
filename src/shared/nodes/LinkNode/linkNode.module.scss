@@ -20,8 +20,13 @@
 		color: var(--text-on-accent);
 		@include theme-transition;
 
-		&:hover {
+		&:hover:not(:disabled) {
 			background: var(--bg-accent-hover);
+		}
+
+		&:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
 		}
 	}
 }

@@ -11,7 +11,9 @@ export const nodeTypes = {
 	language: LabelNode,
 	languageItem: LabelNode,
 	link: LinkNode,
+	project: LabelNode,
 	switch: SwitchNode,
+	textDisplay: DisplayNode,
 	theme: LabelNode,
 	themeItem: LabelNode,
 };

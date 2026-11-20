@@ -22,10 +22,15 @@
 		color: var(--text-secondary);
 		@include theme-transition;
 
-		&:hover {
+		&:hover:not(:disabled) {
 			border-color: var(--border-active);
 			background: var(--bg-hover);
 			color: var(--text-primary);
+		}
+
+		&:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
 		}
 	}
 }

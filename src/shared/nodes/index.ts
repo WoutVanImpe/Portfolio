@@ -2,6 +2,7 @@ export * from "./DisplayNode";
 export * from "./LabelNode";
 export * from "./LinkNode";
 export * from "./SwitchNode";
+export * from "./graph";
 export * from "./initialNodes";
 export * from "./node.actions";
 export * from "./nodeTypes";

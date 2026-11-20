@@ -1,16 +1,21 @@
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { localize } from "@/i18n/localize";
 import { Handler } from "@shared/Handler";
 import type { LabelNodeProps } from "./labelNode.props";
 import styles from "./labelNode.module.scss";
 
 export const LabelNode: FC<LabelNodeProps> = ({ id, data }) => {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const handles = data.handles ?? [];
 	const targets = handles.filter((handle) => handle.type === "target");
 	const sources = handles.filter((handle) => handle.type === "source");
 	const themeValue = data.kind === "theme" ? data.value : undefined;
-	const label = data.labelKey ? t(data.labelKey) : data.label;
+	const label = data.labelKey
+		? t(data.labelKey)
+		: data.localizedLabel
+			? localize(data.localizedLabel, i18n.language)
+			: data.label;
 
 	return (
 		<div className={styles["label-node"]}>
