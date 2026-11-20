@@ -24,22 +24,6 @@
 	&[data-node-group="effect"] {
 		--node-group-color: var(--node-effect);
 	}
-
-	&[data-node-group="web"] {
-		--node-group-color: var(--node-web);
-	}
-
-	&[data-node-group="motion"] {
-		--node-group-color: var(--node-motion);
-	}
-
-	&[data-node-group="design"] {
-		--node-group-color: var(--node-design);
-	}
-
-	&[data-node-group="social"] {
-		--node-group-color: var(--node-social);
-	}
 }
 
 .theme-swatch {

@@ -175,7 +175,7 @@ const nodeDefinitions: NodeDefinition[] = [
 		labelKey: "category.motion",
 		kind: "filter",
 		value: "motion",
-		handles: passThroughHandles,
+		handles: targetOnlyHandle,
 		position: { x: 440, y: 240 },
 	},
 	{

@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import type { CSSProperties } from "react";
 import { localize } from "@/i18n/localize";
-import { getProject } from "@shared/data/projects";
 import { Handler } from "@shared/Handler";
 import type { LabelNodeProps } from "./labelNode.props";
 import styles from "./labelNode.module.scss";
@@ -12,10 +11,6 @@ const groupColors: Record<string, string> = {
 	language: "var(--node-language)",
 	filter: "var(--node-filter)",
 	effect: "var(--node-effect)",
-	web: "var(--node-web)",
-	motion: "var(--node-motion)",
-	design: "var(--node-design)",
-	social: "var(--node-social)",
 };
 
 export const LabelNode = ({ id, data }: LabelNodeProps) => {
@@ -24,7 +19,6 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 	const targets = handles.filter((handle) => handle.type === "target");
 	const sources = handles.filter((handle) => handle.type === "source");
 	const themeValue = data.kind === "theme" ? data.value : undefined;
-	const project = data.kind === "project" ? getProject(data.projectId) : undefined;
 	const label = data.labelKey
 		? t(data.labelKey)
 		: data.localizedLabel
@@ -39,9 +33,7 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 					? "filter"
 					: data.kind === "modifier"
 						? "effect"
-						: data.kind === "project"
-							? project?.category
-							: undefined;
+						: undefined;
 	const groupColor = nodeGroup ? groupColors[nodeGroup] : undefined;
 	const groupStyle: CSSProperties | undefined = groupColor
 		? {
