@@ -178,7 +178,7 @@ export const HomePage: FC<HomePageProps> = () => {
 				nodeTypes={nodeTypes}
 				nodesDraggable
 				nodesConnectable
-				fitView
+				defaultViewport={{ x: 80, y: 40, zoom: 1 }}
 				proOptions={{ hideAttribution: true }}
 			>
 				<Controls showFitView={false} showInteractive={false} showZoom={false} />

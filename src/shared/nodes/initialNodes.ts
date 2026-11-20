@@ -19,7 +19,7 @@ interface NodeDefinition {
 	kind?: NodeKind;
 	value?: string;
 	handles?: NodeHandleConfig[];
-	position?: { x: number; y: number };
+	position: { x: number; y: number };
 }
 
 const passThroughHandles: NodeHandleConfig[] = [
@@ -30,48 +30,14 @@ const passThroughHandles: NodeHandleConfig[] = [
 const targetOnlyHandle: NodeHandleConfig[] = [{ type: "target", position: "left" }];
 
 const nodeDefinitions: NodeDefinition[] = [
-	{
-		id: "display-1",
-		type: "display",
-		labelKey: "node.display",
-		kind: "display",
-		displayId: "media",
-		variant: "media",
-		position: { x: 0, y: 0 },
-	},
-	{
-		id: "displayFilter-2",
-		type: "displayFilter",
-		labelKey: "effect.grayscale",
-		kind: "modifier",
-		value: "grayscale",
-		handles: passThroughHandles,
-		position: { x: 220, y: 0 },
-	},
-	{
-		id: "filter-3",
-		type: "filter",
-		labelKey: "node.filter",
-		kind: "filter",
-		handles: [{ type: "source", position: "right", offsetLeft: 90, offsetTop: 90 }],
-		position: { x: 0, y: 120 },
-	},
-	{
-		id: "filterItem-4",
-		type: "filterItem",
-		labelKey: "category.web",
-		kind: "filter",
-		value: "web",
-		handles: targetOnlyHandle,
-		position: { x: 220, y: 120 },
-	},
+	// Language cluster — top right
 	{
 		id: "language-5",
 		type: "language",
 		labelKey: "node.language",
 		kind: "language",
 		handles: [{ type: "source", position: "right" }],
-		position: { x: 0, y: 240 },
+		position: { x: 1000, y: 0 },
 	},
 	{
 		id: "languageItem-6",
@@ -79,48 +45,8 @@ const nodeDefinitions: NodeDefinition[] = [
 		label: "Nederlands",
 		kind: "language",
 		value: "nl",
-		handles: [{ type: "target", position: "left" }],
-		position: { x: 220, y: 240 },
-	},
-	{
-		id: "link-7",
-		type: "link",
-		labelKey: "node.link",
-		kind: "control",
-		position: { x: 0, y: 360 },
-	},
-	{
-		id: "switch-8",
-		type: "switch",
-		labelKey: "node.switch",
-		kind: "control",
-		position: { x: 220, y: 360 },
-	},
-	{
-		id: "theme-9",
-		type: "theme",
-		labelKey: "node.theme",
-		kind: "theme",
-		handles: [{ type: "source", position: "right" }],
-		position: { x: 0, y: 480 },
-	},
-	{
-		id: "themeItem-10",
-		type: "themeItem",
-		labelKey: "theme.light",
-		kind: "theme",
-		value: "light",
-		handles: [{ type: "target", position: "left" }],
-		position: { x: 220, y: 480 },
-	},
-	{
-		id: "themeItem-11",
-		type: "themeItem",
-		labelKey: "theme.dark",
-		kind: "theme",
-		value: "dark",
-		handles: [{ type: "target", position: "left" }],
-		position: { x: 0, y: 600 },
+		handles: targetOnlyHandle,
+		position: { x: 1160, y: 0 },
 	},
 	{
 		id: "languageItem-12",
@@ -128,8 +54,47 @@ const nodeDefinitions: NodeDefinition[] = [
 		label: "English",
 		kind: "language",
 		value: "en",
-		handles: [{ type: "target", position: "left" }],
-		position: { x: 220, y: 300 },
+		handles: targetOnlyHandle,
+		position: { x: 1160, y: 80 },
+	},
+
+	// Theme cluster — top right
+	{
+		id: "theme-9",
+		type: "theme",
+		labelKey: "node.theme",
+		kind: "theme",
+		handles: [{ type: "source", position: "right" }],
+		position: { x: 1000, y: 220 },
+	},
+	{
+		id: "themeItem-10",
+		type: "themeItem",
+		labelKey: "theme.light",
+		kind: "theme",
+		value: "light",
+		handles: targetOnlyHandle,
+		position: { x: 1160, y: 220 },
+	},
+	{
+		id: "themeItem-11",
+		type: "themeItem",
+		labelKey: "theme.dark",
+		kind: "theme",
+		value: "dark",
+		handles: targetOnlyHandle,
+		position: { x: 1160, y: 300 },
+	},
+
+	// Displays and navigation — middle
+	{
+		id: "display-1",
+		type: "display",
+		labelKey: "node.display",
+		kind: "display",
+		displayId: "media",
+		variant: "media",
+		position: { x: 300, y: 240 },
 	},
 	{
 		id: "textDisplay-13",
@@ -138,19 +103,33 @@ const nodeDefinitions: NodeDefinition[] = [
 		kind: "display",
 		displayId: "text",
 		variant: "text",
-		position: { x: 220, y: 720 },
+		position: { x: 300, y: 460 },
 	},
-	...projects.map(
-		(project, index): NodeDefinition => ({
-			id: `project-${index + 14}`,
-			type: "project",
-			kind: "project",
-			localizedLabel: project.title,
-			projectId: project.id,
-			handles: [{ type: "source", position: "right" }],
-			position: { x: 0, y: 840 + index * 120 },
-		}),
-	),
+	{
+		id: "link-7",
+		type: "link",
+		labelKey: "node.link",
+		kind: "control",
+		position: { x: 580, y: 240 },
+	},
+	{
+		id: "switch-8",
+		type: "switch",
+		labelKey: "node.switch",
+		kind: "control",
+		position: { x: 580, y: 340 },
+	},
+
+	// Effects — right
+	{
+		id: "displayFilter-2",
+		type: "displayFilter",
+		labelKey: "effect.grayscale",
+		kind: "modifier",
+		value: "grayscale",
+		handles: passThroughHandles,
+		position: { x: 860, y: 480 },
+	},
 	{
 		id: "displayFilter-16",
 		type: "displayFilter",
@@ -158,7 +137,7 @@ const nodeDefinitions: NodeDefinition[] = [
 		kind: "modifier",
 		value: "blur",
 		handles: passThroughHandles,
-		position: { x: 440, y: 0 },
+		position: { x: 860, y: 560 },
 	},
 	{
 		id: "displayFilter-17",
@@ -167,7 +146,26 @@ const nodeDefinitions: NodeDefinition[] = [
 		kind: "modifier",
 		value: "contrast",
 		handles: passThroughHandles,
-		position: { x: 440, y: 120 },
+		position: { x: 860, y: 640 },
+	},
+
+	// Category filters — right
+	{
+		id: "filter-3",
+		type: "filter",
+		labelKey: "node.filter",
+		kind: "filter",
+		handles: [{ type: "source", position: "right", offsetLeft: 90, offsetTop: 90 }],
+		position: { x: 1080, y: 480 },
+	},
+	{
+		id: "filterItem-4",
+		type: "filterItem",
+		labelKey: "category.web",
+		kind: "filter",
+		value: "web",
+		handles: targetOnlyHandle,
+		position: { x: 1240, y: 480 },
 	},
 	{
 		id: "filterItem-18",
@@ -176,7 +174,7 @@ const nodeDefinitions: NodeDefinition[] = [
 		kind: "filter",
 		value: "motion",
 		handles: targetOnlyHandle,
-		position: { x: 440, y: 240 },
+		position: { x: 1240, y: 560 },
 	},
 	{
 		id: "filterItem-19",
@@ -185,7 +183,7 @@ const nodeDefinitions: NodeDefinition[] = [
 		kind: "filter",
 		value: "design",
 		handles: targetOnlyHandle,
-		position: { x: 440, y: 360 },
+		position: { x: 1240, y: 640 },
 	},
 	{
 		id: "filterItem-20",
@@ -194,8 +192,21 @@ const nodeDefinitions: NodeDefinition[] = [
 		kind: "filter",
 		value: "social",
 		handles: targetOnlyHandle,
-		position: { x: 440, y: 480 },
+		position: { x: 1240, y: 720 },
 	},
+
+	// Projects — right
+	...projects.map(
+		(project, index): NodeDefinition => ({
+			id: `project-${index + 14}`,
+			type: "project",
+			kind: "project",
+			localizedLabel: project.title,
+			projectId: project.id,
+			handles: [{ type: "source", position: "right" }],
+			position: { x: 860, y: 840 + index * 120 },
+		}),
+	),
 ];
 
 const toNodeData = (definition: NodeDefinition): PortfolioNodeData => {
@@ -216,6 +227,6 @@ const toNodeData = (definition: NodeDefinition): PortfolioNodeData => {
 export const initialNodes: PortfolioNode[] = nodeDefinitions.map((definition) => ({
 	id: definition.id,
 	type: definition.type,
-	position: definition.position ?? { x: 0, y: 0 },
+	position: definition.position,
 	data: toNodeData(definition),
 }));
