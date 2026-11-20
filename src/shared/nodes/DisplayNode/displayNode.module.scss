@@ -1,0 +1,22 @@
+@use "@styles/abstract" as *;
+
+.display-node {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 200px;
+
+	padding: 4px;
+	border: 1px solid var(--border-node);
+	border-radius: $radius-md;
+	background: var(--bg-node);
+	color: var(--text-primary);
+	box-shadow: var(--shadow-node);
+	@include theme-transition;
+
+	& img {
+		border-radius: $radius-sm;
+		border: 1px solid var(--border-subtle);
+	}
+}

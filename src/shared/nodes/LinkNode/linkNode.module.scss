@@ -1,0 +1,27 @@
+@use "@styles/abstract" as *;
+
+.link-node {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	padding: 4px;
+	border: 1px solid var(--border-node);
+	border-radius: $radius-md;
+	background: var(--bg-node);
+	box-shadow: var(--shadow-node);
+	font-size: $font-size-sm;
+	@include theme-transition;
+
+	&__button {
+		padding: 6px;
+		border-radius: $radius-md;
+		background: var(--bg-accent);
+		color: var(--text-on-accent);
+		@include theme-transition;
+
+		&:hover {
+			background: var(--bg-accent-hover);
+		}
+	}
+}

@@ -1,0 +1,31 @@
+@use "@styles/abstract" as *;
+
+.switch-node {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+
+	padding: 4px 4px;
+	border: 1px solid var(--border-node);
+	border-radius: $radius-md;
+	background: var(--bg-node);
+	box-shadow: var(--shadow-node);
+	font-size: $font-size-sm;
+	@include theme-transition;
+
+	&__button {
+		padding: 6px 4px;
+		border: 1px solid var(--border-subtle);
+		border-radius: $radius-md;
+		background: var(--bg-surface-secondary);
+		color: var(--text-secondary);
+		@include theme-transition;
+
+		&:hover {
+			border-color: var(--border-active);
+			background: var(--bg-hover);
+			color: var(--text-primary);
+		}
+	}
+}
