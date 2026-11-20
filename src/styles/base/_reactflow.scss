@@ -1,0 +1,35 @@
+@use "@styles/abstract/themes" as *;
+
+.react-flow {
+	--xy-background-color: var(--bg-canvas);
+	--xy-background-pattern-color: var(--pattern-dot);
+	--xy-edge-stroke-default: var(--border-cable);
+	--xy-edge-stroke-selected-default: var(--border-cable-active);
+	--xy-selection-background-color: var(--pattern-selection);
+	--xy-selection-border: 1px solid var(--border-active);
+	--xy-controls-button-background-color: var(--bg-surface-secondary);
+	--xy-controls-button-background-color-hover: var(--bg-hover);
+	--xy-controls-button-color: var(--text-icon);
+	--xy-controls-button-color-hover: var(--text-primary);
+	--xy-controls-button-border-color: var(--border-node);
+
+	background-color: var(--bg-canvas);
+	@include theme-transition;
+
+	&__node {
+		@include theme-transition;
+	}
+
+	&__edge-path {
+		@include theme-transition;
+	}
+
+	&__edge.edge--active .react-flow__edge-path {
+		stroke: var(--border-active);
+		stroke-width: 2;
+	}
+
+	&__controls-button {
+		@include theme-transition;
+	}
+}

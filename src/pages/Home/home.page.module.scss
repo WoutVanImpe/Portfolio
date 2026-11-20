@@ -3,4 +3,8 @@
 .home-page {
 	width: 100dvw;
 	height: 100dvh;
+
+	z-index: 2;
+	background-color: var(--bg-canvas);
+	@include theme-transition;
 }
