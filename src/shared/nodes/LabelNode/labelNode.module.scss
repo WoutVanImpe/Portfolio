@@ -1,10 +1,14 @@
 @use "@styles/abstract" as *;
 
 .label-node {
-	@include node-surface;
+	@include synth-module;
+
+	gap: $spacing-xs;
 
 	&[data-node-group] {
-		background: var(--node-group-color, var(--bg-node));
+		--module-lip: var(--node-group-color, var(--border-node));
+
+		background-color: var(--node-group-color, var(--bg-node));
 		border-color: var(--node-group-color, var(--border-node));
 		color: var(--text-on-accent);
 	}
@@ -23,6 +27,10 @@
 
 	&[data-node-group="effect"] {
 		--node-group-color: var(--node-effect);
+	}
+
+	&__led {
+		@include synth-led(var(--node-group-color, var(--signal-active)));
 	}
 }
 

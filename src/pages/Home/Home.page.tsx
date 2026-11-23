@@ -40,6 +40,18 @@ export const HomePage: FC<HomePageProps> = () => {
 	);
 	const [mediaIndexes, setMediaIndexes] = useState<Record<string, number>>({});
 
+	const connectedHandleList = useMemo(
+		() =>
+			Array.from(
+				new Set(
+					edges.flatMap((edge) =>
+						[edge.sourceHandle, edge.targetHandle].filter((value): value is string => Boolean(value)),
+					),
+				),
+			),
+		[edges],
+	);
+
 	const activeCategory = useMemo(() => getActiveCategoryFilter(nodes, edges), [nodes, edges]);
 	const displayStates = useMemo(() => getDisplayStates(nodes, edges), [nodes, edges]);
 	const controlStates = useMemo(() => getControlStates(nodes, edges), [nodes, edges]);
@@ -82,13 +94,15 @@ export const HomePage: FC<HomePageProps> = () => {
 			nodes.map((node) => {
 				if (hiddenNodeIds.has(node.id)) return { ...node, hidden: true };
 
+				const connectedData = { ...node.data, connectedHandles: connectedHandleList };
+
 				if (node.data.kind === "display") {
 					const state = displayStates[node.data.displayId];
 
 					return {
 						...node,
 						data: {
-							...node.data,
+							...connectedData,
 							project: state?.project,
 							status: state?.status,
 							filter: state?.filter,
@@ -106,7 +120,7 @@ export const HomePage: FC<HomePageProps> = () => {
 					return {
 						...node,
 						data: {
-							...node.data,
+							...connectedData,
 							project,
 							mediaIndex,
 							onPrevious: () => stepMedia(displayId, -1),
@@ -115,9 +129,9 @@ export const HomePage: FC<HomePageProps> = () => {
 					};
 				}
 
-				return node;
+				return { ...node, data: connectedData };
 			}),
-		[nodes, hiddenNodeIds, displayStates, controlStates, mediaIndexes, primaryDisplayId, primaryDisplay?.project, stepMedia],
+		[nodes, hiddenNodeIds, displayStates, controlStates, mediaIndexes, primaryDisplayId, primaryDisplay?.project, stepMedia, connectedHandleList],
 	);
 
 	const renderEdges = useMemo(

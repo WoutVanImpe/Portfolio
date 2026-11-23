@@ -17,4 +17,6 @@ export interface HandlerProps {
 	handleId?: string;
 	offsetLeft?: number;
 	offsetTop?: number;
+	connected?: boolean;
+	portLabel?: "IN" | "OUT";
 }

@@ -18,6 +18,7 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 	const handles = data.handles ?? [];
 	const targets = handles.filter((handle) => handle.type === "target");
 	const sources = handles.filter((handle) => handle.type === "source");
+	const connectedHandles = data.connectedHandles ?? [];
 	const themeValue = data.kind === "theme" ? data.value : undefined;
 	const label = data.labelKey
 		? t(data.labelKey)
@@ -36,11 +37,7 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 						: undefined;
 	const groupColor = nodeGroup ? groupColors[nodeGroup] : undefined;
 	const groupStyle: CSSProperties | undefined = groupColor
-		? {
-				backgroundColor: groupColor,
-				borderColor: groupColor,
-				color: "var(--text-on-accent)",
-			}
+		? ({ "--node-group-color": groupColor } as CSSProperties)
 		: undefined;
 
 	return (
@@ -53,8 +50,12 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 					id={`${id}-${index}`}
 					offsetTop={handle.offsetTop}
 					offsetLeft={handle.offsetLeft}
+					connected={connectedHandles.includes(`${id}-${index}-target`)}
+					portLabel="IN"
 				/>
 			))}
+
+			<span className={styles["label-node__led"]} aria-hidden="true" />
 
 			{themeValue ? (
 				<span className={styles["theme-swatch"]} data-theme-preview={themeValue} role="img" aria-label={label} />
@@ -70,6 +71,8 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 					id={`${id}-${index}`}
 					offsetTop={handle.offsetTop}
 					offsetLeft={handle.offsetLeft}
+					connected={connectedHandles.includes(`${id}-${index}-source`)}
+					portLabel="OUT"
 				/>
 			))}
 		</div>

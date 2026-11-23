@@ -1,32 +1,35 @@
 @use "@styles/abstract" as *;
 
 .link-node {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	@include synth-module;
 
-	padding: 4px;
-	border: 1px solid var(--border-node);
-	border-radius: $radius-md;
-	background: var(--bg-node);
-	box-shadow: var(--shadow-node);
-	font-size: $font-size-sm;
-	@include theme-transition;
+	gap: $spacing-xs;
+	padding: 14px 12px 18px;
+
+	&__led {
+		@include synth-led(var(--signal-active));
+	}
+
+	&:not([data-active="true"]) &__led {
+		background: var(--border-node);
+		box-shadow: none;
+	}
 
 	&__button {
-		padding: 6px;
-		border-radius: $radius-md;
+		@include tactile-button;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		padding: 8px;
+		border-color: var(--bg-accent);
 		background: var(--bg-accent);
 		color: var(--text-on-accent);
-		@include theme-transition;
 
 		&:hover:not(:disabled) {
+			border-color: var(--bg-accent-hover);
 			background: var(--bg-accent-hover);
-		}
-
-		&:disabled {
-			opacity: 0.5;
-			cursor: not-allowed;
 		}
 	}
 }

@@ -13,10 +13,20 @@ export const SwitchNode: FC<SNP> = ({ data }) => {
 	const canSwitch = (control?.project?.media.length ?? 0) > 1;
 	const previousLabel = t("control.previous");
 	const nextLabel = t("control.next");
+	const connectedHandles = data.connectedHandles ?? [];
 
 	return (
-		<div className={clsx(styles["switch-node"])}>
-			<Handler type="target" position="top" id="switch-node" offsetTop={5} offsetLeft={5} />
+		<div className={clsx(styles["switch-node"])} data-active={control?.project ? "true" : undefined}>
+			<Handler
+				type="target"
+				position="top"
+				id="switch-node"
+				offsetTop={5}
+				offsetLeft={5}
+				connected={connectedHandles.includes("switch-node-target")}
+				portLabel="IN"
+			/>
+			<span className={styles["switch-node__led"]} aria-hidden="true" />
 			<button
 				className={clsx(styles["switch-node__button"])}
 				type="button"

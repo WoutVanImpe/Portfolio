@@ -21,12 +21,13 @@
 	}
 
 	&__edge-path {
+		stroke-width: var(--cable-width);
 		@include theme-transition;
 	}
 
 	&__edge.edge--active .react-flow__edge-path {
 		stroke: var(--border-active);
-		stroke-width: 2;
+		stroke-width: var(--cable-width);
 	}
 
 	&__controls-button {

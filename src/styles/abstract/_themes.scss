@@ -32,6 +32,13 @@ $themes: (
 		node-filter: #d98f4a,
 		node-effect: #3f7fa3,
 
+		module-lip: var(--border-node),
+		screen-inset: rgba(31, 41, 51, 0.08),
+		screen-scanline: rgba(31, 41, 51, 0.05),
+		led-glow: rgba(47, 111, 107, 0.55),
+		signal-active: var(--border-active),
+		cable-width: 2px,
+
 		shadow-node: (0 1px 2px rgba(31, 41, 51, 0.08), 0 6px 16px rgba(31, 41, 51, 0.08)),
 	),
 	dark: (
@@ -64,6 +71,13 @@ $themes: (
 		node-language: #5ec2b6,
 		node-filter: #f0b46e,
 		node-effect: #7fb8dd,
+
+		module-lip: var(--border-node),
+		screen-inset: rgba(0, 0, 0, 0.48),
+		screen-scanline: rgba(255, 255, 255, 0.035),
+		led-glow: rgba(94, 194, 182, 0.55),
+		signal-active: var(--border-active),
+		cable-width: 2px,
 
 		shadow-node: (0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.5)),
 	),

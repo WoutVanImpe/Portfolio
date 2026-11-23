@@ -1,19 +1,37 @@
 @use "@styles/abstract" as *;
 
 .display-node {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	@include synth-module;
 
 	width: 200px;
+	padding: 18px 12px 22px;
 
-	padding: 4px;
-	border: 1px solid var(--border-node);
-	border-radius: $radius-md;
-	background: var(--bg-node);
-	color: var(--text-primary);
-	box-shadow: var(--shadow-node);
-	@include theme-transition;
+	&__screen {
+		@include recessed-screen;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		width: 100%;
+		min-height: 120px;
+		padding: 8px;
+	}
+
+	&__media {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		width: 100%;
+		min-height: 120px;
+
+		&--loading,
+		&--error {
+			text-align: center;
+		}
+	}
 
 	& img,
 	& video {
@@ -22,12 +40,32 @@
 		border: 1px solid var(--border-subtle);
 	}
 
+	&__led {
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		z-index: 2;
+
+		@include synth-led(var(--signal-active));
+	}
+
+	&[data-status="empty"] &__led {
+		background: var(--border-node);
+		box-shadow: none;
+	}
+
+	&[data-status="error"] &__led {
+		background: var(--node-filter);
+	}
+
 	&__message,
 	&__text {
 		width: 100%;
 		color: var(--text-secondary);
 		font-size: $font-size-sm;
 		text-align: center;
+		text-transform: none;
+		letter-spacing: 0;
 	}
 
 	&__text {
@@ -36,10 +74,12 @@
 		gap: $spacing-2xs;
 		color: var(--text-primary);
 
+		& strong,
 		& span {
 			color: var(--text-accent);
 			font-size: $font-size-sm;
 			text-transform: uppercase;
+			letter-spacing: 0.06em;
 		}
 
 		& p {

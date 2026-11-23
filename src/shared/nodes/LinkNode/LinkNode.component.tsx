@@ -12,10 +12,20 @@ export const LinkNode: FC<LNP> = ({ data }) => {
 	const control = data.kind === "control" ? data : undefined;
 	const project = control?.project;
 	const label = t("control.open");
+	const connectedHandles = data.connectedHandles ?? [];
 
 	return (
-		<div className={clsx(styles["link-node"])}>
-			<Handler type="target" position="left" id="link-node" offsetTop={5} offsetLeft={5} />
+		<div className={clsx(styles["link-node"])} data-active={project ? "true" : undefined}>
+			<Handler
+				type="target"
+				position="left"
+				id="link-node"
+				offsetTop={5}
+				offsetLeft={5}
+				connected={connectedHandles.includes("link-node-target")}
+				portLabel="IN"
+			/>
+			<span className={styles["link-node__led"]} aria-hidden="true" />
 			<button
 				className={clsx(styles["link-node__button"])}
 				type="button"

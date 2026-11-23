@@ -16,6 +16,9 @@ export const DisplayNode: FC<DNP> = ({ data }) => {
 	const project = display?.project;
 	const mediaIndex = display?.mediaIndex ?? 0;
 	const media = project?.media[mediaIndex];
+	const connectedHandles = data.connectedHandles ?? [];
+	const status = display?.status ?? "empty";
+	const ledStatus = mediaState === "error" ? "error" : status;
 
 	useEffect(() => {
 		setMediaState("loading");
@@ -28,46 +31,71 @@ export const DisplayNode: FC<DNP> = ({ data }) => {
 	const mediaStyle = { filter: display?.filter };
 
 	return (
-		<div className={clsx(styles["display-node"])}>
-			<Handler type="target" position="left" id="display-node" offsetTop={10} />
+		<div className={clsx(styles["display-node"])} data-status={ledStatus}>
+			<Handler
+				type="target"
+				position="left"
+				id="display-node"
+				offsetTop={10}
+				connected={connectedHandles.includes("display-node-target")}
+				portLabel="IN"
+			/>
 
-			{!project || display?.status === "empty" ? (
-				<p className={styles["display-node__message"]}>{t("display.empty")}</p>
-			) : display?.status === "error" || !media ? (
-				<p className={styles["display-node__message"]}>{t("display.error")}</p>
-			) : display?.variant === "text" ? (
-				<div className={styles["display-node__text"]}>
-					<strong>{localize(project.title, i18n.language)}</strong>
-					<span>{t(`category.${project.category}`)}</span>
-					<p>{localize(project.description, i18n.language)}</p>
-				</div>
-			) : (
-				<div className={mediaClassName}>
-					{mediaState === "loading" && <p className={styles["display-node__message"]}>{t("display.loading")}</p>}
-					{mediaState === "error" && <p className={styles["display-node__message"]}>{t("display.error")}</p>}
-					{media.type === "image" ? (
-						<img
-							src={media.src}
-							alt={media.alt ? localize(media.alt, i18n.language) : (label ?? "")}
-							style={mediaStyle}
-							onLoad={() => setMediaState("ready")}
-							onError={() => setMediaState("error")}
-						/>
-					) : (
-						<video
-							src={media.src}
-							controls
-							aria-label={label ?? ""}
-							style={mediaStyle}
-							onLoadedData={() => setMediaState("ready")}
-							onError={() => setMediaState("error")}
-						/>
-					)}
-				</div>
-			)}
+			<div className={styles["display-node__screen"]}>
+				<span className={styles["display-node__led"]} aria-hidden="true" />
 
-			<Handler type="source" position="right" id="display-node-1" offsetTop={90} />
-			<Handler type="source" position="bottom" id="display-node-2" offsetLeft={90} />
+				{!project || status === "empty" ? (
+					<p className={styles["display-node__message"]}>{t("display.empty")}</p>
+				) : status === "error" || !media ? (
+					<p className={styles["display-node__message"]}>{t("display.error")}</p>
+				) : display?.variant === "text" ? (
+					<div className={styles["display-node__text"]}>
+						<strong>{localize(project.title, i18n.language)}</strong>
+						<span>{t(`category.${project.category}`)}</span>
+						<p>{localize(project.description, i18n.language)}</p>
+					</div>
+				) : (
+					<div className={mediaClassName}>
+						{mediaState === "loading" && <p className={styles["display-node__message"]}>{t("display.loading")}</p>}
+						{mediaState === "error" && <p className={styles["display-node__message"]}>{t("display.error")}</p>}
+						{media.type === "image" ? (
+							<img
+								src={media.src}
+								alt={media.alt ? localize(media.alt, i18n.language) : (label ?? "")}
+								style={mediaStyle}
+								onLoad={() => setMediaState("ready")}
+								onError={() => setMediaState("error")}
+							/>
+						) : (
+							<video
+								src={media.src}
+								controls
+								aria-label={label ?? ""}
+								style={mediaStyle}
+								onLoadedData={() => setMediaState("ready")}
+								onError={() => setMediaState("error")}
+							/>
+						)}
+					</div>
+				)}
+			</div>
+
+			<Handler
+				type="source"
+				position="right"
+				id="display-node-1"
+				offsetTop={90}
+				connected={connectedHandles.includes("display-node-1-source")}
+				portLabel="OUT"
+			/>
+			<Handler
+				type="source"
+				position="bottom"
+				id="display-node-2"
+				offsetLeft={90}
+				connected={connectedHandles.includes("display-node-2-source")}
+				portLabel="OUT"
+			/>
 		</div>
 	);
 };
