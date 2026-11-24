@@ -15,6 +15,7 @@ import {
 	nodeTypes,
 	withActiveLanguageEdge,
 	withActiveThemeEdge,
+	type DisplayView,
 	type ModifierValue,
 	type PortfolioEdge,
 	type PortfolioNode,
@@ -29,6 +30,7 @@ export const HomePage: FC<HomePageProps> = () => {
 	const [nodes, setNodes, onNodesChange] = useNodesState<PortfolioNode>(initialNodes);
 	const [edges, setEdges, onEdgesChange] = useEdgesState<PortfolioEdge>(withActiveLanguageEdge(withActiveThemeEdge(initialEdges, initialNodes, theme), initialNodes, language));
 	const [mediaIndexes, setMediaIndexes] = useState<Record<string, number>>({});
+	const [displayViews, setDisplayViews] = useState<Record<string, DisplayView>>({});
 
 	const activeCategory = useMemo(() => getActiveCategoryFilter(nodes, edges), [nodes, edges]);
 	const filteredOutNodeIds = useMemo(() => new Set(nodes.filter((node) => node.data.kind === "project" && Boolean(activeCategory) && getProject(node.data.projectId)?.category !== activeCategory).map((node) => node.id)), [nodes, activeCategory]);
@@ -68,6 +70,10 @@ export const HomePage: FC<HomePageProps> = () => {
 		[displayStates],
 	);
 
+	const setDisplayView = useCallback((displayId: string, view: DisplayView) => {
+		setDisplayViews((current) => ({ ...current, [displayId]: view }));
+	}, []);
+
 	const toggleModifier = useCallback(
 		(nodeId: string, value: ModifierValue) => {
 			setNodes((current) =>
@@ -96,7 +102,8 @@ export const HomePage: FC<HomePageProps> = () => {
 				};
 
 				if (node.data.kind === "display") {
-					const state = displayStates[node.data.displayId];
+					const displayId = node.data.displayId;
+					const state = displayStates[displayId];
 
 					return {
 						...node,
@@ -105,7 +112,9 @@ export const HomePage: FC<HomePageProps> = () => {
 							project: state?.project,
 							status: state?.status,
 							filter: state?.filter,
-							mediaIndex: mediaIndexes[node.data.displayId] ?? 0,
+							mediaIndex: mediaIndexes[displayId] ?? 0,
+							view: displayViews[displayId] ?? "info",
+							onViewChange: (view: DisplayView) => setDisplayView(displayId, view),
 						},
 					};
 				}
@@ -140,7 +149,7 @@ export const HomePage: FC<HomePageProps> = () => {
 
 				return { ...node, data: connectedData };
 			}),
-		[nodes, displayStates, controlStates, mediaIndexes, stepMedia, toggleModifier, connectedHandleList, handleColorMap, connectedNodeIds, filteredOutNodeIds],
+		[nodes, displayStates, controlStates, mediaIndexes, displayViews, stepMedia, setDisplayView, toggleModifier, connectedHandleList, handleColorMap, connectedNodeIds, filteredOutNodeIds],
 	);
 
 	const renderEdges = useMemo(() => edges.map((edge) => (filteredOutNodeIds.has(edge.source) || filteredOutNodeIds.has(edge.target) ? { ...edge, hidden: true } : edge)), [edges, filteredOutNodeIds]);

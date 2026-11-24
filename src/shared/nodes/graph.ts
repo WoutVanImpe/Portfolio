@@ -134,16 +134,6 @@ export const getDisplayStates = (nodes: PortfolioNode[], edges: PortfolioEdge[])
 	return states;
 };
 
-export const getPrimaryDisplayState = (
-	nodes: PortfolioNode[],
-	edges: PortfolioEdge[],
-): DisplayState | undefined => {
-	const states = getDisplayStates(nodes, edges);
-	const mediaDisplay = nodes.find((node) => node.data.kind === "display" && node.data.variant === "media");
-
-	return mediaDisplay?.data.kind === "display" ? states[mediaDisplay.data.displayId] : undefined;
-};
-
 export const getControlStates = (nodes: PortfolioNode[], edges: PortfolioEdge[]): Record<string, ControlState> => {
 	const displayStates = getDisplayStates(nodes, edges);
 	const states: Record<string, ControlState> = {};

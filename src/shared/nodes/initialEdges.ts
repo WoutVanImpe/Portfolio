@@ -13,14 +13,6 @@ export const initialEdges: PortfolioEdge[] = [
 		data: { kind: "flow" },
 	},
 	{
-		id: "onboarding-project-text",
-		source: firstProjectId,
-		sourceHandle: projectSourceHandle,
-		target: "textDisplay-13",
-		targetHandle: "textDisplay-13-media-target",
-		data: { kind: "flow" },
-	},
-	{
 		id: "onboarding-media-link",
 		source: "display-1",
 		sourceHandle: "display-1-source-1-source",

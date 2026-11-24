@@ -13,7 +13,6 @@ export const nodeTypes = {
 	link: LinkNode,
 	project: LabelNode,
 	switch: SwitchNode,
-	textDisplay: DisplayNode,
 	theme: LabelNode,
 	themeItem: LabelNode,
 };

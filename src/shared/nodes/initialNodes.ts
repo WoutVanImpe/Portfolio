@@ -15,7 +15,6 @@ interface NodeDefinition {
 	localizedLabel?: LocalizedText;
 	projectId?: string;
 	displayId?: string;
-	variant?: "media" | "text";
 	kind?: NodeKind;
 	value?: string;
 	activeModifiers?: ModifierValue[];
@@ -94,31 +93,21 @@ const nodeDefinitions: NodeDefinition[] = [
 		labelKey: "node.display",
 		kind: "display",
 		displayId: "media",
-		variant: "media",
 		position: { x: 300, y: 240 },
-	},
-	{
-		id: "textDisplay-13",
-		type: "textDisplay",
-		labelKey: "node.display",
-		kind: "display",
-		displayId: "text",
-		variant: "text",
-		position: { x: 300, y: 460 },
 	},
 	{
 		id: "link-7",
 		type: "link",
 		labelKey: "node.link",
 		kind: "control",
-		position: { x: 580, y: 240 },
+		position: { x: 860, y: 240 },
 	},
 	{
 		id: "switch-8",
 		type: "switch",
 		labelKey: "node.switch",
 		kind: "control",
-		position: { x: 580, y: 340 },
+		position: { x: 860, y: 340 },
 	},
 
 	// Effects — right
@@ -193,13 +182,13 @@ const nodeDefinitions: NodeDefinition[] = [
 ];
 
 const toNodeData = (definition: NodeDefinition): PortfolioNodeData => {
-	const { label, labelKey, localizedLabel, projectId, displayId, variant, kind, value, activeModifiers, handles } = definition;
+	const { label, labelKey, localizedLabel, projectId, displayId, kind, value, activeModifiers, handles } = definition;
 	const common = { label, labelKey, localizedLabel, handles };
 
 	if (kind === "theme") return { ...common, kind, value: value as ThemeName | undefined };
 	if (kind === "language") return { ...common, kind, value };
 	if (kind === "project") return { ...common, kind, projectId: projectId ?? "" };
-	if (kind === "display") return { ...common, kind, displayId: displayId ?? "", variant };
+	if (kind === "display") return { ...common, kind, displayId: displayId ?? "" };
 	if (kind === "control") return { ...common, kind };
 	if (kind === "modifier") return { ...common, kind, activeModifiers: activeModifiers ?? [] };
 	if (kind === "filter") return { ...common, kind, value: value as ProjectCategory | undefined };

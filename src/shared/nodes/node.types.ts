@@ -45,16 +45,18 @@ export interface ProjectNodeData extends BaseNodeData {
 }
 
 export type DisplayStatus = "empty" | "loading" | "error" | "ready";
+export type DisplayView = "media" | "info";
 export type ModifierValue = "grayscale" | "blur" | "contrast";
 
 export interface DisplayNodeData extends BaseNodeData {
 	kind: "display";
 	displayId: string;
-	variant?: "media" | "text";
 	project?: Project;
 	mediaIndex?: number;
 	status?: DisplayStatus;
 	filter?: string;
+	view?: DisplayView;
+	onViewChange?: (view: DisplayView) => void;
 }
 
 export interface ControlNodeData extends BaseNodeData {

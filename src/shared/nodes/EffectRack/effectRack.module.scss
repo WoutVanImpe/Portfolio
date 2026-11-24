@@ -30,7 +30,7 @@
 	}
 
 	&__jack-strip {
-		@include jack-strip-flat;
+		@include jack-strip;
 
 		padding: 6px 8px;
 	}

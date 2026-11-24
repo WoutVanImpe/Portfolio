@@ -169,14 +169,7 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 	gap: 12px;
 
 	width: 100%;
-	padding: 8px 2px 6px 2px;;
-	border-top: 1px solid var(--border-node);
-}
-
-@mixin jack-strip-flat {
-	@include jack-strip;
-
-	border-top: 0;
+	padding: 8px 2px 6px 2px;
 }
 
 @mixin key-housing {

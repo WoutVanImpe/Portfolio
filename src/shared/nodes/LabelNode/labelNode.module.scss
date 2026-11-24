@@ -3,7 +3,7 @@
 .label-node {
 	@include synth-module;
 
-	min-width: 140px;
+	min-width: 120px;
 	width: max-content;
 	padding-right: $side-code-gutter;
 
@@ -34,7 +34,7 @@
 	}
 
 	&__jack-strip {
-		@include jack-strip-flat;
+		@include jack-strip;
 	}
 
 	&--filter {
