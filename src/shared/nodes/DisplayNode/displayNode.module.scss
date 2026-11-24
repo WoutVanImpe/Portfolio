@@ -4,6 +4,7 @@
 	@include synth-module;
 
 	width: 200px;
+	padding-right: $side-code-gutter;
 
 	&__header {
 		@include module-header;
@@ -22,7 +23,7 @@
 	}
 
 	&__code {
-		@include module-code;
+		@include module-side-code;
 	}
 
 	&__body {

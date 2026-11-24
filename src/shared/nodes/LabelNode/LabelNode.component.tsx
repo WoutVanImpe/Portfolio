@@ -43,7 +43,14 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 	const sourceLabel: PortLabel = "OUT";
 
 	return (
-		<div className={clsx(styles["label-node"])}>
+		<div
+			className={clsx(styles["label-node"], {
+				[styles["label-node--filter"]]: data.kind === "filter",
+				[styles["label-node--language"]]: data.kind === "language",
+			})}
+		>
+			<span className={styles["label-node__code"]}>{hardwareCode}</span>
+
 			<div className={styles["label-node__header"]}>
 				<span
 					className={styles["label-node__status"]}
@@ -52,7 +59,6 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 					aria-hidden="true"
 				/>
 				<span className={styles["label-node__title"]}>{label}</span>
-				<span className={styles["label-node__code"]}>{hardwareCode}</span>
 			</div>
 
 			<div className={styles["label-node__jack-strip"]}>

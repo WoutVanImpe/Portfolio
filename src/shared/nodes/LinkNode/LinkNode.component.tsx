@@ -16,10 +16,11 @@ export const LinkNode: FC<LNP> = ({ id, data }) => {
 
 	return (
 		<div className={clsx(styles["link-node"])}>
+			<span className={styles["link-node__code"]}>LNK-01</span>
+
 			<div className={styles["link-node__header"]}>
 				<span className={styles["link-node__status"]} data-active={isConnected ? "true" : undefined} aria-hidden="true" />
 				<span className={styles["link-node__title"]}>{t("node.link")}</span>
-				<span className={styles["link-node__code"]}>LNK-01</span>
 			</div>
 
 			<div className={styles["link-node__body"]}>

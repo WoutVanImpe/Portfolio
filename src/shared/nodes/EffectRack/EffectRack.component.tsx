@@ -22,6 +22,8 @@ export const EffectRack: FC<EffectRackProps> = ({ id, data }) => {
 
 	return (
 		<div className={styles["effect-rack"]}>
+			<span className={styles["effect-rack__code"]}>FX-01</span>
+
 			<div className={styles["effect-rack__header"]}>
 				<span
 					className={styles["effect-rack__status"]}
@@ -29,7 +31,6 @@ export const EffectRack: FC<EffectRackProps> = ({ id, data }) => {
 					aria-hidden="true"
 				/>
 				<span className={styles["effect-rack__title"]}>{t("node.displayFilter")}</span>
-				<span className={styles["effect-rack__code"]}>FX-01</span>
 			</div>
 
 			<div className={styles["effect-rack__body"]}>

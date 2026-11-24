@@ -5,6 +5,7 @@
 $radius-control: 4px;
 $jack-size: 20px;
 $led-size: 8px;
+$side-code-gutter: 0px;
 $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 
 @mixin synth-module {
@@ -73,9 +74,8 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 	gap: 6px;
 
 	width: 100%;
-	min-height: 28px;
-	padding: 6px 10px;
-	border-bottom: 1px solid var(--border-node);
+	min-height: 18px;
+	padding: 6px 10px 3px 10px;
 }
 
 @mixin module-title {
@@ -99,6 +99,25 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 	line-height: 1;
 	opacity: 0.45;
 	white-space: nowrap;
+}
+
+@mixin module-code-subtle {
+	@include module-code;
+
+	font-size: 6px;
+	opacity: 0.9;
+}
+
+@mixin module-side-code {
+	@include module-code-subtle;
+
+	position: absolute;
+	top: 50%;
+	right: 4px;
+	margin: 0;
+	pointer-events: none;
+	transform: translateY(-50%) rotate(180deg);
+	writing-mode: vertical-rl;
 }
 
 @mixin module-status-led {
@@ -132,7 +151,7 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 	justify-content: center;
 
 	width: 100%;
-	padding: 10px;
+	padding: 4px;
 }
 
 @mixin screen-bezel {
@@ -150,8 +169,14 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 	gap: 12px;
 
 	width: 100%;
-	padding: 10px;
+	padding: 8px 2px 6px 2px;;
 	border-top: 1px solid var(--border-node);
+}
+
+@mixin jack-strip-flat {
+	@include jack-strip;
+
+	border-top: 0;
 }
 
 @mixin key-housing {
@@ -159,20 +184,22 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 	align-items: center;
 	justify-content: center;
 
-	width: 5em;
-	height: 5em;
+	width: 3.5em;
+	height: 3.5em;
 	border-radius: 5px;
 	background-color: var(--key-well);
+	font-size: 1rem;
 }
 
 @mixin keycap-shared {
-	width: 5.7em;
-	height: 5.7em;
+	width: 3.9em;
+	height: 3.9em;
 	border: none;
 	outline: none;
 	border-radius: 10px;
 	cursor: pointer;
 	font-family: $font-family-button;
+	font-size: 13.333px;
 	transition: 0.1s ease-in-out;
 }
 
@@ -219,7 +246,7 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 
 @mixin button-text {
 	color: var(--text-on-accent);
-	padding-top: 0.9em;
+	padding-top: 1em;
 	letter-spacing: 0.075em;
 	font-size: 0.85em;
 	transition: 0.1s ease-in-out;

@@ -3,7 +3,8 @@
 .link-node {
 	@include synth-module;
 
-	width: 176px;
+	width: 88px;
+	padding-right: $side-code-gutter;
 
 	&__header {
 		@include module-header;
@@ -18,7 +19,7 @@
 	}
 
 	&__code {
-		@include module-code;
+		@include module-side-code;
 	}
 
 	&__body {
@@ -46,6 +47,6 @@
 	}
 
 	&__jack-strip {
-		@include jack-strip;
+		@include jack-strip-flat;
 	}
 }

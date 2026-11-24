@@ -36,6 +36,8 @@ export const DisplayNode: FC<DNP> = ({ id, data }) => {
 
 	return (
 		<div className={clsx(styles["display-node"])}>
+			<span className={styles["display-node__code"]}>DSP-01</span>
+
 			<div className={styles["display-node__header"]}>
 				<span
 					className={styles["display-node__status"]}
@@ -44,7 +46,6 @@ export const DisplayNode: FC<DNP> = ({ id, data }) => {
 					aria-hidden="true"
 				/>
 				<span className={styles["display-node__title"]}>{label}</span>
-				<span className={styles["display-node__code"]}>DSP-01</span>
 			</div>
 
 			<div className={styles["display-node__body"]}>

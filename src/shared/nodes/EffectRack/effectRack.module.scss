@@ -3,15 +3,11 @@
 .effect-rack {
 	@include synth-module;
 
-	width: 160px;
-	min-height: 280px;
+	width: 140px;
+	padding-right: $side-code-gutter;
 
 	&__header {
 		@include module-header;
-
-		gap: 4px;
-		min-height: 24px;
-		padding: 4px 8px;
 	}
 
 	&__status {
@@ -20,25 +16,23 @@
 
 	&__title {
 		@include module-title;
-
-		letter-spacing: 0.04em;
 	}
 
 	&__code {
-		@include module-code;
+		@include module-side-code;
 	}
 
 	&__body {
 		@include module-body;
 
-		gap: 10px;
+		gap: 4px;
 		padding: 6px 8px;
 	}
 
 	&__jack-strip {
-		@include jack-strip;
+		@include jack-strip-flat;
 
-		padding: 7px 8px;
+		padding: 6px 8px;
 	}
 }
 
@@ -46,7 +40,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 4px;
+	gap: 2px;
 
 	&__name {
 		color: var(--text-secondary);
@@ -72,6 +66,7 @@
 	position: relative;
 	width: 12em;
 	height: 12em;
+	margin: -2em 0;
 }
 
 .lever {

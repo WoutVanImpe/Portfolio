@@ -19,10 +19,11 @@ export const SwitchNode: FC<SNP> = ({ id, data }) => {
 
 	return (
 		<div className={clsx(styles["switch-node"])}>
+			<span className={styles["switch-node__code"]}>SW-01</span>
+
 			<div className={styles["switch-node__header"]}>
 				<span className={styles["switch-node__status"]} data-active={isConnected ? "true" : undefined} aria-hidden="true" />
 				<span className={styles["switch-node__title"]}>{t("node.switch")}</span>
-				<span className={styles["switch-node__code"]}>SW-01</span>
 			</div>
 
 			<div className={styles["switch-node__body"]}>
@@ -35,7 +36,7 @@ export const SwitchNode: FC<SNP> = ({ id, data }) => {
 						title={previousLabel}
 						onClick={() => control?.onPrevious?.()}
 					>
-						<Icon icon={ArrowLeft} size={25} className={styles["switch-node__icon"]} />
+						<Icon icon={ArrowLeft} size={20} className={styles["switch-node__icon"]} />
 					</button>
 				</span>
 				<span className={styles["switch-node__key-housing"]}>
@@ -47,7 +48,7 @@ export const SwitchNode: FC<SNP> = ({ id, data }) => {
 						title={nextLabel}
 						onClick={() => control?.onNext?.()}
 					>
-						<Icon icon={ArrowRight} size={25} className={styles["switch-node__icon"]} />
+						<Icon icon={ArrowRight} size={20} className={styles["switch-node__icon"]} />
 					</button>
 				</span>
 			</div>
