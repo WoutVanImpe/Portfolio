@@ -20,6 +20,9 @@ interface BaseNodeData extends Record<string, unknown> {
 	localizedLabel?: LocalizedText;
 	handles?: NodeHandleConfig[];
 	connectedHandles?: string[];
+	handleColors?: Record<string, string>;
+	isConnected?: boolean;
+	isFilteredOut?: boolean;
 }
 
 export interface PlainNodeData extends BaseNodeData {

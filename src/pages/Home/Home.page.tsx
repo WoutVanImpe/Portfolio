@@ -1,14 +1,6 @@
 import { useCallback, useMemo, useState, type FC, type MouseEvent as ReactMouseEvent } from "react";
 import { useTranslation } from "react-i18next";
-import {
-	Background,
-	Controls,
-	ReactFlow,
-	useEdgesState,
-	useNodesState,
-	type Connection,
-	type OnBeforeDelete,
-} from "@xyflow/react";
+import { Background, Controls, ReactFlow, useEdgesState, useNodesState, type Connection, type OnBeforeDelete } from "@xyflow/react";
 import { useTheme } from "@context/Theme";
 import { normalizeLanguage } from "@/i18n/localize";
 import { getProject } from "@shared/data/projects";
@@ -16,7 +8,6 @@ import {
 	getActiveCategoryFilter,
 	getControlStates,
 	getDisplayStates,
-	getPrimaryDisplayState,
 	handleConnect,
 	initialEdges,
 	initialNodes,
@@ -35,44 +26,31 @@ export const HomePage: FC<HomePageProps> = () => {
 	const { i18n } = useTranslation();
 	const language = normalizeLanguage(i18n.resolvedLanguage);
 	const [nodes, , onNodesChange] = useNodesState<PortfolioNode>(initialNodes);
-	const [edges, setEdges, onEdgesChange] = useEdgesState<PortfolioEdge>(
-		withActiveLanguageEdge(withActiveThemeEdge(initialEdges, initialNodes, theme), initialNodes, language),
-	);
+	const [edges, setEdges, onEdgesChange] = useEdgesState<PortfolioEdge>(withActiveLanguageEdge(withActiveThemeEdge(initialEdges, initialNodes, theme), initialNodes, language));
 	const [mediaIndexes, setMediaIndexes] = useState<Record<string, number>>({});
 
-	const connectedHandleList = useMemo(
-		() =>
-			Array.from(
-				new Set(
-					edges.flatMap((edge) =>
-						[edge.sourceHandle, edge.targetHandle].filter((value): value is string => Boolean(value)),
-					),
-				),
-			),
-		[edges],
-	);
-
 	const activeCategory = useMemo(() => getActiveCategoryFilter(nodes, edges), [nodes, edges]);
+	const filteredOutNodeIds = useMemo(() => new Set(nodes.filter((node) => node.data.kind === "project" && Boolean(activeCategory) && getProject(node.data.projectId)?.category !== activeCategory).map((node) => node.id)), [nodes, activeCategory]);
+	const visibleEdges = useMemo(() => edges.filter((edge) => !filteredOutNodeIds.has(edge.source) && !filteredOutNodeIds.has(edge.target)), [edges, filteredOutNodeIds]);
+
+	const connectedHandleList = useMemo(() => Array.from(new Set(visibleEdges.flatMap((edge) => [edge.sourceHandle, edge.targetHandle].filter((value): value is string => Boolean(value))))), [visibleEdges]);
+	const handleColorMap = useMemo(() => {
+		const colors: Record<string, string> = {};
+
+		for (const edge of visibleEdges) {
+			const color = edge.data?.kind === "theme" && edge.data?.active ? "var(--accent)" : "var(--cable-color)";
+
+			for (const handle of [edge.sourceHandle, edge.targetHandle]) {
+				if (handle) colors[handle] = color;
+			}
+		}
+
+		return colors;
+	}, [visibleEdges]);
+	const connectedNodeIds = useMemo(() => new Set(visibleEdges.flatMap((edge) => [edge.source, edge.target])), [visibleEdges]);
+
 	const displayStates = useMemo(() => getDisplayStates(nodes, edges), [nodes, edges]);
 	const controlStates = useMemo(() => getControlStates(nodes, edges), [nodes, edges]);
-	const primaryDisplay = getPrimaryDisplayState(nodes, edges);
-	const primaryDisplayNode = nodes.find((node) => node.data.kind === "display" && node.data.variant === "media");
-	const primaryDisplayId = primaryDisplayNode?.data.kind === "display" ? primaryDisplayNode.data.displayId : undefined;
-
-	const hiddenNodeIds = useMemo(
-		() =>
-			new Set(
-				nodes
-					.filter(
-						(node) =>
-							node.data.kind === "project" &&
-							Boolean(activeCategory) &&
-							getProject(node.data.projectId)?.category !== activeCategory,
-					)
-					.map((node) => node.id),
-			),
-		[nodes, activeCategory],
-	);
 
 	const stepMedia = useCallback(
 		(displayId: string | undefined, delta: number) => {
@@ -81,7 +59,7 @@ export const HomePage: FC<HomePageProps> = () => {
 
 			setMediaIndexes((current) => {
 				const index = current[displayId] ?? 0;
-				const next = ((index + delta) % count + count) % count;
+				const next = (((index + delta) % count) + count) % count;
 
 				return { ...current, [displayId]: next };
 			});
@@ -92,9 +70,13 @@ export const HomePage: FC<HomePageProps> = () => {
 	const renderNodes = useMemo(
 		() =>
 			nodes.map((node) => {
-				if (hiddenNodeIds.has(node.id)) return { ...node, hidden: true };
-
-				const connectedData = { ...node.data, connectedHandles: connectedHandleList };
+				const connectedData = {
+					...node.data,
+					connectedHandles: connectedHandleList,
+					handleColors: handleColorMap,
+					isConnected: connectedNodeIds.has(node.id),
+					isFilteredOut: filteredOutNodeIds.has(node.id),
+				};
 
 				if (node.data.kind === "display") {
 					const state = displayStates[node.data.displayId];
@@ -113,8 +95,8 @@ export const HomePage: FC<HomePageProps> = () => {
 
 				if (node.data.kind === "control") {
 					const state = controlStates[node.id];
-					const displayId = state?.displayId ?? primaryDisplayId;
-					const project = state?.project ?? primaryDisplay?.project;
+					const displayId = state?.displayId;
+					const project = state?.project;
 					const mediaIndex = displayId ? (mediaIndexes[displayId] ?? 0) : 0;
 
 					return {
@@ -131,16 +113,10 @@ export const HomePage: FC<HomePageProps> = () => {
 
 				return { ...node, data: connectedData };
 			}),
-		[nodes, hiddenNodeIds, displayStates, controlStates, mediaIndexes, primaryDisplayId, primaryDisplay?.project, stepMedia, connectedHandleList],
+		[nodes, displayStates, controlStates, mediaIndexes, stepMedia, connectedHandleList, handleColorMap, connectedNodeIds, filteredOutNodeIds],
 	);
 
-	const renderEdges = useMemo(
-		() =>
-			edges.map((edge) =>
-				hiddenNodeIds.has(edge.source) || hiddenNodeIds.has(edge.target) ? { ...edge, hidden: true } : edge,
-			),
-		[edges, hiddenNodeIds],
-	);
+	const renderEdges = useMemo(() => edges.map((edge) => (filteredOutNodeIds.has(edge.source) || filteredOutNodeIds.has(edge.target) ? { ...edge, hidden: true } : edge)), [edges, filteredOutNodeIds]);
 
 	const onConnect = useCallback(
 		(connection: Connection) =>
@@ -157,8 +133,9 @@ export const HomePage: FC<HomePageProps> = () => {
 	);
 
 	const isValidConnectionCallback = useCallback(
-		(connection: Connection | PortfolioEdge) => isValidGraphConnection(connection, nodes, edges),
-		[nodes, edges],
+		(connection: Connection | PortfolioEdge) =>
+			!filteredOutNodeIds.has(connection.source) && !filteredOutNodeIds.has(connection.target) && isValidGraphConnection(connection, nodes, edges),
+		[filteredOutNodeIds, nodes, edges],
 	);
 
 	const onEdgeDoubleClick = useCallback(

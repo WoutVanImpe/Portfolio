@@ -41,7 +41,9 @@ export const withActiveThemeEdge = (
 		{
 			id: `active-theme-${source.id}-${target.id}`,
 			source: source.id,
+			sourceHandle: `${source.id}-0-source`,
 			target: target.id,
+			targetHandle: `${target.id}-0-target`,
 			className: ACTIVE_EDGE_CLASS,
 			data: { kind: "theme", active: true },
 		},
@@ -64,7 +66,9 @@ export const withActiveLanguageEdge = (
 		{
 			id: `active-language-${source.id}-${target.id}`,
 			source: source.id,
+			sourceHandle: `${source.id}-0-source`,
 			target: target.id,
+			targetHandle: `${target.id}-0-target`,
 			data: { kind: "language", active: true },
 		},
 	];
@@ -86,7 +90,9 @@ export const withActiveFilterEdge = (
 		{
 			id: `active-filter-${source.id}-${target.id}`,
 			source: source.id,
+			sourceHandle: `${source.id}-0-source`,
 			target: target.id,
+			targetHandle: `${target.id}-0-target`,
 			data: { kind: "filter", active: true },
 		},
 	];
