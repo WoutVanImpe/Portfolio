@@ -1,17 +1,9 @@
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
-import type { CSSProperties } from "react";
 import { localize } from "@/i18n/localize";
-import { Handler } from "@shared/Handler";
+import { Handler, type PortLabel } from "@shared/Handler";
 import type { LabelNodeProps } from "./labelNode.props";
 import styles from "./labelNode.module.scss";
-
-const groupColors: Record<string, string> = {
-	theme: "var(--node-theme)",
-	language: "var(--node-language)",
-	filter: "var(--node-filter)",
-	effect: "var(--node-effect)",
-};
 
 export const LabelNode = ({ id, data }: LabelNodeProps) => {
 	const { t, i18n } = useTranslation();
@@ -19,62 +11,80 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 	const targets = handles.filter((handle) => handle.type === "target");
 	const sources = handles.filter((handle) => handle.type === "source");
 	const connectedHandles = data.connectedHandles ?? [];
-	const themeValue = data.kind === "theme" ? data.value : undefined;
+	const isConnected = data.isConnected ?? false;
 	const label = data.labelKey
 		? t(data.labelKey)
 		: data.localizedLabel
 			? localize(data.localizedLabel, i18n.language)
 			: data.label;
-	const nodeGroup =
-		data.kind === "theme"
-			? "theme"
-			: data.kind === "language"
-				? "language"
-				: data.kind === "filter"
-					? "filter"
-					: data.kind === "modifier"
-						? "effect"
-						: undefined;
-	const groupColor = nodeGroup ? groupColors[nodeGroup] : undefined;
-	const groupStyle: CSSProperties | undefined = groupColor
-		? ({ "--node-group-color": groupColor } as CSSProperties)
-		: undefined;
+	const hardwareCode =
+		data.kind === "project"
+			? "PRJ-01"
+			: data.kind === "filter"
+				? "FLT-01"
+				: data.kind === "modifier"
+					? "FX-01"
+					: data.kind === "theme"
+						? "SYS-01"
+						: data.kind === "language"
+							? "SYS-02"
+							: "SYS-00";
+	const showFlowArrow = data.kind === "modifier" && targets.length > 0 && sources.length > 0;
+
+	const targetLabel: PortLabel =
+		data.kind === "filter"
+			? "FILTER"
+			: data.kind === "theme"
+				? "THEME"
+				: data.kind === "language"
+					? "LANG"
+					: "IN";
+	const sourceLabel: PortLabel = "OUT";
 
 	return (
-		<div className={clsx(styles["label-node"])} data-node-group={nodeGroup} style={groupStyle}>
-			{targets.map((handle, index) => (
-				<Handler
-					key={`target-${index}`}
-					type="target"
-					position={handle.position}
-					id={`${id}-${index}`}
-					offsetTop={handle.offsetTop}
-					offsetLeft={handle.offsetLeft}
-					connected={connectedHandles.includes(`${id}-${index}-target`)}
-					portLabel="IN"
+		<div className={clsx(styles["label-node"])}>
+			<div className={styles["label-node__header"]}>
+				<span
+					className={styles["label-node__status"]}
+					data-active={isConnected ? "true" : undefined}
+					data-filtered={data.isFilteredOut ? "true" : undefined}
+					aria-hidden="true"
 				/>
-			))}
+				<span className={styles["label-node__title"]}>{label}</span>
+				<span className={styles["label-node__code"]}>{hardwareCode}</span>
+			</div>
 
-			<span className={styles["label-node__led"]} aria-hidden="true" />
+			<div className={styles["label-node__jack-strip"]}>
+				{targets.map((handle, index) => (
+					<Handler
+						key={`target-${index}`}
+						type="target"
+						position={handle.position}
+						id={`${id}-${index}`}
+						portLabel={targetLabel}
+						connected={connectedHandles.includes(`${id}-${index}-target`)}
+						handleColors={data.handleColors}
+					/>
+				))}
 
-			{themeValue ? (
-				<span className={styles["theme-swatch"]} data-theme-preview={themeValue} role="img" aria-label={label} />
-			) : (
-				<span>{label}</span>
-			)}
+				{showFlowArrow ? (
+					<span className={styles["label-node__flow-arrow"]} aria-hidden="true">
+						──▶
+					</span>
+				) : null}
 
-			{sources.map((handle, index) => (
-				<Handler
-					key={`source-${index}`}
-					type="source"
-					position={handle.position}
-					id={`${id}-${index}`}
-					offsetTop={handle.offsetTop}
-					offsetLeft={handle.offsetLeft}
-					connected={connectedHandles.includes(`${id}-${index}-source`)}
-					portLabel="OUT"
-				/>
-			))}
+				{sources.map((handle, index) => (
+					<Handler
+						key={`source-${index}`}
+						type="source"
+						position={handle.position}
+						id={`${id}-${index}`}
+						portLabel={sourceLabel}
+						connected={connectedHandles.includes(`${id}-${index}-source`)}
+						handleColors={data.handleColors}
+					/>
+				))}
+			</div>
 		</div>
 	);
 };

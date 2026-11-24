@@ -4,11 +4,35 @@
 	@include synth-module;
 
 	width: 200px;
-	padding: 18px 12px 22px;
+
+	&__header {
+		@include module-header;
+	}
+
+	&__status {
+		@include module-status-led;
+
+		&[data-status="loading"] {
+			--led-color: var(--led-yellow);
+		}
+	}
+
+	&__title {
+		@include module-title;
+	}
+
+	&__code {
+		@include module-code;
+	}
+
+	&__body {
+		@include module-body;
+	}
 
 	&__screen {
-		@include recessed-screen;
+		@include screen-bezel;
 
+		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -16,10 +40,17 @@
 		width: 100%;
 		min-height: 120px;
 		padding: 8px;
+
+		&::after {
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(135deg, var(--screen-sheen) 0%, transparent 45%);
+			content: "";
+			pointer-events: none;
+		}
 	}
 
 	&__media {
-		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -36,36 +67,16 @@
 	& img,
 	& video {
 		max-height: 160px;
-		border-radius: $radius-sm;
-		border: 1px solid var(--border-subtle);
-	}
-
-	&__led {
-		position: absolute;
-		top: 8px;
-		right: 8px;
-		z-index: 2;
-
-		@include synth-led(var(--signal-active));
-	}
-
-	&[data-status="empty"] &__led {
-		background: var(--border-node);
-		box-shadow: none;
-	}
-
-	&[data-status="error"] &__led {
-		background: var(--node-filter);
+		border: 1.5px solid var(--border-node);
+		border-radius: $radius-control;
 	}
 
 	&__message,
 	&__text {
 		width: 100%;
 		color: var(--text-secondary);
-		font-size: $font-size-sm;
+		font-size: 11px;
 		text-align: center;
-		text-transform: none;
-		letter-spacing: 0;
 	}
 
 	&__text {
@@ -77,13 +88,18 @@
 		& strong,
 		& span {
 			color: var(--text-accent);
-			font-size: $font-size-sm;
-			text-transform: uppercase;
+			font-size: 11px;
+			font-weight: $font-weight-bold;
 			letter-spacing: 0.06em;
+			text-transform: uppercase;
 		}
 
 		& p {
 			color: var(--text-secondary);
 		}
+	}
+
+	&__jack-strip {
+		@include jack-strip;
 	}
 }

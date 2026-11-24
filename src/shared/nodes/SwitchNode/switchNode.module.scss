@@ -3,25 +3,56 @@
 .switch-node {
 	@include synth-module;
 
-	gap: $spacing-xs;
-	padding: 18px 12px 18px;
+	width: 208px;
 
-	&__led {
-		@include synth-led(var(--signal-active));
+	&__header {
+		@include module-header;
 	}
 
-	&:not([data-active="true"]) &__led {
-		background: var(--border-node);
-		box-shadow: none;
+	&__status {
+		@include module-status-led;
 	}
 
-	&__button {
-		@include tactile-button;
+	&__title {
+		@include module-title;
+	}
+
+	&__code {
+		@include module-code;
+	}
+
+	&__body {
+		@include module-body;
+
+		flex-direction: row;
+		gap: 16px;
+	}
+
+	&__key-housing {
+		@include key-housing;
+	}
+
+	&__keycap {
+		@include keycap-icon;
+		@include keycap-icon-active;
 
 		display: flex;
 		align-items: center;
 		justify-content: center;
 
-		padding: 8px 10px;
+		&:disabled {
+			cursor: not-allowed;
+		}
+	}
+
+	&__icon {
+		width: 25px;
+		height: 25px;
+		stroke: var(--keycap-light-ink);
+		transition: 0.1s ease-in-out;
+	}
+
+	&__jack-strip {
+		@include jack-strip;
 	}
 }

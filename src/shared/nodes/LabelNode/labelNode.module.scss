@@ -3,52 +3,36 @@
 .label-node {
 	@include synth-module;
 
-	gap: $spacing-xs;
+	min-width: 160px;
+	width: max-content;
 
-	&[data-node-group] {
-		--module-lip: var(--node-group-color, var(--border-node));
-
-		background-color: var(--node-group-color, var(--bg-node));
-		border-color: var(--node-group-color, var(--border-node));
-		color: var(--text-on-accent);
+	&__header {
+		@include module-header;
 	}
 
-	&[data-node-group="theme"] {
-		--node-group-color: var(--node-theme);
+	&__status {
+		@include module-status-led;
 	}
 
-	&[data-node-group="language"] {
-		--node-group-color: var(--node-language);
+	&__title {
+		@include module-title;
 	}
 
-	&[data-node-group="filter"] {
-		--node-group-color: var(--node-filter);
+	&__code {
+		@include module-code;
 	}
 
-	&[data-node-group="effect"] {
-		--node-group-color: var(--node-effect);
+	&__flow-arrow {
+		align-self: center;
+		color: var(--text-secondary);
+		font-family: $font-family-mono;
+		font-size: 9px;
+		letter-spacing: 0.04em;
+		opacity: 0.7;
+		white-space: nowrap;
 	}
 
-	&__led {
-		@include synth-led(var(--node-group-color, var(--signal-active)));
-	}
-}
-
-.theme-swatch {
-	width: $spacing-lg;
-	height: $spacing-lg;
-
-	flex-shrink: 0;
-	border: 1px solid var(--border-node);
-	border-radius: $radius-sm;
-	background-color: var(--bg-canvas);
-	@include theme-transition;
-
-	&[data-theme-preview="light"] {
-		@include theme-tokens(light);
-	}
-
-	&[data-theme-preview="dark"] {
-		@include theme-tokens(dark);
+	&__jack-strip {
+		@include jack-strip;
 	}
 }

@@ -3,33 +3,49 @@
 .link-node {
 	@include synth-module;
 
-	gap: $spacing-xs;
-	padding: 14px 12px 18px;
+	width: 176px;
 
-	&__led {
-		@include synth-led(var(--signal-active));
+	&__header {
+		@include module-header;
 	}
 
-	&:not([data-active="true"]) &__led {
-		background: var(--border-node);
-		box-shadow: none;
+	&__status {
+		@include module-status-led;
 	}
 
-	&__button {
-		@include tactile-button;
+	&__title {
+		@include module-title;
+	}
 
-		display: flex;
-		align-items: center;
-		justify-content: center;
+	&__code {
+		@include module-code;
+	}
 
-		padding: 8px;
-		border-color: var(--bg-accent);
-		background: var(--bg-accent);
-		color: var(--text-on-accent);
+	&__body {
+		@include module-body;
+	}
 
-		&:hover:not(:disabled) {
-			border-color: var(--bg-accent-hover);
-			background: var(--bg-accent-hover);
+	&__key-housing {
+		@include key-housing;
+	}
+
+	&__keycap {
+		@include keycap-record;
+		@include keycap-record-active;
+
+		&:disabled {
+			cursor: not-allowed;
+			opacity: 0.6;
 		}
+	}
+
+	&__keycap-text {
+		@include button-text;
+
+		font-weight: $font-weight-bold;
+	}
+
+	&__jack-strip {
+		@include jack-strip;
 	}
 }
