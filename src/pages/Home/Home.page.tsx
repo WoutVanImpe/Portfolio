@@ -15,6 +15,7 @@ import {
 	nodeTypes,
 	withActiveLanguageEdge,
 	withActiveThemeEdge,
+	type ModifierValue,
 	type PortfolioEdge,
 	type PortfolioNode,
 } from "@shared/nodes";
@@ -25,7 +26,7 @@ export const HomePage: FC<HomePageProps> = () => {
 	const { theme, setTheme } = useTheme();
 	const { i18n } = useTranslation();
 	const language = normalizeLanguage(i18n.resolvedLanguage);
-	const [nodes, , onNodesChange] = useNodesState<PortfolioNode>(initialNodes);
+	const [nodes, setNodes, onNodesChange] = useNodesState<PortfolioNode>(initialNodes);
 	const [edges, setEdges, onEdgesChange] = useEdgesState<PortfolioEdge>(withActiveLanguageEdge(withActiveThemeEdge(initialEdges, initialNodes, theme), initialNodes, language));
 	const [mediaIndexes, setMediaIndexes] = useState<Record<string, number>>({});
 
@@ -65,6 +66,22 @@ export const HomePage: FC<HomePageProps> = () => {
 			});
 		},
 		[displayStates],
+	);
+
+	const toggleModifier = useCallback(
+		(nodeId: string, value: ModifierValue) => {
+			setNodes((current) =>
+				current.map((node) => {
+					if (node.id !== nodeId || node.data.kind !== "modifier") return node;
+
+					const active = node.data.activeModifiers ?? [];
+					const next = active.includes(value) ? active.filter((item) => item !== value) : [...active, value];
+
+					return { ...node, data: { ...node.data, activeModifiers: next } };
+				}),
+			);
+		},
+		[setNodes],
 	);
 
 	const renderNodes = useMemo(
@@ -111,9 +128,19 @@ export const HomePage: FC<HomePageProps> = () => {
 					};
 				}
 
+				if (node.data.kind === "modifier") {
+					return {
+						...node,
+						data: {
+							...connectedData,
+							onToggleModifier: (value: ModifierValue) => toggleModifier(node.id, value),
+						},
+					};
+				}
+
 				return { ...node, data: connectedData };
 			}),
-		[nodes, displayStates, controlStates, mediaIndexes, stepMedia, connectedHandleList, handleColorMap, connectedNodeIds, filteredOutNodeIds],
+		[nodes, displayStates, controlStates, mediaIndexes, stepMedia, toggleModifier, connectedHandleList, handleColorMap, connectedNodeIds, filteredOutNodeIds],
 	);
 
 	const renderEdges = useMemo(() => edges.map((edge) => (filteredOutNodeIds.has(edge.source) || filteredOutNodeIds.has(edge.target) ? { ...edge, hidden: true } : edge)), [edges, filteredOutNodeIds]);

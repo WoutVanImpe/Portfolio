@@ -22,6 +22,8 @@ const en = {
 	"control.open": "Open live project",
 	"control.previous": "Previous media",
 	"control.next": "Next media",
+	"common.on": "On",
+	"common.off": "Off",
 } as const;
 
 export type TranslationKey = keyof typeof en;
@@ -50,6 +52,8 @@ const nl: Record<TranslationKey, string> = {
 	"control.open": "Open live project",
 	"control.previous": "Vorige media",
 	"control.next": "Volgende media",
+	"common.on": "Aan",
+	"common.off": "Uit",
 };
 
 export const resources = {

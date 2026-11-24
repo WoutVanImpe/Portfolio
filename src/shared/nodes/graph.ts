@@ -61,8 +61,8 @@ const findUpstreamModifiers = (
 		const source = getNode(nodes, edge.source);
 		if (!source) continue;
 
-		if (source.data.kind === "modifier" && source.data.value) {
-			modifiers.push(source.data.value);
+		if (source.data.kind === "modifier") {
+			modifiers.push(...(source.data.activeModifiers ?? []));
 			modifiers.push(...findUpstreamModifiers(nodes, edges, source.id, visited));
 		}
 	}

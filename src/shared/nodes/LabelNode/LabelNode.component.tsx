@@ -2,11 +2,15 @@ import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { localize } from "@/i18n/localize";
 import { Handler, type PortLabel } from "@shared/Handler";
+import { EffectRack } from "../EffectRack";
 import type { LabelNodeProps } from "./labelNode.props";
 import styles from "./labelNode.module.scss";
 
 export const LabelNode = ({ id, data }: LabelNodeProps) => {
 	const { t, i18n } = useTranslation();
+
+	if (data.kind === "modifier") return <EffectRack id={id} data={data} />;
+
 	const handles = data.handles ?? [];
 	const targets = handles.filter((handle) => handle.type === "target");
 	const sources = handles.filter((handle) => handle.type === "source");
@@ -22,14 +26,11 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 			? "PRJ-01"
 			: data.kind === "filter"
 				? "FLT-01"
-				: data.kind === "modifier"
-					? "FX-01"
-					: data.kind === "theme"
-						? "SYS-01"
-						: data.kind === "language"
-							? "SYS-02"
-							: "SYS-00";
-	const showFlowArrow = data.kind === "modifier" && targets.length > 0 && sources.length > 0;
+				: data.kind === "theme"
+					? "SYS-01"
+					: data.kind === "language"
+						? "SYS-02"
+						: "SYS-00";
 
 	const targetLabel: PortLabel =
 		data.kind === "filter"
@@ -66,12 +67,6 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 						handleColors={data.handleColors}
 					/>
 				))}
-
-				{showFlowArrow ? (
-					<span className={styles["label-node__flow-arrow"]} aria-hidden="true">
-						──▶
-					</span>
-				) : null}
 
 				{sources.map((handle, index) => (
 					<Handler

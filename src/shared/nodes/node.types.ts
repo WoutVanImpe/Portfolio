@@ -67,7 +67,8 @@ export interface ControlNodeData extends BaseNodeData {
 
 export interface ModifierNodeData extends BaseNodeData {
 	kind: "modifier";
-	value?: ModifierValue;
+	activeModifiers?: ModifierValue[];
+	onToggleModifier?: (value: ModifierValue) => void;
 }
 
 export interface FilterNodeData extends BaseNodeData {

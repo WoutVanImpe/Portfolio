@@ -1,0 +1,196 @@
+@use "@styles/abstract" as *;
+
+.effect-rack {
+	@include synth-module;
+
+	width: 160px;
+	min-height: 280px;
+
+	&__header {
+		@include module-header;
+
+		gap: 4px;
+		min-height: 24px;
+		padding: 4px 8px;
+	}
+
+	&__status {
+		@include module-status-led;
+	}
+
+	&__title {
+		@include module-title;
+
+		letter-spacing: 0.04em;
+	}
+
+	&__code {
+		@include module-code;
+	}
+
+	&__body {
+		@include module-body;
+
+		gap: 10px;
+		padding: 6px 8px;
+	}
+
+	&__jack-strip {
+		@include jack-strip;
+
+		padding: 7px 8px;
+	}
+}
+
+.effect-filter {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+
+	&__name {
+		color: var(--text-secondary);
+		font-family: $font-family-mono;
+		font-size: 9px;
+		letter-spacing: 0.06em;
+		line-height: 1;
+		text-transform: uppercase;
+	}
+}
+
+.lever-switch {
+	--lever-duration: 0.22s;
+
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 4px;
+}
+
+.switch {
+	position: relative;
+	width: 12em;
+	height: 12em;
+}
+
+.lever {
+	appearance: none;
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	outline: 0;
+	cursor: pointer;
+	background-image:
+		radial-gradient(0.75em 0.75em at 55% 45%, var(--lever-specular), transparent),
+		radial-gradient(0.5em 0.4em at 43% 56%, var(--lever-glow-soft), transparent),
+		radial-gradient(0.5em 0.4em at 55% 57%, var(--lever-glow-mid), transparent),
+		radial-gradient(0.5em 0.4em at 50% 60%, var(--lever-glow-mid), transparent),
+		radial-gradient(
+			100% 100% at 50% 50%,
+			var(--lever-base-light) 0%,
+			var(--lever-base-mid) 10%,
+			var(--lever-base-dark) 18% 21%,
+			var(--lever-base-ring) 21.5% 24%,
+			transparent 24.5% 30%,
+			var(--lever-base-inner) 30.5% 33%,
+			transparent 33.5%
+		);
+}
+
+.lever-parts {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+
+.lever-ball {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 1;
+	width: 4em;
+	height: 4em;
+	border-radius: 50%;
+	background:
+		radial-gradient(35% 25% at 50% 25%, var(--lever-ball-highlight) 20%, transparent),
+		radial-gradient(1em 0.75em at 32% 75%, var(--lever-ball-shade), transparent),
+		radial-gradient(1em 0.75em at 65% 78%, var(--lever-ball-shade), transparent),
+		radial-gradient(100% 100% at center, var(--lever-ball) 49.5%, transparent 50%);
+	transform: translate(-200%, -50%);
+	box-shadow:
+		2em 4em 2em var(--lever-shadow),
+		2em 5em 4em var(--lever-shadow-soft),
+		2em 7em 4em var(--lever-shadow-soft),
+		2em 9em 4em var(--lever-shadow-soft),
+		2em 11em 4em var(--lever-shadow-soft);
+	transition:
+		transform var(--lever-duration) linear,
+		box-shadow var(--lever-duration) linear;
+}
+
+.lever-shaft {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 7.5em;
+	height: 4em;
+	border-radius: 15em;
+	background-color: var(--lever-shaft);
+	box-shadow: 0 0 1em var(--lever-shaft-inset) inset;
+	transform: translate(-8em, -50%);
+	transition: transform var(--lever-duration) linear;
+}
+
+.lever:checked ~ .lever-parts .lever-ball {
+	transform: translate(100%, -50%);
+	box-shadow:
+		-2em 4em 2em var(--lever-shadow),
+		-2em 5em 4em var(--lever-shadow-soft),
+		-2em 7em 4em var(--lever-shadow-soft),
+		-2em 9em 4em var(--lever-shadow-soft),
+		-2em 11em 4em var(--lever-shadow-soft);
+}
+
+.lever:checked ~ .lever-parts .lever-shaft {
+	transform: translate(0.5em, -50%);
+}
+
+.led {
+	@include module-status-led;
+
+	border-width: 1px;
+	position: absolute;
+	top: 50%;
+	cursor: pointer;
+	transform: translateY(-50%);
+	transition:
+		background-color var(--theme-transition),
+		border-color var(--theme-transition),
+		box-shadow var(--theme-transition);
+}
+
+.led--left {
+	left: -4.5em;
+	--led-color: var(--led-red);
+}
+
+.led--right {
+	right: -4.5em;
+	--led-color: var(--screen-bg);
+}
+
+.lever:checked ~ .led--left {
+	--led-color: var(--screen-bg);
+}
+
+.lever:checked ~ .led--right {
+	--led-color: var(--led-green);
+}
+
+.led span {
+	display: inline-block;
+	overflow: hidden;
+	width: 0;
+}

@@ -18,6 +18,7 @@ interface NodeDefinition {
 	variant?: "media" | "text";
 	kind?: NodeKind;
 	value?: string;
+	activeModifiers?: ModifierValue[];
 	handles?: NodeHandleConfig[];
 	position: { x: number; y: number };
 }
@@ -124,29 +125,11 @@ const nodeDefinitions: NodeDefinition[] = [
 	{
 		id: "displayFilter-2",
 		type: "displayFilter",
-		labelKey: "effect.grayscale",
+		labelKey: "node.displayFilter",
 		kind: "modifier",
-		value: "grayscale",
+		activeModifiers: [],
 		handles: passThroughHandles,
 		position: { x: 860, y: 480 },
-	},
-	{
-		id: "displayFilter-16",
-		type: "displayFilter",
-		labelKey: "effect.blur",
-		kind: "modifier",
-		value: "blur",
-		handles: passThroughHandles,
-		position: { x: 860, y: 560 },
-	},
-	{
-		id: "displayFilter-17",
-		type: "displayFilter",
-		labelKey: "effect.contrast",
-		kind: "modifier",
-		value: "contrast",
-		handles: passThroughHandles,
-		position: { x: 860, y: 640 },
 	},
 
 	// Category filters — right
@@ -210,7 +193,7 @@ const nodeDefinitions: NodeDefinition[] = [
 ];
 
 const toNodeData = (definition: NodeDefinition): PortfolioNodeData => {
-	const { label, labelKey, localizedLabel, projectId, displayId, variant, kind, value, handles } = definition;
+	const { label, labelKey, localizedLabel, projectId, displayId, variant, kind, value, activeModifiers, handles } = definition;
 	const common = { label, labelKey, localizedLabel, handles };
 
 	if (kind === "theme") return { ...common, kind, value: value as ThemeName | undefined };
@@ -218,7 +201,7 @@ const toNodeData = (definition: NodeDefinition): PortfolioNodeData => {
 	if (kind === "project") return { ...common, kind, projectId: projectId ?? "" };
 	if (kind === "display") return { ...common, kind, displayId: displayId ?? "", variant };
 	if (kind === "control") return { ...common, kind };
-	if (kind === "modifier") return { ...common, kind, value: value as ModifierValue | undefined };
+	if (kind === "modifier") return { ...common, kind, activeModifiers: activeModifiers ?? [] };
 	if (kind === "filter") return { ...common, kind, value: value as ProjectCategory | undefined };
 
 	return common;

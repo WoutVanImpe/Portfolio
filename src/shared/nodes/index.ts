@@ -1,4 +1,5 @@
 export * from "./DisplayNode";
+export * from "./EffectRack";
 export * from "./LabelNode";
 export * from "./LinkNode";
 export * from "./SwitchNode";
