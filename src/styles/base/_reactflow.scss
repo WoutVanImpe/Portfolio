@@ -3,8 +3,8 @@
 .react-flow {
 	--xy-background-color: var(--bg-canvas);
 	--xy-background-pattern-color: var(--pattern-dot);
-	--xy-edge-stroke-default: var(--border-cable);
-	--xy-edge-stroke-selected-default: var(--border-cable-active);
+	--xy-edge-stroke-default: var(--cable-color);
+	--xy-edge-stroke-selected-default: var(--accent-green);
 	--xy-selection-background-color: var(--pattern-selection);
 	--xy-selection-border: 1px solid var(--border-active);
 	--xy-controls-button-background-color: var(--bg-surface-secondary);
@@ -16,17 +16,33 @@
 	background-color: var(--bg-canvas);
 	@include theme-transition;
 
+	&__nodes {
+		z-index: 1;
+	}
+
+	&__edges {
+		z-index: 10 !important;
+		pointer-events: none;
+	}
+
+	&__edge {
+		pointer-events: all;
+		filter: drop-shadow(0 4px 3px var(--cable-depth-shadow));
+	}
+
 	&__node {
 		@include theme-transition;
 	}
 
 	&__edge-path {
+		stroke: var(--cable-color);
 		stroke-width: var(--cable-width);
+		stroke-linecap: round;
 		@include theme-transition;
 	}
 
 	&__edge.edge--active .react-flow__edge-path {
-		stroke: var(--border-active);
+		stroke: var(--accent);
 		stroke-width: var(--cable-width);
 	}
 
