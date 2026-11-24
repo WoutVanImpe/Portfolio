@@ -2,102 +2,264 @@
 @use "./typography" as *;
 @use "./spacing" as *;
 
-@mixin node-surface {
+$radius-control: 4px;
+$jack-size: 20px;
+$led-size: 8px;
+$font-family-button: Montserrat, "JetBrains Mono", sans-serif;
+
+@mixin synth-module {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+
+	border: 1px solid var(--border-node);
+	border-radius: 5px;
+	background: var(--faceplate-bg);
+	background-image:
+		var(--faceplate-grain),
+		var(--faceplate-brush),
+		var(--faceplate-sheen),
+		var(--faceplate-shading),
+		var(--faceplate-bg);
+	background-position: center, center, center, center, center;
+	background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
+	background-size: 160px 160px, 240px 180px, auto, auto, auto;
+	background-blend-mode: soft-light, soft-light, soft-light, multiply, normal;
+	box-shadow:
+		inset 1px 0 0 var(--faceplate-edge-light),
+		inset -1px 0 0 var(--faceplate-edge-dark),
+		inset 0 1px 0 var(--faceplate-highlight),
+		inset 0 -1.5px 0 var(--faceplate-chamfer),
+		0 -2px 10px var(--faceplate-top-shadow),
+		0 6px 14px var(--faceplate-elevation);
+	color: var(--text-primary);
+	font-family: $font-family-mono;
+	@include theme-transition;
+
+	&::before,
+	&::after {
+		position: absolute;
+		left: 50%;
+		width: 7px;
+		height: 7px;
+		transform: translateX(-50%);
+		border: 1px solid var(--screw-border);
+		border-radius: 50%;
+		background-image:
+			linear-gradient(var(--screw-slot), var(--screw-slot)),
+			var(--screw-bg);
+		background-position: center, center;
+		background-repeat: no-repeat, no-repeat;
+		background-size: 3px 1px, auto;
+		box-shadow: 0 1px 2px var(--screw-shadow);
+		content: "";
+	}
+
+	&::before {
+		top: -4px;
+		transform: translateX(-50%) rotate(45deg);
+	}
+
+	&::after {
+		bottom: -4px;
+		transform: translateX(-50%) rotate(15deg);
+	}
+}
+
+@mixin module-header {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+
+	width: 100%;
+	min-height: 28px;
+	padding: 6px 10px;
+	border-bottom: 1px solid var(--border-node);
+}
+
+@mixin module-title {
+	flex: 1 1 auto;
+	font-family: $font-family-mono;
+	font-size: 10px;
+	font-weight: $font-weight-bold;
+	letter-spacing: 0.08em;
+	line-height: 1.2;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+@mixin module-code {
+	flex: 0 0 auto;
+	margin-left: auto;
+	color: var(--text-secondary);
+	font-family: $font-family-mono;
+	font-size: 8px;
+	letter-spacing: 0.08em;
+	line-height: 1;
+	opacity: 0.45;
+	white-space: nowrap;
+}
+
+@mixin module-status-led {
+	--led-color: var(--led-yellow);
+
+	width: $led-size;
+	height: $led-size;
+	flex-shrink: 0;
+	border: 1.5px solid var(--border-node);
+	border-radius: 50%;
+	background: radial-gradient(circle at 35% 35%, #ffffff 0%, var(--led-color) 45%, rgba(0, 0, 0, 0.4) 100%);
+	box-shadow:
+		inset 0 0 2px var(--screen-inset),
+		0 0 5px color-mix(in srgb, var(--led-color) 55%, transparent),
+		0 0 11px color-mix(in srgb, var(--led-color) 30%, transparent);
+	@include theme-transition;
+
+	&[data-active="true"] {
+		--led-color: var(--led-green);
+	}
+
+	&[data-filtered="true"] {
+		--led-color: var(--led-red);
+	}
+}
+
+@mixin module-body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	padding: 10px;
+}
+
+@mixin screen-bezel {
+	overflow: hidden;
+	border: 2px solid var(--border-node);
+	border-radius: $radius-control;
+	background: var(--screen-bezel);
+	box-shadow: var(--screen-bezel-shadow);
+}
+
+@mixin jack-strip {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 12px;
+
+	width: 100%;
+	padding: 10px;
+	border-top: 1px solid var(--border-node);
+}
+
+@mixin key-housing {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: $spacing-2xs;
 
-	padding: 6px 12px;
-	border: 1px solid var(--border-node);
-	border-radius: $radius-md;
-	background: var(--bg-node);
-	color: var(--text-primary);
-	box-shadow: var(--shadow-node);
-	font-size: $font-size-sm;
-	@include theme-transition;
+	width: 5em;
+	height: 5em;
+	border-radius: 5px;
+	background-color: var(--key-well);
 }
 
-@mixin synth-module {
-	@include node-surface;
-
-	position: relative;
-	border-style: solid;
-	border-width: 1.5px;
-	border-radius: $radius-node;
-	background-color: var(--bg-node);
-	background-image:
-		radial-gradient(circle at 9px 9px, var(--border-handle) 0 1.5px, transparent 2px),
-		radial-gradient(circle at calc(100% - 9px) 9px, var(--border-handle) 0 1.5px, transparent 2px),
-		radial-gradient(circle at 9px calc(100% - 9px), var(--border-handle) 0 1.5px, transparent 2px),
-		radial-gradient(circle at calc(100% - 9px) calc(100% - 9px), var(--border-handle) 0 1.5px, transparent 2px);
-	background-repeat: no-repeat;
-	box-shadow: 0 4px 0 var(--module-lip), var(--shadow-node);
-	font-family: $font-family-mono;
-	font-size: 0.75rem;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
+@mixin keycap-shared {
+	width: 5.7em;
+	height: 5.7em;
+	border: none;
+	outline: none;
+	border-radius: 10px;
+	cursor: pointer;
+	font-family: $font-family-button;
+	transition: 0.1s ease-in-out;
 }
 
-@mixin synth-led($color: var(--signal-active)) {
-	width: $size-led;
-	height: $size-led;
-	flex-shrink: 0;
-	border-radius: $radius-full;
-	background: $color;
-	box-shadow: 0 0 6px var(--led-glow);
-	@include theme-transition;
+@mixin keycap-icon {
+	@include keycap-shared;
+
+	background-color: var(--keycap-light);
+	color: var(--keycap-light-ink);
+	box-shadow:
+		var(--keycap-drop-shadow) 10px 10px 8px,
+		var(--keycap-light-highlight) 1.5px 1.5px 2px 0 inset,
+		var(--keycap-light-low) -3.2px -3.2px 8px 0 inset;
 }
 
-@mixin recessed-screen {
-	position: relative;
-	overflow: hidden;
-	border: 1px solid var(--border-subtle);
-	border-radius: $radius-sm;
-	background: var(--bg-canvas);
-	box-shadow: inset 0 2px 6px var(--screen-inset);
+@mixin keycap-record {
+	@include keycap-shared;
 
-	&::after {
-		content: "";
-		position: absolute;
-		inset: 0;
-		z-index: 1;
-		background: repeating-linear-gradient(
-			to bottom,
-			transparent 0 3px,
-			var(--screen-scanline) 3px 4px
-		);
-		pointer-events: none;
-	}
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+
+	background-color: var(--keycap-orange);
+	color: var(--text-on-accent);
+	box-shadow:
+		var(--keycap-drop-shadow) 10px 10px 8px,
+		var(--keycap-orange-highlight) 2px 2px 10px 0 inset,
+		var(--keycap-orange-low) -4px -4px 1px 0 inset;
 }
 
-@mixin tactile-button {
-	border: 1px solid var(--border-subtle);
-	border-radius: $radius-sm;
-	background: var(--bg-surface-secondary);
-	color: var(--text-primary);
-	font-family: $font-family-mono;
-	font-size: $font-size-sm;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
-	@include theme-transition;
+@mixin keycap-secondary {
+	@include keycap-shared;
 
-	&:hover:not(:disabled) {
-		border-color: var(--border-active);
-		background: var(--bg-hover);
-	}
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
 
+	background-color: var(--keycap-dark);
+	color: var(--keycap-dark-ink);
+	box-shadow:
+		var(--keycap-drop-shadow) 10px 10px 8px,
+		var(--keycap-dark-highlight) 1.5px 1.5px 1px 0 inset,
+		var(--keycap-dark-low) -3.2px -3.2px 8px 0 inset;
+}
+
+@mixin button-text {
+	color: var(--text-on-accent);
+	padding-top: 0.9em;
+	letter-spacing: 0.075em;
+	font-size: 0.85em;
+	transition: 0.1s ease-in-out;
+}
+
+@mixin keycap-icon-active {
 	&:active:not(:disabled) {
-		transform: translateY(2px);
-	}
+		box-shadow:
+			var(--keycap-drop-shadow) 0 0 0,
+			inset 0.5px 0.5px 4px var(--keycap-press-ink),
+			var(--keycap-light-low) -3.2px -3.2px 8px 0 inset;
 
-	&:focus-visible {
-		outline: 2px solid var(--border-active);
-		outline-offset: 2px;
+		& > * {
+			scale: 0.95;
+		}
 	}
+}
 
-	&:disabled {
-		opacity: 0.5;
-		cursor: not-allowed;
+@mixin keycap-record-active {
+	&:active:not(:disabled) {
+		box-shadow:
+			var(--keycap-drop-shadow) 0 0 0,
+			inset 0.5px 0.5px 4px var(--keycap-press-ink),
+			var(--keycap-orange-low) -3.2px -3.2px 8px 0 inset;
+
+		& > * {
+			transform: translateY(0.5px);
+		}
+	}
+}
+
+@mixin keycap-secondary-active {
+	&:active:not(:disabled) {
+		box-shadow:
+			var(--keycap-drop-shadow) 0 0 0,
+			inset 0.5px 0.5px 4px var(--keycap-press-ink),
+			var(--keycap-dark-low) -3.2px -3.2px 8px 0 inset;
+
+		& > * {
+			transform: translateY(0.5px);
+		}
 	}
 }
