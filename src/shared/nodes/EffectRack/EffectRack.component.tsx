@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { Handler } from "@shared/Handler";
+import { getHardwareCode } from "../initialNodes";
 import type { ModifierNodeData, ModifierValue } from "../node.types";
 import styles from "./effectRack.module.scss";
 
@@ -22,7 +23,7 @@ export const EffectRack: FC<EffectRackProps> = ({ id, data }) => {
 
 	return (
 		<div className={styles["effect-rack"]}>
-			<span className={styles["effect-rack__code"]}>FX-01</span>
+			<span className={styles["effect-rack__code"]}>{getHardwareCode(id)}</span>
 
 			<div className={styles["effect-rack__header"]}>
 				<span

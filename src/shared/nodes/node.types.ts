@@ -92,9 +92,18 @@ export type NodeData = PortfolioNodeData;
 
 export type PortfolioNode = Node<PortfolioNodeData>;
 
+export const CABLE_COLORS = ["red", "orange", "yellow", "green", "blue", "purple", "white", "black"] as const;
+
+export type CableColor = (typeof CABLE_COLORS)[number];
+
+export const getCableColorVar = (color: CableColor): string => `var(--cable-${color})`;
+
+export const getRandomCableColor = (): CableColor => CABLE_COLORS[Math.floor(Math.random() * CABLE_COLORS.length)] ?? "yellow";
+
 export interface PortfolioEdgeData extends Record<string, unknown> {
 	kind?: "theme" | "language" | "flow" | "filter" | "modifier";
 	active?: boolean;
+	color?: CableColor;
 }
 
 export type PortfolioEdge = Edge<PortfolioEdgeData>;

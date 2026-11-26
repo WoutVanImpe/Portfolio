@@ -10,6 +10,7 @@
 .handler:global(.react-flow__handle) {
 	position: relative !important;
 	inset: auto !important;
+	z-index: 1;
 	transform: none !important;
 
 	width: $jack-size;
@@ -27,11 +28,34 @@
 	@include theme-transition;
 
 	&[data-connected="true"] {
-		background: var(--jack-fill, var(--cable-color));
+		background:
+			radial-gradient(circle at 35% 28%, var(--jack-connect-highlight) 0%, transparent 44%),
+			radial-gradient(circle at 68% 78%, var(--jack-connect-shade) 0%, transparent 58%),
+			var(--jack-fill, var(--cable-color));
 		box-shadow:
 			0 0 0 1px var(--jack-ring-light),
 			0 0 0 3px var(--jack-ring-dark),
-			0 2px 4px var(--jack-ring-shadow);
+			0 2px 4px var(--jack-ring-shadow),
+			inset 0 1px 2px var(--jack-connect-highlight),
+			inset 0 -2px 3px var(--jack-connect-shade);
+
+		&::after {
+			position: absolute;
+			top: calc(100% - 5px);
+			left: 50%;
+			z-index: -1;
+
+			width: 8px;
+			height: 10px;
+			border-radius: $radius-full;
+			background: var(--jack-fill, var(--cable-color));
+			box-shadow:
+				inset 1px 0 1px var(--jack-connect-highlight),
+				inset -1px 0 1px var(--jack-connect-shade);
+			content: "";
+			pointer-events: none;
+			transform: translateX(-50%);
+		}
 	}
 }
 

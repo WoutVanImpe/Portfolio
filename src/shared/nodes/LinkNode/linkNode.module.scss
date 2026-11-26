@@ -3,7 +3,8 @@
 .link-node {
 	@include synth-module;
 
-	width: 88px;
+	width: 100%;
+	height: var(--unit-1-5u);
 	padding-right: $side-code-gutter;
 
 	&__header {

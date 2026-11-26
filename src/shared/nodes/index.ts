@@ -7,5 +7,6 @@ export * from "./graph";
 export * from "./initialEdges";
 export * from "./initialNodes";
 export * from "./node.actions";
+export * from "./nodeLayout";
 export * from "./nodeTypes";
 export * from "./node.types";

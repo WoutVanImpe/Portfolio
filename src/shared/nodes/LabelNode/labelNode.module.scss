@@ -3,8 +3,8 @@
 .label-node {
 	@include synth-module;
 
-	min-width: 120px;
-	width: max-content;
+	width: 100%;
+	height: var(--unit-1u);
 	padding-right: $side-code-gutter;
 
 	&__header {
@@ -35,19 +35,19 @@
 
 	&__jack-strip {
 		@include jack-strip;
+
+		flex: 1 1 auto;
+		align-items: center;
+		padding: 0 2px;
 	}
 
-	&--filter {
-		min-width: 96px;
-	}
-
-	&--language {
-		min-width: 116px;
+	&--project &__title {
+		overflow-wrap: anywhere;
+		white-space: normal;
 	}
 
 	&--filter &__header,
 	&--language &__header {
-		gap: 3px;
 		min-height: 20px;
 		padding: 3px 4px;
 	}
@@ -55,6 +55,6 @@
 	&--filter &__jack-strip,
 	&--language &__jack-strip {
 		gap: 6px;
-		padding: 8px 2px 6px 2px;
+		padding: 0 2px;
 	}
 }

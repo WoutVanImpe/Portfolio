@@ -1,4 +1,4 @@
-import { getProject, type Project, type ProjectCategory } from "@shared/data/projects";
+import { getProject, projectMatchesCategory, type Project, type ProjectCategory } from "@shared/data/projects";
 import type { Connection } from "@xyflow/react";
 import type { DisplayStatus, ModifierValue, PortfolioEdge, PortfolioNode } from "./node.types";
 
@@ -124,7 +124,7 @@ export const getDisplayStates = (nodes: PortfolioNode[], edges: PortfolioEdge[])
 		if (node.data.kind !== "display") continue;
 
 		const upstreamProject = findUpstreamProject(nodes, edges, node.id);
-		const project = activeCategory && upstreamProject?.category !== activeCategory ? undefined : upstreamProject;
+		const project = activeCategory && upstreamProject && !projectMatchesCategory(upstreamProject, activeCategory) ? undefined : upstreamProject;
 		const modifiers = findUpstreamModifiers(nodes, edges, node.id);
 		const status: DisplayStatus = !project ? "empty" : project.media.length === 0 ? "error" : "ready";
 

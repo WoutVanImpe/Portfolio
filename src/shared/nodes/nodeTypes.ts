@@ -1,4 +1,5 @@
-﻿import { DisplayNode } from "./DisplayNode";
+﻿import { CurvedEdge } from "./CurvedEdge";
+import { DisplayNode } from "./DisplayNode";
 import { LabelNode } from "./LabelNode";
 import { LinkNode } from "./LinkNode";
 import { SwitchNode } from "./SwitchNode";
@@ -15,4 +16,8 @@ export const nodeTypes = {
 	switch: SwitchNode,
 	theme: LabelNode,
 	themeItem: LabelNode,
+};
+
+export const edgeTypes = {
+	curved: CurvedEdge,
 };

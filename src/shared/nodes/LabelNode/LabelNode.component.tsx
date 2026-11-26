@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { localize } from "@/i18n/localize";
 import { Handler, type PortLabel } from "@shared/Handler";
 import { EffectRack } from "../EffectRack";
+import { getHardwareCode } from "../initialNodes";
 import type { LabelNodeProps } from "./labelNode.props";
 import styles from "./labelNode.module.scss";
 
@@ -21,16 +22,7 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 		: data.localizedLabel
 			? localize(data.localizedLabel, i18n.language)
 			: data.label;
-	const hardwareCode =
-		data.kind === "project"
-			? "PRJ-01"
-			: data.kind === "filter"
-				? "FLT-01"
-				: data.kind === "theme"
-					? "SYS-01"
-					: data.kind === "language"
-						? "SYS-02"
-						: "SYS-00";
+	const hardwareCode = getHardwareCode(id);
 
 	const targetLabel: PortLabel =
 		data.kind === "filter"
@@ -45,6 +37,7 @@ export const LabelNode = ({ id, data }: LabelNodeProps) => {
 	return (
 		<div
 			className={clsx(styles["label-node"], {
+				[styles["label-node--project"]]: data.kind === "project",
 				[styles["label-node--filter"]]: data.kind === "filter",
 				[styles["label-node--language"]]: data.kind === "language",
 			})}

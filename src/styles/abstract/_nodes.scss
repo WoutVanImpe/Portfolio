@@ -17,23 +17,21 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 	border: 1px solid var(--border-node);
 	border-radius: 5px;
 	background: var(--faceplate-bg);
-	background-image:
-		var(--faceplate-grain),
-		var(--faceplate-brush),
-		var(--faceplate-sheen),
-		var(--faceplate-shading),
-		var(--faceplate-bg);
+	background-image: var(--faceplate-grain), var(--faceplate-brush), var(--faceplate-sheen), var(--faceplate-shading), var(--faceplate-bg);
 	background-position: center, center, center, center, center;
 	background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
-	background-size: 160px 160px, 240px 180px, auto, auto, auto;
+	background-size:
+		160px 160px,
+		240px 180px,
+		auto,
+		auto,
+		auto;
 	background-blend-mode: soft-light, soft-light, soft-light, multiply, normal;
 	box-shadow:
 		inset 1px 0 0 var(--faceplate-edge-light),
 		inset -1px 0 0 var(--faceplate-edge-dark),
 		inset 0 1px 0 var(--faceplate-highlight),
-		inset 0 -1.5px 0 var(--faceplate-chamfer),
-		0 -2px 10px var(--faceplate-top-shadow),
-		0 6px 14px var(--faceplate-elevation);
+		inset 0 -1.5px 0 var(--faceplate-chamfer);
 	color: var(--text-primary);
 	font-family: $font-family-mono;
 	@include theme-transition;
@@ -47,12 +45,12 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 		transform: translateX(-50%);
 		border: 1px solid var(--screw-border);
 		border-radius: 50%;
-		background-image:
-			linear-gradient(var(--screw-slot), var(--screw-slot)),
-			var(--screw-bg);
+		background-image: linear-gradient(var(--screw-slot), var(--screw-slot)), var(--screw-bg);
 		background-position: center, center;
 		background-repeat: no-repeat, no-repeat;
-		background-size: 3px 1px, auto;
+		background-size:
+			3px 1px,
+			auto;
 		box-shadow: 0 1px 2px var(--screw-shadow);
 		content: "";
 	}
@@ -97,19 +95,12 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 	font-size: 8px;
 	letter-spacing: 0.08em;
 	line-height: 1;
-	opacity: 0.45;
+	opacity: 0.9;
 	white-space: nowrap;
 }
 
-@mixin module-code-subtle {
-	@include module-code;
-
-	font-size: 6px;
-	opacity: 0.9;
-}
-
 @mixin module-side-code {
-	@include module-code-subtle;
+	@include module-code;
 
 	position: absolute;
 	top: 50%;
@@ -193,7 +184,7 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 	cursor: pointer;
 	font-family: $font-family-button;
 	font-size: 13.333px;
-	transition: 0.1s ease-in-out;
+	transition: 0.2s ease-in-out;
 }
 
 @mixin keycap-icon {
@@ -242,11 +233,12 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 	padding-top: 1em;
 	letter-spacing: 0.075em;
 	font-size: 0.85em;
-	transition: 0.1s ease-in-out;
+	transition: 0.2s ease-in-out;
 }
 
 @mixin keycap-icon-active {
-	&:active:not(:disabled) {
+	&:active:not(:disabled),
+	&[data-pressed="true"]:not(:disabled) {
 		box-shadow:
 			var(--keycap-drop-shadow) 0 0 0,
 			inset 0.5px 0.5px 4px var(--keycap-press-ink),
@@ -259,7 +251,8 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 }
 
 @mixin keycap-record-active {
-	&:active:not(:disabled) {
+	&:active:not(:disabled),
+	&[data-pressed="true"]:not(:disabled) {
 		box-shadow:
 			var(--keycap-drop-shadow) 0 0 0,
 			inset 0.5px 0.5px 4px var(--keycap-press-ink),
@@ -272,7 +265,8 @@ $font-family-button: Montserrat, "JetBrains Mono", sans-serif;
 }
 
 @mixin keycap-secondary-active {
-	&:active:not(:disabled) {
+	&:active:not(:disabled),
+	&[data-pressed="true"]:not(:disabled) {
 		box-shadow:
 			var(--keycap-drop-shadow) 0 0 0,
 			inset 0.5px 0.5px 4px var(--keycap-press-ink),

@@ -3,7 +3,8 @@
 .switch-node {
 	@include synth-module;
 
-	width: 144px;
+	width: 100%;
+	height: var(--unit-1-5u);
 	padding-right: $side-code-gutter;
 
 	&__header {
@@ -42,7 +43,9 @@
 		justify-content: center;
 
 		&:disabled {
-			cursor: not-allowed;
+			cursor: default;
+			filter: saturate(0.35);
+			opacity: 0.42;
 		}
 	}
 
@@ -50,7 +53,7 @@
 		width: 20px;
 		height: 20px;
 		stroke: var(--keycap-light-ink);
-		transition: 0.1s ease-in-out;
+		transition: 0.2s ease-in-out;
 	}
 
 	&__jack-strip {
