@@ -6,6 +6,10 @@ import { isThemeName, type ThemeContextValue, type ThemeName } from "./theme.typ
 const STORAGE_KEY = "portfolio-theme";
 
 const getInitialTheme = (): ThemeName => {
+	const applied = document.documentElement.dataset.theme ?? null;
+
+	if (isThemeName(applied)) return applied;
+
 	const stored = window.localStorage.getItem(STORAGE_KEY);
 
 	if (isThemeName(stored)) return stored;
