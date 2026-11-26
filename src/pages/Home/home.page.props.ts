@@ -1,3 +1,1 @@
-export interface HomePageProps {
-	title?: string;
-}
+export type HomePageProps = Record<string, never>;

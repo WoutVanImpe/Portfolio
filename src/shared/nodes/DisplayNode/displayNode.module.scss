@@ -1,0 +1,369 @@
+@use "@styles/abstract" as *;
+
+.display-node {
+	@include synth-module;
+
+	width: 100%;
+	height: var(--unit-4u);
+	padding-right: $side-code-gutter;
+
+	&__header {
+		@include module-header;
+	}
+
+	&__status {
+		@include module-status-led;
+
+		&[data-status="loading"] {
+			--led-color: var(--led-yellow);
+		}
+	}
+
+	&__title {
+		@include module-title;
+	}
+
+	&__code {
+		@include module-side-code;
+
+		top: 8px;
+		right: 50%;
+		transform: translateX(50%);
+		writing-mode: horizontal-tb;
+	}
+
+	&__body {
+		@include module-body;
+
+		flex: 1 1 auto;
+		min-height: 0;
+		gap: 8px;
+		padding: 8px;
+	}
+
+	&__title-strip {
+		@include screen-bezel;
+
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+
+		width: 100%;
+		min-height: 24px;
+		padding: 4px 8px;
+		background: var(--screen-bg);
+		box-shadow:
+			var(--screen-bezel-shadow),
+			inset 0 0 6px var(--screen-inset);
+
+		&::after {
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(135deg, var(--screen-sheen) 0%, transparent 45%);
+			content: "";
+			pointer-events: none;
+		}
+	}
+
+	&__strip-title {
+		overflow: hidden;
+		color: var(--text-on-accent);
+		font-family: $font-family-mono;
+		font-size: 11px;
+		font-weight: $font-weight-bold;
+		letter-spacing: 0.04em;
+		line-height: 1.2;
+		text-overflow: ellipsis;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	&__strip-category {
+		flex: 0 0 auto;
+		color: var(--text-on-accent);
+		font-family: $font-family-mono;
+		font-size: 9px;
+		font-weight: $font-weight-bold;
+		letter-spacing: 0.08em;
+		line-height: 1;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	&__screen {
+		@include screen-bezel;
+
+		position: relative;
+		width: 100%;
+		flex: 1 1 auto;
+		min-height: 0;
+		padding: 8px;
+
+		&::after {
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(135deg, var(--screen-sheen) 0%, transparent 45%);
+			content: "";
+			pointer-events: none;
+		}
+	}
+
+	&__screen-content {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		opacity: 1;
+		transition: opacity 0.4s ease;
+
+		&--info {
+			align-items: stretch;
+			justify-content: stretch;
+		}
+
+		&--view-fading {
+			opacity: 0;
+		}
+	}
+
+	&__stage {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		width: 100%;
+		height: 100%;
+	}
+
+	&__media {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		width: 100%;
+		height: 100%;
+		opacity: 1;
+		transform: scale(1);
+		transition: opacity 0.4s ease, transform 0.4s ease;
+
+		&--fading {
+			opacity: 0;
+			transform: scale(0.985);
+		}
+
+		&--loading,
+		&--error {
+			text-align: center;
+		}
+	}
+
+	& img,
+	& video {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		object-position: center;
+		border-radius: $radius-control;
+	}
+
+	&__youtube {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		border-radius: $radius-control;
+		background-color: var(--screen-bg);
+		background-image: var(--youtube-poster, none);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		@include theme-transition;
+
+		&[data-loading="true"] iframe {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		& iframe {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			border: 0;
+			border-radius: $radius-control;
+			opacity: 1;
+			transition: opacity 0.2s ease;
+		}
+	}
+
+	&__message {
+		width: 100%;
+		color: var(--text-secondary);
+		font-size: 12px;
+		text-align: center;
+	}
+
+	&__text {
+		width: 100%;
+		height: 100%;
+		padding: 18px 20px;
+		overflow: auto;
+		color: var(--text-on-accent);
+		font-family: $font-family-mono;
+		font-size: 13px;
+		line-height: 1.55;
+		text-align: left;
+		text-wrap: pretty;
+
+		& p {
+			margin: 0 0 0.85em;
+		}
+
+		& p:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&__jack-strip {
+		@include jack-strip;
+
+		position: relative;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		padding-top: 0;
+	}
+
+	&__controls {
+		position: absolute;
+		top: 40%;
+		left: 6px;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		transform: translateY(-50%);
+	}
+
+	&__rotary-tag {
+		color: var(--text-secondary);
+		font-family: $font-family-mono;
+		font-size: 9px;
+		font-weight: $font-weight-bold;
+		letter-spacing: 0.08em;
+		line-height: 1;
+		text-transform: uppercase;
+		white-space: nowrap;
+		padding-top: 2px;
+	}
+
+	&__rotary {
+		position: relative;
+		flex: 0 0 auto;
+		z-index: 2;
+
+		width: 40px;
+		height: 40px;
+		border: 3px solid var(--rotary-border);
+		border-radius: 50%;
+		background:
+			conic-gradient(
+				from -2deg,
+				var(--rotary-highlight),
+				var(--rotary-shade),
+				var(--rotary-highlight),
+				var(--rotary-shade),
+				var(--rotary-highlight)
+			),
+			radial-gradient(
+				var(--rotary-shadow-dark),
+				var(--rotary-shadow-light),
+				var(--rotary-shadow-dark),
+				var(--rotary-shadow-light),
+				var(--rotary-shadow-dark),
+				var(--rotary-shadow-light)
+			),
+			radial-gradient(circle at 12% 12%, var(--rotary-face-light), var(--rotary-face-dark));
+		background-position: -3px -3px;
+		background-size: calc(100% + 6px) calc(100% + 6px);
+	}
+
+	&__radio {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: 0;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	&__rotary-label {
+		position: absolute;
+		inset: 4px;
+		z-index: 1;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
+	&__radio:focus-visible + &__rotary-label {
+		outline: 2px solid var(--border-active);
+		outline-offset: 2px;
+	}
+
+	&[data-view="media"] .display-node__rotary-label--info,
+	&[data-view="info"] .display-node__rotary-label--media {
+		z-index: 2;
+	}
+
+	&__dial {
+		position: absolute;
+		top: calc(50% - 1.5px);
+		left: calc(50% - 1.5px);
+		z-index: 3;
+
+		width: 18px;
+		height: 3px;
+		border-radius: 99px;
+		background: var(--rotary-mark);
+		pointer-events: none;
+		transform-origin: 1.5px 50%;
+		transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	&[data-view="media"] .display-node__dial {
+		transform: rotate(180deg);
+	}
+
+	&[data-view="info"] .display-node__dial {
+		transform: rotate(0deg);
+	}
+
+	&__notches {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+
+	&__notch {
+		z-index: 1;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+
+		width: 6px;
+		height: 1.5px;
+		background: var(--rotary-notch);
+	}
+
+	&__notch[data-notch="media"] {
+		transform: translate(-50%) rotate(180deg) translateX(22px);
+	}
+
+	&__notch[data-notch="info"] {
+		transform: translate(-50%) rotate(0deg) translateX(22px);
+	}
+}

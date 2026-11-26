@@ -20,19 +20,18 @@ ol {
 img,
 picture,
 video,
-canvas,
-svg {
+canvas {
 	display: block;
 	max-width: 100%;
 }
 
-input,
-button,
-textarea,
-select {
-	font: inherit;
-	color: inherit;
-}
+// input,
+// button,
+// textarea,
+// select {
+// 	font: inherit;
+// 	color: inherit;
+// }
 
 textarea {
 	resize: vertical;
