@@ -1,31 +1,62 @@
 @use "@styles/abstract" as *;
 
 .switch-node {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 4px;
+	@include synth-module;
 
-	padding: 4px 4px;
-	border: 1px solid var(--border-node);
-	border-radius: $radius-md;
-	background: var(--bg-node);
-	box-shadow: var(--shadow-node);
-	font-size: $font-size-sm;
-	@include theme-transition;
+	width: 100%;
+	height: var(--unit-1-5u);
+	padding-right: $side-code-gutter;
 
-	&__button {
-		padding: 6px 4px;
-		border: 1px solid var(--border-subtle);
-		border-radius: $radius-md;
-		background: var(--bg-surface-secondary);
-		color: var(--text-secondary);
-		@include theme-transition;
+	&__header {
+		@include module-header;
+	}
 
-		&:hover {
-			border-color: var(--border-active);
-			background: var(--bg-hover);
-			color: var(--text-primary);
+	&__status {
+		@include module-status-led;
+	}
+
+	&__title {
+		@include module-title;
+	}
+
+	&__code {
+		@include module-side-code;
+	}
+
+	&__body {
+		@include module-body;
+
+		flex-direction: row;
+		gap: 8px;
+	}
+
+	&__key-housing {
+		@include key-housing;
+	}
+
+	&__keycap {
+		@include keycap-icon;
+		@include keycap-icon-active;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&:disabled {
+			cursor: default;
+			filter: saturate(0.35);
+			opacity: 0.42;
 		}
+	}
+
+	&__icon {
+		width: 20px;
+		height: 20px;
+		stroke: var(--keycap-light-ink);
+		transition: 0.2s ease-in-out;
+	}
+
+	&__jack-strip {
+		@include jack-strip;
 	}
 }

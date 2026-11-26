@@ -1,27 +1,53 @@
 @use "@styles/abstract" as *;
 
 .link-node {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	@include synth-module;
 
-	padding: 4px;
-	border: 1px solid var(--border-node);
-	border-radius: $radius-md;
-	background: var(--bg-node);
-	box-shadow: var(--shadow-node);
-	font-size: $font-size-sm;
-	@include theme-transition;
+	width: 100%;
+	height: var(--unit-1-5u);
+	padding-right: $side-code-gutter;
 
-	&__button {
-		padding: 6px;
-		border-radius: $radius-md;
-		background: var(--bg-accent);
-		color: var(--text-on-accent);
-		@include theme-transition;
+	&__header {
+		@include module-header;
+	}
 
-		&:hover {
-			background: var(--bg-accent-hover);
+	&__status {
+		@include module-status-led;
+	}
+
+	&__title {
+		@include module-title;
+	}
+
+	&__code {
+		@include module-side-code;
+	}
+
+	&__body {
+		@include module-body;
+	}
+
+	&__key-housing {
+		@include key-housing;
+	}
+
+	&__keycap {
+		@include keycap-record;
+		@include keycap-record-active;
+
+		&:disabled {
+			cursor: not-allowed;
+			opacity: 0.6;
 		}
+	}
+
+	&__keycap-text {
+		@include button-text;
+
+		font-weight: $font-weight-bold;
+	}
+
+	&__jack-strip {
+		@include jack-strip;
 	}
 }

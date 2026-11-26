@@ -3,8 +3,8 @@
 .react-flow {
 	--xy-background-color: var(--bg-canvas);
 	--xy-background-pattern-color: var(--pattern-dot);
-	--xy-edge-stroke-default: var(--border-cable);
-	--xy-edge-stroke-selected-default: var(--border-cable-active);
+	--xy-edge-stroke-default: var(--cable-color);
+	--xy-edge-stroke-selected-default: var(--accent-green);
 	--xy-selection-background-color: var(--pattern-selection);
 	--xy-selection-border: 1px solid var(--border-active);
 	--xy-controls-button-background-color: var(--bg-surface-secondary);
@@ -16,17 +16,74 @@
 	background-color: var(--bg-canvas);
 	@include theme-transition;
 
-	&__node {
-		@include theme-transition;
+	&__nodes {
+		z-index: 2;
+	}
+
+	&__edges {
+		z-index: 10 !important;
+		pointer-events: none;
+	}
+
+	&__edge {
+		pointer-events: none;
+		filter: drop-shadow(0 4px 3px var(--cable-depth-shadow));
 	}
 
 	&__edge-path {
+		pointer-events: none;
+	}
+
+	&__edge-interaction {
+		pointer-events: stroke;
+	}
+
+	&__node {
+		cursor: default;
+		padding: 0;
+		border: 0;
+		border-radius: 0;
+		background: transparent;
+		box-shadow: none;
+		color: inherit;
+		font-size: inherit;
+		text-align: left;
 		@include theme-transition;
 	}
 
+	&__node.selectable {
+		cursor: default !important;
+	}
+
+	&__edge-path {
+		stroke: var(--cable-color);
+		stroke-width: var(--cable-width);
+		stroke-linecap: round;
+		@include theme-transition;
+	}
+
+	&__edge-shadow,
+	&__edge-highlight {
+		fill: none;
+		pointer-events: none;
+		stroke-linecap: round;
+		@include theme-transition;
+	}
+
+	&__edge-shadow {
+		stroke: var(--cable-shadow);
+		stroke-width: calc(var(--cable-width) + 3px);
+	}
+
+	&__edge-highlight {
+		stroke: var(--cable-highlight);
+		stroke-width: 1px;
+		transform: translateY(-1px);
+	}
+
 	&__edge.edge--active .react-flow__edge-path {
-		stroke: var(--border-active);
-		stroke-width: 2;
+		stroke: var(--accent);
+		stroke-width: var(--cable-width);
 	}
 
 	&__controls-button {

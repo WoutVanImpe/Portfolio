@@ -9,6 +9,8 @@ export const POS_RECORD: Record<HandlerPosition, Position> = {
 	bottom: Position.Bottom,
 };
 
+export type PortLabel = "IN" | "OUT" | "> OUT" | "FILTER" | "MEDIA" | "THEME" | "LANG";
+
 export interface HandlerProps {
 	type: "target" | "source";
 	id: string;
@@ -17,4 +19,7 @@ export interface HandlerProps {
 	handleId?: string;
 	offsetLeft?: number;
 	offsetTop?: number;
+	connected?: boolean;
+	portLabel?: PortLabel;
+	handleColors?: Record<string, string>;
 }

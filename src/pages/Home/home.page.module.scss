@@ -1,10 +1,168 @@
 @use "@styles/abstract" as *;
 
 .home-page {
+	position: relative;
 	width: 100dvw;
 	height: 100dvh;
-
+	overflow: hidden;
 	z-index: 2;
-	background-color: var(--bg-canvas);
+	background: var(--case-cheek);
 	@include theme-transition;
+
+	&__measure {
+		position: absolute;
+		inset: var(--case-rail-size) var(--case-cheek-size);
+		pointer-events: none;
+		visibility: hidden;
+	}
+
+	&__frame {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		overflow: hidden;
+		pointer-events: none;
+		background: transparent;
+		box-shadow:
+			inset 0 0 0 2px var(--case-rail-edge),
+			0 0 60px var(--case-shadow);
+		@include theme-transition;
+
+		&::before,
+		&::after {
+			position: absolute;
+			right: var(--case-cheek-size);
+			left: var(--case-cheek-size);
+			z-index: 1;
+			height: var(--case-rail-size);
+			border-top: 1px solid var(--case-rail-edge);
+			border-bottom: 1px solid var(--case-rail-edge);
+			background:
+				radial-gradient(circle, var(--case-screw) 0 3px, transparent 3.5px) center / 120px 100% repeat-x,
+				var(--case-rail);
+			content: "";
+		}
+
+		&::before {
+			top: 0;
+		}
+
+		&::after {
+			bottom: 0;
+			transform: rotate(180deg);
+		}
+	}
+
+	&__cheek {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		z-index: 1;
+		width: var(--case-cheek-size);
+		background: var(--case-cheek);
+		@include theme-transition;
+
+		&::before,
+		&::after {
+			position: absolute;
+			left: 50%;
+			width: 9px;
+			height: 9px;
+			border: 1px solid var(--case-rail-edge);
+			border-radius: 50%;
+			background-image:
+				linear-gradient(var(--case-screw-slot), var(--case-screw-slot)),
+				var(--case-screw);
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: 4px 1px, auto;
+			content: "";
+			transform: translateX(-50%);
+		}
+
+		&::before {
+			top: 10px;
+		}
+
+		&::after {
+			bottom: 10px;
+		}
+
+		&--left {
+			left: 0;
+			border-right: 2px solid var(--case-cheek-edge);
+		}
+
+		&--right {
+			right: 0;
+			border-left: 2px solid var(--case-cheek-edge);
+		}
+	}
+
+	&__canvas {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background: var(--case-inner);
+		box-shadow: inset 0 0 28px var(--case-shadow);
+
+		.home-page__flow {
+			width: 100%;
+			height: 100%;
+			background: transparent;
+
+			:global(.react-flow__viewport) {
+				will-change: transform;
+			}
+		}
+	}
+
+	&__canvas--moving {
+		.blank-panel {
+			background-image: none;
+			background-blend-mode: normal;
+			box-shadow: none;
+		}
+
+		:global(.react-flow__node) > * {
+			background-image: none;
+			background-blend-mode: normal;
+			box-shadow: none;
+		}
+
+		:global(.react-flow__edge) {
+			filter: none;
+		}
+
+		:global(.react-flow__edge-shadow),
+		:global(.react-flow__edge-highlight) {
+			display: none;
+		}
+	}
+
+	&--zoomed {
+		.home-page__frame {
+			opacity: 0;
+		}
+
+		.home-page__canvas {
+			box-shadow: none;
+		}
+	}
 }
+
+.rack-backdrop {
+	position: absolute;
+	z-index: 0;
+	pointer-events: none;
+	background: var(--case-inner);
+}
+
+.blank-panel {
+	@include synth-module;
+
+	position: absolute;
+	z-index: 1;
+	pointer-events: none;
+}
+

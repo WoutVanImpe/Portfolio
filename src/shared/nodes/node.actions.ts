@@ -1,9 +1,10 @@
 import type { Dispatch, SetStateAction } from "react";
 import { addEdge, type Connection } from "@xyflow/react";
 import type { ThemeName } from "@context/Theme";
-import type { PortfolioEdge, PortfolioNode } from "./node.types";
+import type { ProjectCategory } from "@shared/data/projects";
+import { getRandomCableColor, type PortfolioEdge, type PortfolioNode } from "./node.types";
 
-type NodeKind = "theme" | "language";
+type NodeKind = "theme" | "language" | "filter";
 
 export const ACTIVE_EDGE_CLASS = "edge--active";
 
@@ -40,9 +41,59 @@ export const withActiveThemeEdge = (
 		{
 			id: `active-theme-${source.id}-${target.id}`,
 			source: source.id,
+			sourceHandle: `${source.id}-0-source`,
 			target: target.id,
+			targetHandle: `${target.id}-0-target`,
 			className: ACTIVE_EDGE_CLASS,
-			data: { kind: "theme", active: true },
+			data: { kind: "theme", active: true, color: getRandomCableColor() },
+		},
+	];
+};
+
+export const withActiveLanguageEdge = (
+	currentEdges: PortfolioEdge[],
+	nodes: PortfolioNode[],
+	language: string,
+): PortfolioEdge[] => {
+	const source = nodes.find((node) => node.data.kind === "language" && !node.data.value);
+	const target = nodes.find((node) => node.data.kind === "language" && node.data.value === language);
+	const remaining = currentEdges.filter((edge) => edge.data?.kind !== "language");
+
+	if (!source || !target) return remaining;
+
+	return [
+		...remaining,
+		{
+			id: `active-language-${source.id}-${target.id}`,
+			source: source.id,
+			sourceHandle: `${source.id}-0-source`,
+			target: target.id,
+			targetHandle: `${target.id}-0-target`,
+			data: { kind: "language", active: true, color: getRandomCableColor() },
+		},
+	];
+};
+
+export const withActiveFilterEdge = (
+	currentEdges: PortfolioEdge[],
+	nodes: PortfolioNode[],
+	category: ProjectCategory,
+): PortfolioEdge[] => {
+	const source = nodes.find((node) => node.data.kind === "filter" && !node.data.value);
+	const target = nodes.find((node) => node.data.kind === "filter" && node.data.value === category);
+	const remaining = currentEdges.filter((edge) => edge.data?.kind !== "filter");
+
+	if (!source || !target) return remaining;
+
+	return [
+		...remaining,
+		{
+			id: `active-filter-${source.id}-${target.id}`,
+			source: source.id,
+			sourceHandle: `${source.id}-0-source`,
+			target: target.id,
+			targetHandle: `${target.id}-0-target`,
+			data: { kind: "filter", active: true, color: getRandomCableColor() },
 		},
 	];
 };
@@ -59,11 +110,23 @@ export const handleConnect = (options: ConnectHandlerOptions, connection: Connec
 	}
 
 	const languageValue = findEndpointValue(connection, nodes, "language");
-	if (languageValue && applyLanguage) applyLanguage(languageValue);
+	if (languageValue && applyLanguage) {
+		applyLanguage(languageValue);
+		setEdges((current) => withActiveLanguageEdge(current, nodes, languageValue));
+		return;
+	}
 
-	setEdges((current) =>
-		languageValue
-			? addEdge<PortfolioEdge>({ ...connection, data: { kind: "language" } }, current)
-			: addEdge<PortfolioEdge>(connection, current),
-	);
+	const filterValue = findEndpointValue(connection, nodes, "filter");
+	if (filterValue) {
+		setEdges((current) => withActiveFilterEdge(current, nodes, filterValue as ProjectCategory));
+		return;
+	}
+
+	const targetIsDisplay = nodes.some((node) => node.id === connection.target && node.data.kind === "display");
+
+	setEdges((current) => {
+		const base = targetIsDisplay ? current.filter((edge) => edge.target !== connection.target) : current;
+
+		return addEdge<PortfolioEdge>({ ...connection, data: { kind: "flow", color: getRandomCableColor() } }, base);
+	});
 };
