@@ -2,7 +2,7 @@ import type { Dispatch, SetStateAction } from "react";
 import { addEdge, type Connection } from "@xyflow/react";
 import type { ThemeName } from "@context/Theme";
 import type { ProjectCategory } from "@shared/data/projects";
-import type { PortfolioEdge, PortfolioNode } from "./node.types";
+import { getRandomCableColor, type PortfolioEdge, type PortfolioNode } from "./node.types";
 
 type NodeKind = "theme" | "language" | "filter";
 
@@ -45,7 +45,7 @@ export const withActiveThemeEdge = (
 			target: target.id,
 			targetHandle: `${target.id}-0-target`,
 			className: ACTIVE_EDGE_CLASS,
-			data: { kind: "theme", active: true },
+			data: { kind: "theme", active: true, color: getRandomCableColor() },
 		},
 	];
 };
@@ -69,7 +69,7 @@ export const withActiveLanguageEdge = (
 			sourceHandle: `${source.id}-0-source`,
 			target: target.id,
 			targetHandle: `${target.id}-0-target`,
-			data: { kind: "language", active: true },
+			data: { kind: "language", active: true, color: getRandomCableColor() },
 		},
 	];
 };
@@ -93,7 +93,7 @@ export const withActiveFilterEdge = (
 			sourceHandle: `${source.id}-0-source`,
 			target: target.id,
 			targetHandle: `${target.id}-0-target`,
-			data: { kind: "filter", active: true },
+			data: { kind: "filter", active: true, color: getRandomCableColor() },
 		},
 	];
 };
@@ -127,6 +127,6 @@ export const handleConnect = (options: ConnectHandlerOptions, connection: Connec
 	setEdges((current) => {
 		const base = targetIsDisplay ? current.filter((edge) => edge.target !== connection.target) : current;
 
-		return addEdge<PortfolioEdge>({ ...connection, data: { kind: "flow" } }, base);
+		return addEdge<PortfolioEdge>({ ...connection, data: { kind: "flow", color: getRandomCableColor() } }, base);
 	});
 };
