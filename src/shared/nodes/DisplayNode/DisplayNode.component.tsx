@@ -1,7 +1,9 @@
-import { useEffect, useState, type FC } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FC } from "react";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { localize } from "@/i18n/localize";
+import { getYouTubeEmbedUrl, getYouTubeThumbnailUrl, type ProjectMedia } from "@shared/data/projects";
+import { getHardwareCode } from "../initialNodes";
 import type { DisplayView } from "../node.types";
 import type { DisplayNodeProps as DNP } from "./displayNode.props";
 import styles from "./displayNode.module.scss";
@@ -9,9 +11,17 @@ import { Handler } from "@shared/Handler";
 
 type MediaState = "loading" | "ready" | "error";
 
+const MEDIA_FADE_MS = 400;
+
 export const DisplayNode: FC<DNP> = ({ id, data }) => {
 	const { t, i18n } = useTranslation();
 	const [mediaState, setMediaState] = useState<MediaState>("loading");
+	const [renderedMedia, setRenderedMedia] = useState<ProjectMedia | undefined>(() => data.kind === "display" ? data.project?.media[data.mediaIndex ?? 0] : undefined);
+	const [mediaFading, setMediaFading] = useState(false);
+	const hasMediaMountedRef = useRef(false);
+	const [renderedView, setRenderedView] = useState<DisplayView>(() => (data.kind === "display" ? data.view ?? "media" : "media"));
+	const [viewFading, setViewFading] = useState(false);
+	const hasViewMountedRef = useRef(false);
 	const mediaTargetId = `${id}-media-target`;
 	const mediaSourceOneId = `${id}-source-1-source`;
 	const mediaSourceTwoId = `${id}-source-2-source`;
@@ -23,25 +33,75 @@ export const DisplayNode: FC<DNP> = ({ id, data }) => {
 	const project = display?.project;
 	const mediaIndex = display?.mediaIndex ?? 0;
 	const media = project?.media[mediaIndex];
-	const view: DisplayView = display?.view ?? "info";
+	const youtubeEmbedUrl = renderedMedia?.type === "youtube" ? getYouTubeEmbedUrl(renderedMedia.src) : null;
+	const youtubePosterUrl = renderedMedia?.type === "youtube" ? getYouTubeThumbnailUrl(renderedMedia.src) : null;
+	const youtubeUnavailable = renderedMedia?.type === "youtube" && !youtubeEmbedUrl;
+	const view: DisplayView = display?.view ?? "media";
 	const connectedHandles = data.connectedHandles ?? [];
 	const isConnected = data.isConnected ?? false;
 	const status = display?.status ?? "empty";
-	const ledStatus = mediaState === "error" ? "error" : status;
+	const hasMediaError = mediaState === "error" || youtubeUnavailable;
+	const ledStatus = hasMediaError ? "error" : status;
 
 	useEffect(() => {
-		setMediaState("loading");
-	}, [media?.src]);
+		if (!hasMediaMountedRef.current) {
+			hasMediaMountedRef.current = true;
+			setRenderedMedia(media);
+			return;
+		}
+
+		if (renderedMedia?.src === media?.src && renderedMedia?.type === media?.type) return;
+
+		setMediaFading(true);
+		const timer = window.setTimeout(() => {
+			setRenderedMedia(media);
+			setMediaState("loading");
+		}, MEDIA_FADE_MS);
+
+		return () => window.clearTimeout(timer);
+	}, [media, renderedMedia]);
+
+	useEffect(() => {
+		if (!hasViewMountedRef.current) {
+			hasViewMountedRef.current = true;
+			setRenderedView(view);
+			return;
+		}
+
+		if (renderedView === view) return;
+
+		setViewFading(true);
+		const timer = window.setTimeout(() => {
+			setRenderedView(view);
+			setViewFading(false);
+		}, MEDIA_FADE_MS);
+
+		return () => window.clearTimeout(timer);
+	}, [renderedView, view]);
+
+	const revealMedia = () => {
+		setMediaState("ready");
+		setMediaFading(false);
+	};
+	const failMedia = () => {
+		setMediaState("error");
+		setMediaFading(false);
+	};
 
 	const mediaClassName = clsx(styles["display-node__media"], {
 		[styles["display-node__media--loading"]]: mediaState === "loading",
-		[styles["display-node__media--error"]]: mediaState === "error",
+		[styles["display-node__media--error"]]: hasMediaError,
+		[styles["display-node__media--fading"]]: mediaFading,
+	});
+	const screenContentClassName = clsx(styles["display-node__screen-content"], {
+		[styles["display-node__screen-content--info"]]: renderedView === "info",
+		[styles["display-node__screen-content--view-fading"]]: viewFading,
 	});
 	const handleViewChange = (next: DisplayView) => () => display?.onViewChange?.(next);
 
 	return (
 		<div className={clsx(styles["display-node"])} data-view={view}>
-			<span className={styles["display-node__code"]}>DSP-01</span>
+			<span className={styles["display-node__code"]}>{getHardwareCode(id)}</span>
 
 			<div className={styles["display-node__header"]}>
 				<span
@@ -58,38 +118,60 @@ export const DisplayNode: FC<DNP> = ({ id, data }) => {
 					<span className={styles["display-node__strip-title"]}>
 						{project ? localize(project.title, i18n.language) : t("display.empty")}
 					</span>
-					{project && <span className={styles["display-node__strip-category"]}>{t(`category.${project.category}`)}</span>}
+					{project && <span className={styles["display-node__strip-category"]}>{project.categories.map((category) => t(`category.${category}`)).join(" / ")}</span>}
 				</div>
 
 				<div className={styles["display-node__screen"]}>
-					<div className={styles["display-node__screen-content"]} style={{ filter: display?.filter }}>
+					<div
+						className={screenContentClassName}
+						style={{ filter: display?.filter }}
+					>
 						{!project || status === "empty" ? (
 							<p className={styles["display-node__message"]}>{t("display.empty")}</p>
-						) : view === "info" ? (
+						) : renderedView === "info" ? (
 							<div className={styles["display-node__text"]}>
 								<p>{localize(project.description, i18n.language)}</p>
 							</div>
-						) : status === "error" || !media ? (
+						) : status === "error" || !renderedMedia || youtubeUnavailable ? (
 							<p className={styles["display-node__message"]}>{t("display.error")}</p>
+						) : renderedMedia.type === "youtube" && youtubeEmbedUrl ? (
+							<div
+								className={clsx(styles["display-node__youtube"], mediaClassName)}
+								data-loading={mediaState === "loading" ? "true" : undefined}
+								style={{ "--youtube-poster": youtubePosterUrl ? `url("${youtubePosterUrl}")` : undefined } as CSSProperties}
+							>
+								{mediaState === "loading" && <p className={styles["display-node__message"]}>{t("display.loading")}</p>}
+								{mediaState === "error" && <p className={styles["display-node__message"]}>{t("display.error")}</p>}
+								<iframe
+									src={youtubeEmbedUrl}
+									title={renderedMedia.alt ? localize(renderedMedia.alt, i18n.language) : (label ?? t("display.media"))}
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+									allowFullScreen
+									loading="lazy"
+									referrerPolicy="strict-origin-when-cross-origin"
+									onLoad={revealMedia}
+									onError={failMedia}
+								/>
+							</div>
 						) : (
 							<div className={styles["display-node__stage"]}>
 								<div className={mediaClassName}>
 									{mediaState === "loading" && <p className={styles["display-node__message"]}>{t("display.loading")}</p>}
 									{mediaState === "error" && <p className={styles["display-node__message"]}>{t("display.error")}</p>}
-									{media.type === "image" ? (
+									{renderedMedia.type === "image" ? (
 										<img
-											src={media.src}
-											alt={media.alt ? localize(media.alt, i18n.language) : (label ?? "")}
-											onLoad={() => setMediaState("ready")}
-											onError={() => setMediaState("error")}
+											src={renderedMedia.src}
+											alt={renderedMedia.alt ? localize(renderedMedia.alt, i18n.language) : (label ?? "")}
+											onLoad={revealMedia}
+											onError={failMedia}
 										/>
 									) : (
 										<video
-											src={media.src}
+											src={renderedMedia.src}
 											controls
 											aria-label={label ?? ""}
-											onLoadedData={() => setMediaState("ready")}
-											onError={() => setMediaState("error")}
+											onLoadedData={revealMedia}
+											onError={failMedia}
 										/>
 									)}
 								</div>
@@ -102,7 +184,7 @@ export const DisplayNode: FC<DNP> = ({ id, data }) => {
 			<div className={styles["display-node__jack-strip"]}>
 				<Handler
 					type="target"
-					position="left"
+					position="bottom"
 					id={`${id}-media`}
 					portLabel="MEDIA"
 					connected={connectedHandles.includes(mediaTargetId)}
@@ -110,7 +192,7 @@ export const DisplayNode: FC<DNP> = ({ id, data }) => {
 				/>
 				<Handler
 					type="source"
-					position="right"
+					position="bottom"
 					id={`${id}-source-1`}
 					portLabel="OUT"
 					connected={connectedHandles.includes(mediaSourceOneId)}
@@ -127,7 +209,7 @@ export const DisplayNode: FC<DNP> = ({ id, data }) => {
 
 				<div className={styles["display-node__controls"]}>
 					<span className={styles["display-node__rotary-tag"]} aria-hidden="true">
-						{t("display.info")}
+						{t("display.media")}
 					</span>
 
 					<div className={styles["display-node__rotary"]} role="radiogroup" aria-label={t("display.view")}>
@@ -167,7 +249,7 @@ export const DisplayNode: FC<DNP> = ({ id, data }) => {
 					</div>
 
 					<span className={styles["display-node__rotary-tag"]} aria-hidden="true">
-						{t("display.media")}
+						{t("display.info")}
 					</span>
 				</div>
 			</div>
