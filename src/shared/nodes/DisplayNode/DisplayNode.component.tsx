@@ -5,13 +5,12 @@ import { localize } from "@/i18n/localize";
 import { getYouTubeEmbedUrl, getYouTubeThumbnailUrl, type ProjectMedia } from "@shared/data/projects";
 import { getHardwareCode } from "../initialNodes";
 import type { DisplayView } from "../node.types";
+import { MEDIA_FADE_MS } from "../timing";
 import type { DisplayNodeProps as DNP } from "./displayNode.props";
 import styles from "./displayNode.module.scss";
 import { Handler } from "@shared/Handler";
 
 type MediaState = "loading" | "ready" | "error";
-
-const MEDIA_FADE_MS = 400;
 
 export const DisplayNode: FC<DNP> = ({ id, data }) => {
 	const { t, i18n } = useTranslation();

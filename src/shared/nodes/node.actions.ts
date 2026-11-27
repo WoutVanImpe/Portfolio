@@ -6,8 +6,6 @@ import { getRandomCableColor, type PortfolioEdge, type PortfolioNode } from "./n
 
 type NodeKind = "theme" | "language" | "filter";
 
-export const ACTIVE_EDGE_CLASS = "edge--active";
-
 export interface ConnectHandlerOptions {
 	nodes: PortfolioNode[];
 	setEdges: Dispatch<SetStateAction<PortfolioEdge[]>>;
@@ -44,7 +42,6 @@ export const withActiveThemeEdge = (
 			sourceHandle: `${source.id}-0-source`,
 			target: target.id,
 			targetHandle: `${target.id}-0-target`,
-			className: ACTIVE_EDGE_CLASS,
 			data: { kind: "theme", active: true, color: getRandomCableColor() },
 		},
 	];

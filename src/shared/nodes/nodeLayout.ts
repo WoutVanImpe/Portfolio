@@ -425,7 +425,7 @@ const packWide = (nodes: PortfolioNode[], naturalWidths: NaturalWidths): PackRes
 	}
 	if (currentRow.length) projectRows.push(currentRow);
 
-	for (const [rowIndex, row] of projectRows.slice(0, 3).entries()) {
+	for (const [rowIndex, row] of projectRows.entries()) {
 		const baseBuckets = row.map(projectBucket);
 		const rowBuckets = [...baseBuckets];
 		let remainder = leftZoneWidth - (rowBuckets.reduce((sum, value) => sum + value, 0) + (rowBuckets.length - 1) * MODULE_SEAM);

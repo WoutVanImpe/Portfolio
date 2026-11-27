@@ -46,7 +46,7 @@
 
 		position: relative;
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: space-between;
 		gap: 8px;
 
@@ -68,28 +68,29 @@
 	}
 
 	&__strip-title {
-		overflow: hidden;
+		min-width: 0;
+		flex: 1 1 auto;
 		color: var(--text-on-accent);
 		font-family: $font-family-mono;
 		font-size: 11px;
 		font-weight: $font-weight-bold;
 		letter-spacing: 0.04em;
 		line-height: 1.2;
-		text-overflow: ellipsis;
+		overflow-wrap: anywhere;
 		text-transform: uppercase;
-		white-space: nowrap;
 	}
 
 	&__strip-category {
-		flex: 0 0 auto;
+		flex: 0 1 auto;
 		color: var(--text-on-accent);
 		font-family: $font-family-mono;
 		font-size: 9px;
 		font-weight: $font-weight-bold;
 		letter-spacing: 0.08em;
 		line-height: 1;
+		overflow-wrap: anywhere;
+		text-align: right;
 		text-transform: uppercase;
-		white-space: nowrap;
 	}
 
 	&__screen {
@@ -118,7 +119,7 @@
 		justify-content: center;
 		overflow: hidden;
 		opacity: 1;
-		transition: opacity 0.4s ease;
+		transition: opacity var(--motion-fade) ease;
 
 		&--info {
 			align-items: stretch;
@@ -149,7 +150,7 @@
 		height: 100%;
 		opacity: 1;
 		transform: scale(1);
-		transition: opacity 0.4s ease, transform 0.4s ease;
+		transition: opacity var(--motion-fade) ease, transform var(--motion-fade) ease;
 
 		&--fading {
 			opacity: 0;
@@ -181,7 +182,7 @@
 		background-image: var(--youtube-poster, none);
 		background-position: center;
 		background-repeat: no-repeat;
-		background-size: cover;
+		background-size: contain;
 		@include theme-transition;
 
 		&[data-loading="true"] iframe {
@@ -197,7 +198,7 @@
 			border: 0;
 			border-radius: $radius-control;
 			opacity: 1;
-			transition: opacity 0.2s ease;
+			transition: opacity var(--motion-fade) ease;
 		}
 	}
 

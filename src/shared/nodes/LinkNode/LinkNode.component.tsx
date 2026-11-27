@@ -3,10 +3,9 @@ import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { Handler } from "@shared/Handler";
 import { getHardwareCode } from "../initialNodes";
+import { PRESS_DURATION_MS } from "../timing";
 import type { LinkNodeProps as LNP } from "./linkNode.props";
 import styles from "./linkNode.module.scss";
-
-const PRESS_DURATION_MS = 400;
 
 export const LinkNode: FC<LNP> = ({ id, data }) => {
 	const { t } = useTranslation();

@@ -5,12 +5,28 @@ import { isThemeName, type ThemeContextValue, type ThemeName } from "./theme.typ
 
 const STORAGE_KEY = "portfolio-theme";
 
+const readStoredTheme = (): string | null => {
+	try {
+		return window.localStorage.getItem(STORAGE_KEY);
+	} catch {
+		return null;
+	}
+};
+
+const writeStoredTheme = (theme: ThemeName): void => {
+	try {
+		window.localStorage.setItem(STORAGE_KEY, theme);
+	} catch {
+		// Storage can be unavailable in privacy modes; the in-memory theme still works.
+	}
+};
+
 const getInitialTheme = (): ThemeName => {
 	const applied = document.documentElement.dataset.theme ?? null;
 
 	if (isThemeName(applied)) return applied;
 
-	const stored = window.localStorage.getItem(STORAGE_KEY);
+	const stored = readStoredTheme();
 
 	if (isThemeName(stored)) return stored;
 
@@ -22,7 +38,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
 
 	useEffect(() => {
 		document.documentElement.dataset.theme = theme;
-		window.localStorage.setItem(STORAGE_KEY, theme);
+		writeStoredTheme(theme);
 	}, [theme]);
 
 	const toggleTheme = useCallback(() => {

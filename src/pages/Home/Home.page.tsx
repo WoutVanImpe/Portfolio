@@ -41,6 +41,7 @@ import {
 	getRackLayout,
 	initialEdges,
 	initialNodes,
+	MIN_LOADER_VISIBLE_MS,
 	naturalWidth,
 	packNodes,
 	isValidConnection as isValidGraphConnection,
@@ -60,7 +61,6 @@ import type { HomePageProps } from "./home.page.props";
 
 const CASE_CHEEK_SIZE = 34;
 const CASE_RAIL_SIZE = 22;
-const MIN_LOADER_VISIBLE_MS = 700;
 const frameStyle = {
 	"--case-cheek-size": `${CASE_CHEEK_SIZE}px`,
 	"--case-rail-size": `${CASE_RAIL_SIZE}px`,
@@ -250,6 +250,7 @@ export const HomePage: FC<HomePageProps> = () => {
 		return () => cancelAnimationFrame(frame);
 	}, [flowInstance, layoutTick]);
 
+	// Fit is calculated for the inner case opening; blanks and pan bounds must cover the full visible canvas.
 	const frameRect = useMemo<FrameRect | null>(() => {
 		if (!fitReady || !viewportWidth || !viewportHeight) return null;
 
@@ -551,7 +552,6 @@ export const HomePage: FC<HomePageProps> = () => {
 					minZoom={zoomFloor}
 					maxZoom={3}
 					translateExtent={translateExtent}
-					proOptions={{ hideAttribution: true }}
 				>
 					<ViewportPortal>
 						<div

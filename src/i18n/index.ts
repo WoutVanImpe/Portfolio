@@ -23,9 +23,9 @@ void i18n
 			lookupLocalStorage: "portfolio-language",
 			caches: ["localStorage"],
 		},
-	});
+	})
+	.then(syncHtmlLang);
 
-syncHtmlLang();
 i18n.on("languageChanged", syncHtmlLang);
 
 export default i18n;

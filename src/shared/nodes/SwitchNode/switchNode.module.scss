@@ -53,7 +53,7 @@
 		width: 20px;
 		height: 20px;
 		stroke: var(--keycap-light-ink);
-		transition: 0.2s ease-in-out;
+		transition: var(--motion-press-transition) ease-in-out;
 	}
 
 	&__jack-strip {

@@ -116,6 +116,8 @@ $themes: (
 		led-yellow: hsl(35, 100%, 60%),
 		led-green: hsl(118, 100%, 55%),
 		led-red: hsl(0, 100%, 60%),
+		led-specular: #ffffff,
+		led-shade: rgba(0, 0, 0, 0.4),
 
 		key-well: #171717,
 		keycap-light: #c7c3c0,
@@ -263,6 +265,8 @@ $themes: (
 		led-yellow: hsl(35, 100%, 60%),
 		led-green: hsl(118, 100%, 55%),
 		led-red: hsl(0, 100%, 60%),
+		led-specular: #ffffff,
+		led-shade: rgba(0, 0, 0, 0.4),
 
 		key-well: #171717,
 		keycap-light: #c7c3c0,
@@ -299,6 +303,9 @@ $themes: (
 
 :root {
 	--theme-transition: 0.3s ease;
+	--motion-fade: 400ms;
+	--motion-press-hold: 400ms;
+	--motion-press-transition: 200ms;
 	--unit-1u: 96px;
 	--unit-1-5u: 145px;
 	--unit-3u: 292px;
