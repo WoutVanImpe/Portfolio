@@ -27,6 +27,8 @@ const en = {
 	"control.next": "Next media",
 	"common.on": "On",
 	"common.off": "Off",
+	"screenBlock.title": "Window too small",
+	"screenBlock.message": "This site needs a larger window. Please maximize your browser or use a bigger screen.",
 } as const;
 
 export type TranslationKey = keyof typeof en;
@@ -60,6 +62,8 @@ const nl: Record<TranslationKey, string> = {
 	"control.next": "Volgende media",
 	"common.on": "Aan",
 	"common.off": "Uit",
+	"screenBlock.title": "Venster te klein",
+	"screenBlock.message": "Deze site heeft een groter venster nodig. Maximaliseer je browser of gebruik een groter scherm.",
 };
 
 export const resources = {
