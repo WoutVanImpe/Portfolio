@@ -46,7 +46,7 @@
 
 		position: relative;
 		display: flex;
-		align-items: flex-start;
+		align-items: center;
 		justify-content: space-between;
 		gap: 8px;
 
@@ -136,10 +136,10 @@
 			inset: 0;
 			content: "";
 			pointer-events: none;
-			background:
-				repeating-linear-gradient(to bottom, var(--fx-vhs-scanline) 0 1px, transparent 1px 3px),
-				linear-gradient(to bottom, transparent 0%, var(--fx-vhs-band) 50%, transparent 100%);
-			background-size: 100% 100%, 100% 28%;
+			background: repeating-linear-gradient(to bottom, var(--fx-vhs-scanline) 0 1px, transparent 1px 3px), linear-gradient(to bottom, transparent 0%, var(--fx-vhs-band) 50%, transparent 100%);
+			background-size:
+				100% 100%,
+				100% 28%;
 			mix-blend-mode: overlay;
 			opacity: 0.75;
 			animation: display-node-vhs-roll 7s linear infinite;
@@ -165,7 +165,9 @@
 		height: 100%;
 		opacity: 1;
 		transform: scale(1);
-		transition: opacity var(--motion-fade) ease, transform var(--motion-fade) ease;
+		transition:
+			opacity var(--motion-fade) ease,
+			transform var(--motion-fade) ease;
 
 		&--fading {
 			opacity: 0;
@@ -306,22 +308,8 @@
 		border: 3px solid var(--rotary-border);
 		border-radius: 50%;
 		background:
-			conic-gradient(
-				from -2deg,
-				var(--rotary-highlight),
-				var(--rotary-shade),
-				var(--rotary-highlight),
-				var(--rotary-shade),
-				var(--rotary-highlight)
-			),
-			radial-gradient(
-				var(--rotary-shadow-dark),
-				var(--rotary-shadow-light),
-				var(--rotary-shadow-dark),
-				var(--rotary-shadow-light),
-				var(--rotary-shadow-dark),
-				var(--rotary-shadow-light)
-			),
+			conic-gradient(from -2deg, var(--rotary-highlight), var(--rotary-shade), var(--rotary-highlight), var(--rotary-shade), var(--rotary-highlight)),
+			radial-gradient(var(--rotary-shadow-dark), var(--rotary-shadow-light), var(--rotary-shadow-dark), var(--rotary-shadow-light), var(--rotary-shadow-dark), var(--rotary-shadow-light)),
 			radial-gradient(circle at 12% 12%, var(--rotary-face-light), var(--rotary-face-dark));
 		background-position: -3px -3px;
 		background-size: calc(100% + 6px) calc(100% + 6px);
@@ -405,11 +393,15 @@
 
 @keyframes display-node-vhs-roll {
 	from {
-		background-position: 0 0, 0 -100%;
+		background-position:
+			0 0,
+			0 -100%;
 	}
 
 	to {
-		background-position: 0 0, 0 100%;
+		background-position:
+			0 0,
+			0 100%;
 	}
 }
 
