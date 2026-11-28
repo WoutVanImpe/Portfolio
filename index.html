@@ -3,9 +3,33 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Wout Van Impe</title>
-		<script type="module" crossorigin src="/Portfolio/assets/index-CZKu8fHj.js"></script>
-		<link rel="stylesheet" crossorigin href="/Portfolio/assets/index-BS5GeOIO.css">
+		<script>
+			// Keep in sync with STORAGE_KEY in src/context/Theme/ThemeProvider.component.tsx.
+			(function () {
+				var stored = null;
+				try {
+					stored = window.localStorage.getItem("portfolio-theme");
+				} catch (error) {
+					// Storage may be unavailable; fall back to the system preference.
+				}
+
+				var theme =
+					stored === "light" || stored === "dark"
+						? stored
+						: window.matchMedia("(prefers-color-scheme: dark)").matches
+							? "dark"
+							: "light";
+				document.documentElement.dataset.theme = theme;
+			})();
+		</script>
+		<title>Portfolio</title>
+		<script type="module" crossorigin src="/Portfolio/assets/index-DFYRbSYt.js"></script>
+		<link rel="modulepreload" crossorigin href="/Portfolio/assets/react-vendor-CRLdCD3-.js">
+		<link rel="modulepreload" crossorigin href="/Portfolio/assets/flow-vendor-Bt2Vh22w.js">
+		<link rel="modulepreload" crossorigin href="/Portfolio/assets/i18n-vendor-DqmY4Wpd.js">
+		<link rel="modulepreload" crossorigin href="/Portfolio/assets/icons-0_3IQtNk.js">
+		<link rel="stylesheet" crossorigin href="/Portfolio/assets/flow-vendor-CGuSgA2m.css">
+		<link rel="stylesheet" crossorigin href="/Portfolio/assets/index-uVwmei98.css">
 	</head>
 	<body>
 		<div id="root"></div>
