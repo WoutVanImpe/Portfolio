@@ -13,6 +13,36 @@ export const HomePage: FC<HomePageProps> = () => {
 
 	return (
 		<main className={clsx(styles["home-page"], rack.isZoomedIn && styles["home-page--zoomed"])} style={frameStyle}>
+			<svg className={styles["home-page__filters"]} aria-hidden="true" focusable="false">
+				<defs>
+					<filter id="portfolio-rgb-split" colorInterpolationFilters="sRGB" x="-10%" y="-10%" width="120%" height="120%">
+						<feOffset in="SourceGraphic" dx="3" dy="0" result="redShift" />
+						<feColorMatrix
+							in="redShift"
+							type="matrix"
+							values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"
+							result="red"
+						/>
+						<feOffset in="SourceGraphic" dx="-3" dy="0" result="cyanShift" />
+						<feColorMatrix
+							in="cyanShift"
+							type="matrix"
+							values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
+							result="cyan"
+						/>
+						<feBlend in="red" in2="cyan" mode="screen" />
+					</filter>
+
+					<filter id="portfolio-pixelate" colorInterpolationFilters="sRGB">
+						<feFlood x="3" y="3" width="2" height="2" floodColor="white" result="sample" />
+						<feComposite in="sample" in2="sample" x="0" y="0" width="10" height="10" operator="over" result="cell" />
+						<feTile in="cell" result="tiles" />
+						<feComposite in="SourceGraphic" in2="tiles" operator="in" result="sampled" />
+						<feMorphology in="sampled" operator="dilate" radius="4" />
+					</filter>
+				</defs>
+			</svg>
+
 			<div className={styles["home-page__measure"]} ref={rack.measureRef} aria-hidden="true" />
 
 			<div className={styles["home-page__canvas"]} ref={rack.flowWrapRef}>

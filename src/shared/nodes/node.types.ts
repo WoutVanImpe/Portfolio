@@ -53,7 +53,7 @@ export interface ProjectNodeData extends BaseNodeData {
 
 export type DisplayStatus = "empty" | "loading" | "error" | "ready";
 export type DisplayView = "media" | "info";
-export type ModifierValue = "grayscale" | "blur" | "contrast";
+export type ModifierValue = "vhs" | "rgbSplit" | "pixelate";
 
 export interface DisplayNodeData extends BaseNodeData {
 	kind: "display";
@@ -62,6 +62,7 @@ export interface DisplayNodeData extends BaseNodeData {
 	mediaIndex?: number;
 	status?: DisplayStatus;
 	filter?: string;
+	modifiers?: ModifierValue[];
 	view?: DisplayView;
 	onViewChange?: (view: DisplayView) => void;
 }

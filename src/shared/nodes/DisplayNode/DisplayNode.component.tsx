@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { localize } from "@/i18n/localize";
 import { getYouTubeEmbedUrl, getYouTubeThumbnailUrl, type ProjectMedia } from "@shared/data/projects";
+import { toCssFilter } from "../graph";
 import { getHardwareCode } from "../initialNodes";
 import type { DisplayView } from "../node.types";
 import { MEDIA_FADE_MS } from "../timing";
@@ -41,6 +42,10 @@ export const DisplayNode: FC<DNP> = ({ id, data }) => {
 	const status = display?.status ?? "empty";
 	const hasMediaError = mediaState === "error" || youtubeUnavailable;
 	const ledStatus = hasMediaError ? "error" : status;
+	const usesYouTubeFrame = renderedMedia?.type === "youtube" && Boolean(youtubeEmbedUrl) && !youtubeUnavailable;
+	const appliedFilter = usesYouTubeFrame
+		? toCssFilter((display?.modifiers ?? []).filter((modifier) => modifier !== "rgbSplit" && modifier !== "pixelate"))
+		: display?.filter;
 
 	useEffect(() => {
 		if (!hasMediaMountedRef.current) {
@@ -92,9 +97,14 @@ export const DisplayNode: FC<DNP> = ({ id, data }) => {
 		[styles["display-node__media--error"]]: hasMediaError,
 		[styles["display-node__media--fading"]]: mediaFading,
 	});
+	const youtubeEffectClassName = clsx({
+		[styles["display-node__youtube--rgb-split"]]: usesYouTubeFrame && display?.modifiers?.includes("rgbSplit"),
+		[styles["display-node__youtube--pixelate"]]: usesYouTubeFrame && display?.modifiers?.includes("pixelate"),
+	});
 	const screenContentClassName = clsx(styles["display-node__screen-content"], {
 		[styles["display-node__screen-content--info"]]: renderedView === "info",
 		[styles["display-node__screen-content--view-fading"]]: viewFading,
+		[styles["display-node__screen-content--vhs"]]: display?.modifiers?.includes("vhs"),
 	});
 	const handleViewChange = (next: DisplayView) => () => display?.onViewChange?.(next);
 
@@ -123,7 +133,7 @@ export const DisplayNode: FC<DNP> = ({ id, data }) => {
 				<div className={styles["display-node__screen"]}>
 					<div
 						className={screenContentClassName}
-						style={{ filter: display?.filter }}
+						style={{ filter: appliedFilter }}
 					>
 						{!project || status === "empty" ? (
 							<p className={styles["display-node__message"]}>{t("display.empty")}</p>
@@ -135,7 +145,7 @@ export const DisplayNode: FC<DNP> = ({ id, data }) => {
 							<p className={styles["display-node__message"]}>{t("display.error")}</p>
 						) : renderedMedia.type === "youtube" && youtubeEmbedUrl ? (
 							<div
-								className={clsx(styles["display-node__youtube"], mediaClassName)}
+								className={clsx(styles["display-node__youtube"], mediaClassName, youtubeEffectClassName)}
 								data-loading={mediaState === "loading" ? "true" : undefined}
 								style={{ "--youtube-poster": youtubePosterUrl ? `url("${youtubePosterUrl}")` : undefined } as CSSProperties}
 							>

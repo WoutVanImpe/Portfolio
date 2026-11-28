@@ -6,7 +6,7 @@ import { getHardwareCode } from "../initialNodes";
 import type { ModifierNodeData, ModifierValue } from "../node.types";
 import styles from "./effectRack.module.scss";
 
-const modifierValues: ModifierValue[] = ["grayscale", "blur", "contrast"];
+const modifierValues: ModifierValue[] = ["vhs", "rgbSplit", "pixelate"];
 
 interface EffectRackProps {
 	id: string;

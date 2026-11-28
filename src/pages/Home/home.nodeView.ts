@@ -111,6 +111,7 @@ export const buildRenderNodes = ({
 					project: state?.project,
 					status: state?.status,
 					filter: state?.filter,
+					modifiers: state?.modifiers,
 					mediaIndex,
 					view: displayViews[displayId] ?? "media",
 					onViewChange: (view: DisplayView) => setDisplayView(displayId, view),

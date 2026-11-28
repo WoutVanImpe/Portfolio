@@ -6,6 +6,9 @@ import { getRandomCableColor, type PortfolioEdge, type PortfolioNode } from "./n
 
 type NodeKind = "theme" | "language" | "filter";
 
+const isFlowCable = (edge: PortfolioEdge): boolean =>
+	edge.data?.kind === undefined || edge.data.kind === "flow" || edge.data.kind === "modifier";
+
 export interface ConnectHandlerOptions {
 	nodes: PortfolioNode[];
 	setEdges: Dispatch<SetStateAction<PortfolioEdge[]>>;
@@ -119,10 +122,8 @@ export const handleConnect = (options: ConnectHandlerOptions, connection: Connec
 		return;
 	}
 
-	const targetIsDisplay = nodes.some((node) => node.id === connection.target && node.data.kind === "display");
-
 	setEdges((current) => {
-		const base = targetIsDisplay ? current.filter((edge) => edge.target !== connection.target) : current;
+		const base = current.filter((edge) => !(isFlowCable(edge) && edge.target === connection.target));
 
 		return addEdge<PortfolioEdge>({ ...connection, data: { kind: "flow", color: getRandomCableColor() } }, base);
 	});

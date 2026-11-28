@@ -105,9 +105,9 @@ export const getActiveCategoryFilter = (nodes: PortfolioNode[], edges: Portfolio
 };
 
 const effectStyles: Record<ModifierValue, string> = {
-	grayscale: "grayscale(1)",
-	blur: "blur(2px)",
-	contrast: "contrast(1.25)",
+	vhs: "saturate(1.35) contrast(1.12)",
+	rgbSplit: "url(#portfolio-rgb-split)",
+	pixelate: "url(#portfolio-pixelate)",
 };
 
 export const toCssFilter = (modifiers: ModifierValue[] = []): string | undefined => {
