@@ -27,6 +27,8 @@ const en = {
 	"control.next": "Next media",
 	"common.on": "On",
 	"common.off": "Off",
+	"about.label": "About",
+	"about.body": "Hi! I'm Wout, with a background in Multimedia and Creative Technology from Erasmushogeschool Brussel and a strong passion for front-end development and motion design. I love experimenting with new technologies and challenging myself to work creatively and find practical solutions. I'm also active as a social media manager at JNM (Jeugdbond voor Natuur en Milieu), where I help create promotional material such as Instagram content, flyers and magazines. In my free time, I enjoy sharpening my technical and visual skills.",
 	"screenBlock.title": "Window too small",
 	"screenBlock.message": "This site needs a larger window. Please maximize your browser or use a bigger screen.",
 } as const;
@@ -62,6 +64,8 @@ const nl: Record<TranslationKey, string> = {
 	"control.next": "Volgende media",
 	"common.on": "Aan",
 	"common.off": "Uit",
+	"about.label": "Over mij",
+	"about.body": "Hi! Ik ben Wout, met een achtergrond in Multimedia en Creatieve Technologie aan de Erasmushogeschool Brussel en een sterke passie voor front-end development en motion design. Ik experimenteer graag met nieuwe technologieën en daag mezelf uit om creatief en oplossingsgericht te werken. Daarnaast ben ik actief als socialmediamanager bij JNM (Jeugdbond voor Natuur en Milieu), waar ik onder andere meewerk aan promomateriaal zoals Instagramcontent, flyers en magazines. In mijn vrije tijd besteed ik graag aandacht aan het aanscherpen van mijn technische en visuele skills.",
 	"screenBlock.title": "Venster te klein",
 	"screenBlock.message": "Deze site heeft een groter venster nodig. Maximaliseer je browser of gebruik een groter scherm.",
 };

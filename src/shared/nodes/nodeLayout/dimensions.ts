@@ -1,8 +1,9 @@
 import { getProject } from "@shared/data/projects";
 import type { PortfolioNode } from "../node.types";
-import { FX_WIDTH, SWITCH_ID, UNIT_1_5U, UNIT_1U, UNIT_3U, UNIT_4U } from "./constants";
+import { ABOUT_WIDTH, FX_WIDTH, SWITCH_ID, UNIT_1_5U, UNIT_1U, UNIT_1_75U, UNIT_3U, UNIT_4U } from "./constants";
 
 export const naturalWidth = (node: PortfolioNode): number => {
+	if (node.data.kind === "about") return ABOUT_WIDTH;
 	if (node.data.kind === "display") return 520;
 	if (node.data.kind === "modifier") return FX_WIDTH;
 	if (node.data.kind === "control") return node.id === SWITCH_ID ? 144 : 88;
@@ -14,6 +15,7 @@ export const naturalWidth = (node: PortfolioNode): number => {
 };
 
 export const naturalHeight = (node: PortfolioNode): number => {
+	if (node.data.kind === "about") return UNIT_1_75U;
 	if (node.data.kind === "display") return UNIT_4U;
 	if (node.data.kind === "modifier") return UNIT_3U;
 	if (node.data.kind === "control") return UNIT_1_5U;

@@ -5,10 +5,21 @@ import { packCompact, packDeck, packWide } from "./pack";
 import type { Candidate, NaturalWidths, PackResult } from "./types";
 
 const fitScale = (nodes: PortfolioNode[], packed: PackResult, viewportWidth: number, viewportHeight: number): number => {
-	const right = Math.max(...nodes.map((node) => packed.positions.get(node.id)!.x + (packed.widths.get(node.id) ?? naturalWidth(node))));
-	const bottom = Math.max(...nodes.map((node) => packed.positions.get(node.id)!.y + naturalHeight(node)));
+	const positions = nodes.map((node) => {
+		const position = packed.positions.get(node.id)!;
+		return {
+			left: position.x,
+			top: position.y,
+			right: position.x + (packed.widths.get(node.id) ?? naturalWidth(node)),
+			bottom: position.y + naturalHeight(node),
+		};
+	});
+	const left = Math.min(...positions.map((rect) => rect.left));
+	const top = Math.min(...positions.map((rect) => rect.top));
+	const right = Math.max(...positions.map((rect) => rect.right));
+	const bottom = Math.max(...positions.map((rect) => rect.bottom));
 
-	return Math.min(viewportWidth / Math.max(1, right), viewportHeight / Math.max(1, bottom));
+	return Math.min(viewportWidth / Math.max(1, right - left), viewportHeight / Math.max(1, bottom - top));
 };
 
 const candidateMetrics = (nodes: PortfolioNode[], packed: PackResult, viewportWidth: number, viewportHeight: number): Candidate => {

@@ -1,10 +1,12 @@
-﻿import { CurvedEdge } from "./CurvedEdge";
+﻿import { AboutNode } from "./AboutNode";
+import { CurvedEdge } from "./CurvedEdge";
 import { DisplayNode } from "./DisplayNode";
 import { LabelNode } from "./LabelNode";
 import { LinkNode } from "./LinkNode";
 import { SwitchNode } from "./SwitchNode";
 
 export const nodeTypes = {
+	about: AboutNode,
 	display: DisplayNode,
 	displayFilter: LabelNode,
 	filter: LabelNode,

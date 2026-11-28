@@ -1,6 +1,7 @@
 import type { PortfolioNode } from "../node.types";
 import { fillBlanks } from "./blanks";
 import {
+	ABOUT_ID,
 	DISPLAY_ID,
 	FILTER_ID,
 	FILTER_ITEM_IDS,
@@ -20,6 +21,7 @@ import {
 	TOP_RAIL_IDS,
 	UNIT_1U,
 	UNIT_1_5U,
+	UNIT_1_75U,
 	UNIT_3U,
 	UNIT_4U,
 } from "./constants";
@@ -30,7 +32,7 @@ const packDeck = (nodes: PortfolioNode[], naturalWidths: NaturalWidths, options:
 	const positions: PackedPositions = new Map();
 	const widths: Map<string, number> = new Map();
 	const byId = new Map(nodes.map((node) => [node.id, node]));
-	const natural = (id: string): number => naturalWidths.get(id) ?? naturalWidth(byId.get(id)!);
+	const natural = (id: string): number => naturalWidths.get(id) ?? (byId.get(id) ? naturalWidth(byId.get(id)!) : 120);
 
 	for (const node of nodes) widths.set(node.id, natural(node.id));
 
@@ -38,6 +40,7 @@ const packDeck = (nodes: PortfolioNode[], naturalWidths: NaturalWidths, options:
 	widths.set(LINK_ID, controlWidth);
 	widths.set(SWITCH_ID, controlWidth);
 	widths.set(FX_ID, FX_WIDTH);
+	widths.set(ABOUT_ID, natural(ABOUT_ID));
 
 	const railIds = [FILTER_ID, ...FILTER_ITEM_IDS];
 	let contentX = 0;
@@ -74,7 +77,7 @@ const packDeck = (nodes: PortfolioNode[], naturalWidths: NaturalWidths, options:
 
 	const displayWidth = natural(DISPLAY_ID);
 	const projectAreaWidth = projectCellWidth * columns + (columns - 1) * MODULE_SEAM;
-	const topIds = [LANGUAGE_ID, ...LANGUAGE_ITEM_IDS, THEME_ID];
+	const topIds = [LANGUAGE_ID, ...LANGUAGE_ITEM_IDS, THEME_ID, ...THEME_ITEM_IDS];
 	let topX = contentX;
 	for (const id of topIds) {
 		positions.set(id, { x: topX, y: topY });
@@ -86,8 +89,9 @@ const packDeck = (nodes: PortfolioNode[], naturalWidths: NaturalWidths, options:
 		topRowWidth,
 		options.stackDisplay ? displayWidth : FX_WIDTH + MODULE_SEAM + displayWidth,
 	);
+	widths.set(ABOUT_ID, natural(ABOUT_ID));
 
-	const rightIds = options.controlsBelow ? [...THEME_ITEM_IDS] : [...THEME_ITEM_IDS, LINK_ID, SWITCH_ID];
+	const rightIds = options.controlsBelow ? [] : [LINK_ID, SWITCH_ID];
 	const rightX = contentX + centerWidth + MODULE_SEAM;
 	let rightY = topY;
 	for (const id of rightIds) {
@@ -106,6 +110,7 @@ const packDeck = (nodes: PortfolioNode[], naturalWidths: NaturalWidths, options:
 		positions.set(LINK_ID, { x: displayX, y: controlsY });
 		positions.set(SWITCH_ID, { x: displayX + controlWidth + MODULE_SEAM, y: controlsY });
 	}
+	positions.set(ABOUT_ID, { x: 0, y: -(UNIT_1_75U + MODULE_SEAM) });
 
 	return { positions, widths, blanks: fillBlanks(nodes, positions, widths) };
 };
@@ -145,6 +150,7 @@ const packCompact = (nodes: PortfolioNode[], naturalWidths: NaturalWidths, optio
 	positions.set(DISPLAY_ID, { x: displayX, y: displayY });
 
 	const bottomFrameWidth = displayX + displayWidth;
+	widths.set(ABOUT_ID, natural(ABOUT_ID));
 	if (options.controlsRight) {
 		const controlX = bottomFrameWidth + MODULE_SEAM;
 		positions.set(LINK_ID, { x: controlX, y: bottomY });
@@ -154,6 +160,7 @@ const packCompact = (nodes: PortfolioNode[], naturalWidths: NaturalWidths, optio
 		positions.set(LINK_ID, { x: 0, y: controlsY });
 		positions.set(SWITCH_ID, { x: controlWidth + MODULE_SEAM, y: controlsY });
 	}
+	positions.set(ABOUT_ID, { x: 0, y: -(UNIT_1_75U + MODULE_SEAM) });
 
 	return { positions, widths, blanks: fillBlanks(nodes, positions, widths) };
 };
@@ -172,13 +179,25 @@ const packWide = (nodes: PortfolioNode[], naturalWidths: NaturalWidths): PackRes
 	widths.set(LINK_ID, controlWidth);
 	widths.set(SWITCH_ID, controlWidth);
 	widths.set(FX_ID, FX_WIDTH);
+	widths.set(ABOUT_ID, natural(ABOUT_ID));
 
 	const projectNodes = nodes.filter((item) => item.data.kind === "project");
-	const projectBuckets = projectNodes.map(projectBucket);
-	const desiredLeftZone = projectBuckets.reduce((max, _bucket, index) => {
-		if (index % 3 !== 0) return max;
-		const row = projectBuckets.slice(index, index + 3);
-		const rowWidth = row.reduce((sum, value) => sum + value, 0) + Math.max(0, row.length - 1) * MODULE_SEAM;
+	const maxProjectRows = Math.floor((UNIT_4U + MODULE_SEAM) / (UNIT_1U + MODULE_SEAM));
+	const projectRowCount = Math.min(projectNodes.length, maxProjectRows);
+	const projectOrder = new Map(projectNodes.map((node, index) => [node.id, index]));
+	const projectRows: PortfolioNode[][] = Array.from({ length: projectRowCount }, () => []);
+	const projectRowLoads = Array<number>(projectRowCount).fill(0);
+
+	for (const node of [...projectNodes].sort((a, b) => projectBucket(b) - projectBucket(a))) {
+		const target = projectRowLoads.indexOf(Math.min(...projectRowLoads));
+		projectRows[target].push(node);
+		projectRowLoads[target] += projectBucket(node);
+	}
+
+	for (const row of projectRows) row.sort((a, b) => projectOrder.get(a.id)! - projectOrder.get(b.id)!);
+
+	const desiredLeftZone = projectRows.reduce((max, row) => {
+		const rowWidth = row.reduce((sum, node) => sum + projectBucket(node), 0) + Math.max(0, row.length - 1) * MODULE_SEAM;
 		return Math.max(max, rowWidth);
 	}, MIN_LEFT_ZONE);
 
@@ -202,6 +221,9 @@ const packWide = (nodes: PortfolioNode[], naturalWidths: NaturalWidths): PackRes
 	if (leftZoneWidth < desiredLeftZone) {
 		displayWidth = Math.max(MIN_DISPLAY_WIDTH, topRailWidth - FX_WIDTH - controlWidth - 3 * MODULE_SEAM - desiredLeftZone);
 		leftZoneWidth = topRailWidth - FX_WIDTH - displayWidth - controlWidth - 3 * MODULE_SEAM;
+	} else if (leftZoneWidth > desiredLeftZone) {
+		displayWidth += leftZoneWidth - desiredLeftZone;
+		leftZoneWidth = desiredLeftZone;
 	}
 	widths.set(DISPLAY_ID, displayWidth);
 
@@ -212,37 +234,22 @@ const packWide = (nodes: PortfolioNode[], naturalWidths: NaturalWidths): PackRes
 	}
 
 	const centerY = UNIT_1U + MODULE_SEAM;
-	const projectRows: PortfolioNode[][] = [];
-	let currentRow: PortfolioNode[] = [];
-	let rowWidth = 0;
-
-	for (const node of nodes.filter((item) => item.data.kind === "project")) {
-		const bucket = projectBucket(node);
-		if (currentRow.length === 0) {
-			currentRow.push(node);
-			rowWidth = bucket;
-		} else if (rowWidth + MODULE_SEAM + bucket <= leftZoneWidth) {
-			currentRow.push(node);
-			rowWidth += MODULE_SEAM + bucket;
-		} else {
-			projectRows.push(currentRow);
-			currentRow = [node];
-			rowWidth = bucket;
-		}
-	}
-	if (currentRow.length) projectRows.push(currentRow);
 
 	for (const [rowIndex, row] of projectRows.entries()) {
 		const baseBuckets = row.map(projectBucket);
 		const rowBuckets = [...baseBuckets];
-		let remainder = leftZoneWidth - (rowBuckets.reduce((sum, value) => sum + value, 0) + (rowBuckets.length - 1) * MODULE_SEAM);
+		let remainder = leftZoneWidth - (rowBuckets.reduce((sum, value) => sum + value, 0) + Math.max(0, rowBuckets.length - 1) * MODULE_SEAM);
 
-		while (remainder >= HP_STEP) {
-			const index = rowBuckets.findIndex((value, position) => value - baseBuckets[position] < HP_STEP);
-			if (index < 0) break;
+		while (remainder >= HP_STEP && rowBuckets.length > 0) {
+			const index = rowBuckets.reduce((best, _value, position) => {
+				const bestGain = rowBuckets[best] - baseBuckets[best];
+				const gain = rowBuckets[position] - baseBuckets[position];
+				return gain < bestGain ? position : best;
+			}, 0);
 			rowBuckets[index] += HP_STEP;
 			remainder -= HP_STEP;
 		}
+		if (remainder > 0 && rowBuckets.length) rowBuckets[rowBuckets.length - 1] += remainder;
 
 		let projectX = 0;
 		const rowY = centerY + rowIndex * (UNIT_1U + MODULE_SEAM);
@@ -260,6 +267,7 @@ const packWide = (nodes: PortfolioNode[], naturalWidths: NaturalWidths): PackRes
 	positions.set(DISPLAY_ID, { x: displayX, y: centerY });
 	positions.set(LINK_ID, { x: controlX, y: centerY });
 	positions.set(SWITCH_ID, { x: controlX, y: centerY + UNIT_1_5U + MODULE_SEAM });
+	positions.set(ABOUT_ID, { x: 0, y: -(UNIT_1_75U + MODULE_SEAM) });
 
 	return { positions, widths, blanks: fillBlanks(nodes, positions, widths) };
 };

@@ -40,7 +40,7 @@ import {
 	type PortfolioNode,
 	type RackLayout,
 } from "@shared/nodes";
-import { CASE_CHEEK_SIZE, CASE_RAIL_SIZE } from "./home.constants";
+import { ABOUT_MIN_VIEWPORT_SIZE, CASE_CHEEK_SIZE, CASE_RAIL_SIZE } from "./home.constants";
 import {
 	buildRenderEdges,
 	buildRenderNodes,
@@ -73,8 +73,25 @@ export const useHomeRack = () => {
 	const [nodes, setNodes, onNodesChange] = useNodesState<PortfolioNode>(createNodes(layout));
 	const nodesRef = useRef(nodes);
 	nodesRef.current = nodes;
+	const aboutNodeRef = useRef<PortfolioNode | undefined>(nodes.find((node) => node.data.kind === "about"));
+	const showAboutNode = viewportWidth >= ABOUT_MIN_VIEWPORT_SIZE && viewportHeight >= ABOUT_MIN_VIEWPORT_SIZE;
+	const hasAboutNode = nodes.some((node) => node.data.kind === "about");
 	const innerSizeRef = useRef({ width: viewportWidth, height: viewportHeight });
 	innerSizeRef.current = { width: viewportWidth, height: viewportHeight };
+
+	useEffect(() => {
+		if (showAboutNode === hasAboutNode) return;
+
+		setNodes((current) => {
+			const aboutNode = current.find((node) => node.data.kind === "about");
+			if (showAboutNode) return aboutNodeRef.current ? [aboutNodeRef.current, ...current] : current;
+			if (!aboutNode) return current;
+			aboutNodeRef.current = aboutNode;
+			return current.filter((node) => node.id !== aboutNode.id);
+		});
+		setLayoutTick((tick) => tick + 1);
+	}, [hasAboutNode, setNodes, showAboutNode]);
+
 	const [edges, setEdges, onEdgesChange] = useEdgesState<PortfolioEdge>(withActiveLanguageEdge(withActiveThemeEdge(initialEdges, initialNodes, theme), initialNodes, language));
 	const [mediaIndexes, setMediaIndexes] = useState<Record<string, number>>({});
 	const [displayViews, setDisplayViews] = useState<Record<string, DisplayView>>({});

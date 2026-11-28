@@ -5,9 +5,10 @@ import { nodeDefinitions, type NodeDefinition } from "./nodeDefinitions";
 import { rackSlots, slotToPosition } from "./rackSlots";
 
 const toNodeData = (definition: NodeDefinition): PortfolioNodeData => {
-	const { label, labelKey, localizedLabel, projectId, displayId, kind, value, activeModifiers, handles } = definition;
+	const { label, labelKey, bodyKey, localizedLabel, projectId, displayId, kind, value, activeModifiers, handles } = definition;
 	const common = { label, labelKey, localizedLabel, handles };
 
+	if (kind === "about") return { ...common, kind, bodyKey: bodyKey ?? "about.body" };
 	if (kind === "theme") return { ...common, kind, value: value as ThemeName | undefined };
 	if (kind === "language") return { ...common, kind, value };
 	if (kind === "project") return { ...common, kind, projectId: projectId ?? "" };

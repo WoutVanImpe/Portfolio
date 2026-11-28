@@ -1,3 +1,4 @@
+export * from "./AboutNode";
 export * from "./DisplayNode";
 export * from "./EffectRack";
 export * from "./LabelNode";

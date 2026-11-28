@@ -4,6 +4,7 @@ const PROJECT_IDS = projects.map((project) => project.id);
 const FILTER_IDS = ["filter-3", "filterItem-4", "filterItem-18", "filterItem-19", "filterItem-20", "filterItem-21"];
 const SYSTEM_IDS = ["language-5", "languageItem-6", "languageItem-12", "theme-9", "themeItem-10", "themeItem-11"];
 const SINGLE_CODES: Record<string, string> = {
+	"about-1": "ABT-01",
 	"display-1": "DSP-01",
 	"displayFilter-2": "FX-01",
 	"link-7": "LNK-01",

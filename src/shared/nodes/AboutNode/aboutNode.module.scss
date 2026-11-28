@@ -1,0 +1,42 @@
+@use "@styles/abstract" as *;
+
+.about-node {
+	@include synth-module;
+
+	height: 170px;
+	overflow: hidden;
+}
+
+.about-node__header {
+	@include module-header;
+}
+
+.about-node__status {
+	@include module-status-led;
+}
+
+.about-node__title {
+	@include module-title;
+}
+
+.about-node__code {
+	@include module-code;
+}
+
+.about-node__body {
+	@include module-body;
+
+	flex: 1 1 auto;
+	min-height: 0;
+	padding: 8px 12px;
+	overflow: auto;
+	color: var(--text-primary);
+	font-family: $font-family-mono;
+	font-size: 10px;
+	line-height: 1.55;
+	scrollbar-width: thin;
+
+	p {
+		margin: 0;
+	}
+}

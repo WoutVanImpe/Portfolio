@@ -3,13 +3,14 @@ import type { TranslationKey } from "@/i18n/resources";
 import { projects } from "@shared/data/projects";
 import type { ModifierValue, NodeHandleConfig } from "../node.types";
 
-type NodeKind = "theme" | "language" | "project" | "display" | "control" | "modifier" | "filter";
+type NodeKind = "about" | "theme" | "language" | "project" | "display" | "control" | "modifier" | "filter";
 
 export interface NodeDefinition {
 	id: string;
 	type: string;
 	label?: string;
 	labelKey?: TranslationKey;
+	bodyKey?: TranslationKey;
 	localizedLabel?: LocalizedText;
 	projectId?: string;
 	displayId?: string;
@@ -27,6 +28,13 @@ const passThroughHandles: NodeHandleConfig[] = [
 const targetOnlyHandle: NodeHandleConfig[] = [{ type: "target", position: "bottom" }];
 
 export const nodeDefinitions: NodeDefinition[] = [
+	{
+		id: "about-1",
+		type: "about",
+		labelKey: "about.label",
+		bodyKey: "about.body",
+		kind: "about",
+	},
 	...projects.map(
 		(project): NodeDefinition => ({
 			id: project.id,

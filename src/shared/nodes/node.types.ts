@@ -31,6 +31,11 @@ export interface PlainNodeData extends BaseNodeData {
 	kind?: "plain";
 }
 
+export interface AboutNodeData extends BaseNodeData {
+	kind: "about";
+	bodyKey: TranslationKey;
+}
+
 export interface ThemeNodeData extends BaseNodeData {
 	kind: "theme";
 	value?: ThemeName;
@@ -82,6 +87,7 @@ export interface FilterNodeData extends BaseNodeData {
 
 export type PortfolioNodeData =
 	| PlainNodeData
+	| AboutNodeData
 	| ThemeNodeData
 	| LanguageNodeData
 	| ProjectNodeData
