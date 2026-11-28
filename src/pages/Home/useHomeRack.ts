@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent as R
 import { useTranslation } from "react-i18next";
 import {
 	NodeChangeset,
-	getNodesBounds,
 	getViewportForBounds,
 	useEdgesState,
 	useNodesState,
@@ -220,7 +219,7 @@ export const useHomeRack = () => {
 		setIsZoomedIn(false);
 		setBlankPanels([]);
 		const frame = requestAnimationFrame(() => {
-			const bounds = getNodesBounds(nodesRef.current);
+			const bounds = flowInstance.getNodesBounds(nodesRef.current);
 			if (!bounds.width || !bounds.height) return;
 
 			const { width, height } = innerSizeRef.current;
