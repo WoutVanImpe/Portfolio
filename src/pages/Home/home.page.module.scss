@@ -19,7 +19,7 @@
 	&__frame {
 		position: absolute;
 		inset: 0;
-		z-index: 2;
+		z-index: 20;
 		overflow: hidden;
 		pointer-events: none;
 		background: transparent;
@@ -113,6 +113,13 @@
 
 			:global(.react-flow__viewport) {
 				will-change: transform;
+			}
+
+			// The frame is a child of React Flow's z-index: 0 wrapper, so it and
+			// the attribution share a stacking context. Keep the attribution on
+			// top of the frame without lifting the whole canvas.
+			:global(.react-flow__attribution) {
+				z-index: 21;
 			}
 		}
 	}
