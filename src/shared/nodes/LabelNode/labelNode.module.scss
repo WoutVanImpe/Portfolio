@@ -1,0 +1,50 @@
+@use "@styles/abstract" as *;
+
+.label-node {
+	@include synth-module;
+
+	width: 100%;
+	height: var(--unit-1u);
+	padding-right: $side-code-gutter;
+
+	&__header {
+		@include module-header;
+	}
+
+	&__status {
+		@include module-status-led;
+	}
+
+	&__title {
+		@include module-title;
+	}
+
+	&__code {
+		@include module-side-code;
+	}
+
+	&__jack-strip {
+		@include jack-strip;
+
+		flex: 1 1 auto;
+		align-items: center;
+		padding: 0 2px;
+	}
+
+	&--project &__title {
+		overflow-wrap: anywhere;
+		white-space: normal;
+	}
+
+	&--filter &__header,
+	&--language &__header {
+		min-height: 20px;
+		padding: 3px 4px;
+	}
+
+	&--filter &__jack-strip,
+	&--language &__jack-strip {
+		gap: 6px;
+		padding: 0 2px;
+	}
+}

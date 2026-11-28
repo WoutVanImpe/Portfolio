@@ -1,0 +1,14 @@
+@use "sass:map";
+@use "./light";
+@use "./dark";
+
+$themes: (
+	light: light.$theme-light,
+	dark: dark.$theme-dark,
+);
+
+@mixin theme-tokens($theme) {
+	@each $name, $value in map.get($themes, $theme) {
+		--#{$name}: #{$value};
+	}
+}

@@ -1,0 +1,62 @@
+@use "@styles/abstract" as *;
+
+.switch-node {
+	@include synth-module;
+
+	width: 100%;
+	height: var(--unit-1-5u);
+	padding-right: $side-code-gutter;
+
+	&__header {
+		@include module-header;
+	}
+
+	&__status {
+		@include module-status-led;
+	}
+
+	&__title {
+		@include module-title;
+	}
+
+	&__code {
+		@include module-side-code;
+	}
+
+	&__body {
+		@include module-body;
+
+		flex-direction: row;
+		gap: 8px;
+	}
+
+	&__key-housing {
+		@include key-housing;
+	}
+
+	&__keycap {
+		@include keycap-icon;
+		@include keycap-icon-active;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&:disabled {
+			cursor: default;
+			filter: saturate(0.35);
+			opacity: 0.42;
+		}
+	}
+
+	&__icon {
+		width: 20px;
+		height: 20px;
+		stroke: var(--keycap-light-ink);
+		transition: var(--motion-press-transition) ease-in-out;
+	}
+
+	&__jack-strip {
+		@include jack-strip;
+	}
+}

@@ -1,0 +1,53 @@
+@use "@styles/abstract" as *;
+
+.link-node {
+	@include synth-module;
+
+	width: 100%;
+	height: var(--unit-1-5u);
+	padding-right: $side-code-gutter;
+
+	&__header {
+		@include module-header;
+	}
+
+	&__status {
+		@include module-status-led;
+	}
+
+	&__title {
+		@include module-title;
+	}
+
+	&__code {
+		@include module-side-code;
+	}
+
+	&__body {
+		@include module-body;
+	}
+
+	&__key-housing {
+		@include key-housing;
+	}
+
+	&__keycap {
+		@include keycap-record;
+		@include keycap-record-active;
+
+		&:disabled {
+			cursor: default;
+			opacity: 0.6;
+		}
+	}
+
+	&__keycap-text {
+		@include button-text;
+
+		font-weight: $font-weight-bold;
+	}
+
+	&__jack-strip {
+		@include jack-strip;
+	}
+}

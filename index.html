@@ -3,7 +3,26 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Wout Van Impe</title>
+		<script>
+			// Keep in sync with STORAGE_KEY in src/context/Theme/ThemeProvider.component.tsx.
+			(function () {
+				var stored = null;
+				try {
+					stored = window.localStorage.getItem("portfolio-theme");
+				} catch (error) {
+					// Storage may be unavailable; fall back to the system preference.
+				}
+
+				var theme =
+					stored === "light" || stored === "dark"
+						? stored
+						: window.matchMedia("(prefers-color-scheme: dark)").matches
+							? "dark"
+							: "light";
+				document.documentElement.dataset.theme = theme;
+			})();
+		</script>
+		<title>Portfolio</title>
 	</head>
 	<body>
 		<div id="root"></div>
