@@ -5,12 +5,11 @@ import { Icon } from "@shared/Icon";
 import { Handler } from "@shared/Handler";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getHardwareCode } from "../initialNodes";
+import { PRESS_DURATION_MS } from "../timing";
 import type { SwitchNodeProps as SNP } from "./switchNode.props";
 import styles from "./switchNode.module.scss";
 
 type SwitchButton = "previous" | "next";
-
-const PRESS_DURATION_MS = 400;
 
 export const SwitchNode: FC<SNP> = ({ id, data }) => {
 	const { t } = useTranslation();

@@ -1,0 +1,32 @@
+@use "./tokens" as *;
+
+:root {
+	--theme-transition: 0.3s ease;
+	--motion-fade: 400ms;
+	--motion-press-hold: 400ms;
+	--motion-press-transition: 200ms;
+	--unit-1u: 96px;
+	--unit-1-5u: 145px;
+	--unit-3u: 292px;
+	--unit-4u: 390px;
+	--module-seam: 2px;
+}
+
+:root,
+[data-theme="light"] {
+	@include theme-tokens(light);
+}
+
+[data-theme="dark"] {
+	@include theme-tokens(dark);
+}
+
+@mixin theme-transition {
+	transition:
+		background-color var(--theme-transition),
+		color var(--theme-transition),
+		border-color var(--theme-transition),
+		fill var(--theme-transition),
+		stroke var(--theme-transition),
+		box-shadow var(--theme-transition);
+}

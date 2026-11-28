@@ -5,6 +5,8 @@ import type { TranslationKey } from "@/i18n/resources";
 import type { LocalizedText } from "@/i18n/localize";
 import type { Project, ProjectCategory } from "@shared/data/projects";
 
+export type RackLayout = "wide" | "standard" | "tall";
+
 export type NodeHandleType = "source" | "target";
 
 export interface NodeHandleConfig {

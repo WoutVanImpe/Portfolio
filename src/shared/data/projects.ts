@@ -1,40 +1,40 @@
-import parallaxHallShot from "@assets/bluebeard/parallax-hall-shot.jpg";
-import parallaxBluebeardHead from "@assets/bluebeard/parallax-bluebeard-head.png";
-import parallaxTrees from "@assets/bluebeard/parallax-trees.jpg";
-import parallaxSky from "@assets/bluebeard/parallax-sky.jpg";
+import parallaxHallShot from "@assets/bluebeard/parallax-hall-shot.webp";
+import parallaxBluebeardHead from "@assets/bluebeard/parallax-bluebeard-head.webp";
+import parallaxTrees from "@assets/bluebeard/parallax-trees.webp";
+import parallaxSky from "@assets/bluebeard/parallax-sky.webp";
 
-import portalHomeScreen from "@assets/once-upon-a-time/portal-home-screen.jpg";
-import portalFilter from "@assets/once-upon-a-time/portal-filter.png";
-import portalAboutUs from "@assets/once-upon-a-time/portal-about-us.png";
-import portalMakingOff from "@assets/once-upon-a-time/portal-making-off.png";
+import portalHomeScreen from "@assets/once-upon-a-time/portal-home-screen.webp";
+import portalFilter from "@assets/once-upon-a-time/portal-filter.webp";
+import portalAboutUs from "@assets/once-upon-a-time/portal-about-us.webp";
+import portalMakingOff from "@assets/once-upon-a-time/portal-making-off.webp";
 
-import trifoldMockUp from "@assets/trifold-flyer/trifold-mock-up.jpg";
-import trifoldFront from "@assets/trifold-flyer/trifold-front.jpg";
-import trifoldBack from "@assets/trifold-flyer/trifold-back.jpg";
+import trifoldMockUp from "@assets/trifold-flyer/trifold-mock-up.webp";
+import trifoldFront from "@assets/trifold-flyer/trifold-front.webp";
+import trifoldBack from "@assets/trifold-flyer/trifold-back.webp";
 
-import instaMockUp from "@assets/social-media/insta-mock-up.jpg";
-import instaPost from "@assets/social-media/insta-post.jpg";
-import instaMultipost from "@assets/social-media/insta-multipost.jpg";
-import instaAffinity from "@assets/social-media/insta-affinity.png";
+import instaMockUp from "@assets/social-media/insta-mock-up.webp";
+import instaPost from "@assets/social-media/insta-post.webp";
+import instaMultipost from "@assets/social-media/insta-multipost.webp";
+import instaAffinity from "@assets/social-media/insta-affinity.webp";
 
-import droneThumbnail from "@assets/drone-video/drone-tumbnail.jpg";
+import droneThumbnail from "@assets/drone-video/drone-tumbnail.webp";
 
-import kikkertjeMockUp from "@assets/het-kikkertje/kikkertje-mock-up.jpg";
-import kikkertjeArticleOne from "@assets/het-kikkertje/kikkertje-article-1.jpg";
-import kikkertjeArticleTwo from "@assets/het-kikkertje/kikkertje-article-2.jpg";
-import kikkertjeAffinity from "@assets/het-kikkertje/kikkertje-affinity.png";
+import kikkertjeMockUp from "@assets/het-kikkertje/kikkertje-mock-up.webp";
+import kikkertjeArticleOne from "@assets/het-kikkertje/kikkertje-article-1.webp";
+import kikkertjeArticleTwo from "@assets/het-kikkertje/kikkertje-article-2.webp";
+import kikkertjeAffinity from "@assets/het-kikkertje/kikkertje-affinity.webp";
 
-import sproutspotKeyImage from "@assets/sproutspot/sproutspot-key-image.jpg";
+import sproutspotKeyImage from "@assets/sproutspot/sproutspot-key-image.webp";
 
-import forumChat from "@assets/jnm-forum/forum-chat.png";
-import forumThreadChannel from "@assets/jnm-forum/forum-thread-channel.png";
-import forumThread from "@assets/jnm-forum/forum-thread.png";
+import forumChat from "@assets/jnm-forum/forum-chat.webp";
+import forumThreadChannel from "@assets/jnm-forum/forum-thread-channel.webp";
+import forumThread from "@assets/jnm-forum/forum-thread.webp";
 
-import wdmHome from "@assets/wdm-project/wdm-home.png";
-import wdmDashboardOne from "@assets/wdm-project/wdm-dashboard-1.png";
-import wdmDashboardTwo from "@assets/wdm-project/wdm-dashboard-2.png";
-import wdmAdminViewOne from "@assets/wdm-project/wdm-admin-view-1.png";
-import wdmAdminViewTwo from "@assets/wdm-project/wdm-admin-view2.png";
+import wdmHome from "@assets/wdm-project/wdm-home.webp";
+import wdmDashboardOne from "@assets/wdm-project/wdm-dashboard-1.webp";
+import wdmDashboardTwo from "@assets/wdm-project/wdm-dashboard-2.webp";
+import wdmAdminViewOne from "@assets/wdm-project/wdm-admin-view-1.webp";
+import wdmAdminViewTwo from "@assets/wdm-project/wdm-admin-view2.webp";
 
 import type { LocalizedText } from "@/i18n/localize";
 

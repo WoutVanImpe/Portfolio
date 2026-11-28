@@ -23,16 +23,6 @@
 		@include module-side-code;
 	}
 
-	&__flow-arrow {
-		align-self: center;
-		color: var(--text-secondary);
-		font-family: $font-family-mono;
-		font-size: 9px;
-		letter-spacing: 0.04em;
-		opacity: 0.7;
-		white-space: nowrap;
-	}
-
 	&__jack-strip {
 		@include jack-strip;
 
